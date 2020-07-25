@@ -33,4 +33,6 @@ public abstract class AbstractTerminal extends JaaJControl {
         return lastCommand;
     }
 
+    protected abstract Skin<?> createDefaultSkin();
+
 }
