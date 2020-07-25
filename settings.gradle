@@ -1,2 +1,4 @@
 rootProject.name = 'JaaJFXTerminal'
+include 'Controls'
+include 'App'
 
