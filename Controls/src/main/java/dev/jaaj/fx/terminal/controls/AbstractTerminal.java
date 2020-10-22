@@ -25,10 +25,6 @@ public abstract class AbstractTerminal extends JaaJControl {
     protected final StringProperty lastCommand = new SimpleStringProperty("");
     private final String startCommand;
 
-    public AbstractTerminal() {
-        this("");
-    }
-
     public AbstractTerminal(String startCommand) {
         this.startCommand = startCommand;
     }
@@ -49,6 +45,9 @@ public abstract class AbstractTerminal extends JaaJControl {
         return lastCommand;
     }
 
-    protected abstract Skin<?> createDefaultSkin();
 
+    @Override
+    protected Skin<?> createDefaultSkin() {
+        return new SkinTerminalFX(this);
+    }
 }

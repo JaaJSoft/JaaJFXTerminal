@@ -18,13 +18,34 @@ package dev.jaaj.fx.terminal.controls;
 
 import javafx.scene.control.Skin;
 
-public class LocalTerminal extends AbstractTerminal {
-    public LocalTerminal() {
-        super("");
+public class WSLTerminal extends AbstractTerminal {
+
+    private final String distrib;
+    private final String user;
+
+    public WSLTerminal() {
+        super("wsl");
+        distrib = "";
+        user = "";
     }
 
-    @Override
-    protected Skin<?> createDefaultSkin() {
-        return new SkinTerminalFX(this);
+    public WSLTerminal(String distrib) {
+        super("wsl -d " + distrib);
+        this.distrib = distrib;
+        user = "";
+    }
+
+    public WSLTerminal(String distrib, String user) {
+        super("wsl -d " + distrib + "-u " + user);
+        this.user = user;
+        this.distrib = distrib;
+    }
+
+    public String getDistrib() {
+        return distrib;
+    }
+
+    public String getUser() {
+        return user;
     }
 }

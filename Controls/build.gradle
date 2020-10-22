@@ -67,7 +67,7 @@ bintray {
     publications = ['mavenPublication']
     pkg {
         repo = 'JaaJ'
-        name = project.name
+        name = 'JaaJFXTerminal-controls'
         userOrg = "jaaj"
         licenses = ['Apache-2.0']
         vcsUrl = 'https://github.com/JaaJSoft/JaaJFXTerminal'

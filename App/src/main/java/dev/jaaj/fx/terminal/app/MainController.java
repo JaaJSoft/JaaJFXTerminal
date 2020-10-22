@@ -18,7 +18,11 @@ package dev.jaaj.fx.terminal.app;
 
 
 import dev.jaaj.fx.terminal.controls.SSHTerminal;
+import dev.jaaj.fx.terminal.controls.WSLTerminal;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.MenuBar;
 import javafx.scene.layout.BorderPane;
 
 import java.net.InetAddress;
@@ -28,13 +32,18 @@ import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
     public BorderPane root;
+    public MenuBar menuBar;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try {
-            root.setCenter(new SSHTerminal("root", InetAddress.getByName("vps741987.ovh.net")));
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        }
+        //root.setCenter(new SSHTerminal("root", InetAddress.getByName("vps741987.ovh.net")));
+        root.setCenter(new WSLTerminal("ubuntu"));
     }
+
+    @FXML
+    private void openOptions(ActionEvent event) {
+
+    }
+
+
 }
