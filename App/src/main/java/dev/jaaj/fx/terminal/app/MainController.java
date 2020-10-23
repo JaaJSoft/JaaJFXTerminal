@@ -17,8 +17,7 @@
 package dev.jaaj.fx.terminal.app;
 
 
-import dev.jaaj.fx.terminal.controls.SSHTerminal;
-import dev.jaaj.fx.terminal.controls.WSLTerminal;
+import dev.jaaj.fx.terminal.controls.LocalTerminal;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,22 +26,23 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
+import org.controlsfx.control.StatusBar;
 
-import java.net.InetAddress;
 import java.net.URL;
-import java.net.UnknownHostException;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
     public BorderPane root;
     public MenuBar menuBar;
     public TabPane tabPane;
+    public StatusBar statusBar;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //root.setCenter(new SSHTerminal("root", InetAddress.getByName("vps741987.ovh.net")));
         Tab ubuntu = new Tab("ubuntu");
-        ubuntu.setContent(new WSLTerminal("ubuntu"));
+        LocalTerminal terminal = new LocalTerminal();
+        ubuntu.setContent(terminal);
         tabPane.getTabs().add(ubuntu);
     }
 
