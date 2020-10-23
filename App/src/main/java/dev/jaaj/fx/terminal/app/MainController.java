@@ -40,10 +40,7 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //root.setCenter(new SSHTerminal("root", InetAddress.getByName("vps741987.ovh.net")));
-        Tab ubuntu = new Tab("ubuntu");
-        LocalTerminal terminal = new LocalTerminal();
-        ubuntu.setContent(terminal);
-        tabPane.getTabs().add(ubuntu);
+        tabPane.setTabDragPolicy(TabPane.TabDragPolicy.REORDER);
     }
 
     @FXML
@@ -58,4 +55,12 @@ public class MainController implements Initializable {
     }
 
 
+    public void openTerminal(ActionEvent actionEvent) {
+        Tab newTab = new Tab("new Terminal");
+        newTab.setText("AAA");
+        LocalTerminal terminal = new LocalTerminal();
+        newTab.setContent(terminal);
+        tabPane.getTabs().add(newTab);
+        tabPane.getSelectionModel().select(newTab);
+    }
 }

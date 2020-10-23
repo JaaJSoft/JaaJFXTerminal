@@ -24,7 +24,7 @@
     <top>
         <MenuBar fx:id="menuBar">
             <Menu text="%FILE">
-                <MenuItem text="%NEW" />
+                <MenuItem text="%NEW" onAction="#openTerminal"/>
                 <MenuItem text="%CLOSE" onAction="#exit" />
             </Menu>
             <Menu text="%EDIT">
@@ -42,8 +42,8 @@
         </MenuBar>
     </top>
     <center>
-        <TabPane fx:id="tabPane">
-
+        <TabPane fx:id="tabPane" >
+            <Tab closable="false" text="+"/>
         </TabPane>
     </center>
     <bottom>

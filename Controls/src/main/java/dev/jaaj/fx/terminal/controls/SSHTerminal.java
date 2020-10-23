@@ -34,4 +34,12 @@ public class SSHTerminal extends AbstractTerminal {
     protected Skin<?> createDefaultSkin() {
         return new SkinTerminalFX(this);
     }
+
+    public InetAddress getAddress() {
+        return address;
+    }
+
+    public String getUser() {
+        return user;
+    }
 }
