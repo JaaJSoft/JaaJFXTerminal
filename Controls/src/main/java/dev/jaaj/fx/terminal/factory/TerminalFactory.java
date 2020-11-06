@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.controls;
+package dev.jaaj.fx.terminal.factory;
 
-public class TerminalConfig {
+public interface TerminalFactory {
+    
 }

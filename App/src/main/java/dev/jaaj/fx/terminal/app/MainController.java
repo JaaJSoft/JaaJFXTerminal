@@ -17,18 +17,23 @@
 package dev.jaaj.fx.terminal.app;
 
 
+import dev.jaaj.fx.terminal.controls.AbstractTerminal;
 import dev.jaaj.fx.terminal.controls.LocalTerminal;
+import dev.jaaj.fx.terminal.controls.SSHTerminal;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
 import org.controlsfx.control.StatusBar;
 
+import java.net.InetAddress;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
@@ -36,11 +41,13 @@ public class MainController implements Initializable {
     public MenuBar menuBar;
     public TabPane tabPane;
     public StatusBar statusBar;
+    public MenuItem newTerminal;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //root.setCenter(new SSHTerminal("root", InetAddress.getByName("vps741987.ovh.net")));
         tabPane.setTabDragPolicy(TabPane.TabDragPolicy.REORDER);
+        newTerminal.fire();
     }
 
     @FXML
@@ -54,13 +61,26 @@ public class MainController implements Initializable {
         System.exit(0);
     }
 
-
-    public void openTerminal(ActionEvent actionEvent) {
-        Tab newTab = new Tab("new Terminal");
-        newTab.setText("AAA");
-        LocalTerminal terminal = new LocalTerminal();
+    public void addTerminal(AbstractTerminal terminal) {
+        Tab newTab = new Tab();
         newTab.setContent(terminal);
+        newTab.setText(terminal.getTitle());
         tabPane.getTabs().add(newTab);
         tabPane.getSelectionModel().select(newTab);
+    }
+
+    public void openTerminal(ActionEvent actionEvent) {
+        LocalTerminal terminal = new LocalTerminal();
+        addTerminal(terminal);
+    }
+
+    public void openTerminalSSH(ActionEvent actionEvent) {
+        AbstractTerminal terminal = null;
+        try {
+            terminal = new SSHTerminal("root", InetAddress.getByName("vps741987.ovh.net"));
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+        addTerminal(terminal);
     }
 }

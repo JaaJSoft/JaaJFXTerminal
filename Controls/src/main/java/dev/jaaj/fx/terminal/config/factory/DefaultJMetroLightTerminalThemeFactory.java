@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.controls;
+package dev.jaaj.fx.terminal.config.factory;
 
-import dev.jaaj.fx.terminal.config.TerminalConfig;
+import dev.jaaj.fx.terminal.config.TerminalThemeConfig;
+import javafx.scene.paint.Color;
 
-public class LocalTerminal extends AbstractTerminal {
-
-    public LocalTerminal() {
-        super(new TerminalConfig(""));
-    }
-
+public class DefaultJMetroLightTerminalThemeFactory implements IFactoryTerminalThemeConfig {
     @Override
-    public String getTitle() {
-        return "Local";
+    public TerminalThemeConfig build() {
+        TerminalThemeConfig config = new TerminalThemeConfig();
+        config.setForegroundColor(Color.BLACK);
+        config.setBackgroundColor(Color.web("#F8F8F8"));
+        config.setCursorColor(Color.BLACK);
+        return config;
     }
 }

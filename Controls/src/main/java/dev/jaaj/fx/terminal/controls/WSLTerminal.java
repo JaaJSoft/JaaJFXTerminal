@@ -16,7 +16,7 @@
 
 package dev.jaaj.fx.terminal.controls;
 
-import javafx.scene.control.Skin;
+import dev.jaaj.fx.terminal.config.TerminalConfig;
 
 public class WSLTerminal extends AbstractTerminal {
 
@@ -24,19 +24,24 @@ public class WSLTerminal extends AbstractTerminal {
     private final String user;
 
     public WSLTerminal() {
-        super("wsl");
+        super(new TerminalConfig("wsl"));
         distrib = "";
         user = "";
     }
 
     public WSLTerminal(String distrib) {
-        super("wsl -d " + distrib);
+        super(new TerminalConfig("wsl -d " + distrib));
         this.distrib = distrib;
         user = "";
     }
 
+    @Override
+    public String getTitle() {
+        return user + " " + distrib;
+    }
+
     public WSLTerminal(String distrib, String user) {
-        super("wsl -d " + distrib + "-u " + user);
+        super(new TerminalConfig("wsl -d " + distrib + "-u " + user));
         this.user = user;
         this.distrib = distrib;
     }

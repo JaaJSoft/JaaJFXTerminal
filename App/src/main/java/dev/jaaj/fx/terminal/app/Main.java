@@ -34,7 +34,7 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("main.fxml"), ResourceBundle.getBundle("dev/jaaj/fx/terminal/app/Terminal"));
         primaryStage.setTitle("JaaJFX - Terminal");
         Scene scene = new Scene(root, 800, 600);
-        new JMetro(scene, Style.LIGHT);
+        new JMetro(scene, Style.DARK);
         primaryStage.setScene(scene);
         primaryStage.show();
 

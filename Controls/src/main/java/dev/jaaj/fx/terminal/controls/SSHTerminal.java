@@ -16,23 +16,31 @@
 
 package dev.jaaj.fx.terminal.controls;
 
-import javafx.scene.control.Skin;
+import dev.jaaj.fx.terminal.config.TerminalConfig;
+import dev.jaaj.fx.terminal.config.factory.DefaultJMetroDarkTerminalThemeFactory;
+import javafx.beans.property.StringProperty;
 
 import java.net.InetAddress;
 
 public class SSHTerminal extends AbstractTerminal {
     private final InetAddress address;
     private final String user;
+    private int port = 22;
 
     public SSHTerminal(String user, InetAddress address) {
-        super("ssh " + user + "@" + address.getHostName());
+        super(new TerminalConfig("ssh " + user + "@" + address.getHostName() + " -p " + 22));
         this.address = address;
         this.user = user;
     }
 
+    public SSHTerminal(String user, InetAddress address, int port) {
+        this(user, address);
+        this.port = port;
+    }
+
     @Override
-    protected Skin<?> createDefaultSkin() {
-        return new SkinTerminalFX(this);
+    public String getTitle() {
+        return user + "@" + address.getHostName();
     }
 
     public InetAddress getAddress() {
@@ -41,5 +49,9 @@ public class SSHTerminal extends AbstractTerminal {
 
     public String getUser() {
         return user;
+    }
+
+    public int getPort() {
+        return port;
     }
 }

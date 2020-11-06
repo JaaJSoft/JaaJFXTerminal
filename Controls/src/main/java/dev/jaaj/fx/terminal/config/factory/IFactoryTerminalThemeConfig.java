@@ -14,18 +14,10 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.controls;
+package dev.jaaj.fx.terminal.config.factory;
 
-import dev.jaaj.fx.terminal.config.TerminalConfig;
+import dev.jaaj.fx.terminal.config.TerminalThemeConfig;
 
-public class LocalTerminal extends AbstractTerminal {
-
-    public LocalTerminal() {
-        super(new TerminalConfig(""));
-    }
-
-    @Override
-    public String getTitle() {
-        return "Local";
-    }
+public interface IFactoryTerminalThemeConfig {
+    TerminalThemeConfig build();
 }

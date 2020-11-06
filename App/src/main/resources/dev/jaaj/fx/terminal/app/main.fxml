@@ -24,7 +24,8 @@
     <top>
         <MenuBar fx:id="menuBar">
             <Menu text="%FILE">
-                <MenuItem text="%NEW" onAction="#openTerminal"/>
+                <MenuItem fx:id="newTerminal" text="%NEW" onAction="#openTerminal" />
+                <MenuItem fx:id="newSSHTerminal" text="%NEW" onAction="#openTerminalSSH" />
                 <MenuItem text="%CLOSE" onAction="#exit" />
             </Menu>
             <Menu text="%EDIT">
@@ -32,6 +33,9 @@
                 <MenuItem text="%PASTE"/>
                 <MenuItem/>
                 <MenuItem/>
+            </Menu>
+            <Menu text="%PROFILE">
+
             </Menu>
             <Menu text="%OPTIONS">
 
@@ -43,7 +47,7 @@
     </top>
     <center>
         <TabPane fx:id="tabPane" >
-            <Tab closable="false" text="+"/>
+
         </TabPane>
     </center>
     <bottom>

@@ -18,6 +18,7 @@ package dev.jaaj.fx.terminal.controls;
 
 import com.kodedu.terminalfx.Terminal;
 import com.kodedu.terminalfx.config.TerminalConfig;
+import dev.jaaj.fx.terminal.config.TerminalThemeConfig;
 import javafx.scene.control.SkinBase;
 
 
@@ -27,13 +28,26 @@ public class SkinTerminalFX extends SkinBase<AbstractTerminal> {
     protected SkinTerminalFX(AbstractTerminal control) {
         super(control);
         TerminalConfig config = new TerminalConfig();
-        if (!control.getStartCommand().isEmpty()) {
-            config.setWindowsTerminalStarter(control.getStartCommand());
+        dev.jaaj.fx.terminal.config.TerminalConfig terminalConfig = control.getTerminalConfig();
+        SyncTheme(config, control.getTerminalThemeConfig());
+
+        String startCommand = terminalConfig.getStartCommand();
+        if (!startCommand.isEmpty()) {
+            config.setUnixTerminalStarter(startCommand);
+            config.setWindowsTerminalStarter(startCommand);
         }
         terminal = new Terminal(config, null);
         control.lastCommand.addListener((observable, oldValue, newValue) -> {
             terminal.command(newValue);
         });
         this.getChildren().add(terminal);
+    }
+
+    private void SyncTheme(TerminalConfig config, TerminalThemeConfig themeConfig) {
+        config.setForegroundColor(themeConfig.getForegroundColor());
+        config.setBackgroundColor(themeConfig.getBackgroundColor());
+        config.setCursorColor(themeConfig.getCursorColor());
+        //config.setFontFamily(themeConfig.getFont().getFamily());
+        //config.setFontSize((int) themeConfig.getFont().getSize());
     }
 }

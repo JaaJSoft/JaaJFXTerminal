@@ -17,24 +17,28 @@
 package dev.jaaj.fx.terminal.controls;
 
 import dev.jaaj.fx.control.JaaJControl;
+import dev.jaaj.fx.terminal.config.TerminalConfig;
+import dev.jaaj.fx.terminal.config.TerminalThemeConfig;
+import dev.jaaj.fx.terminal.config.factory.DefaultJMetroDarkTerminalThemeFactory;
+import dev.jaaj.fx.terminal.config.factory.DefaultJMetroLightTerminalThemeFactory;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.Skin;
 
 public abstract class AbstractTerminal extends JaaJControl {
     protected final StringProperty lastCommand = new SimpleStringProperty("");
-    private final String startCommand;
+    private final ObjectProperty<TerminalConfig> terminalConfig;
+    private final ObjectProperty<TerminalThemeConfig> terminalThemeConfig;
 
-    public AbstractTerminal(String startCommand) {
-        this.startCommand = startCommand;
+    public AbstractTerminal(TerminalConfig terminalConfig) {
+        this.terminalConfig = new SimpleObjectProperty<>(terminalConfig);
+        this.terminalThemeConfig = new SimpleObjectProperty<>(new DefaultJMetroDarkTerminalThemeFactory().build());
     }
 
     public void execute(String command) {
         lastCommand.set(command);
-    }
-
-    public String getStartCommand() {
-        return startCommand;
     }
 
     public String getLastCommand() {
@@ -45,9 +49,33 @@ public abstract class AbstractTerminal extends JaaJControl {
         return lastCommand;
     }
 
+    public TerminalThemeConfig getTerminalThemeConfig() {
+        return terminalThemeConfig.get();
+    }
+
+    public ObjectProperty<TerminalThemeConfig> terminalThemeConfigProperty() {
+        return terminalThemeConfig;
+    }
+
+    public void setTerminalThemeConfig(TerminalThemeConfig terminalThemeConfig) {
+        this.terminalThemeConfig.set(terminalThemeConfig);
+    }
+
+    public TerminalConfig getTerminalConfig() {
+        return terminalConfig.get();
+    }
+
+    public ObjectProperty<TerminalConfig> terminalConfigProperty() {
+        return terminalConfig;
+    }
+
 
     @Override
     protected Skin<?> createDefaultSkin() {
         return new SkinTerminalFX(this);
     }
+
+    public abstract String getTitle();
+
+
 }
