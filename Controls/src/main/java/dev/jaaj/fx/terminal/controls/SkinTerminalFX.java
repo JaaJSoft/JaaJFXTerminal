@@ -40,6 +40,7 @@ public class SkinTerminalFX extends SkinBase<AbstractTerminal> {
         control.lastCommand.addListener((observable, oldValue, newValue) -> {
             terminal.command(newValue);
         });
+        this.getChildren().clear();
         this.getChildren().add(terminal);
     }
 
