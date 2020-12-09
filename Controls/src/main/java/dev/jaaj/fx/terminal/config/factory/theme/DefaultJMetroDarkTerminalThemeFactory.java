@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.config.factory;
+package dev.jaaj.fx.terminal.config.factory.theme;
 
 import dev.jaaj.fx.terminal.config.TerminalThemeConfig;
 import javafx.scene.paint.Color;

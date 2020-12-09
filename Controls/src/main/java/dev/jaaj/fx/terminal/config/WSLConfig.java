@@ -14,10 +14,25 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.config.factory;
+package dev.jaaj.fx.terminal.config;
 
-import dev.jaaj.fx.terminal.config.TerminalThemeConfig;
+public class WSLConfig {
+    private String distrib = "";
+    private String user = "";
 
-public interface IFactoryTerminalThemeConfig {
-    TerminalThemeConfig build();
+    public String getDistrib() {
+        return distrib;
+    }
+
+    public void setDistrib(String distrib) {
+        this.distrib = distrib;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
 }

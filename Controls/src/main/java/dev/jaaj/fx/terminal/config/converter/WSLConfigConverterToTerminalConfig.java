@@ -14,36 +14,29 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.controls;
+package dev.jaaj.fx.terminal.config.converter;
 
+import dev.jaaj.fx.terminal.config.TerminalConfig;
 import dev.jaaj.fx.terminal.config.WSLConfig;
-import dev.jaaj.fx.terminal.config.converter.WSLConfigConverterToTerminalConfig;
 
-public class WSLTerminal extends AbstractTerminal {
-
+public class WSLConfigConverterToTerminalConfig implements IConverterTerminalConfig {
     private final WSLConfig wslConfig;
 
-    public WSLTerminal(WSLConfig wslConfig) {
-        super(new WSLConfigConverterToTerminalConfig(wslConfig).convert());
+    public WSLConfigConverterToTerminalConfig(WSLConfig wslConfig) {
         this.wslConfig = wslConfig;
     }
 
-    public WSLTerminal() {
-        super(new WSLConfigConverterToTerminalConfig(new WSLConfig()).convert());
-        wslConfig = new WSLConfig();
-    }
-
     @Override
-    public String getTitle() {
-        return getUser() + " " + getDistrib();
-    }
-
-
-    public String getDistrib() {
-        return wslConfig.getDistrib();
-    }
-
-    public String getUser() {
-        return wslConfig.getUser();
+    public TerminalConfig convert() {
+        TerminalConfig terminalConfig = new TerminalConfig();
+        String command = "wsl";
+        if (!wslConfig.getDistrib().isBlank()) {
+            command += " -d " + wslConfig.getDistrib();
+        }
+        if (!wslConfig.getUser().isBlank()) {
+            command += " -u " + wslConfig.getUser();
+        }
+        terminalConfig.setStartCommand(command);
+        return terminalConfig;
     }
 }

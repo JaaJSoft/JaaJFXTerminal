@@ -20,6 +20,7 @@ package dev.jaaj.fx.terminal.app;
 import dev.jaaj.fx.terminal.controls.AbstractTerminal;
 import dev.jaaj.fx.terminal.controls.LocalTerminal;
 import dev.jaaj.fx.terminal.controls.SSHTerminal;
+import dev.jaaj.fx.terminal.controls.WSLTerminal;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -76,11 +77,7 @@ public class MainController implements Initializable {
 
     public void openTerminalSSH(ActionEvent actionEvent) {
         AbstractTerminal terminal = null;
-        try {
-            terminal = new SSHTerminal("root", InetAddress.getByName("vps741987.ovh.net"));
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        }
+        terminal = new WSLTerminal();
         addTerminal(terminal);
     }
 }

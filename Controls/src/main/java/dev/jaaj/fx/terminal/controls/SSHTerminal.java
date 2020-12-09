@@ -16,42 +16,37 @@
 
 package dev.jaaj.fx.terminal.controls;
 
-import dev.jaaj.fx.terminal.config.TerminalConfig;
-import dev.jaaj.fx.terminal.config.factory.DefaultJMetroDarkTerminalThemeFactory;
-import javafx.beans.property.StringProperty;
+import dev.jaaj.fx.terminal.config.SSHConfig;
+import dev.jaaj.fx.terminal.config.converter.SSHConfigConverterToTerminalConfig;
 
 import java.net.InetAddress;
 
 public class SSHTerminal extends AbstractTerminal {
-    private final InetAddress address;
-    private final String user;
-    private int port = 22;
+    private final SSHConfig sshConfig;
 
-    public SSHTerminal(String user, InetAddress address) {
-        super(new TerminalConfig("ssh " + user + "@" + address.getHostName() + " -p " + 22));
-        this.address = address;
-        this.user = user;
-    }
-
-    public SSHTerminal(String user, InetAddress address, int port) {
-        this(user, address);
-        this.port = port;
+    public SSHTerminal(SSHConfig sshConfig) {
+        super(new SSHConfigConverterToTerminalConfig(sshConfig).convert());
+        this.sshConfig = sshConfig;
     }
 
     @Override
     public String getTitle() {
-        return user + "@" + address.getHostName();
+        return getUser() + "@" + getAddress().getHostName();
     }
 
     public InetAddress getAddress() {
-        return address;
+        return sshConfig.getAddress();
     }
 
     public String getUser() {
-        return user;
+        return sshConfig.getUser();
     }
 
     public int getPort() {
-        return port;
+        return sshConfig.getPort();
+    }
+
+    public SSHConfig getSshConfig() {
+        return sshConfig;
     }
 }
