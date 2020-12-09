@@ -19,26 +19,8 @@ package dev.jaaj.fx.terminal.config;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class TerminalConfig {
-    private final StringProperty startCommand = new SimpleStringProperty("");
+public abstract class AbstractTerminalConfig {
 
-    public TerminalConfig(String startCommand) {
-        this.setStartCommand(startCommand);
-    }
-
-    public TerminalConfig() {
-    }
-
-    public String getStartCommand() {
-        return startCommand.get();
-    }
-
-    public StringProperty startCommandProperty() {
-        return startCommand;
-    }
-
-    public void setStartCommand(String startCommand) {
-        this.startCommand.set(startCommand);
-    }
+    public abstract String getStartCommand();
 
 }

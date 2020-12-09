@@ -17,7 +17,6 @@
 package dev.jaaj.fx.terminal.controls;
 
 import dev.jaaj.fx.terminal.config.SSHConfig;
-import dev.jaaj.fx.terminal.config.converter.SSHConfigConverterToTerminalConfig;
 
 import java.net.InetAddress;
 
@@ -25,7 +24,7 @@ public class SSHTerminal extends AbstractTerminal {
     private final SSHConfig sshConfig;
 
     public SSHTerminal(SSHConfig sshConfig) {
-        super(new SSHConfigConverterToTerminalConfig(sshConfig).convert());
+        super(sshConfig);
         this.sshConfig = sshConfig;
     }
 

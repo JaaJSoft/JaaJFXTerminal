@@ -14,10 +14,19 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.config.converter;
+package dev.jaaj.fx.terminal.controls;
 
-import dev.jaaj.fx.terminal.config.TerminalConfig;
+import dev.jaaj.fx.terminal.config.AbstractTerminalConfig;
 
-public interface IConverterTerminalConfig {
-    TerminalConfig convert();
+public class LocalTerminalConfig extends AbstractTerminalConfig {
+    private final String executable ;
+
+    public LocalTerminalConfig(String executable) {
+        this.executable = executable;
+    }
+
+    @Override
+    public String getStartCommand() {
+        return executable;
+    }
 }

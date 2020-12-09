@@ -16,7 +16,7 @@
 
 package dev.jaaj.fx.terminal.config;
 
-public class WSLConfig {
+public class WSLConfig  extends AbstractTerminalConfig{
     private String distrib = "";
     private String user = "";
 
@@ -34,5 +34,17 @@ public class WSLConfig {
 
     public void setUser(String user) {
         this.user = user;
+    }
+
+    @Override
+    public String getStartCommand() {
+        String command = "wsl";
+        if (!distrib.isBlank()) {
+            command += " -d " + distrib;
+        }
+        if (!user.isBlank()) {
+            command += " -u " + user;
+        }
+        return command;
     }
 }

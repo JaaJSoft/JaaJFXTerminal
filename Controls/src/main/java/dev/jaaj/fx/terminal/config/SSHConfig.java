@@ -18,7 +18,7 @@ package dev.jaaj.fx.terminal.config;
 
 import java.net.InetAddress;
 
-public class SSHConfig {
+public class SSHConfig extends AbstractTerminalConfig {
     private InetAddress address;
     private String user;
     private int port = 22;
@@ -54,5 +54,19 @@ public class SSHConfig {
 
     public void setCommand(String command) {
         this.command = command;
+    }
+
+    @Override
+    public String getStartCommand() {
+        String startCommand = "ssh "
+                + user
+                + "@"
+                + address.getHostName()
+                + " -p "
+                + port;
+        if (!command.isBlank()) {
+            startCommand += " -t " + command;
+        }
+        return startCommand;
     }
 }

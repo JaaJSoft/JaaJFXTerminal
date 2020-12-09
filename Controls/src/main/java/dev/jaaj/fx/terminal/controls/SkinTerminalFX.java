@@ -18,6 +18,7 @@ package dev.jaaj.fx.terminal.controls;
 
 import com.kodedu.terminalfx.Terminal;
 import com.kodedu.terminalfx.config.TerminalConfig;
+import dev.jaaj.fx.terminal.config.AbstractTerminalConfig;
 import dev.jaaj.fx.terminal.config.TerminalThemeConfig;
 import javafx.scene.control.SkinBase;
 
@@ -28,7 +29,7 @@ public class SkinTerminalFX extends SkinBase<AbstractTerminal> {
     protected SkinTerminalFX(AbstractTerminal control) {
         super(control);
         TerminalConfig config = new TerminalConfig();
-        dev.jaaj.fx.terminal.config.TerminalConfig terminalConfig = control.getTerminalConfig();
+        AbstractTerminalConfig terminalConfig = control.getTerminalConfig();
         SyncTheme(config, control.getTerminalThemeConfig());
 
         String startCommand = terminalConfig.getStartCommand();

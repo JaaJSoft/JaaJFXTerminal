@@ -17,25 +17,29 @@
 package dev.jaaj.fx.terminal.controls;
 
 import dev.jaaj.fx.terminal.config.WSLConfig;
-import dev.jaaj.fx.terminal.config.converter.WSLConfigConverterToTerminalConfig;
 
 public class WSLTerminal extends AbstractTerminal {
 
     private final WSLConfig wslConfig;
 
     public WSLTerminal(WSLConfig wslConfig) {
-        super(new WSLConfigConverterToTerminalConfig(wslConfig).convert());
+        super(wslConfig);
         this.wslConfig = wslConfig;
     }
 
     public WSLTerminal() {
-        super(new WSLConfigConverterToTerminalConfig(new WSLConfig()).convert());
+        super(new WSLConfig());
         wslConfig = new WSLConfig();
     }
 
     @Override
     public String getTitle() {
-        return getUser() + " " + getDistrib();
+        String distrib = getDistrib();
+        String user = getUser();
+        if (distrib.isBlank()) {
+            distrib = "Default"; //TODO: resource bundle
+        }
+        return user + " " + distrib;
     }
 
 

@@ -16,12 +16,10 @@
 
 package dev.jaaj.fx.terminal.controls;
 
-import dev.jaaj.fx.terminal.config.TerminalConfig;
-
 public class LocalTerminal extends AbstractTerminal {
 
     public LocalTerminal() {
-        super(new TerminalConfig(""));
+        super(new LocalTerminalConfig(""));
     }
 
     @Override

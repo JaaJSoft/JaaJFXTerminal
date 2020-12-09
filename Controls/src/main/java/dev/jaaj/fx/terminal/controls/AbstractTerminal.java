@@ -17,7 +17,7 @@
 package dev.jaaj.fx.terminal.controls;
 
 import dev.jaaj.fx.control.JaaJControl;
-import dev.jaaj.fx.terminal.config.TerminalConfig;
+import dev.jaaj.fx.terminal.config.AbstractTerminalConfig;
 import dev.jaaj.fx.terminal.config.TerminalThemeConfig;
 import dev.jaaj.fx.terminal.config.factory.theme.DefaultJMetroDarkTerminalThemeFactory;
 import javafx.beans.property.ObjectProperty;
@@ -28,10 +28,10 @@ import javafx.scene.control.Skin;
 
 public abstract class AbstractTerminal extends JaaJControl {
     protected final StringProperty lastCommand = new SimpleStringProperty("");
-    private final ObjectProperty<TerminalConfig> terminalConfig;
+    private final ObjectProperty<AbstractTerminalConfig> terminalConfig;
     private final ObjectProperty<TerminalThemeConfig> terminalThemeConfig;
 
-    public AbstractTerminal(TerminalConfig terminalConfig) {
+    public AbstractTerminal(AbstractTerminalConfig terminalConfig) {
         this.terminalConfig = new SimpleObjectProperty<>(terminalConfig);
         this.terminalThemeConfig = new SimpleObjectProperty<>(new DefaultJMetroDarkTerminalThemeFactory().build());
     }
@@ -60,11 +60,11 @@ public abstract class AbstractTerminal extends JaaJControl {
         this.terminalThemeConfig.set(terminalThemeConfig);
     }
 
-    public TerminalConfig getTerminalConfig() {
+    public AbstractTerminalConfig getTerminalConfig() {
         return terminalConfig.get();
     }
 
-    public ObjectProperty<TerminalConfig> terminalConfigProperty() {
+    public ObjectProperty<AbstractTerminalConfig> terminalConfigProperty() {
         return terminalConfig;
     }
 
