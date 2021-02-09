@@ -17,7 +17,7 @@
 plugins {
     id 'java'
     id 'application'
-    id 'org.openjfx.javafxplugin' version '0.0.8'
+    id 'org.openjfx.javafxplugin' version '0.0.9'
 }
 
 javafx {
@@ -36,7 +36,7 @@ repositories {
     mavenCentral()
     jcenter()
     maven {
-        url  "https://dl.bintray.com/jaaj/JaaJ"
+        url  "https://nexus.jaaj.dev/repository/maven-public/"
     }
     maven {
         url 'https://github.com/javaterminal/terminalfx/raw/master/releases'
@@ -44,7 +44,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'dev.jaaj.fx:JaaJFX-core:0.1.1'
+    implementation 'dev.jaaj.fx:core:0.1.4'
     implementation 'org.controlsfx:controlsfx:11.0.2'
     implementation project(":Controls")
     implementation 'org.jfxtras:jmetro:11.6.14'

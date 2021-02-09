@@ -16,33 +16,44 @@
 
 package dev.jaaj.fx.terminal.config;
 
-public class WSLConfig  extends AbstractTerminalConfig{
-    private String distrib = "";
-    private String user = "";
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
-    public String getDistrib() {
-        return distrib;
+public class WSLConfig  extends AbstractTerminalConfig{
+    private final StringProperty distribution = new SimpleStringProperty("");
+    private final StringProperty user = new SimpleStringProperty("");
+
+    public String getDistribution() {
+        return distribution.get();
     }
 
-    public void setDistrib(String distrib) {
-        this.distrib = distrib;
+    public StringProperty distributionProperty() {
+        return distribution;
+    }
+
+    public void setDistribution(String distribution) {
+        this.distribution.set(distribution);
     }
 
     public String getUser() {
+        return user.get();
+    }
+
+    public StringProperty userProperty() {
         return user;
     }
 
     public void setUser(String user) {
-        this.user = user;
+        this.user.set(user);
     }
 
     @Override
     public String getStartCommand() {
         String command = "wsl";
-        if (!distrib.isBlank()) {
-            command += " -d " + distrib;
+        if (!getDistribution().isBlank()) {
+            command += " -d " + distribution;
         }
-        if (!user.isBlank()) {
+        if (!getUser().isBlank()) {
             command += " -u " + user;
         }
         return command;

@@ -49,7 +49,9 @@ public class SkinTerminalFX extends SkinBase<AbstractTerminal> {
         config.setForegroundColor(themeConfig.getForegroundColor());
         config.setBackgroundColor(themeConfig.getBackgroundColor());
         config.setCursorColor(themeConfig.getCursorColor());
-        //config.setFontFamily(themeConfig.getFont().getFamily());
-        //config.setFontSize((int) themeConfig.getFont().getSize());
+        if (themeConfig.getFont() != null) {
+            config.setFontFamily(themeConfig.getFont().getFamily());
+            config.setFontSize((int) themeConfig.getFont().getSize());
+        }
     }
 }

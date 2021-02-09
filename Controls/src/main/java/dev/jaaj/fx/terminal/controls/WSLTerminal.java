@@ -44,7 +44,7 @@ public class WSLTerminal extends AbstractTerminal {
 
 
     public String getDistrib() {
-        return wslConfig.getDistrib();
+        return wslConfig.getDistribution();
     }
 
     public String getUser() {

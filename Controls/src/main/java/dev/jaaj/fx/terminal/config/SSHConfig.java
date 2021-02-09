@@ -16,44 +16,62 @@
 
 package dev.jaaj.fx.terminal.config;
 
+import javafx.beans.property.*;
+
 import java.net.InetAddress;
 
 public class SSHConfig extends AbstractTerminalConfig {
-    private InetAddress address;
-    private String user;
-    private int port = 22;
-    private String command = "";
+    private final ObjectProperty<InetAddress> address = new SimpleObjectProperty<>();
+    private final StringProperty user = new SimpleStringProperty();
+    private final IntegerProperty port = new SimpleIntegerProperty(22);
+    private final StringProperty command = new SimpleStringProperty("");
 
     public InetAddress getAddress() {
-        return address;
+        return address.getValue();
     }
 
     public void setAddress(InetAddress address) {
-        this.address = address;
+        this.address.setValue(address);
     }
 
     public String getUser() {
-        return user;
+        return user.getValue();
     }
 
     public void setUser(String user) {
-        this.user = user;
+        this.user.setValue(user);
     }
 
     public int getPort() {
-        return port;
+        return port.getValue();
     }
 
     public void setPort(int port) {
-        this.port = port;
+        this.port.setValue(port);
     }
 
     public String getCommand() {
-        return command;
+        return command.getValue();
     }
 
     public void setCommand(String command) {
-        this.command = command;
+        this.command.setValue(command);
+    }
+
+    public StringProperty userProperty() {
+        return user;
+    }
+
+    public IntegerProperty portProperty() {
+        return port;
+    }
+
+    public StringProperty commandProperty() {
+        return command;
+    }
+
+    public ObjectProperty<InetAddress> addressProperty() {
+        return address;
     }
 
     @Override
@@ -61,10 +79,10 @@ public class SSHConfig extends AbstractTerminalConfig {
         String startCommand = "ssh "
                 + user
                 + "@"
-                + address.getHostName()
+                + address.getValue().getHostName()
                 + " -p "
                 + port;
-        if (!command.isBlank()) {
+        if (!command.getValue().isBlank()) {
             startCommand += " -t " + command;
         }
         return startCommand;
