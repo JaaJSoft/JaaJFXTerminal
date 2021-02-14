@@ -33,18 +33,18 @@ sourceCompatibility = 13
 mainClassName = 'dev.jaaj.fx.terminal.app.Main'
 
 repositories {
+    maven {
+        url  'https://nexus.jaaj.dev/repository/maven-releases'
+    }
     mavenCentral()
     jcenter()
-    maven {
-        url  "https://nexus.jaaj.dev/repository/maven-public/"
-    }
     maven {
         url 'https://github.com/javaterminal/terminalfx/raw/master/releases'
     }
 }
 
 dependencies {
-    implementation 'dev.jaaj.fx:core:0.1.4'
+    implementation 'dev.jaaj.fx:core:0.1.5'
     implementation 'org.controlsfx:controlsfx:11.0.2'
     implementation project(":Controls")
     implementation 'org.jfxtras:jmetro:11.6.14'

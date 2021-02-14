@@ -17,24 +17,22 @@
 package dev.jaaj.fx.terminal.app;
 
 
+import dev.jaaj.fx.terminal.config.LocalShellConfig;
+import dev.jaaj.fx.terminal.config.SSHConfig;
 import dev.jaaj.fx.terminal.controls.AbstractTerminal;
 import dev.jaaj.fx.terminal.controls.LocalTerminal;
 import dev.jaaj.fx.terminal.controls.SSHTerminal;
-import dev.jaaj.fx.terminal.controls.WSLTerminal;
+import dev.jaaj.fx.terminal.controls.form.ssh.DialogSSHForm;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import org.controlsfx.control.StatusBar;
 
-import java.net.InetAddress;
 import java.net.URL;
-import java.net.UnknownHostException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
@@ -43,6 +41,7 @@ public class MainController implements Initializable {
     public TabPane tabPane;
     public StatusBar statusBar;
     public MenuItem newTerminal;
+    public MenuItem newSSHTerminal;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -71,13 +70,18 @@ public class MainController implements Initializable {
     }
 
     public void openTerminal(ActionEvent actionEvent) {
-        LocalTerminal terminal = new LocalTerminal();
+        LocalShellConfig pwshConfig = new LocalShellConfig("pwsh.exe");
+        LocalTerminal terminal = new LocalTerminal(pwshConfig);
         addTerminal(terminal);
     }
 
     public void openTerminalSSH(ActionEvent actionEvent) {
-        AbstractTerminal terminal = null;
-        terminal = new WSLTerminal();
-        addTerminal(terminal);
+        Dialog<SSHConfig> sshTerminalDialog = new DialogSSHForm();
+        sshTerminalDialog.initOwner(root.getCenter().getScene().getWindow());
+        Optional<SSHConfig> optional = sshTerminalDialog.showAndWait();
+        optional.ifPresent(sshConfig -> {
+            AbstractTerminal terminal = new SSHTerminal(sshTerminalDialog.getResult());
+            addTerminal(terminal);
+        });
     }
 }

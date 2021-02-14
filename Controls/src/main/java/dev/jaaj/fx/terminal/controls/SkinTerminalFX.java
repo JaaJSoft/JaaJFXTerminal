@@ -18,7 +18,7 @@ package dev.jaaj.fx.terminal.controls;
 
 import com.kodedu.terminalfx.Terminal;
 import com.kodedu.terminalfx.config.TerminalConfig;
-import dev.jaaj.fx.terminal.config.AbstractTerminalConfig;
+import dev.jaaj.fx.terminal.config.AbstractShellConfig;
 import dev.jaaj.fx.terminal.config.TerminalThemeConfig;
 import javafx.scene.control.SkinBase;
 
@@ -29,8 +29,8 @@ public class SkinTerminalFX extends SkinBase<AbstractTerminal> {
     protected SkinTerminalFX(AbstractTerminal control) {
         super(control);
         TerminalConfig config = new TerminalConfig();
-        AbstractTerminalConfig terminalConfig = control.getTerminalConfig();
-        SyncTheme(config, control.getTerminalThemeConfig());
+        AbstractShellConfig terminalConfig = control.getTerminalConfig();
+        syncTheme(config, control.getTerminalThemeConfig());
 
         String startCommand = terminalConfig.getStartCommand();
         if (!startCommand.isEmpty()) {
@@ -45,7 +45,7 @@ public class SkinTerminalFX extends SkinBase<AbstractTerminal> {
         this.getChildren().add(terminal);
     }
 
-    private void SyncTheme(TerminalConfig config, TerminalThemeConfig themeConfig) {
+    private void syncTheme(TerminalConfig config, TerminalThemeConfig themeConfig) {
         config.setForegroundColor(themeConfig.getForegroundColor());
         config.setBackgroundColor(themeConfig.getBackgroundColor());
         config.setCursorColor(themeConfig.getCursorColor());

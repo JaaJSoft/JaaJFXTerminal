@@ -21,10 +21,12 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
 
+import java.io.FileInputStream;
 import java.util.ResourceBundle;
 
 public class Main extends Application {
@@ -34,10 +36,12 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("main.fxml"), ResourceBundle.getBundle("dev/jaaj/fx/terminal/app/Terminal"));
         primaryStage.setTitle("JaaJFX - Terminal");
         Scene scene = new Scene(root, 800, 600);
-        new JMetro(scene, Style.DARK);
+        JMetro jMetro = new JMetro(Style.LIGHT);
+        jMetro.setScene(scene);
         primaryStage.setScene(scene);
         primaryStage.show();
-
+        String path = getClass().getResource("img/console_96px.png").getPath();
+        primaryStage.getIcons().add(new Image(new FileInputStream(path)));
         primaryStage.setOnCloseRequest(event -> {
             Platform.exit();
             System.exit(0);

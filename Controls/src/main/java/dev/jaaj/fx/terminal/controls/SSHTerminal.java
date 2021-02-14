@@ -34,7 +34,7 @@ public class SSHTerminal extends AbstractTerminal {
     }
 
     public InetAddress getAddress() {
-        return sshConfig.getAddress();
+        return sshConfig.getInetAddress();
     }
 
     public String getUser() {

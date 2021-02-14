@@ -19,7 +19,7 @@ package dev.jaaj.fx.terminal.config;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class WSLConfig  extends AbstractTerminalConfig{
+public class WSLConfig  extends AbstractShellConfig {
     private final StringProperty distribution = new SimpleStringProperty("");
     private final StringProperty user = new SimpleStringProperty("");
 

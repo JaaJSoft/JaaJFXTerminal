@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.controls;
+package dev.jaaj.fx.terminal.config;
 
-import dev.jaaj.fx.terminal.config.AbstractTerminalConfig;
+import dev.jaaj.fx.terminal.config.AbstractShellConfig;
 
-public class LocalTerminalConfig extends AbstractTerminalConfig {
-    private final String executable ;
+public class LocalShellConfig extends AbstractShellConfig {
+    private final String executable;
 
-    public LocalTerminalConfig(String executable) {
+    public LocalShellConfig(String executable) {
         this.executable = executable;
     }
 

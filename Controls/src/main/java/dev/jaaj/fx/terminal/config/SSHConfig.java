@@ -20,18 +20,26 @@ import javafx.beans.property.*;
 
 import java.net.InetAddress;
 
-public class SSHConfig extends AbstractTerminalConfig {
-    private final ObjectProperty<InetAddress> address = new SimpleObjectProperty<>();
-    private final StringProperty user = new SimpleStringProperty();
+public class SSHConfig extends AbstractShellConfig implements Cloneable {
+
+    private final ObjectProperty<InetAddress> inetAddress = new SimpleObjectProperty<>();
+    private final StringProperty inetAddressStr = new SimpleStringProperty();
+    private final StringProperty user = new SimpleStringProperty("root");
     private final IntegerProperty port = new SimpleIntegerProperty(22);
     private final StringProperty command = new SimpleStringProperty("");
 
-    public InetAddress getAddress() {
-        return address.getValue();
+    public SSHConfig() {
+        inetAddress.addListener((observable, oldValue, newValue) -> {
+            inetAddressStr.set(newValue.getHostName());
+        });
     }
 
-    public void setAddress(InetAddress address) {
-        this.address.setValue(address);
+    public InetAddress getInetAddress() {
+        return inetAddress.getValue();
+    }
+
+    public void setInetAddress(InetAddress inetAddress) {
+        this.inetAddress.setValue(inetAddress);
     }
 
     public String getUser() {
@@ -70,21 +78,49 @@ public class SSHConfig extends AbstractTerminalConfig {
         return command;
     }
 
-    public ObjectProperty<InetAddress> addressProperty() {
-        return address;
+    public ObjectProperty<InetAddress> inetAddressProperty() {
+        return inetAddress;
+    }
+
+    public String getInetAddressStr() {
+        return inetAddressStr.get();
+    }
+
+    public ReadOnlyStringProperty inetAddressStrProperty() {
+        return inetAddressStr;
     }
 
     @Override
     public String getStartCommand() {
         String startCommand = "ssh "
-                + user
+                + user.getValue()
                 + "@"
-                + address.getValue().getHostName()
+                + inetAddressStr.getValue()
                 + " -p "
-                + port;
+                + port.getValue();
         if (!command.getValue().isBlank()) {
-            startCommand += " -t " + command;
+            startCommand += " -t " + command.getValue();
         }
+        System.out.println(startCommand);
         return startCommand;
+    }
+
+    @Override
+    public Object clone() {
+        SSHConfig sshConfigCopy = new SSHConfig();
+        sshConfigCopy.setInetAddress(this.getInetAddress());
+        sshConfigCopy.setUser(this.getUser());
+        sshConfigCopy.setPort(this.getPort());
+        return sshConfigCopy;
+    }
+
+    @Override
+    public String toString() {
+        return "SSHConfig{" +
+                "address=" + inetAddress.getValue().getHostName() +
+                ", user=" + user.getValue() +
+                ", port=" + port.getValue() +
+                ", command=" + command.getValue() +
+                '}';
     }
 }

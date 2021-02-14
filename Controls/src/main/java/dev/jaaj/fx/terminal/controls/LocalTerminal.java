@@ -16,14 +16,24 @@
 
 package dev.jaaj.fx.terminal.controls;
 
+import dev.jaaj.fx.terminal.config.LocalShellConfig;
+
 public class LocalTerminal extends AbstractTerminal {
 
     public LocalTerminal() {
-        super(new LocalTerminalConfig(""));
+        super(new LocalShellConfig(""));
+    }
+
+    public LocalTerminal(LocalShellConfig terminalConfig) {
+        super(terminalConfig);
     }
 
     @Override
     public String getTitle() {
-        return "Local";
+        String command = this.getTerminalConfig().getStartCommand();
+        if(command.isBlank()){
+            return "Local";
+        }
+        return command;
     }
 }

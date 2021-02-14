@@ -19,7 +19,7 @@ package dev.jaaj.fx.terminal.config;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public abstract class AbstractTerminalConfig {
+public abstract class AbstractShellConfig {
 
     public abstract String getStartCommand();
 
