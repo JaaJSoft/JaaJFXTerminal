@@ -16,8 +16,8 @@
 
 package dev.jaaj.fx.terminal.controls.form.ssh;
 
+import dev.jaaj.fx.core.form.AbstractForm;
 import dev.jaaj.fx.terminal.config.SSHConfig;
-import dev.jaaj.fx.terminal.controls.form.AbstractForm;
 import javafx.beans.property.*;
 import javafx.scene.control.Skin;
 
@@ -25,7 +25,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 public class SSHForm extends AbstractForm<SSHConfig> {
-    private final ObjectProperty<SSHConfig> sshConfigObjectProperty = new SimpleObjectProperty<>();
+    private final ObjectProperty<SSHConfig> sshConfig = new SimpleObjectProperty<>();
 
     private final StringProperty inetAddressStr = new SimpleStringProperty();
     private final StringProperty user = new SimpleStringProperty("root");
@@ -37,13 +37,13 @@ public class SSHForm extends AbstractForm<SSHConfig> {
     }
 
     public SSHForm(SSHConfig config) {
-        this.sshConfigObjectProperty.addListener((observable, oldValue, newValue) -> {
+        this.sshConfig.addListener((observable, oldValue, newValue) -> {
             inetAddressStr.set(newValue.getInetAddressStr());
             user.set(newValue.getUser());
             port.set(newValue.getPort());
             command.set(newValue.getCommand());
         });
-        this.sshConfigObjectProperty.set(config);
+        this.sshConfig.set(config);
     }
 
     @Override
@@ -67,7 +67,7 @@ public class SSHForm extends AbstractForm<SSHConfig> {
 
     @Override
     public SSHConfig apply() {
-        SSHConfig config = sshConfigObjectProperty.getValue();
+        SSHConfig config = sshConfig.getValue();
         if (config != null) {
             try {
                 config.setInetAddress(InetAddress.getByName(inetAddressStr.get()));
@@ -87,34 +87,30 @@ public class SSHForm extends AbstractForm<SSHConfig> {
     }
 
     public SSHConfig getSshConfig() {
-        return sshConfigObjectProperty.get();
+        return sshConfig.get();
     }
 
-    public ObjectProperty<SSHConfig> sshConfigObjectPropertyProperty() {
-        return sshConfigObjectProperty;
+    public ObjectProperty<SSHConfig> sshConfigProperty() {
+        return sshConfig;
     }
 
-    public void setSshConfigObjectProperty(SSHConfig sshConfigObjectProperty) {
-        this.sshConfigObjectProperty.set(sshConfigObjectProperty);
+    public void setSshConfig(SSHConfig sshConfig) {
+        this.sshConfig.set(sshConfig);
     }
 
-    StringProperty inetAddressStrProperty() {
+    public StringProperty inetAddressStrProperty() {
         return inetAddressStr;
     }
 
-    StringProperty userProperty() {
+    public StringProperty userProperty() {
         return user;
     }
 
-    IntegerProperty portProperty() {
+    public IntegerProperty portProperty() {
         return port;
     }
 
     public StringProperty commandProperty() {
         return command;
-    }
-
-    public void setSshConfig(SSHConfig sshConfig) {
-        this.sshConfigObjectProperty.set(sshConfig);
     }
 }

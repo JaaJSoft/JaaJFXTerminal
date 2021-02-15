@@ -19,10 +19,13 @@ package dev.jaaj.fx.terminal.app;
 
 import dev.jaaj.fx.terminal.config.LocalShellConfig;
 import dev.jaaj.fx.terminal.config.SSHConfig;
+import dev.jaaj.fx.terminal.config.WSLConfig;
 import dev.jaaj.fx.terminal.controls.AbstractTerminal;
 import dev.jaaj.fx.terminal.controls.LocalTerminal;
 import dev.jaaj.fx.terminal.controls.SSHTerminal;
+import dev.jaaj.fx.terminal.controls.WSLTerminal;
 import dev.jaaj.fx.terminal.controls.form.ssh.DialogSSHForm;
+import dev.jaaj.fx.terminal.controls.form.wsl.DialogWSLForm;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -42,6 +45,7 @@ public class MainController implements Initializable {
     public StatusBar statusBar;
     public MenuItem newTerminal;
     public MenuItem newSSHTerminal;
+    public MenuItem newWSLTerminal;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -70,18 +74,31 @@ public class MainController implements Initializable {
     }
 
     public void openTerminal(ActionEvent actionEvent) {
-        LocalShellConfig pwshConfig = new LocalShellConfig("pwsh.exe");
-        LocalTerminal terminal = new LocalTerminal(pwshConfig);
+        LocalTerminal terminal = new LocalTerminal();
         addTerminal(terminal);
     }
 
     public void openTerminalSSH(ActionEvent actionEvent) {
-        Dialog<SSHConfig> sshTerminalDialog = new DialogSSHForm();
+        DialogSSHForm sshTerminalDialog = new DialogSSHForm();
         sshTerminalDialog.initOwner(root.getCenter().getScene().getWindow());
         Optional<SSHConfig> optional = sshTerminalDialog.showAndWait();
         optional.ifPresent(sshConfig -> {
             AbstractTerminal terminal = new SSHTerminal(sshTerminalDialog.getResult());
             addTerminal(terminal);
         });
+    }
+
+    public void openTerminalWSL(ActionEvent actionEvent) {
+        DialogWSLForm dialogWSLForm = new DialogWSLForm();
+        dialogWSLForm.initOwner(root.getCenter().getScene().getWindow());
+        Optional<WSLConfig> optional = dialogWSLForm.showAndWait();
+        optional.ifPresent(sshConfig -> {
+            AbstractTerminal terminal = new WSLTerminal(dialogWSLForm.getResult());
+            addTerminal(terminal);
+        });
+    }
+
+    public void openAbout(ActionEvent actionEvent) {
+
     }
 }

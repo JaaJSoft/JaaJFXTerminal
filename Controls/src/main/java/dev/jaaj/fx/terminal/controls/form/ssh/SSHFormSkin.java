@@ -16,8 +16,7 @@
 
 package dev.jaaj.fx.terminal.controls.form.ssh;
 
-import dev.jaaj.fx.core.control.SkinFXML;
-import dev.jaaj.fx.terminal.config.SSHConfig;
+import dev.jaaj.fx.core.skin.SkinFXML;
 import dev.jaaj.fx.terminal.util.IntegerField;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -39,7 +38,6 @@ public class SSHFormSkin extends SkinFXML<SSHForm> {
                 SSHFormSkin.class.getResource("SSHForm.fxml"),
                 ResourceBundle.getBundle(SSHFormSkin.class.getPackageName() + ".SSHForm")
         );
-        System.out.println();
         bind(control);
         control.formStateProperty().addListener((observable, oldValue, newValue) -> {
             switch (newValue) {

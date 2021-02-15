@@ -36,15 +36,18 @@ public class WSLTerminal extends AbstractTerminal {
     public String getTitle() {
         String distrib = getDistrib();
         String user = getUser();
+        if (!user.isBlank()) {
+            user += "@";
+        }
         if (distrib.isBlank()) {
             distrib = "Default"; //TODO: resource bundle
         }
-        return user + " " + distrib;
+        return user + distrib;
     }
 
 
     public String getDistrib() {
-        return wslConfig.getDistribution();
+        return wslConfig.getDistribution().getName();
     }
 
     public String getUser() {

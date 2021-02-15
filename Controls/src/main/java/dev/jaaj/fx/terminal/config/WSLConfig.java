@@ -16,22 +16,27 @@
 
 package dev.jaaj.fx.terminal.config;
 
+import dev.jaaj.fx.terminal.controls.form.wsl.Distribution;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class WSLConfig  extends AbstractShellConfig {
-    private final StringProperty distribution = new SimpleStringProperty("");
+public class WSLConfig extends AbstractShellConfig {
+    private final ObjectProperty<Distribution> distribution = new SimpleObjectProperty<>();
     private final StringProperty user = new SimpleStringProperty("");
+    private final StringProperty workingDirectory = new SimpleStringProperty("");
+    private final StringProperty command = new SimpleStringProperty("");
 
-    public String getDistribution() {
+    public Distribution getDistribution() {
         return distribution.get();
     }
 
-    public StringProperty distributionProperty() {
+    public ObjectProperty<Distribution> distributionProperty() {
         return distribution;
     }
 
-    public void setDistribution(String distribution) {
+    public void setDistribution(Distribution distribution) {
         this.distribution.set(distribution);
     }
 
@@ -47,15 +52,48 @@ public class WSLConfig  extends AbstractShellConfig {
         this.user.set(user);
     }
 
+    public String getWorkingDirectory() {
+        return workingDirectory.get();
+    }
+
+    public StringProperty workingDirectoryProperty() {
+        return workingDirectory;
+    }
+
+    public void setWorkingDirectory(String workingDirectory) {
+        this.workingDirectory.set(workingDirectory);
+    }
+
+    public String getCommand() {
+        return command.get();
+    }
+
+    public StringProperty commandProperty() {
+        return command;
+    }
+
+    public void setCommand(String command) {
+        this.command.set(command);
+    }
+
     @Override
     public String getStartCommand() {
-        String command = "wsl";
-        if (!getDistribution().isBlank()) {
-            command += " -d " + distribution;
+        String startCommand = "wsl";
+        if (distribution.isNotNull().get() && !getDistribution().getName().isBlank()) {
+            startCommand += " -d " + getDistribution();
         }
         if (!getUser().isBlank()) {
-            command += " -u " + user;
+            startCommand += " -u " + getUser();
         }
-        return command;
+
+        if (!getWorkingDirectory().isBlank()) {
+            startCommand += " --cd " + getWorkingDirectory();
+        }
+
+        if (!getCommand().isBlank()) {
+            startCommand += " -e " + getCommand();
+        }
+        System.out.println(startCommand);
+        return startCommand;
     }
 }
