@@ -40,7 +40,6 @@ public class WSLFormSkin extends SkinFXML<WSLForm> {
                 WSLFormSkin.class.getResource("WSLForm.fxml"),
                 ResourceBundle.getBundle(WSLFormSkin.class.getPackageName() + ".WSLForm")
         );
-        System.out.println(control.getPossibleDistributions());
         distributionComboBox.setItems(control.getPossibleDistributions());
         bind(control);
         selectDefaultDistribution(control);

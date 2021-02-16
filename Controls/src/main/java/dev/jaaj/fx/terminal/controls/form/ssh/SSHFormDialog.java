@@ -21,14 +21,14 @@ import dev.jaaj.fx.terminal.config.SSHConfig;
 
 import java.util.ResourceBundle;
 
-public class DialogSSHForm extends DialogForm<SSHConfig> {
-    private static final ResourceBundle SSH_BUNDLE = ResourceBundle.getBundle(DialogSSHForm.class.getPackageName() + ".SSHForm");
+public class SSHFormDialog extends DialogForm<SSHConfig> {
+    private static final ResourceBundle SSH_BUNDLE = ResourceBundle.getBundle(SSHFormDialog.class.getPackageName() + ".SSHForm");
 
-    public DialogSSHForm(SSHConfig sshConfig) {
+    public SSHFormDialog(SSHConfig sshConfig) {
         super(new SSHForm(sshConfig), SSH_BUNDLE.getString("title_dialog"), SSH_BUNDLE.getString("header_dialog"));
     }
 
-    public DialogSSHForm() {
+    public SSHFormDialog() {
         this(new SSHConfig());
     }
 }

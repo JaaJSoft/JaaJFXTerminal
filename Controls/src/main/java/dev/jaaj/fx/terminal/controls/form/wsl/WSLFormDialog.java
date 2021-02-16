@@ -21,14 +21,14 @@ import dev.jaaj.fx.terminal.config.WSLConfig;
 
 import java.util.ResourceBundle;
 
-public class DialogWSLForm extends DialogForm<WSLConfig> {
-    private static final ResourceBundle SSH_BUNDLE = ResourceBundle.getBundle(DialogWSLForm.class.getPackageName() + ".WSLForm");
+public class WSLFormDialog extends DialogForm<WSLConfig> {
+    private static final ResourceBundle SSH_BUNDLE = ResourceBundle.getBundle(WSLFormDialog.class.getPackageName() + ".WSLForm");
 
-    public DialogWSLForm(WSLConfig wslConfig) {
+    public WSLFormDialog(WSLConfig wslConfig) {
         super(new WSLForm(wslConfig), SSH_BUNDLE.getString("title_dialog"), SSH_BUNDLE.getString("header_dialog"));
     }
 
-    public DialogWSLForm() {
+    public WSLFormDialog() {
         this(new WSLConfig());
     }
 }

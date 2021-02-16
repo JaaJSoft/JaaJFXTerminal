@@ -17,15 +17,15 @@
 package dev.jaaj.fx.terminal.app;
 
 
-import dev.jaaj.fx.terminal.config.LocalShellConfig;
 import dev.jaaj.fx.terminal.config.SSHConfig;
 import dev.jaaj.fx.terminal.config.WSLConfig;
 import dev.jaaj.fx.terminal.controls.AbstractTerminal;
 import dev.jaaj.fx.terminal.controls.LocalTerminal;
 import dev.jaaj.fx.terminal.controls.SSHTerminal;
 import dev.jaaj.fx.terminal.controls.WSLTerminal;
-import dev.jaaj.fx.terminal.controls.form.ssh.DialogSSHForm;
-import dev.jaaj.fx.terminal.controls.form.wsl.DialogWSLForm;
+import dev.jaaj.fx.terminal.controls.about.AboutDialog;
+import dev.jaaj.fx.terminal.controls.form.ssh.SSHFormDialog;
+import dev.jaaj.fx.terminal.controls.form.wsl.WSLFormDialog;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -79,7 +79,7 @@ public class MainController implements Initializable {
     }
 
     public void openTerminalSSH(ActionEvent actionEvent) {
-        DialogSSHForm sshTerminalDialog = new DialogSSHForm();
+        SSHFormDialog sshTerminalDialog = new SSHFormDialog();
         sshTerminalDialog.initOwner(root.getCenter().getScene().getWindow());
         Optional<SSHConfig> optional = sshTerminalDialog.showAndWait();
         optional.ifPresent(sshConfig -> {
@@ -89,16 +89,18 @@ public class MainController implements Initializable {
     }
 
     public void openTerminalWSL(ActionEvent actionEvent) {
-        DialogWSLForm dialogWSLForm = new DialogWSLForm();
-        dialogWSLForm.initOwner(root.getCenter().getScene().getWindow());
-        Optional<WSLConfig> optional = dialogWSLForm.showAndWait();
+        WSLFormDialog WSLFormDialog = new WSLFormDialog();
+        WSLFormDialog.initOwner(root.getCenter().getScene().getWindow());
+        Optional<WSLConfig> optional = WSLFormDialog.showAndWait();
         optional.ifPresent(sshConfig -> {
-            AbstractTerminal terminal = new WSLTerminal(dialogWSLForm.getResult());
+            AbstractTerminal terminal = new WSLTerminal(WSLFormDialog.getResult());
             addTerminal(terminal);
         });
     }
 
     public void openAbout(ActionEvent actionEvent) {
-
+        AboutDialog aboutDialog = new AboutDialog();
+        aboutDialog.initOwner(root.getCenter().getScene().getWindow());
+        aboutDialog.show();
     }
 }

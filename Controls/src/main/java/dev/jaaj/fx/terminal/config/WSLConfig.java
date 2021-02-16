@@ -93,7 +93,6 @@ public class WSLConfig extends AbstractShellConfig {
         if (!getCommand().isBlank()) {
             startCommand += " -e " + getCommand();
         }
-        System.out.println(startCommand);
         return startCommand;
     }
 }
