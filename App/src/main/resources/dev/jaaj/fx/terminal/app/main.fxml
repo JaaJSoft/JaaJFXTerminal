@@ -37,7 +37,7 @@
                 <MenuItem text="%PASTE"/>
             </Menu>
             <Menu text="%PROFILE">
-
+                <MenuItem text="%SAVE_PROFILE"/>
             </Menu>
             <Menu text="%OPTIONS">
 
