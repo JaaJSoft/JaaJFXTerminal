@@ -1,11 +1,9 @@
-package dev.jaaj.fx.terminal.util;
+package dev.jaaj.fx.terminal.controls.util;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
-import org.controlsfx.validation.ValidationMessage;
-import org.controlsfx.validation.Validator;
 
 public class IntegerField extends TextField {
 

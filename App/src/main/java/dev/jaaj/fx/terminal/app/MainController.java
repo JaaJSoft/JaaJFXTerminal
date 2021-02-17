@@ -17,12 +17,10 @@
 package dev.jaaj.fx.terminal.app;
 
 
-import dev.jaaj.fx.terminal.config.SSHConfig;
-import dev.jaaj.fx.terminal.config.WSLConfig;
-import dev.jaaj.fx.terminal.controls.AbstractTerminal;
-import dev.jaaj.fx.terminal.controls.LocalTerminal;
-import dev.jaaj.fx.terminal.controls.SSHTerminal;
-import dev.jaaj.fx.terminal.controls.WSLTerminal;
+import dev.jaaj.fx.terminal.config.shell.LocalShellConfig;
+import dev.jaaj.fx.terminal.config.shell.SSHConfig;
+import dev.jaaj.fx.terminal.config.shell.WSLConfig;
+import dev.jaaj.fx.terminal.controls.Terminal;
 import dev.jaaj.fx.terminal.controls.about.AboutDialog;
 import dev.jaaj.fx.terminal.controls.form.ssh.SSHFormDialog;
 import dev.jaaj.fx.terminal.controls.form.wsl.WSLFormDialog;
@@ -65,16 +63,16 @@ public class MainController implements Initializable {
         System.exit(0);
     }
 
-    public void addTerminal(AbstractTerminal terminal) {
+    public void addTerminal(Terminal terminal) {
         Tab newTab = new Tab();
         newTab.setContent(terminal);
-        newTab.setText(terminal.getTitle());
+        newTab.setText(terminal.getTerminalConfig().getTitle());
         tabPane.getTabs().add(newTab);
         tabPane.getSelectionModel().select(newTab);
     }
 
     public void openTerminal(ActionEvent actionEvent) {
-        LocalTerminal terminal = new LocalTerminal();
+        Terminal terminal = new Terminal(new LocalShellConfig());
         addTerminal(terminal);
     }
 
@@ -83,7 +81,7 @@ public class MainController implements Initializable {
         sshTerminalDialog.initOwner(root.getCenter().getScene().getWindow());
         Optional<SSHConfig> optional = sshTerminalDialog.showAndWait();
         optional.ifPresent(sshConfig -> {
-            AbstractTerminal terminal = new SSHTerminal(sshTerminalDialog.getResult());
+            Terminal terminal = new Terminal(sshTerminalDialog.getResult());
             addTerminal(terminal);
         });
     }
@@ -93,7 +91,7 @@ public class MainController implements Initializable {
         WSLFormDialog.initOwner(root.getCenter().getScene().getWindow());
         Optional<WSLConfig> optional = WSLFormDialog.showAndWait();
         optional.ifPresent(sshConfig -> {
-            AbstractTerminal terminal = new WSLTerminal(WSLFormDialog.getResult());
+            Terminal terminal = new Terminal(WSLFormDialog.getResult());
             addTerminal(terminal);
         });
     }

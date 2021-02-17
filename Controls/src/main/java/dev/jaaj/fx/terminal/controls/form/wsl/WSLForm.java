@@ -17,15 +17,11 @@
 package dev.jaaj.fx.terminal.controls.form.wsl;
 
 import dev.jaaj.fx.core.form.AbstractForm;
-import dev.jaaj.fx.terminal.config.SSHConfig;
-import dev.jaaj.fx.terminal.config.WSLConfig;
+import dev.jaaj.fx.terminal.config.shell.WSLConfig;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Skin;
-
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 
 public class WSLForm extends AbstractForm<WSLConfig> {
     private final ObjectProperty<WSLConfig> wslConfig = new SimpleObjectProperty<>();

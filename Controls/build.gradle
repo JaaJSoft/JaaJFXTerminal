@@ -22,16 +22,18 @@ plugins {
 }
 
 javafx {
-    version = '13'
-    modules = ['javafx.controls', 'javafx.fxml', 'javafx.graphics', 'javafx.web']
+    version = '15'
+    modules = ['javafx.controls', 'javafx.fxml', 'javafx.web']
 }
 
 group 'dev.jaaj.fx.terminal'
 version '0.1'
 
+sourceCompatibility = 15
+
 repositories {
     maven {
-        url  'https://nexus.jaaj.dev/repository/maven-releases'
+        url 'https://nexus.jaaj.dev/repository/maven-releases'
     }
     mavenCentral()
     jcenter()
@@ -48,52 +50,54 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
-
-task sourcesJar(type: Jar, dependsOn: classes) {
-    from sourceSets.main.allSource
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    from javadoc.destinationDir
-}
-
-artifacts {
-    archives sourcesJar
-    archives javadocJar
-}
-
-bintray {
-    user = BINTRAY_USER
-    key = BINTRAY_KEY
-    publications = ['mavenPublication']
-    pkg {
-        repo = 'JaaJ'
-        name = 'JaaJFXTerminal-controls'
-        userOrg = "jaaj"
-        licenses = ['Apache-2.0']
-        vcsUrl = 'https://github.com/JaaJSoft/JaaJFXTerminal'
-        issueTrackerUrl = 'https://github.com/JaaJSoft/JaaJFXTerminal/issues'
-        publicDownloadNumbers = true
-        version {
-            name = project.version
-            vcsTag = project.version
-        }
-    }
+java {
+    withJavadocJar()
+    withSourcesJar()
 }
 
 publishing {
     publications {
-        mavenPublication(MavenPublication) {
-            from components.java
-            artifact sourcesJar {
-                classifier "sources"
-            }
-            artifact javadocJar {
-                classifier "javadoc"
-            }
+        mavenJava(MavenPublication) {
             groupId project.group
             artifactId project.name
             version project.version
+            from components.java
+            pom {
+                name = project.name
+                description = 'A JavaFX terminal app'
+                url = 'https://github.com/JaaJSoft/JaaJFX-core'
+                /*properties = [
+                        myProp: "value",
+                        "prop.with.dots": "anotherValue"
+                ]*/
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                scm {
+                    url = 'https://github.com/JaaJSoft/JaaJFX-core'
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            credentials {
+                username System.getenv('REPO_USER')
+                password System.getenv('REPO_PASSWORD')
+            }
+            def releasesRepoUrl = "https://nexus.jaaj.dev/repository/maven-releases/"
+            def snapshotsRepoUrl = "https://nexus.jaaj.dev/repository/maven-snapshots/"
+            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
         }
     }
 }
+
+javadoc {
+    if(JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption('html5', true)
+    }
+}
+

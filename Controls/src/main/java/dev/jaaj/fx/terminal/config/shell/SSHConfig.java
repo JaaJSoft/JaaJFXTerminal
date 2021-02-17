@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.config;
+package dev.jaaj.fx.terminal.config.shell;
 
 import javafx.beans.property.*;
 
@@ -103,6 +103,11 @@ public class SSHConfig extends AbstractShellConfig implements Cloneable {
         }
         System.out.println(startCommand);
         return startCommand;
+    }
+
+    @Override
+    public String getTitle() {
+        return getUser() + "@" + getInetAddress().getHostName();
     }
 
     @Override

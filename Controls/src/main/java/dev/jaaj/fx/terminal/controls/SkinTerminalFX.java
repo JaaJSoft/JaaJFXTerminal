@@ -16,17 +16,16 @@
 
 package dev.jaaj.fx.terminal.controls;
 
-import com.kodedu.terminalfx.Terminal;
 import com.kodedu.terminalfx.config.TerminalConfig;
-import dev.jaaj.fx.terminal.config.AbstractShellConfig;
-import dev.jaaj.fx.terminal.config.TerminalThemeConfig;
+import dev.jaaj.fx.terminal.config.shell.AbstractShellConfig;
+import dev.jaaj.fx.terminal.config.terminal.TerminalThemeConfig;
 import javafx.scene.control.SkinBase;
 
 
-public class SkinTerminalFX extends SkinBase<AbstractTerminal> {
-    private final Terminal terminal;
+public class SkinTerminalFX extends SkinBase<Terminal> {
+    private final com.kodedu.terminalfx.Terminal terminal;
 
-    protected SkinTerminalFX(AbstractTerminal control) {
+    protected SkinTerminalFX(Terminal control) {
         super(control);
         TerminalConfig config = new TerminalConfig();
         AbstractShellConfig terminalConfig = control.getTerminalConfig();
@@ -37,7 +36,7 @@ public class SkinTerminalFX extends SkinBase<AbstractTerminal> {
             config.setUnixTerminalStarter(startCommand);
             config.setWindowsTerminalStarter(startCommand);
         }
-        terminal = new Terminal(config, null);
+        terminal = new com.kodedu.terminalfx.Terminal(config, null);
         control.lastCommand.addListener((observable, oldValue, newValue) -> {
             terminal.command(newValue);
         });

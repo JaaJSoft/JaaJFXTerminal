@@ -14,26 +14,13 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.controls;
+package dev.jaaj.fx.terminal.config.shell;
 
-import dev.jaaj.fx.terminal.config.LocalShellConfig;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
-public class LocalTerminal extends AbstractTerminal {
+public abstract class AbstractShellConfig {
 
-    public LocalTerminal() {
-        super(new LocalShellConfig(""));
-    }
-
-    public LocalTerminal(LocalShellConfig terminalConfig) {
-        super(terminalConfig);
-    }
-
-    @Override
-    public String getTitle() {
-        String command = this.getTerminalConfig().getStartCommand();
-        if(command.isBlank()){
-            return "Local";
-        }
-        return command;
-    }
+    public abstract String getStartCommand();
+    public abstract String getTitle();
 }

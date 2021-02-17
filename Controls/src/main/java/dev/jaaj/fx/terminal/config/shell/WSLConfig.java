@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.config;
+package dev.jaaj.fx.terminal.config.shell;
 
 import dev.jaaj.fx.terminal.controls.form.wsl.Distribution;
 import javafx.beans.property.ObjectProperty;
@@ -94,5 +94,18 @@ public class WSLConfig extends AbstractShellConfig {
             startCommand += " -e " + getCommand();
         }
         return startCommand;
+    }
+
+    @Override
+    public String getTitle() {
+        String distrib = getDistribution().getName();
+        String user = getUser();
+        if (!user.isBlank()) {
+            user += "@";
+        }
+        if (distrib.isBlank()) {
+            distrib = "Default"; //TODO: resource bundle
+        }
+        return user + distrib;
     }
 }

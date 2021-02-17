@@ -36,8 +36,12 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("main.fxml"), ResourceBundle.getBundle("dev/jaaj/fx/terminal/app/Terminal"));
         primaryStage.setTitle("JaaJFX - Terminal");
         Scene scene = new Scene(root, 800, 600);
+
         JMetro jMetro = new JMetro(Style.LIGHT);
         jMetro.setScene(scene);
+
+        //scene.getStylesheets().add(Main.class.getResource("styles/Styles.css").toExternalForm());
+
         primaryStage.setScene(scene);
         primaryStage.show();
         String path = getClass().getResource("img/console_96px.png").getPath();

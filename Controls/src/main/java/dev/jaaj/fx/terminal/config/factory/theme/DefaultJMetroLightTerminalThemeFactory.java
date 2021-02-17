@@ -16,9 +16,8 @@
 
 package dev.jaaj.fx.terminal.config.factory.theme;
 
-import dev.jaaj.fx.terminal.config.TerminalThemeConfig;
+import dev.jaaj.fx.terminal.config.terminal.TerminalThemeConfig;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 
 public class DefaultJMetroLightTerminalThemeFactory implements IFactoryTerminalThemeConfig {
     @Override

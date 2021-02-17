@@ -16,7 +16,7 @@
 
 package dev.jaaj.fx.terminal.config.factory.theme;
 
-import dev.jaaj.fx.terminal.config.TerminalThemeConfig;
+import dev.jaaj.fx.terminal.config.terminal.TerminalThemeConfig;
 import javafx.scene.paint.Color;
 
 public class DefaultJMetroDarkTerminalThemeFactory implements IFactoryTerminalThemeConfig {

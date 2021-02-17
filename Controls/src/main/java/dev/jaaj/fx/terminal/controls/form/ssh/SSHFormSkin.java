@@ -17,7 +17,7 @@
 package dev.jaaj.fx.terminal.controls.form.ssh;
 
 import dev.jaaj.fx.core.skin.SkinFXML;
-import dev.jaaj.fx.terminal.util.IntegerField;
+import dev.jaaj.fx.terminal.controls.util.IntegerField;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 

@@ -17,7 +17,7 @@
 package dev.jaaj.fx.terminal.controls.form.ssh;
 
 import dev.jaaj.fx.core.form.AbstractForm;
-import dev.jaaj.fx.terminal.config.SSHConfig;
+import dev.jaaj.fx.terminal.config.shell.SSHConfig;
 import javafx.beans.property.*;
 import javafx.scene.control.Skin;
 

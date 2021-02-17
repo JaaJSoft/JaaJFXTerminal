@@ -16,8 +16,8 @@
 
 package dev.jaaj.fx.terminal.controls;
 
-import dev.jaaj.fx.terminal.config.AbstractShellConfig;
-import dev.jaaj.fx.terminal.config.TerminalThemeConfig;
+import dev.jaaj.fx.terminal.config.shell.AbstractShellConfig;
+import dev.jaaj.fx.terminal.config.terminal.TerminalThemeConfig;
 import dev.jaaj.fx.terminal.config.factory.theme.DefaultJMetroLightTerminalThemeFactory;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -26,12 +26,12 @@ import javafx.beans.property.StringProperty;
 import javafx.scene.control.Control;
 import javafx.scene.control.Skin;
 
-public abstract class AbstractTerminal extends Control {
+public class Terminal extends Control {
     protected final StringProperty lastCommand = new SimpleStringProperty("");
     private final ObjectProperty<AbstractShellConfig> terminalConfig;
     private final ObjectProperty<TerminalThemeConfig> terminalThemeConfig;
 
-    public AbstractTerminal(AbstractShellConfig terminalConfig) {
+    public Terminal(AbstractShellConfig terminalConfig) {
         this.terminalConfig = new SimpleObjectProperty<>(terminalConfig);
         this.terminalThemeConfig = new SimpleObjectProperty<>(new DefaultJMetroLightTerminalThemeFactory().build()); //TODO auto theme
     }
@@ -73,8 +73,5 @@ public abstract class AbstractTerminal extends Control {
     protected Skin<?> createDefaultSkin() {
         return new SkinTerminalFX(this);
     }
-
-    public abstract String getTitle();
-
 
 }

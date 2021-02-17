@@ -17,7 +17,7 @@
 package dev.jaaj.fx.terminal.controls.form.ssh;
 
 import dev.jaaj.fx.core.form.DialogForm;
-import dev.jaaj.fx.terminal.config.SSHConfig;
+import dev.jaaj.fx.terminal.config.shell.SSHConfig;
 
 import java.util.ResourceBundle;
 

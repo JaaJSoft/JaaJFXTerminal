@@ -17,7 +17,7 @@
 package dev.jaaj.fx.terminal.controls.form.wsl;
 
 import dev.jaaj.fx.core.form.DialogForm;
-import dev.jaaj.fx.terminal.config.WSLConfig;
+import dev.jaaj.fx.terminal.config.shell.WSLConfig;
 
 import java.util.ResourceBundle;
 

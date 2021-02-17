@@ -14,13 +14,30 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.config;
+package dev.jaaj.fx.terminal.config.shell;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+public class LocalShellConfig extends AbstractShellConfig {
+    private final String executable;
 
-public abstract class AbstractShellConfig {
+    public LocalShellConfig(String executable) {
+        this.executable = executable;
+    }
 
-    public abstract String getStartCommand();
+    public LocalShellConfig() {
+        this.executable = "";
+    }
 
+    @Override
+    public String getStartCommand() {
+        return executable;
+    }
+
+    @Override
+    public String getTitle() {
+        String command = getStartCommand();
+        if (command.isBlank()) {
+            return "Local";
+        }
+        return command;
+    }
 }

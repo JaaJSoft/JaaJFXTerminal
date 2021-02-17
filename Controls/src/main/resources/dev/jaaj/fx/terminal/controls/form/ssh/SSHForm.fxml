@@ -17,7 +17,7 @@
   -->
 
 
-<?import dev.jaaj.fx.terminal.util.IntegerField?>
+<?import dev.jaaj.fx.terminal.controls.util.IntegerField?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.VBox?>
 

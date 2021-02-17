@@ -21,20 +21,23 @@ plugins {
 }
 
 javafx {
-    version = '13'
-    modules = ['javafx.controls', 'javafx.fxml','javafx.graphics', 'javafx.web']
+    version = '15'
+    modules = ['javafx.controls', 'javafx.fxml', 'javafx.web']
 }
+
+compileJava.options.encoding = "UTF-8"
+compileTestJava.options.encoding = "UTF-8"
 
 group 'dev.jaaj.fx.terminal'
 version '0.1'
 
-sourceCompatibility = 13
+sourceCompatibility = 15
 
 mainClassName = 'dev.jaaj.fx.terminal.app.Main'
 
 repositories {
     maven {
-        url  'https://nexus.jaaj.dev/repository/maven-releases'
+        url 'https://nexus.jaaj.dev/repository/maven-releases'
     }
     mavenCentral()
     jcenter()
