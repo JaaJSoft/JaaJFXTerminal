@@ -14,6 +14,16 @@
  * limitations under the License.
  */
 
-group 'dev.jaaj.fx'
-version '0.1'
+package dev.jaaj.fx.terminal.controls.about;
 
+import dev.jaaj.fx.core.skin.SkinFXML;
+import javafx.scene.control.SkinBase;
+
+public class AboutSkin extends SkinFXML<About> {
+
+
+    protected AboutSkin(About control) {
+        super(control, AboutSkin.class.getResource("About.fxml"));
+    }
+
+}

@@ -14,30 +14,34 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.config.shell;
+package dev.jaaj.fx.terminal.controls.about.data;
 
-public class LocalShellConfig extends AbstractShellConfig {
-    private final String executable;
+public class Person {
+    private final String name;
+    private final String title;
+    private final String email;
+    private final String website;
 
-    public LocalShellConfig(String executable) {
-        this.executable = executable;
+    public Person(String name, String title, String email, String website) {
+        this.name = name;
+        this.title = title;
+        this.email = email;
+        this.website = website;
     }
 
-    public LocalShellConfig() {
-        this.executable = "";
+    public String getName() {
+        return name;
     }
 
-    @Override
-    public String getStartCommand() {
-        return executable;
-    }
-
-    @Override
     public String getTitle() {
-        String command = getStartCommand();
-        if (command.isBlank()) {
-            return "Local";
-        }
-        return command;
+        return title;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getWebsite() {
+        return website;
     }
 }

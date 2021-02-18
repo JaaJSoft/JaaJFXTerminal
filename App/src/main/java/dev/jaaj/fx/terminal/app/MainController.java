@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 JaaJSoft
+ * Copyright 2021 JaaJSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,11 +24,15 @@ import dev.jaaj.fx.terminal.controls.Terminal;
 import dev.jaaj.fx.terminal.controls.about.AboutDialog;
 import dev.jaaj.fx.terminal.controls.form.ssh.SSHFormDialog;
 import dev.jaaj.fx.terminal.controls.form.wsl.WSLFormDialog;
+import dev.jaaj.fx.terminal.controls.options.OptionsDialog;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
 import org.controlsfx.control.StatusBar;
 
@@ -37,13 +41,20 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
-    public BorderPane root;
-    public MenuBar menuBar;
-    public TabPane tabPane;
-    public StatusBar statusBar;
-    public MenuItem newTerminal;
-    public MenuItem newSSHTerminal;
-    public MenuItem newWSLTerminal;
+    @FXML
+    BorderPane root;
+    @FXML
+    MenuBar menuBar;
+    @FXML
+    TabPane tabPane;
+    @FXML
+    StatusBar statusBar;
+    @FXML
+    MenuItem newTerminal;
+    @FXML
+    MenuItem newSSHTerminal;
+    @FXML
+    MenuItem newWSLTerminal;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -52,10 +63,6 @@ public class MainController implements Initializable {
         newTerminal.fire();
     }
 
-    @FXML
-    private void openOptions(ActionEvent event) {
-
-    }
 
     @FXML
     private void exit(ActionEvent event) {
@@ -101,4 +108,18 @@ public class MainController implements Initializable {
         aboutDialog.initOwner(root.getCenter().getScene().getWindow());
         aboutDialog.show();
     }
+
+    public void openAboutJaaJFX(ActionEvent actionEvent) {
+        AboutDialog aboutDialog = new AboutDialog();
+        aboutDialog.initOwner(root.getCenter().getScene().getWindow());
+        aboutDialog.show();
+    }
+
+    public void openSettings(ActionEvent event) {
+        OptionsDialog optionsDialog = new OptionsDialog();
+        optionsDialog.initOwner(root.getCenter().getScene().getWindow());
+        optionsDialog.show();
+    }
+
+
 }

@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 
 <!--
-  ~ Copyright 2020 JaaJSoft
+  ~ Copyright 2021 JaaJSoft
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -39,10 +39,11 @@
             <Menu text="%PROFILE">
                 <MenuItem text="%SAVE_PROFILE"/>
             </Menu>
-            <Menu text="%OPTIONS">
-
+            <Menu text="%SETTINGS">
+                <MenuItem text="%OPEN_SETTINGS" onAction="#openSettings"/>
             </Menu>
             <Menu text="%HELP">
+                <MenuItem text="%ABOUT_JAAJFX" onAction="#openAboutJaaJFX"/>
                 <MenuItem text="%ABOUT" onAction="#openAbout"/>
             </Menu>
         </MenuBar>

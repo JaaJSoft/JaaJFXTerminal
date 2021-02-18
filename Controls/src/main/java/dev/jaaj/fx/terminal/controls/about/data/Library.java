@@ -14,6 +14,28 @@
  * limitations under the License.
  */
 
-group 'dev.jaaj.fx'
-version '0.1'
+package dev.jaaj.fx.terminal.controls.about.data;
 
+public class Library {
+    private final String name;
+    private final String version;
+    private final String licence;
+
+    public Library(String name, String version, String licence) {
+        this.name = name;
+        this.version = version;
+        this.licence = licence;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public String getLicence() {
+        return licence;
+    }
+}

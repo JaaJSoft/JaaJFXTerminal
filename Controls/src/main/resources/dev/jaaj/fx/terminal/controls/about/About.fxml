@@ -6,7 +6,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import org.controlsfx.control.SearchableComboBox?>
 <!--
   ~ Copyright 2021 JaaJSoft
   ~
@@ -23,23 +22,8 @@
   ~ limitations under the License.
   -->
 
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      spacing="10" prefWidth="250">
-    <VBox spacing="5">
-        <Label text="%distribution"/>
-        <ComboBox fx:id="distributionComboBox" prefWidth="250"/>
-    </VBox>
-    <VBox spacing="5">
-        <Label text="%user"/>
-        <TextField fx:id="userField"/>
-    </VBox>
-    <VBox spacing="5">
-        <Label text="%working_directory"/>
-        <TextField fx:id="workingDirectoryField"/>
-    </VBox>
-    <VBox spacing="5">
-        <Label text="%command"/>
-        <TextField fx:id="commandField"/>
-    </VBox>
-</VBox>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            prefHeight="400.0" prefWidth="600.0">
+
+</AnchorPane>
