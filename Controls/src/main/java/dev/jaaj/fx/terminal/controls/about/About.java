@@ -16,6 +16,7 @@
 
 package dev.jaaj.fx.terminal.controls.about;
 
+import dev.jaaj.fx.terminal.controls.about.data.Library;
 import dev.jaaj.fx.terminal.controls.about.data.Person;
 import javafx.beans.property.*;
 import javafx.collections.ObservableList;
@@ -24,7 +25,7 @@ import javafx.scene.control.Skin;
 import javafx.scene.image.Image;
 
 public class About extends Control {
-    private final ObservableList<String> libsList = new SimpleListProperty<>();
+    private final ObservableList<Library> libsList = new SimpleListProperty<>();
     private final ObservableList<Person> developers = new SimpleListProperty<>();
     private final ObservableList<Person> translators = new SimpleListProperty<>();
     private final ObservableList<Person> thanks = new SimpleListProperty<>();
@@ -32,8 +33,17 @@ public class About extends Control {
     private final StringProperty version = new SimpleStringProperty();
     private final StringProperty aboutText = new SimpleStringProperty();
 
-    public ObservableList<String> getLibsList() {
+
+    public ObservableList<Library> getLibsList() {
         return libsList;
+    }
+
+    public String getAboutText() {
+        return aboutText.get();
+    }
+
+    public StringProperty aboutTextProperty() {
+        return aboutText;
     }
 
     public ObservableList<Person> getDevelopers() {

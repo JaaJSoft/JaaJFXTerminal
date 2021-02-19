@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
 <!--
   ~ Copyright 2021 JaaJSoft
   ~
@@ -19,18 +16,23 @@
   ~ limitations under the License.
   -->
 
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.BorderPane?>
 <?import org.controlsfx.control.StatusBar?>
-<BorderPane styleClass="background" fx:id="root" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.jaaj.fx.terminal.app.MainController">
+
+<BorderPane styleClass="background" fx:id="root" prefHeight="400.0" prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="dev.jaaj.fx.terminal.app.MainController">
     <top>
         <MenuBar fx:id="menuBar">
             <Menu text="%FILE">
                 <Menu text="%NEW">
-                    <MenuItem fx:id="newTerminal" text="%NEW_LOCAL" onAction="#openTerminal" />
-                    <MenuItem fx:id="newWSLTerminal" text="%NEW_WSL" onAction="#openTerminalWSL" />
-                    <MenuItem fx:id="newSSHTerminal" text="%NEW_SSH" onAction="#openTerminalSSH" />
+                    <MenuItem fx:id="newTerminal" text="%NEW_LOCAL" onAction="#openTerminal"/>
+                    <MenuItem fx:id="newWSLTerminal" text="%NEW_WSL" onAction="#openTerminalWSL"/>
+                    <MenuItem fx:id="newSSHTerminal" text="%NEW_SSH" onAction="#openTerminalSSH"/>
                 </Menu>
 
-                <MenuItem text="%CLOSE" onAction="#exit" />
+                <MenuItem text="%CLOSE" onAction="#exit"/>
             </Menu>
             <Menu text="%EDIT">
                 <MenuItem text="%COPY"/>
@@ -49,8 +51,7 @@
         </MenuBar>
     </top>
     <center>
-        <TabPane fx:id="tabPane" >
-
+        <TabPane fx:id="tabPane">
         </TabPane>
     </center>
     <bottom>
