@@ -16,6 +16,7 @@
 
 package dev.jaaj.fx.terminal.controls.about;
 
+import dev.jaaj.fx.terminal.controls.about.data.AppInfo;
 import dev.jaaj.fx.terminal.controls.about.data.Library;
 import dev.jaaj.fx.terminal.controls.about.data.Person;
 import javafx.beans.property.*;
@@ -24,62 +25,17 @@ import javafx.scene.control.Control;
 import javafx.scene.control.Skin;
 import javafx.scene.image.Image;
 
+import java.util.List;
+
 public class About extends Control {
-    private final ObservableList<Library> libsList = new SimpleListProperty<>();
-    private final ObservableList<Person> developers = new SimpleListProperty<>();
-    private final ObservableList<Person> translators = new SimpleListProperty<>();
-    private final ObservableList<Person> thanks = new SimpleListProperty<>();
-    private final ObjectProperty<Image> icon = new SimpleObjectProperty<>();
-    private final StringProperty version = new SimpleStringProperty();
-    private final StringProperty aboutText = new SimpleStringProperty();
+    private final AppInfo appInfo;
 
-
-    public ObservableList<Library> getLibsList() {
-        return libsList;
+    public About(AppInfo appInfo) {
+        this.appInfo = appInfo;
     }
 
-    public String getAboutText() {
-        return aboutText.get();
-    }
-
-    public StringProperty aboutTextProperty() {
-        return aboutText;
-    }
-
-    public ObservableList<Person> getDevelopers() {
-        return developers;
-    }
-
-    public ObservableList<Person> getTranslators() {
-        return translators;
-    }
-
-    public ObservableList<Person> getThanks() {
-        return thanks;
-    }
-
-    public Image getIcon() {
-        return icon.get();
-    }
-
-    public ObjectProperty<Image> iconProperty() {
-        return icon;
-    }
-
-    public void setIcon(Image icon) {
-        this.icon.set(icon);
-    }
-
-    public String getVersion() {
-        return version.get();
-    }
-
-    public StringProperty versionProperty() {
-        return version;
-    }
-
-    public void setVersion(String version) {
-        this.version.set(version);
+    public AppInfo getAppInfo() {
+        return appInfo;
     }
 
     @Override

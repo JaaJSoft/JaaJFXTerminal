@@ -13,30 +13,3 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-.button {
-    -fx-font-weight: bold;
-}
-
-.text-area {
-    -fx-font-size: 14px;
-    -fx-font-family: Monospaced;
-    -fx-text-fill: yellow;
-    -fx-font-weight: bold;
-}
-
-.text-area .content {
-    -fx-background-color: black;
-}
-
-.text-field {
-    -fx-font-size: 14px;
-    -fx-font-family: Monospaced;
-    -fx-text-fill: yellow;
-    -fx-font-weight: bold;
-}
-
-.tab-pane {
-    -fx-open-tab-animation: NONE;
-    -fx-close-tab-animation: NONE;
-}

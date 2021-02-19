@@ -16,20 +16,21 @@
 
 package dev.jaaj.fx.terminal.controls.about;
 
-import dev.jaaj.fx.terminal.controls.form.ssh.SSHFormDialog;
+import dev.jaaj.fx.terminal.controls.about.data.AppInfo;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
+import javafx.scene.image.Image;
 
+import java.io.FileInputStream;
 import java.util.ResourceBundle;
 
 public class AboutDialog extends Dialog<Void> {
     private static final ResourceBundle ABOUT_BUNDLE = ResourceBundle.getBundle(AboutDialog.class.getPackageName() + ".About");
 
-    public AboutDialog() {
-        this.setTitle(ABOUT_BUNDLE.getString("title"));
-        this.setHeaderText(ABOUT_BUNDLE.getString("header"));
+    public AboutDialog(AppInfo appInfo) {
+        this.setTitle(appInfo.getAppName());
         this.getDialogPane().getButtonTypes().addAll(ButtonType.CLOSE);
-        this.getDialogPane().setContent(new About());
+        this.getDialogPane().setContent(new About(appInfo));
 
     }
 }

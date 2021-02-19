@@ -22,6 +22,8 @@ import dev.jaaj.fx.terminal.config.shell.SSHConfig;
 import dev.jaaj.fx.terminal.config.shell.WSLConfig;
 import dev.jaaj.fx.terminal.controls.Terminal;
 import dev.jaaj.fx.terminal.controls.about.AboutDialog;
+import dev.jaaj.fx.terminal.controls.about.data.AppInfo;
+import dev.jaaj.fx.terminal.controls.about.data.AppInfoBuilder;
 import dev.jaaj.fx.terminal.controls.form.ssh.SSHFormDialog;
 import dev.jaaj.fx.terminal.controls.form.wsl.WSLFormDialog;
 import dev.jaaj.fx.terminal.controls.options.OptionsDialog;
@@ -33,9 +35,12 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import org.controlsfx.control.StatusBar;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -104,13 +109,27 @@ public class MainController implements Initializable {
     }
 
     public void openAbout(ActionEvent actionEvent) {
-        AboutDialog aboutDialog = new AboutDialog();
+        String path = getClass().getResource("img/console_96px.png").getPath();
+        Image image;
+        try {
+            image = new Image(new FileInputStream(path));
+        } catch (FileNotFoundException e) {
+            image = null;
+        }
+        AppInfo JaaJFXTerminalApp = new AppInfoBuilder().setAppName("JaaJFXTerminal")
+                .setIcon(image)
+                .setVersion("0.1")// todo get app version from gradle
+                .createAppInfo();
+        AboutDialog aboutDialog = new AboutDialog(JaaJFXTerminalApp);
         aboutDialog.initOwner(root.getCenter().getScene().getWindow());
         aboutDialog.show();
     }
 
     public void openAboutJaaJFX(ActionEvent actionEvent) {
-        AboutDialog aboutDialog = new AboutDialog();
+        AppInfo JaaJFX = new AppInfoBuilder().setAppName("JaaJFX")
+                .setVersion("0.2.0")// todo get app version from gradle
+                .createAppInfo();
+        AboutDialog aboutDialog = new AboutDialog(JaaJFX);
         aboutDialog.initOwner(root.getCenter().getScene().getWindow());
         aboutDialog.show();
     }
