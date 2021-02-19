@@ -20,8 +20,11 @@ import dev.jaaj.fx.core.skin.SkinFXML;
 import dev.jaaj.fx.terminal.controls.about.data.AppInfo;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.image.ImageView;
 
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class AboutSkin extends SkinFXML<About> {
@@ -31,6 +34,9 @@ public class AboutSkin extends SkinFXML<About> {
     Label appName;
     @FXML
     Label version;
+    @FXML
+    TabPane tabPane;
+
 
     protected AboutSkin(About control) {
         super(control, AboutSkin.class.getResource("About.fxml"), ResourceBundle.getBundle(AboutSkin.class.getPackageName() + ".About"));

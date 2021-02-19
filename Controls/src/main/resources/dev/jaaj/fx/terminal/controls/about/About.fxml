@@ -20,12 +20,33 @@
   ~ limitations under the License.
   -->
 
-<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox spacing="10"
+      prefHeight="500"
+      prefWidth="550"
+      xmlns="http://javafx.com/javafx/11.0.1"
+      xmlns:fx="http://javafx.com/fxml/1">
     <HBox spacing="10">
-        <ImageView fx:id="icon" fitHeight="50" preserveRatio="true" />
+        <ImageView fx:id="icon" fitHeight="50" preserveRatio="true"/>
         <VBox alignment="CENTER_LEFT">
-            <Label fx:id="appName" style="-fx-font-size: 20" text="AAAAA" />
-            <Label fx:id="version" style="-fx-font-size: 14" text="20.1" />
+            <Label fx:id="appName" style="-fx-font-size: 20"/>
+            <Label fx:id="version" style="-fx-font-size: 14"/>
         </VBox>
     </HBox>
+    <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE">
+        <Tab fx:id="aboutTab" text="%aboutTab">
+
+        </Tab>
+        <Tab fx:id="libsTab" text="%libsTab">
+
+        </Tab>
+        <Tab fx:id="developersTab" text="%developersTab">
+
+        </Tab>
+        <Tab fx:id="thanksTab" text="%thanksTab">
+
+        </Tab>
+        <Tab fx:id="translateTab" text="%translatorsTab">
+
+        </Tab>
+    </TabPane>
 </VBox>

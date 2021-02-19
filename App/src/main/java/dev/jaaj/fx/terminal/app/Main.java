@@ -44,7 +44,7 @@ public class Main extends Application {
 
         primaryStage.setScene(scene);
         primaryStage.show();
-        String path = getClass().getResource("img/console_96px.png").getPath();
+        String path = getClass().getResource("img/icon.png").getPath();
         primaryStage.getIcons().add(new Image(new FileInputStream(path)));
         primaryStage.setOnCloseRequest(event -> {
             Platform.exit();

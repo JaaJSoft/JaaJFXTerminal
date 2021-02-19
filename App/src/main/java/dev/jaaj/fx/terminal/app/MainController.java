@@ -109,16 +109,18 @@ public class MainController implements Initializable {
     }
 
     public void openAbout(ActionEvent actionEvent) {
-        String path = getClass().getResource("img/console_96px.png").getPath();
+        String path = getClass().getResource("img/icon.png").getPath();
         Image image;
         try {
             image = new Image(new FileInputStream(path));
         } catch (FileNotFoundException e) {
             image = null;
         }
-        AppInfo JaaJFXTerminalApp = new AppInfoBuilder().setAppName("JaaJFXTerminal")
+        AppInfo JaaJFXTerminalApp = new AppInfoBuilder()
+                .setAppName("JaaJFXTerminal")
                 .setIcon(image)
                 .setVersion("0.1")// todo get app version from gradle
+                .setAboutText("")
                 .createAppInfo();
         AboutDialog aboutDialog = new AboutDialog(JaaJFXTerminalApp);
         aboutDialog.initOwner(root.getCenter().getScene().getWindow());
@@ -126,7 +128,8 @@ public class MainController implements Initializable {
     }
 
     public void openAboutJaaJFX(ActionEvent actionEvent) {
-        AppInfo JaaJFX = new AppInfoBuilder().setAppName("JaaJFX")
+        AppInfo JaaJFX = new AppInfoBuilder()
+                .setAppName("JaaJFX")
                 .setVersion("0.2.0")// todo get app version from gradle
                 .createAppInfo();
         AboutDialog aboutDialog = new AboutDialog(JaaJFX);
