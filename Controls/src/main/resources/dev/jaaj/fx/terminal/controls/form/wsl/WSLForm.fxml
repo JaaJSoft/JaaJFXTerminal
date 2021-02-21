@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<?import org.controlsfx.control.SearchableComboBox?>
 <!--
   ~ Copyright 2021 JaaJSoft
   ~
@@ -23,9 +20,8 @@
   ~ limitations under the License.
   -->
 
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      spacing="10" prefWidth="250">
+<?import javafx.geometry.Insets?>
+<VBox prefWidth="250" spacing="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <VBox spacing="5">
         <Label text="%distribution"/>
         <ComboBox fx:id="distributionComboBox" prefWidth="250"/>
@@ -36,7 +32,20 @@
     </VBox>
     <VBox spacing="5">
         <Label text="%working_directory"/>
-        <TextField fx:id="workingDirectoryField"/>
+        <HBox alignment="CENTER_LEFT" spacing="5">
+            <TextField fx:id="workingDirectoryField" HBox.hgrow="ALWAYS"/>
+            <Button fx:id="chooseDirBtn" HBox.hgrow="NEVER">
+                <padding>
+                    <Insets/>
+                </padding>
+                <graphic>
+                    <ImageView fitWidth="25.0" preserveRatio="true">
+                        <Image preserveRatio="true" url="@browse_folder_96px.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+        </HBox>
+
     </VBox>
     <VBox spacing="5">
         <Label text="%command"/>

@@ -17,11 +17,15 @@
 package dev.jaaj.fx.terminal.controls.form.wsl;
 
 import dev.jaaj.fx.core.skin.SkinFXML;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.stage.DirectoryChooser;
 import org.controlsfx.control.SearchableComboBox;
 
+import java.io.File;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -34,6 +38,8 @@ public class WSLFormSkin extends SkinFXML<WSLForm> {
     TextField workingDirectoryField;
     @FXML
     TextField commandField;
+    @FXML
+    Button chooseDirBtn;
 
     public WSLFormSkin(WSLForm control) {
         super(control,
@@ -50,17 +56,27 @@ public class WSLFormSkin extends SkinFXML<WSLForm> {
                     userField.setEditable(false);
                     workingDirectoryField.setEditable(false);
                     commandField.setEditable(false);
+                    chooseDirBtn.setDisable(true);
                     break;
                 case EDITABLE:
                     distributionComboBox.setEditable(true);
                     userField.setEditable(true);
                     workingDirectoryField.setEditable(true);
                     commandField.setEditable(true);
+                    chooseDirBtn.setDisable(false);
                     break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + newValue);
             }
+
         });
+        chooseDirBtn.setOnAction(this::openFolderPicker);
+    }
+
+    public void openFolderPicker(ActionEvent actionEvent) {
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        File file = directoryChooser.showDialog(this.getNode().getScene().getWindow());
+        workingDirectoryField.textProperty().set(file.toPath().toAbsolutePath().toString());
     }
 
     private void selectDefaultDistribution(WSLForm control) {
