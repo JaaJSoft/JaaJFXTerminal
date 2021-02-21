@@ -76,7 +76,9 @@ public class WSLFormSkin extends SkinFXML<WSLForm> {
     public void openFolderPicker(ActionEvent actionEvent) {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         File file = directoryChooser.showDialog(this.getNode().getScene().getWindow());
-        workingDirectoryField.textProperty().set(file.toPath().toAbsolutePath().toString());
+        if (file != null) {
+            workingDirectoryField.textProperty().set(file.toPath().toAbsolutePath().toString());
+        }
     }
 
     private void selectDefaultDistribution(WSLForm control) {
