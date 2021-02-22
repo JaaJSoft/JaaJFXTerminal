@@ -26,7 +26,7 @@ public class DefaultJMetroLightTerminalThemeFactory implements IFactoryTerminalT
         config.setForegroundColor(Color.BLACK);
         config.setBackgroundColor(Color.web("#F8F8F8"));
         config.setCursorColor(Color.BLACK);
-        //config.setFont(new Font("Hack Nerd Font Mono", 15));
+        config.setFont(null);
         return config;
     }
 }

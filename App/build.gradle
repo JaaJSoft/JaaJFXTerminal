@@ -27,9 +27,6 @@ javafx {
     modules = ['javafx.controls', 'javafx.fxml', 'javafx.web']
 }
 
-compileJava.options.encoding = "UTF-8"
-compileTestJava.options.encoding = "UTF-8"
-
 group 'dev.jaaj.fx.terminal'
 version '0.1'
 
@@ -39,6 +36,25 @@ mainClassName = 'dev.jaaj.fx.terminal.app.Main'
 
 runtime {
     options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
+    launcher {
+        noConsole = true
+    }
+    jpackage {
+        def currentOs = org.gradle.internal.os.OperatingSystem.current()
+        def imgType = currentOs.windows ? 'ico' : currentOs.macOsX ? 'icns' : 'png'
+        imageOptions += ['--icon', "src/main/resources/dev/jaaj/fx/terminal/app/img/icon.$imgType"]
+        installerOptions += ['--resource-dir', "src/main/resources"]
+        installerOptions += ['--vendor', 'JaaJSoft']
+        if (currentOs.windows) {
+            installerOptions += ['--win-dir-chooser', '--win-menu', '--win-shortcut']
+        } else if (currentOs.linux) {
+            installerOptions += ['--linux-package-name', rootProject.name, '--linux-shortcut']
+        } else if (currentOs.macOsX) {
+            installerOptions += ['--mac-package-name', rootProject.name]
+        }
+        imageName = rootProject.name
+        installerName = rootProject.name
+    }
 }
 
 repositories {
@@ -53,7 +69,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'dev.jaaj.fx:core:0.2.0'
+    implementation 'dev.jaaj.fx:core:0.2.1'
     implementation 'org.controlsfx:controlsfx:11.0.2'
     implementation project(":Controls")
     implementation 'org.jfxtras:jmetro:11.6.14'
