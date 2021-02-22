@@ -60,9 +60,11 @@ public class MainController implements Initializable {
     MenuItem newSSHTerminal;
     @FXML
     MenuItem newWSLTerminal;
+    private ResourceBundle bundle;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        bundle = resources;
         //root.setCenter(new SSHTerminal("root", InetAddress.getByName("vps741987.ovh.net")));
         tabPane.setTabDragPolicy(TabPane.TabDragPolicy.REORDER);
         newTerminal.fire();
@@ -120,7 +122,7 @@ public class MainController implements Initializable {
                 .setAppName("JaaJFXTerminal")
                 .setIcon(image)
                 .setVersion("0.1")// todo get app version from gradle
-                .setAboutText("")
+                .setAboutText(bundle.getString("ABOUT_TEXT_JAAJFXTERM"))
                 .createAppInfo();
         AboutDialog aboutDialog = new AboutDialog(JaaJFXTerminalApp);
         aboutDialog.initOwner(root.getCenter().getScene().getWindow());
@@ -131,6 +133,7 @@ public class MainController implements Initializable {
         AppInfo JaaJFX = new AppInfoBuilder()
                 .setAppName("JaaJFX")
                 .setVersion("0.2.0")// todo get app version from gradle
+                .setAboutText(bundle.getString("ABOUT_TEXT_JAAJFX"))
                 .createAppInfo();
         AboutDialog aboutDialog = new AboutDialog(JaaJFX);
         aboutDialog.initOwner(root.getCenter().getScene().getWindow());

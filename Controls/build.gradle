@@ -17,7 +17,6 @@
 plugins {
     id 'java-library'
     id 'org.openjfx.javafxplugin' version '0.0.9'
-    id "com.jfrog.bintray" version "1.8.4"
     id "maven-publish"
 }
 

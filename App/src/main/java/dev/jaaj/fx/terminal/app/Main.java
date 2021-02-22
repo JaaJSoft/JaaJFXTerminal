@@ -16,45 +16,8 @@
 
 package dev.jaaj.fx.terminal.app;
 
-import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.stage.Stage;
-import jfxtras.styles.jmetro.JMetro;
-import jfxtras.styles.jmetro.Style;
-
-import java.io.FileInputStream;
-import java.util.ResourceBundle;
-
-public class Main extends Application {
-
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("main.fxml"), ResourceBundle.getBundle("dev/jaaj/fx/terminal/app/Terminal"));
-        primaryStage.setTitle("JaaJFX - Terminal");
-        Scene scene = new Scene(root, 800, 600);
-
-        JMetro jMetro = new JMetro(Style.LIGHT);
-        jMetro.setScene(scene);
-
-        //scene.getStylesheets().add(Main.class.getResource("styles/Styles.css").toExternalForm());
-
-        primaryStage.setScene(scene);
-        primaryStage.show();
-        String path = getClass().getResource("img/icon.png").getPath();
-        primaryStage.getIcons().add(new Image(new FileInputStream(path)));
-        primaryStage.setOnCloseRequest(event -> {
-            Platform.exit();
-            System.exit(0);
-        });
-    }
-
-
+public class Main {
     public static void main(String[] args) {
-        launch(args);
+        App.main(args);
     }
 }
-
