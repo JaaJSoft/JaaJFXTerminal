@@ -39,8 +39,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import org.controlsfx.control.StatusBar;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -111,13 +110,8 @@ public class MainController implements Initializable {
     }
 
     public void openAbout(ActionEvent actionEvent) {
-        String path = getClass().getResource("img/icon.png").getPath();
-        Image image;
-        try {
-            image = new Image(new FileInputStream(path));
-        } catch (FileNotFoundException e) {
-            image = null;
-        }
+        InputStream inputStream = getClass().getResourceAsStream("img/icon.png");
+        Image image = new Image(inputStream);
         AppInfo JaaJFXTerminalApp = new AppInfoBuilder()
                 .setAppName("JaaJFXTerminal")
                 .setIcon(image)
@@ -132,7 +126,7 @@ public class MainController implements Initializable {
     public void openAboutJaaJFX(ActionEvent actionEvent) {
         AppInfo JaaJFX = new AppInfoBuilder()
                 .setAppName("JaaJFX")
-                .setVersion("0.2.0")// todo get app version from gradle
+                .setVersion("0.2.1")// todo get app version from gradle
                 .setAboutText(bundle.getString("ABOUT_TEXT_JAAJFX"))
                 .createAppInfo();
         AboutDialog aboutDialog = new AboutDialog(JaaJFX);
@@ -145,6 +139,5 @@ public class MainController implements Initializable {
         optionsDialog.initOwner(root.getCenter().getScene().getWindow());
         optionsDialog.show();
     }
-
 
 }

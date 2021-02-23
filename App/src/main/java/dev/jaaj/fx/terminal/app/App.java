@@ -27,6 +27,7 @@ import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
 
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.ResourceBundle;
 
 public class App extends Application {
@@ -44,8 +45,8 @@ public class App extends Application {
 
         primaryStage.setScene(scene);
         primaryStage.show();
-        //String path = getClass().getResource("img/icon.png").getPath();
-        //primaryStage.getIcons().add(new Image(new FileInputStream(path)));
+        InputStream inputStream = getClass().getResourceAsStream("img/icon.png");
+        primaryStage.getIcons().add(new Image(inputStream));
         primaryStage.setOnCloseRequest(event -> {
             Platform.exit();
             System.exit(0);
