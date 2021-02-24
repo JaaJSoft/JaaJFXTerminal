@@ -38,8 +38,8 @@
                 <MenuItem text="%COPY"/>
                 <MenuItem text="%PASTE"/>
             </Menu>
-            <Menu text="%PROFILE">
-                <MenuItem text="%SAVE_PROFILE"/>
+            <Menu text="%PROFILE" fx:id="profileMenu">
+                <MenuItem text="%SAVE_PROFILE" onAction="#saveProfile"/>
             </Menu>
             <Menu text="%SETTINGS">
                 <MenuItem text="%OPEN_SETTINGS" onAction="#openSettings"/>

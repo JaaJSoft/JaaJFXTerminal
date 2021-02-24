@@ -17,6 +17,8 @@
 package dev.jaaj.fx.terminal.app;
 
 
+import dev.jaaj.fx.terminal.config.profile.Profile;
+import dev.jaaj.fx.terminal.config.profile.ProfilesService;
 import dev.jaaj.fx.terminal.config.shell.LocalShellConfig;
 import dev.jaaj.fx.terminal.config.shell.SSHConfig;
 import dev.jaaj.fx.terminal.config.shell.WSLConfig;
@@ -28,13 +30,12 @@ import dev.jaaj.fx.terminal.controls.form.ssh.SSHFormDialog;
 import dev.jaaj.fx.terminal.controls.form.wsl.WSLFormDialog;
 import dev.jaaj.fx.terminal.controls.options.OptionsDialog;
 import javafx.application.Platform;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import org.controlsfx.control.StatusBar;
@@ -45,6 +46,8 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
+    @FXML
+    Menu profileMenu;
     @FXML
     BorderPane root;
     @FXML
@@ -61,12 +64,28 @@ public class MainController implements Initializable {
     MenuItem newWSLTerminal;
     private ResourceBundle bundle;
 
+    private ProfilesService profilesService = new ProfilesService();
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         bundle = resources;
-        //root.setCenter(new SSHTerminal("root", InetAddress.getByName("vps741987.ovh.net")));
         tabPane.setTabDragPolicy(TabPane.TabDragPolicy.REORDER);
         newTerminal.fire();
+        profilesService.getProfiles().addListener((ListChangeListener<? super Profile>) c -> {
+            c.next();
+            ObservableList<MenuItem> profileMenuItems = profileMenu.getItems();
+            if (c.wasAdded()) {
+                Profile profile = c.getAddedSubList().get(0);
+                MenuItem e = new MenuItem(profile.getProfileName());
+                e.setOnAction(event -> {
+                    addTerminal(new Terminal(profile.getShellConfig(), profile.getTerminalThemeConfig()));
+                });
+                profileMenuItems.add(e);
+            } else if (c.wasRemoved()) {
+                Optional<MenuItem> optionalMenuItem = profileMenuItems.stream().filter(menuItem -> menuItem.getText().equals(c.getRemoved().get(0).getProfileName())).findAny();
+                optionalMenuItem.ifPresent(profileMenuItems::remove);
+            }
+        });
     }
 
 
@@ -140,4 +159,9 @@ public class MainController implements Initializable {
         optionsDialog.show();
     }
 
+    public void saveProfile(ActionEvent event) {
+        Profile profile = new Profile("test");
+
+        profilesService.saveProfile(profile);
+    }
 }

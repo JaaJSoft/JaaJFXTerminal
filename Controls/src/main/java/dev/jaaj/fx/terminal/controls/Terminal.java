@@ -16,6 +16,7 @@
 
 package dev.jaaj.fx.terminal.controls;
 
+import dev.jaaj.fx.terminal.config.profile.Profile;
 import dev.jaaj.fx.terminal.config.shell.AbstractShellConfig;
 import dev.jaaj.fx.terminal.config.terminal.TerminalThemeConfig;
 import dev.jaaj.fx.terminal.config.factory.theme.DefaultJMetroLightTerminalThemeFactory;
@@ -32,8 +33,16 @@ public class Terminal extends Control {
     private final ObjectProperty<TerminalThemeConfig> terminalThemeConfig;
 
     public Terminal(AbstractShellConfig terminalConfig) {
+        this(terminalConfig, new DefaultJMetroLightTerminalThemeFactory().build());// todo auto-theme
+    }
+
+    public Terminal(AbstractShellConfig terminalConfig, TerminalThemeConfig themeConfig) {
         this.terminalConfig = new SimpleObjectProperty<>(terminalConfig);
-        this.terminalThemeConfig = new SimpleObjectProperty<>(new DefaultJMetroLightTerminalThemeFactory().build()); //TODO auto theme
+        this.terminalThemeConfig = new SimpleObjectProperty<>(themeConfig);
+    }
+
+    public Terminal(Profile profile) {
+        this(profile.getShellConfig(), profile.getTerminalThemeConfig());
     }
 
     public void execute(String command) {

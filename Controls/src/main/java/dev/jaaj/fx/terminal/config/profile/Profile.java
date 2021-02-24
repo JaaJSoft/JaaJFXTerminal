@@ -14,21 +14,31 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.config;
+package dev.jaaj.fx.terminal.config.profile;
 
 import dev.jaaj.fx.terminal.config.shell.AbstractShellConfig;
 import dev.jaaj.fx.terminal.config.terminal.TerminalThemeConfig;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
+import java.util.Objects;
 
 /**
  * a profile is composed of a ShellConfig and and a ThemeConfig
  */
 public class Profile {
+    private final StringProperty profileName = new SimpleStringProperty();
     private final ObjectProperty<AbstractShellConfig> shellConfig = new SimpleObjectProperty<>();
     private final ObjectProperty<TerminalThemeConfig> terminalThemeConfig = new SimpleObjectProperty<>();
 
-    public Profile(AbstractShellConfig shellConfig, TerminalThemeConfig themeConfig) {
+    public Profile(String profileName) {
+        this.profileName.set(profileName);
+    }
+
+    public Profile(String profileName, AbstractShellConfig shellConfig, TerminalThemeConfig themeConfig) {
+        this.profileName.set(profileName);
         this.shellConfig.set(shellConfig);
         this.terminalThemeConfig.set(themeConfig);
     }
@@ -55,5 +65,30 @@ public class Profile {
 
     public void setTerminalThemeConfig(TerminalThemeConfig terminalThemeConfig) {
         this.terminalThemeConfig.set(terminalThemeConfig);
+    }
+
+    public String getProfileName() {
+        return profileName.get();
+    }
+
+    public StringProperty profileNameProperty() {
+        return profileName;
+    }
+
+    public void setProfileName(String profileName) {
+        this.profileName.set(profileName);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Profile profile = (Profile) o;
+        return Objects.equals(getProfileName(), profile.getProfileName()) && Objects.equals(getShellConfig(), profile.getShellConfig()) && Objects.equals(getTerminalThemeConfig(), profile.getTerminalThemeConfig());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getProfileName(), getShellConfig(), getTerminalThemeConfig());
     }
 }
