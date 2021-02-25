@@ -16,21 +16,19 @@
 
 package dev.jaaj.fx.terminal.controls;
 
+import dev.jaaj.fx.terminal.config.factory.theme.DefaultJMetroLightTerminalThemeFactory;
 import dev.jaaj.fx.terminal.config.profile.Profile;
 import dev.jaaj.fx.terminal.config.shell.AbstractShellConfig;
 import dev.jaaj.fx.terminal.config.terminal.TerminalThemeConfig;
-import dev.jaaj.fx.terminal.config.factory.theme.DefaultJMetroLightTerminalThemeFactory;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 import javafx.scene.control.Control;
 import javafx.scene.control.Skin;
 
 public class Terminal extends Control {
-    protected final StringProperty lastCommand = new SimpleStringProperty("");
+    private final StringProperty lastCommand = new SimpleStringProperty("");
     private final ObjectProperty<AbstractShellConfig> terminalConfig;
     private final ObjectProperty<TerminalThemeConfig> terminalThemeConfig;
+    private final BooleanProperty closed = new SimpleBooleanProperty(false);
 
     public Terminal(AbstractShellConfig terminalConfig) {
         this(terminalConfig, new DefaultJMetroLightTerminalThemeFactory().build());// todo auto-theme
@@ -83,4 +81,15 @@ public class Terminal extends Control {
         return new SkinTerminalFX(this);
     }
 
+    public boolean isClosed() {
+        return closed.get();
+    }
+
+    public BooleanProperty closedProperty() {
+        return closed;
+    }
+
+    public void close(){
+        closed.set(true);
+    }
 }

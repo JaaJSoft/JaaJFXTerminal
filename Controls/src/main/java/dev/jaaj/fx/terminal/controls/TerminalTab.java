@@ -41,6 +41,7 @@ public class TerminalTab extends Tab {
                 this.setContent(newValue);
             }
         });
+        this.onClosedProperty().addListener((observable, oldValue, newValue) -> terminal.close());
     }
 
     public void setTerminal(Terminal terminal) {

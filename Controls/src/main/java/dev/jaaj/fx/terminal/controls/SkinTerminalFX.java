@@ -17,9 +17,13 @@
 package dev.jaaj.fx.terminal.controls;
 
 import com.kodedu.terminalfx.config.TerminalConfig;
+import com.kodedu.terminalfx.helper.IOHelper;
+import com.kodedu.terminalfx.helper.ThreadHelper;
 import dev.jaaj.fx.terminal.config.shell.AbstractShellConfig;
 import dev.jaaj.fx.terminal.config.terminal.TerminalThemeConfig;
 import javafx.scene.control.SkinBase;
+
+import java.util.Objects;
 
 
 public class SkinTerminalFX extends SkinBase<Terminal> {
@@ -37,11 +41,15 @@ public class SkinTerminalFX extends SkinBase<Terminal> {
             config.setWindowsTerminalStarter(startCommand);
         }
         terminal = new com.kodedu.terminalfx.Terminal(config, null);
-        control.lastCommand.addListener((observable, oldValue, newValue) -> {
-            terminal.command(newValue);
-        });
+
+        control.lastCommandProperty().addListener((observable, oldValue, newValue) -> terminal.command(newValue));
+
+        control.closedProperty().addListener((observable, oldValue, newValue) -> destroy());
+
         this.getChildren().clear();
         this.getChildren().add(terminal);
+
+
     }
 
     private void syncTheme(TerminalConfig config, TerminalThemeConfig themeConfig) {
@@ -53,4 +61,15 @@ public class SkinTerminalFX extends SkinBase<Terminal> {
             config.setFontSize((int) themeConfig.getFont().getSize());
         }
     }
+
+    private void destroy() {
+        ThreadHelper.start(() -> {
+            while (Objects.isNull(terminal.getProcess())) {
+                ThreadHelper.sleep(250);
+            }
+            terminal.getProcess().destroy();
+            IOHelper.close(terminal.getInputReader(), terminal.getErrorReader(), terminal.getOutputWriter());
+        });
+    }
+
 }
