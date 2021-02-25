@@ -51,7 +51,7 @@
         </MenuBar>
     </top>
     <center>
-        <TabPane fx:id="tabPane">
+        <TabPane fx:id="tabPane" tabDragPolicy="REORDER">
         </TabPane>
     </center>
     <bottom>

@@ -22,6 +22,7 @@ import dev.jaaj.fx.terminal.config.profile.ProfilesService;
 import dev.jaaj.fx.terminal.config.shell.LocalShellConfig;
 import dev.jaaj.fx.terminal.config.shell.SSHConfig;
 import dev.jaaj.fx.terminal.config.shell.WSLConfig;
+import dev.jaaj.fx.terminal.config.terminal.TerminalService;
 import dev.jaaj.fx.terminal.controls.Terminal;
 import dev.jaaj.fx.terminal.controls.about.AboutDialog;
 import dev.jaaj.fx.terminal.controls.about.data.AppInfo;
@@ -65,11 +66,12 @@ public class MainController implements Initializable {
     private ResourceBundle bundle;
 
     private ProfilesService profilesService = new ProfilesService();
+    private TerminalService terminalService;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         bundle = resources;
-        tabPane.setTabDragPolicy(TabPane.TabDragPolicy.REORDER);
+        terminalService = new TerminalService(tabPane);
         newTerminal.fire();
         profilesService.getProfiles().addListener((ListChangeListener<? super Profile>) c -> {
             c.next();
@@ -78,7 +80,7 @@ public class MainController implements Initializable {
                 Profile profile = c.getAddedSubList().get(0);
                 MenuItem e = new MenuItem(profile.getProfileName());
                 e.setOnAction(event -> {
-                    addTerminal(new Terminal(profile.getShellConfig(), profile.getTerminalThemeConfig()));
+                    terminalService.addTerminal(new Terminal(profile.getShellConfig(), profile.getTerminalThemeConfig()));
                 });
                 profileMenuItems.add(e);
             } else if (c.wasRemoved()) {
@@ -95,17 +97,9 @@ public class MainController implements Initializable {
         System.exit(0);
     }
 
-    public void addTerminal(Terminal terminal) {
-        Tab newTab = new Tab();
-        newTab.setContent(terminal);
-        newTab.setText(terminal.getTerminalConfig().getTitle());
-        tabPane.getTabs().add(newTab);
-        tabPane.getSelectionModel().select(newTab);
-    }
-
     public void openTerminal(ActionEvent actionEvent) {
         Terminal terminal = new Terminal(new LocalShellConfig());
-        addTerminal(terminal);
+        terminalService.addTerminal(terminal);
     }
 
     public void openTerminalSSH(ActionEvent actionEvent) {
@@ -114,7 +108,7 @@ public class MainController implements Initializable {
         Optional<SSHConfig> optional = sshTerminalDialog.showAndWait();
         optional.ifPresent(sshConfig -> {
             Terminal terminal = new Terminal(sshTerminalDialog.getResult());
-            addTerminal(terminal);
+            terminalService.addTerminal(terminal);
         });
     }
 
@@ -124,7 +118,7 @@ public class MainController implements Initializable {
         Optional<WSLConfig> optional = WSLFormDialog.showAndWait();
         optional.ifPresent(sshConfig -> {
             Terminal terminal = new Terminal(WSLFormDialog.getResult());
-            addTerminal(terminal);
+            terminalService.addTerminal(terminal);
         });
     }
 
@@ -160,8 +154,12 @@ public class MainController implements Initializable {
     }
 
     public void saveProfile(ActionEvent event) {
-        Profile profile = new Profile("test");
+        terminalService.getFocusedTerminal().ifPresent(terminal -> {
+            Profile profile = new Profile(terminal.getTerminalConfig().getTitle());
+            profile.setShellConfig(terminal.getTerminalConfig());
+            profile.setTerminalThemeConfig(terminal.getTerminalThemeConfig());
+            profilesService.saveProfile(profile);
+        });
 
-        profilesService.saveProfile(profile);
     }
 }

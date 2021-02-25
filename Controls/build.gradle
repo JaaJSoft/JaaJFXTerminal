@@ -29,6 +29,7 @@ group 'dev.jaaj.fx.terminal'
 version '0.1'
 
 sourceCompatibility = 15
+
 repositories {
     maven {
         url 'https://nexus.jaaj.dev/repository/maven-releases'
