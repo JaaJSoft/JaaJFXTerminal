@@ -61,11 +61,11 @@ repositories {
     maven {
         url 'https://nexus.jaaj.dev/repository/maven-releases'
     }
-    mavenCentral()
-    jcenter()
     maven {
         url 'https://github.com/javaterminal/terminalfx/raw/master/releases'
     }
+    mavenCentral()
+    jcenter()
 }
 
 dependencies {

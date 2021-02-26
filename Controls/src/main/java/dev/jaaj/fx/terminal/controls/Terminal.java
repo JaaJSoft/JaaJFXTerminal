@@ -26,8 +26,7 @@ import javafx.scene.control.Skin;
 
 public class Terminal extends Control {
     private final StringProperty lastCommand = new SimpleStringProperty("");
-    private final ObjectProperty<AbstractShellConfig> terminalConfig;
-    private final ObjectProperty<TerminalThemeConfig> terminalThemeConfig;
+    private final Profile profile;
     private final BooleanProperty closed = new SimpleBooleanProperty(false);
 
     public Terminal(AbstractShellConfig terminalConfig) {
@@ -35,8 +34,7 @@ public class Terminal extends Control {
     }
 
     public Terminal(AbstractShellConfig terminalConfig, TerminalThemeConfig themeConfig) {
-        this.terminalConfig = new SimpleObjectProperty<>(terminalConfig);
-        this.terminalThemeConfig = new SimpleObjectProperty<>(themeConfig);
+        profile = new Profile(terminalConfig.getTitle(), terminalConfig, themeConfig);
     }
 
     public Terminal(Profile profile) {
@@ -56,23 +54,23 @@ public class Terminal extends Control {
     }
 
     public TerminalThemeConfig getTerminalThemeConfig() {
-        return terminalThemeConfig.get();
+        return profile.getTerminalThemeConfig();
     }
 
     public ObjectProperty<TerminalThemeConfig> terminalThemeConfigProperty() {
-        return terminalThemeConfig;
+        return profile.terminalThemeConfigProperty();
     }
 
     public void setTerminalThemeConfig(TerminalThemeConfig terminalThemeConfig) {
-        this.terminalThemeConfig.set(terminalThemeConfig);
+        this.profile.setTerminalThemeConfig(terminalThemeConfig);
     }
 
     public AbstractShellConfig getTerminalConfig() {
-        return terminalConfig.get();
+        return profile.getShellConfig();
     }
 
     public ObjectProperty<AbstractShellConfig> terminalConfigProperty() {
-        return terminalConfig;
+        return profile.shellConfigProperty();
     }
 
 
@@ -89,7 +87,11 @@ public class Terminal extends Control {
         return closed;
     }
 
-    public void close(){
+    public void close() {
         closed.set(true);
+    }
+
+    public Profile getProfile() {
+        return profile;
     }
 }

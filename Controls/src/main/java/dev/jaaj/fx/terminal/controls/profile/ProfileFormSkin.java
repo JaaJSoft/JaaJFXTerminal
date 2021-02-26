@@ -16,20 +16,16 @@
 
 package dev.jaaj.fx.terminal.controls.profile;
 
-import dev.jaaj.fx.core.form.DialogForm;
-import dev.jaaj.fx.terminal.config.profile.Profile;
+import dev.jaaj.fx.core.skin.SkinFXML;
+import dev.jaaj.fx.terminal.controls.about.AboutSkin;
 
+import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ProfileDialog extends DialogForm<Profile> {
+public class ProfileFormSkin extends SkinFXML<ProfileForm> {
     public static final ResourceBundle BUNDLE = ResourceBundle.getBundle(ProfileForm.class.getPackageName() + ".Profile");
 
-    public ProfileDialog(Profile profile) {
-        super(new ProfileForm(profile), BUNDLE.getString("title"), BUNDLE.getString("header") + " " + profile.getProfileName());
-    }
-
-
-    public ProfileDialog() {
-        this(new Profile(BUNDLE.getString("default_name")));
+    public ProfileFormSkin(ProfileForm control) {
+        super(control, ProfileFormSkin.class.getResource("Profile.fxml"), BUNDLE);
     }
 }

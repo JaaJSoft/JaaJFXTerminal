@@ -34,18 +34,19 @@ repositories {
     maven {
         url 'https://nexus.jaaj.dev/repository/maven-releases'
     }
-    mavenCentral()
-    jcenter()
     maven {
         url 'https://github.com/javaterminal/terminalfx/raw/master/releases'
     }
+    mavenCentral()
+    jcenter()
+
 }
 
 dependencies {
-    implementation group: 'org.jetbrains.pty4j', name: 'pty4j', version: '0.8.6'
+    implementation group: 'org.jetbrains.pty4j', name: 'pty4j', version: '0.11.4'
     implementation 'dev.jaaj.fx:core:0.2.1'
     implementation 'com.kodedu.terminalfx:terminalfx:1.1.0'
-    implementation 'org.controlsfx:controlsfx:11.0.2'
+    //implementation 'org.controlsfx:controlsfx:11.0.2'
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 

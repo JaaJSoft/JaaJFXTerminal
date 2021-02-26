@@ -14,21 +14,21 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.controls.form.wsl;
+package dev.jaaj.fx.terminal.controls.ssh;
 
 import dev.jaaj.fx.core.form.DialogForm;
-import dev.jaaj.fx.terminal.config.shell.WSLConfig;
+import dev.jaaj.fx.terminal.config.shell.SSHConfig;
 
 import java.util.ResourceBundle;
 
-public class WSLFormDialog extends DialogForm<WSLConfig> {
-    private static final ResourceBundle SSH_BUNDLE = ResourceBundle.getBundle(WSLFormDialog.class.getPackageName() + ".WSLForm");
+public class SSHFormDialog extends DialogForm<SSHConfig> {
+    private static final ResourceBundle SSH_BUNDLE = ResourceBundle.getBundle(SSHFormDialog.class.getPackageName() + ".SSHForm");
 
-    public WSLFormDialog(WSLConfig wslConfig) {
-        super(new WSLForm(wslConfig), SSH_BUNDLE.getString("title_dialog"), SSH_BUNDLE.getString("header_dialog"));
+    public SSHFormDialog(SSHConfig sshConfig) {
+        super(new SSHForm(sshConfig), SSH_BUNDLE.getString("title_dialog"), SSH_BUNDLE.getString("header_dialog"));
     }
 
-    public WSLFormDialog() {
-        this(new WSLConfig());
+    public SSHFormDialog() {
+        this(new SSHConfig());
     }
 }

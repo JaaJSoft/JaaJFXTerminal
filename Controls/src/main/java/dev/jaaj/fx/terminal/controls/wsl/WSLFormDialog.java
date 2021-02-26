@@ -14,22 +14,21 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.controls.profile;
+package dev.jaaj.fx.terminal.controls.wsl;
 
 import dev.jaaj.fx.core.form.DialogForm;
-import dev.jaaj.fx.terminal.config.profile.Profile;
+import dev.jaaj.fx.terminal.config.shell.WSLConfig;
 
 import java.util.ResourceBundle;
 
-public class ProfileDialog extends DialogForm<Profile> {
-    public static final ResourceBundle BUNDLE = ResourceBundle.getBundle(ProfileForm.class.getPackageName() + ".Profile");
+public class WSLFormDialog extends DialogForm<WSLConfig> {
+    private static final ResourceBundle SSH_BUNDLE = ResourceBundle.getBundle(WSLFormDialog.class.getPackageName() + ".WSLForm");
 
-    public ProfileDialog(Profile profile) {
-        super(new ProfileForm(profile), BUNDLE.getString("title"), BUNDLE.getString("header") + " " + profile.getProfileName());
+    public WSLFormDialog(WSLConfig wslConfig) {
+        super(new WSLForm(wslConfig), SSH_BUNDLE.getString("title_dialog"), SSH_BUNDLE.getString("header_dialog"));
     }
 
-
-    public ProfileDialog() {
-        this(new Profile(BUNDLE.getString("default_name")));
+    public WSLFormDialog() {
+        this(new WSLConfig());
     }
 }

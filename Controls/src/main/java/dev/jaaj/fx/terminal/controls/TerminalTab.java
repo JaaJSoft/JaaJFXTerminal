@@ -16,18 +16,28 @@
 
 package dev.jaaj.fx.terminal.controls;
 
+import dev.jaaj.fx.terminal.config.profile.Profile;
+import dev.jaaj.fx.terminal.config.shell.WSLConfig;
+import dev.jaaj.fx.terminal.controls.profile.ProfileDialog;
+import dev.jaaj.fx.terminal.controls.profile.ProfileForm;
+import dev.jaaj.fx.terminal.controls.wsl.WSLFormDialog;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.scene.Node;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tab;
 
 import java.util.Objects;
+import java.util.Optional;
+import java.util.ResourceBundle;
 
 public class TerminalTab extends Tab {
+    public static final ResourceBundle BUNDLE = ResourceBundle.getBundle(TerminalTab.class.getPackageName() + ".Terminal");
+
     private final ObjectProperty<Terminal> terminal = new SimpleObjectProperty<>();
 
     public TerminalTab(Terminal terminal) {
-        super(terminal.getTerminalConfig().getTitle(), terminal);
+        super(terminal.getProfile().getProfileName(), terminal);
         this.terminal.set(terminal);
         this.contentProperty().addListener((observable, oldValue, newValue) -> {
             if (!Objects.equals(oldValue, newValue)) {
@@ -42,6 +52,22 @@ public class TerminalTab extends Tab {
             }
         });
         this.onClosedProperty().addListener((observable, oldValue, newValue) -> terminal.close());
+        this.setContextMenu(createContextMenu());
+    }
+
+    private ContextMenu createContextMenu() {
+        ContextMenu contextMenu = new ContextMenu();
+        MenuItem edit = new MenuItem(BUNDLE.getString("edit"));
+        edit.setOnAction(event -> {
+            ProfileDialog profileDialog = new ProfileDialog(getTerminal().getProfile());
+            profileDialog.initOwner(this.getTabPane().getScene().getWindow());
+            Optional<Profile> optional = profileDialog.showAndWait();
+            optional.ifPresent(profile -> {
+
+            });
+        });
+        contextMenu.getItems().add(edit);
+        return contextMenu;
     }
 
     public void setTerminal(Terminal terminal) {

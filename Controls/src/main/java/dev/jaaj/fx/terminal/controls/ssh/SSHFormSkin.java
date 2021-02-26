@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.controls.form.ssh;
+package dev.jaaj.fx.terminal.controls.ssh;
 
 import dev.jaaj.fx.core.skin.SkinFXML;
 import dev.jaaj.fx.terminal.controls.util.IntegerField;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.controls.form.wsl;
+package dev.jaaj.fx.terminal.controls.wsl;
 
 import dev.jaaj.fx.core.skin.SkinFXML;
 import javafx.event.ActionEvent;
@@ -23,10 +23,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.DirectoryChooser;
-import org.controlsfx.control.SearchableComboBox;
 
 import java.io.File;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class WSLFormSkin extends SkinFXML<WSLForm> {

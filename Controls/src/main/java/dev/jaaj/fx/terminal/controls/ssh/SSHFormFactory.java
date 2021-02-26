@@ -14,40 +14,21 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.controls.profile;
+package dev.jaaj.fx.terminal.controls.ssh;
 
 import dev.jaaj.fx.core.form.AbstractForm;
-import dev.jaaj.fx.terminal.config.profile.Profile;
 import dev.jaaj.fx.terminal.config.shell.SSHConfig;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.scene.control.Skin;
+import dev.jaaj.fx.terminal.controls.util.AbstractFormFactory;
 
-import java.text.Normalizer;
+public class SSHFormFactory implements AbstractFormFactory<SSHConfig> {
 
-public class ProfileForm extends AbstractForm<Profile> {
-
-    private final ObjectProperty<Profile> profile = new SimpleObjectProperty<>();
-
-    public ProfileForm() {
-    }
-
-    public ProfileForm(Profile profile) {
-        this.profile.set(profile);
+    @Override
+    public boolean canBuild(Object objectToInitWithForm) {
+        return objectToInitWithForm instanceof SSHConfig;
     }
 
     @Override
-    public boolean validate() {
-        return false;
-    }
-
-    @Override
-    public Profile apply() {
-        return null;
-    }
-
-    @Override
-    protected Skin<?> createDefaultSkin() {
-        return new ProfileFormSkin(this);
+    public AbstractForm<SSHConfig> build(Object objectToInitWithForm) {
+        return new SSHForm((SSHConfig) objectToInitWithForm);
     }
 }

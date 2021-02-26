@@ -14,21 +14,13 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.controls.form.ssh;
+package dev.jaaj.fx.terminal.controls.util;
 
-import dev.jaaj.fx.core.form.DialogForm;
-import dev.jaaj.fx.terminal.config.shell.SSHConfig;
+import dev.jaaj.fx.core.form.AbstractForm;
 
-import java.util.ResourceBundle;
+public interface AbstractFormFactory<T> {
 
-public class SSHFormDialog extends DialogForm<SSHConfig> {
-    private static final ResourceBundle SSH_BUNDLE = ResourceBundle.getBundle(SSHFormDialog.class.getPackageName() + ".SSHForm");
+    boolean canBuild(Object objectToInitWithForm);
 
-    public SSHFormDialog(SSHConfig sshConfig) {
-        super(new SSHForm(sshConfig), SSH_BUNDLE.getString("title_dialog"), SSH_BUNDLE.getString("header_dialog"));
-    }
-
-    public SSHFormDialog() {
-        this(new SSHConfig());
-    }
+    AbstractForm<T> build(Object objectToInitWithForm);
 }

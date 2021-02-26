@@ -16,7 +16,7 @@
 
 package dev.jaaj.fx.terminal.config.shell;
 
-import dev.jaaj.fx.terminal.controls.form.wsl.Distribution;
+import dev.jaaj.fx.terminal.controls.wsl.Distribution;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;

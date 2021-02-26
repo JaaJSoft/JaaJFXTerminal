@@ -27,8 +27,8 @@ import dev.jaaj.fx.terminal.controls.Terminal;
 import dev.jaaj.fx.terminal.controls.about.AboutDialog;
 import dev.jaaj.fx.terminal.controls.about.data.AppInfo;
 import dev.jaaj.fx.terminal.controls.about.data.AppInfoBuilder;
-import dev.jaaj.fx.terminal.controls.form.ssh.SSHFormDialog;
-import dev.jaaj.fx.terminal.controls.form.wsl.WSLFormDialog;
+import dev.jaaj.fx.terminal.controls.ssh.SSHFormDialog;
+import dev.jaaj.fx.terminal.controls.wsl.WSLFormDialog;
 import dev.jaaj.fx.terminal.controls.options.OptionsDialog;
 import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
@@ -65,14 +65,13 @@ public class MainController implements Initializable {
     MenuItem newWSLTerminal;
     private ResourceBundle bundle;
 
-    private ProfilesService profilesService = new ProfilesService();
+    private final ProfilesService profilesService = new ProfilesService();
     private TerminalService terminalService;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         bundle = resources;
         terminalService = new TerminalService(tabPane);
-        newTerminal.fire();
         profilesService.getProfiles().addListener((ListChangeListener<? super Profile>) c -> {
             c.next();
             ObservableList<MenuItem> profileMenuItems = profileMenu.getItems();
@@ -88,6 +87,7 @@ public class MainController implements Initializable {
                 optionalMenuItem.ifPresent(profileMenuItems::remove);
             }
         });
+        newTerminal.fire();
     }
 
 
@@ -98,7 +98,7 @@ public class MainController implements Initializable {
     }
 
     public void openTerminal(ActionEvent actionEvent) {
-        Terminal terminal = new Terminal(new LocalShellConfig());
+        Terminal terminal = new Terminal(profilesService.getDefaultProfile());
         terminalService.addTerminal(terminal);
     }
 
@@ -155,11 +155,12 @@ public class MainController implements Initializable {
 
     public void saveProfile(ActionEvent event) {
         terminalService.getFocusedTerminal().ifPresent(terminal -> {
-            Profile profile = new Profile(terminal.getTerminalConfig().getTitle());
-            profile.setShellConfig(terminal.getTerminalConfig());
-            profile.setTerminalThemeConfig(terminal.getTerminalThemeConfig());
-            profilesService.saveProfile(profile);
+            profilesService.saveProfile(terminal.getProfile());
         });
+
+    }
+
+    public void manageProfile(ActionEvent actionEvent) {
 
     }
 }

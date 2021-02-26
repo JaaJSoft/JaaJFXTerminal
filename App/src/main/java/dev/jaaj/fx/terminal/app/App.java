@@ -41,7 +41,7 @@ public class App extends Application {
         JMetro jMetro = new JMetro(Style.LIGHT);
         jMetro.setScene(scene);
 
-        //scene.getStylesheets().add(Main.class.getResource("styles/Styles.css").toExternalForm());
+        scene.getStylesheets().add(Main.class.getResource("styles/Styles.css").toExternalForm());
 
         primaryStage.setScene(scene);
         primaryStage.show();
