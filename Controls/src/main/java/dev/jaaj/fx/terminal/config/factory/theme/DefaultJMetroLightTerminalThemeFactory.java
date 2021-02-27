@@ -23,6 +23,7 @@ public class DefaultJMetroLightTerminalThemeFactory implements IFactoryTerminalT
     @Override
     public TerminalThemeConfig build() {
         TerminalThemeConfig config = new TerminalThemeConfig();
+        config.setThemeName("Light JMetro");
         config.setForegroundColor(Color.BLACK);
         config.setBackgroundColor(Color.web("#F8F8F8"));
         config.setCursorColor(Color.BLACK);

@@ -17,15 +17,24 @@
 package dev.jaaj.fx.terminal.controls.profile;
 
 import dev.jaaj.fx.core.skin.SkinFXML;
-import dev.jaaj.fx.terminal.controls.about.AboutSkin;
+import dev.jaaj.fx.terminal.config.terminal.TerminalThemeConfig;
+import javafx.fxml.FXML;
+import javafx.scene.control.ChoiceBox;
 
-import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ProfileFormSkin extends SkinFXML<ProfileForm> {
     public static final ResourceBundle BUNDLE = ResourceBundle.getBundle(ProfileForm.class.getPackageName() + ".Profile");
 
+    @FXML
+    ChoiceBox<TerminalThemeConfig> builtInThemes;
+
     public ProfileFormSkin(ProfileForm control) {
         super(control, ProfileFormSkin.class.getResource("Profile.fxml"), BUNDLE);
+        builtInThemes.itemsProperty().set(control.getTerminalThemeConfigs());
+        builtInThemes.prefWidthProperty().bind(control.widthProperty());
+        control.terminalThemeSelectionModelProperty().bindBidirectional(builtInThemes.selectionModelProperty());
     }
+
+
 }

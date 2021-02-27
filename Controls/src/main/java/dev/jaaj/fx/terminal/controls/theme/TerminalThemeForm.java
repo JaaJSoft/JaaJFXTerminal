@@ -14,11 +14,18 @@
  * limitations under the License.
  */
 
+package dev.jaaj.fx.terminal.controls.theme;
 
-.label {
-    -fx-font-size: 14;
-}
+import javafx.scene.control.Control;
+import javafx.scene.control.Skin;
 
-.check-box {
-    -fx-font-size: 14;
+import java.util.ResourceBundle;
+
+public class TerminalThemeForm extends Control {
+    public static final ResourceBundle BUNDLE = ResourceBundle.getBundle(TerminalThemeForm.class.getPackageName() + ".TerminalTheme");
+
+    @Override
+    protected Skin<?> createDefaultSkin() {
+        return new TerminalThemeFormSkin(this);
+    }
 }

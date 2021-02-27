@@ -79,7 +79,7 @@ public class MainController implements Initializable {
                 Profile profile = c.getAddedSubList().get(0);
                 MenuItem e = new MenuItem(profile.getProfileName());
                 e.setOnAction(event -> {
-                    terminalService.addTerminal(new Terminal(profile.getShellConfig(), profile.getTerminalThemeConfig()));
+                    terminalService.addTerminal(new Terminal(profile));
                 });
                 profileMenuItems.add(e);
             } else if (c.wasRemoved()) {

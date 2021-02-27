@@ -23,9 +23,11 @@ public class DefaultJMetroDarkTerminalThemeFactory implements IFactoryTerminalTh
     @Override
     public TerminalThemeConfig build() {
         TerminalThemeConfig config = new TerminalThemeConfig();
+        config.setThemeName("Dark JMetro");
         config.setForegroundColor(Color.WHITE);
         config.setBackgroundColor(Color.web("#1E1E1E"));
         config.setCursorColor(Color.WHITE);
         return config;
     }
+
 }

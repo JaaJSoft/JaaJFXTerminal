@@ -19,21 +19,34 @@
   ~ limitations under the License.
   -->
 
-<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab text="Untitled Tab 1">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-            </content>
-          </Tab>
-          <Tab text="Untitled Tab 2">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-            </content>
-          </Tab>
-        </tabs>
-      </TabPane>
-   </children>
+<?import dev.jaaj.fx.terminal.controls.theme.TerminalThemeForm?>
+<?import javafx.geometry.Insets?>
+<VBox prefHeight="400.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+
+    <TabPane tabClosingPolicy="UNAVAILABLE">
+        <Tab text="Shell">
+            <VBox>
+
+            </VBox>
+        </Tab>
+        <Tab text="%theme">
+            <VBox spacing="10">
+                <padding>
+                    <Insets top="10" left="5" right="5"/>
+                </padding>
+                <HBox spacing="5" alignment="CENTER_LEFT">
+                    <CheckBox text="%label_follow_system_theme" fx:id="checkBoxSystemTheme" />
+                </HBox>
+                <VBox spacing="5">
+                    <Label text="%built_in_themes"/>
+                    <ChoiceBox fx:id="builtInThemes" />
+                </VBox>
+                <Separator/>
+                <TerminalThemeForm>
+
+                </TerminalThemeForm>
+            </VBox>
+
+        </Tab>
+    </TabPane>
 </VBox>

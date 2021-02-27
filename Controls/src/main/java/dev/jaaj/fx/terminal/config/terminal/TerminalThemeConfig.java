@@ -18,10 +18,13 @@ package dev.jaaj.fx.terminal.config.terminal;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public class TerminalThemeConfig {
+    private final StringProperty themeName = new SimpleStringProperty();
     private final ObjectProperty<Color> backgroundColor = new SimpleObjectProperty<>(Color.BLACK);
     private final ObjectProperty<Color> foregroundColor = new SimpleObjectProperty<>(Color.WHITE);
     private final ObjectProperty<Color> cursorColor = new SimpleObjectProperty<>(Color.WHITE);
@@ -76,5 +79,22 @@ public class TerminalThemeConfig {
 
     public void setFont(Font font) {
         this.font.set(font);
+    }
+
+    public String getThemeName() {
+        return themeName.get();
+    }
+
+    public StringProperty themeNameProperty() {
+        return themeName;
+    }
+
+    public void setThemeName(String themeName) {
+        this.themeName.set(themeName);
+    }
+
+    @Override
+    public String toString() {
+        return themeName.getValue();
     }
 }

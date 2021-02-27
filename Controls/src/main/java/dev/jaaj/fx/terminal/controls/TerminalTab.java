@@ -37,7 +37,7 @@ public class TerminalTab extends Tab {
     private final ObjectProperty<Terminal> terminal = new SimpleObjectProperty<>();
 
     public TerminalTab(Terminal terminal) {
-        super(terminal.getProfile().getProfileName(), terminal);
+        super(terminal.getTitle(), terminal);
         this.terminal.set(terminal);
         this.contentProperty().addListener((observable, oldValue, newValue) -> {
             if (!Objects.equals(oldValue, newValue)) {

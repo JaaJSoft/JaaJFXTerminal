@@ -17,23 +17,28 @@
 package dev.jaaj.fx.terminal.controls.profile;
 
 import dev.jaaj.fx.core.form.AbstractForm;
+import dev.jaaj.fx.terminal.config.factory.theme.DefaultJMetroDarkTerminalThemeFactory;
+import dev.jaaj.fx.terminal.config.factory.theme.DefaultJMetroLightTerminalThemeFactory;
 import dev.jaaj.fx.terminal.config.profile.Profile;
-import dev.jaaj.fx.terminal.config.shell.SSHConfig;
+import dev.jaaj.fx.terminal.config.terminal.TerminalThemeConfig;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Skin;
-
-import java.text.Normalizer;
 
 public class ProfileForm extends AbstractForm<Profile> {
 
     private final ObjectProperty<Profile> profile = new SimpleObjectProperty<>();
-
-    public ProfileForm() {
-    }
+    private final ObservableList<TerminalThemeConfig> terminalThemeConfigs = FXCollections.observableArrayList();
+    private final ObjectProperty<SingleSelectionModel<TerminalThemeConfig>> terminalThemeSelectionModel = new SimpleObjectProperty<>();
 
     public ProfileForm(Profile profile) {
         this.profile.set(profile);
+        terminalThemeConfigs.add(new DefaultJMetroLightTerminalThemeFactory().build());
+        terminalThemeConfigs.add(new DefaultJMetroDarkTerminalThemeFactory().build());
+        getTerminalThemeSelectionModel().select(profile.getTerminalThemeConfig());
     }
 
     @Override
@@ -49,5 +54,34 @@ public class ProfileForm extends AbstractForm<Profile> {
     @Override
     protected Skin<?> createDefaultSkin() {
         return new ProfileFormSkin(this);
+    }
+
+    public Profile getProfile() {
+        return profile.get();
+    }
+
+    public ObjectProperty<Profile> profileProperty() {
+        return profile;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile.set(profile);
+    }
+
+    public ObservableList<TerminalThemeConfig> getTerminalThemeConfigs() {
+        return terminalThemeConfigs;
+    }
+
+
+    public SingleSelectionModel<TerminalThemeConfig> getTerminalThemeSelectionModel() {
+        return terminalThemeSelectionModel.get();
+    }
+
+    public ObjectProperty<SingleSelectionModel<TerminalThemeConfig>> terminalThemeSelectionModelProperty() {
+        return terminalThemeSelectionModel;
+    }
+
+    public void setTerminalThemeSelectionModel(SingleSelectionModel<TerminalThemeConfig> terminalThemeSelectionModel) {
+        this.terminalThemeSelectionModel.set(terminalThemeSelectionModel);
     }
 }

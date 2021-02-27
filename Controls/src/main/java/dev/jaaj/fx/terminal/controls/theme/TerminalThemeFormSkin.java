@@ -14,8 +14,18 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.factory;
+package dev.jaaj.fx.terminal.controls.theme;
 
-public interface TerminalFactory {
-    
+import dev.jaaj.fx.core.skin.SkinFXML;
+
+import java.util.ResourceBundle;
+
+public class TerminalThemeFormSkin extends SkinFXML<TerminalThemeForm> {
+    public static final ResourceBundle BUNDLE = ResourceBundle.getBundle(TerminalThemeFormSkin.class.getPackageName() + ".TerminalTheme");
+
+
+    public TerminalThemeFormSkin(TerminalThemeForm control) {
+        super(control, TerminalThemeFormSkin.class.getResource("TerminalTheme.fxml"), BUNDLE);
+
+    }
 }

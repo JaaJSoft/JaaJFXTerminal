@@ -38,7 +38,7 @@ public class Terminal extends Control {
     }
 
     public Terminal(Profile profile) {
-        this(profile.getShellConfig(), profile.getTerminalThemeConfig());
+        this.profile = profile;
     }
 
     public void execute(String command) {
@@ -93,5 +93,9 @@ public class Terminal extends Control {
 
     public Profile getProfile() {
         return profile;
+    }
+
+    public String getTitle() {
+        return profile.getProfileName();
     }
 }
