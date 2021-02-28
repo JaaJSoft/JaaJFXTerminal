@@ -77,7 +77,7 @@ public class WSLConfig extends AbstractShellConfig {
     }
 
     @Override
-    public String getStartCommand() {
+    public String getCommandLine() {
         String startCommand = "wsl";
         if (distribution.isNotNull().get() && !getDistribution().getName().isBlank()) {
             startCommand += " -d " + getDistribution();

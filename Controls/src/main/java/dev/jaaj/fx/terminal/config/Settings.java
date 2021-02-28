@@ -14,14 +14,7 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.config.shell;
+package dev.jaaj.fx.terminal.config;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-
-public abstract class AbstractShellConfig {
-
-    public abstract String getCommandLine();
-
-    public abstract String getTitle();
+public class Settings {
 }

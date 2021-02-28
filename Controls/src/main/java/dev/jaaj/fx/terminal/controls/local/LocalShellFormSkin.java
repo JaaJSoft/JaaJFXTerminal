@@ -14,21 +14,21 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.controls.wsl;
+package dev.jaaj.fx.terminal.controls.local;
 
 import dev.jaaj.fx.core.skin.SkinFXML;
+import dev.jaaj.fx.terminal.controls.wsl.Distribution;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TitledPane;
 import javafx.stage.DirectoryChooser;
 
 import java.io.File;
 import java.util.ResourceBundle;
 
-public class WSLFormSkin extends SkinFXML<WSLForm> {
+public class LocalShellFormSkin extends SkinFXML<LocalShellForm> {
     @FXML
     ComboBox<Distribution> distributionComboBox;
     @FXML
@@ -39,17 +39,14 @@ public class WSLFormSkin extends SkinFXML<WSLForm> {
     TextField commandField;
     @FXML
     Button chooseDirBtn;
-    @FXML
-    TitledPane advancedPane;
 
-    public WSLFormSkin(WSLForm control) {
+    public LocalShellFormSkin(LocalShellForm control) {
         super(control,
-                WSLFormSkin.class.getResource("WSLForm.fxml"),
-                ResourceBundle.getBundle(WSLFormSkin.class.getPackageName() + ".WSLForm")
+                LocalShellFormSkin.class.getResource("WSLForm.fxml"),
+                ResourceBundle.getBundle(LocalShellFormSkin.class.getPackageName() + ".LocalShellForm")
         );
-        distributionComboBox.setItems(control.getPossibleDistributions());
+        //distributionComboBox.setItems(control.getPossibleDistributions());
         bind(control);
-        selectDefaultDistribution(control);
         control.formStateProperty().addListener((observable, oldValue, newValue) -> {
             switch (newValue) {
                 case READONLY:
@@ -72,9 +69,6 @@ public class WSLFormSkin extends SkinFXML<WSLForm> {
 
         });
         chooseDirBtn.setOnAction(this::openFolderPicker);
-        advancedPane.setOnMouseClicked(event -> {
-            advancedPane.getScene().getWindow().sizeToScene();
-        });
     }
 
     public void openFolderPicker(ActionEvent actionEvent) {
@@ -85,13 +79,6 @@ public class WSLFormSkin extends SkinFXML<WSLForm> {
         }
     }
 
-    private void selectDefaultDistribution(WSLForm control) {
-        control.getPossibleDistributions()
-                .stream()
-                .filter(Distribution::isDefault)
-                .findAny()
-                .ifPresent(value -> distributionComboBox.getSelectionModel().select(value));
-    }
 
     public void unbind() {
         distributionComboBox.valueProperty().unbind();
@@ -100,10 +87,10 @@ public class WSLFormSkin extends SkinFXML<WSLForm> {
         commandField.textProperty().unbind();
     }
 
-    public void bind(WSLForm wslForm) {
-        distributionComboBox.valueProperty().bindBidirectional(wslForm.distributionProperty());
-        userField.textProperty().bindBidirectional(wslForm.userProperty());
-        workingDirectoryField.textProperty().bindBidirectional(wslForm.workingDirectoryProperty());
-        commandField.textProperty().bindBidirectional(wslForm.commandProperty());
+    public void bind(LocalShellForm localShellForm) {
+     /*   distributionComboBox.valueProperty().bindBidirectional(localShellForm.distributionProperty());
+        userField.textProperty().bindBidirectional(localShellForm.userProperty());
+        workingDirectoryField.textProperty().bindBidirectional(localShellForm.workingDirectoryProperty());
+        commandField.textProperty().bindBidirectional(localShellForm.commandProperty());*/
     }
 }

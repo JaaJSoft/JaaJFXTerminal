@@ -16,12 +16,14 @@
 
 package dev.jaaj.fx.terminal.config.shell;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+public class DefaultShellConfig extends AbstractShellConfig {
+    @Override
+    public String getCommandLine() {
+        return "";
+    }
 
-public abstract class AbstractShellConfig {
-
-    public abstract String getCommandLine();
-
-    public abstract String getTitle();
+    @Override
+    public String getTitle() {
+        return "Default";
+    }
 }

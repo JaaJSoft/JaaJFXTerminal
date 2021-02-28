@@ -20,6 +20,7 @@ import dev.jaaj.fx.core.skin.SkinFXML;
 import dev.jaaj.fx.terminal.controls.util.IntegerField;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
 
 import java.util.ResourceBundle;
 
@@ -32,6 +33,8 @@ public class SSHFormSkin extends SkinFXML<SSHForm> {
     IntegerField portField;
     @FXML
     TextField commandField;
+    @FXML
+    TitledPane advancedPane;
 
     public SSHFormSkin(SSHForm control) {
         super(control,
@@ -56,6 +59,9 @@ public class SSHFormSkin extends SkinFXML<SSHForm> {
                 default:
                     throw new IllegalStateException("Unexpected value: " + newValue);
             }
+        });
+        advancedPane.setOnMouseClicked(event -> {
+            advancedPane.getScene().getWindow().sizeToScene();
         });
     }
 

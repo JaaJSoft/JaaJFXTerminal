@@ -91,7 +91,7 @@ public class SSHConfig extends AbstractShellConfig implements Cloneable {
     }
 
     @Override
-    public String getStartCommand() {
+    public String getCommandLine() {
         String startCommand = "ssh "
                 + user.getValue()
                 + "@"

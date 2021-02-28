@@ -33,7 +33,7 @@ public class ProfileFormSkin extends SkinFXML<ProfileForm> {
         super(control, ProfileFormSkin.class.getResource("Profile.fxml"), BUNDLE);
         builtInThemes.itemsProperty().set(control.getTerminalThemeConfigs());
         builtInThemes.prefWidthProperty().bind(control.widthProperty());
-        control.terminalThemeSelectionModelProperty().bindBidirectional(builtInThemes.selectionModelProperty());
+        control.terminalThemeSelectionModelProperty().bind(builtInThemes.selectionModelProperty());
     }
 
 

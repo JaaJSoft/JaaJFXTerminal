@@ -52,7 +52,7 @@
         </MenuBar>
     </top>
     <center>
-        <TabPane fx:id="tabPane" tabDragPolicy="REORDER">
+        <TabPane fx:id="tabPane" tabDragPolicy="REORDER" tabClosingPolicy="ALL_TABS">
         </TabPane>
     </center>
     <bottom>

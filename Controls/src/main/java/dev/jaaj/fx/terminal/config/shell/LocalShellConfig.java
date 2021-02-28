@@ -16,28 +16,51 @@
 
 package dev.jaaj.fx.terminal.config.shell;
 
-public class LocalShellConfig extends AbstractShellConfig {
-    private final String executable;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
+public abstract class LocalShellConfig extends AbstractShellConfig {
+    private final StringProperty executable = new SimpleStringProperty();
+    private final StringProperty workingDirectory = new SimpleStringProperty();
+    private final StringProperty commandToExecute = new SimpleStringProperty();
 
     public LocalShellConfig(String executable) {
-        this.executable = executable;
+        this.executable.set(executable);
     }
 
-    public LocalShellConfig() {
-        this.executable = "";
+    public String getExecutable() {
+        return executable.get();
     }
 
-    @Override
-    public String getStartCommand() {
+    public StringProperty executableProperty() {
         return executable;
     }
 
-    @Override
-    public String getTitle() {
-        String command = getStartCommand();
-        if (command.isBlank()) {
-            return "Local";
-        }
-        return command;
+    public void setExecutable(String executable) {
+        this.executable.set(executable);
+    }
+
+    public String getWorkingDirectory() {
+        return workingDirectory.get();
+    }
+
+    public StringProperty workingDirectoryProperty() {
+        return workingDirectory;
+    }
+
+    public void setWorkingDirectory(String workingDirectory) {
+        this.workingDirectory.set(workingDirectory);
+    }
+
+    public String getCommandToExecute() {
+        return commandToExecute.get();
+    }
+
+    public StringProperty commandToExecuteProperty() {
+        return commandToExecute;
+    }
+
+    public void setCommandToExecute(String commandToExecute) {
+        this.commandToExecute.set(commandToExecute);
     }
 }

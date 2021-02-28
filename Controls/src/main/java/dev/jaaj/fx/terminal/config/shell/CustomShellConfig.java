@@ -19,9 +19,16 @@ package dev.jaaj.fx.terminal.config.shell;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public abstract class AbstractShellConfig {
+public class CustomShellConfig extends AbstractShellConfig {
+    private final StringProperty shellCommand = new SimpleStringProperty();
 
-    public abstract String getCommandLine();
+    @Override
+    public String getCommandLine() {
+        return shellCommand.get();
+    }
 
-    public abstract String getTitle();
+    @Override
+    public String getTitle() {
+        return shellCommand.get();
+    }
 }

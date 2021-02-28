@@ -17,6 +17,8 @@
 package dev.jaaj.fx.terminal.config.profile;
 
 import dev.jaaj.fx.terminal.config.factory.theme.DefaultJMetroLightTerminalThemeFactory;
+import dev.jaaj.fx.terminal.config.shell.AbstractShellConfig;
+import dev.jaaj.fx.terminal.config.shell.DefaultShellConfig;
 import dev.jaaj.fx.terminal.config.shell.LocalShellConfig;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
@@ -45,7 +47,7 @@ public class ProfilesService {
 
     public Profile getDefaultProfile() {
         if (profiles.isEmpty()) {
-            LocalShellConfig shellConfig = new LocalShellConfig();
+            AbstractShellConfig shellConfig = new DefaultShellConfig();
             profiles.add(new Profile("Default", shellConfig, new DefaultJMetroLightTerminalThemeFactory().build()));
         }
         return profiles.get(0);

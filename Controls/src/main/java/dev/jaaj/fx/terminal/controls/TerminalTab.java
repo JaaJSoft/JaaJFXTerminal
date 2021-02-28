@@ -17,10 +17,7 @@
 package dev.jaaj.fx.terminal.controls;
 
 import dev.jaaj.fx.terminal.config.profile.Profile;
-import dev.jaaj.fx.terminal.config.shell.WSLConfig;
 import dev.jaaj.fx.terminal.controls.profile.ProfileDialog;
-import dev.jaaj.fx.terminal.controls.profile.ProfileForm;
-import dev.jaaj.fx.terminal.controls.wsl.WSLFormDialog;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.control.ContextMenu;

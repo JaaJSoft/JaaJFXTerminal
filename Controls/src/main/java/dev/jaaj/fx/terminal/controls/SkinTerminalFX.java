@@ -35,7 +35,7 @@ public class SkinTerminalFX extends SkinBase<Terminal> {
         AbstractShellConfig terminalConfig = control.getTerminalConfig();
         syncTheme(config, control.getTerminalThemeConfig());
 
-        String startCommand = terminalConfig.getStartCommand();
+        String startCommand = terminalConfig.getCommandLine();
         if (!startCommand.isEmpty()) {
             config.setUnixTerminalStarter(startCommand);
             config.setWindowsTerminalStarter(startCommand);

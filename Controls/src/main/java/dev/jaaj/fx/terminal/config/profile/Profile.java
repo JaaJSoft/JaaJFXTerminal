@@ -18,6 +18,7 @@ package dev.jaaj.fx.terminal.config.profile;
 
 import dev.jaaj.fx.terminal.config.factory.theme.DefaultJMetroLightTerminalThemeFactory;
 import dev.jaaj.fx.terminal.config.shell.AbstractShellConfig;
+import dev.jaaj.fx.terminal.config.shell.DefaultShellConfig;
 import dev.jaaj.fx.terminal.config.shell.LocalShellConfig;
 import dev.jaaj.fx.terminal.config.terminal.TerminalThemeConfig;
 import javafx.beans.property.ObjectProperty;
@@ -36,7 +37,7 @@ public class Profile {
     private final ObjectProperty<TerminalThemeConfig> terminalThemeConfig = new SimpleObjectProperty<>();
 
     public Profile(String profileName) {
-        this(profileName, new LocalShellConfig(), new DefaultJMetroLightTerminalThemeFactory().build());
+        this(profileName, new DefaultShellConfig(), new DefaultJMetroLightTerminalThemeFactory().build());
     }
 
     public Profile(String profileName, AbstractShellConfig shellConfig, TerminalThemeConfig themeConfig) {

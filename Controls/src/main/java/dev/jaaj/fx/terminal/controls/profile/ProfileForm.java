@@ -38,7 +38,11 @@ public class ProfileForm extends AbstractForm<Profile> {
         this.profile.set(profile);
         terminalThemeConfigs.add(new DefaultJMetroLightTerminalThemeFactory().build());
         terminalThemeConfigs.add(new DefaultJMetroDarkTerminalThemeFactory().build());
-        getTerminalThemeSelectionModel().select(profile.getTerminalThemeConfig());
+        terminalThemeSelectionModel.addListener((observable, oldValue, newValue) -> {
+            if (oldValue == null && newValue != null) {
+                getTerminalThemeSelectionModel().select(profile.getTerminalThemeConfig());
+            }
+        });
     }
 
     @Override
@@ -79,9 +83,5 @@ public class ProfileForm extends AbstractForm<Profile> {
 
     public ObjectProperty<SingleSelectionModel<TerminalThemeConfig>> terminalThemeSelectionModelProperty() {
         return terminalThemeSelectionModel;
-    }
-
-    public void setTerminalThemeSelectionModel(SingleSelectionModel<TerminalThemeConfig> terminalThemeSelectionModel) {
-        this.terminalThemeSelectionModel.set(terminalThemeSelectionModel);
     }
 }
