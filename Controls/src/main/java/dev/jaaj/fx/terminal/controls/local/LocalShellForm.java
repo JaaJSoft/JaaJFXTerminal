@@ -17,14 +17,11 @@
 package dev.jaaj.fx.terminal.controls.local;
 
 import dev.jaaj.fx.core.form.AbstractForm;
-import dev.jaaj.fx.terminal.config.shell.LocalShellConfig;
-import dev.jaaj.fx.terminal.config.shell.WSLConfig;
-import dev.jaaj.fx.terminal.controls.wsl.Distribution;
+import dev.jaaj.fx.terminal.models.shell.LocalShellConfig;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.collections.ObservableList;
 import javafx.scene.control.Skin;
 
 public class LocalShellForm extends AbstractForm<LocalShellConfig> {

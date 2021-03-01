@@ -17,8 +17,7 @@
 package dev.jaaj.fx.terminal.controls.local;
 
 import dev.jaaj.fx.core.form.DialogForm;
-import dev.jaaj.fx.terminal.config.shell.LocalShellConfig;
-import dev.jaaj.fx.terminal.config.shell.WSLConfig;
+import dev.jaaj.fx.terminal.models.shell.LocalShellConfig;
 
 import java.util.ResourceBundle;
 

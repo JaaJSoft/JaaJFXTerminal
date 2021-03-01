@@ -17,12 +17,11 @@
 package dev.jaaj.fx.terminal.app;
 
 
-import dev.jaaj.fx.terminal.config.profile.Profile;
-import dev.jaaj.fx.terminal.config.profile.ProfilesService;
-import dev.jaaj.fx.terminal.config.shell.LocalShellConfig;
-import dev.jaaj.fx.terminal.config.shell.SSHConfig;
-import dev.jaaj.fx.terminal.config.shell.WSLConfig;
-import dev.jaaj.fx.terminal.config.terminal.TerminalService;
+import dev.jaaj.fx.terminal.models.profile.Profile;
+import dev.jaaj.fx.terminal.services.profile.ProfilesService;
+import dev.jaaj.fx.terminal.models.shell.SSHConfig;
+import dev.jaaj.fx.terminal.models.shell.WSLConfig;
+import dev.jaaj.fx.terminal.services.terminal.TerminalService;
 import dev.jaaj.fx.terminal.controls.Terminal;
 import dev.jaaj.fx.terminal.controls.about.AboutDialog;
 import dev.jaaj.fx.terminal.controls.about.data.AppInfo;

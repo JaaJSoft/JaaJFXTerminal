@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.config.shell;
+package dev.jaaj.fx.terminal.models.shell;
 
 import javafx.beans.property.*;
 

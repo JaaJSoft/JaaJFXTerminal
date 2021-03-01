@@ -17,7 +17,7 @@
 package dev.jaaj.fx.terminal.controls.profile;
 
 import dev.jaaj.fx.core.form.DialogForm;
-import dev.jaaj.fx.terminal.config.profile.Profile;
+import dev.jaaj.fx.terminal.models.profile.Profile;
 
 import java.util.ResourceBundle;
 

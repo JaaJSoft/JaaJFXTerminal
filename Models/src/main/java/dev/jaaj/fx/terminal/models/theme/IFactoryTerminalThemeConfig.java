@@ -14,7 +14,10 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.config;
+package dev.jaaj.fx.terminal.models.theme;
 
-public class Session {
+import dev.jaaj.fx.terminal.models.theme.TerminalThemeConfig;
+
+public interface IFactoryTerminalThemeConfig {
+    TerminalThemeConfig build();
 }

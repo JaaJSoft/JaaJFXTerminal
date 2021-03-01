@@ -17,7 +17,7 @@
 package dev.jaaj.fx.terminal.controls.ssh;
 
 import dev.jaaj.fx.core.form.AbstractForm;
-import dev.jaaj.fx.terminal.config.shell.SSHConfig;
+import dev.jaaj.fx.terminal.models.shell.SSHConfig;
 import dev.jaaj.fx.terminal.controls.util.AbstractFormFactory;
 
 public class SSHFormFactory implements AbstractFormFactory<SSHConfig> {

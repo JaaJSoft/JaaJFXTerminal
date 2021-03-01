@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.controls.wsl;
+package dev.jaaj.fx.terminal.models.shell.wsl;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -14,20 +14,21 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.config.factory.theme;
+package dev.jaaj.fx.terminal.models.shell;
 
-import dev.jaaj.fx.terminal.config.terminal.TerminalThemeConfig;
-import javafx.scene.paint.Color;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
-public class DefaultJMetroLightTerminalThemeFactory implements IFactoryTerminalThemeConfig {
+public class CustomShellConfig extends AbstractShellConfig {
+    private final StringProperty shellCommand = new SimpleStringProperty();
+
     @Override
-    public TerminalThemeConfig build() {
-        TerminalThemeConfig config = new TerminalThemeConfig();
-        config.setThemeName("Light JMetro");
-        config.setForegroundColor(Color.BLACK);
-        config.setBackgroundColor(Color.web("#F8F8F8"));
-        config.setCursorColor(Color.BLACK);
-        config.setFont(null);
-        return config;
+    public String getCommandLine() {
+        return shellCommand.get();
+    }
+
+    @Override
+    public String getTitle() {
+        return shellCommand.get();
     }
 }

@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.config.shell;
+package dev.jaaj.fx.terminal.models.shell;
 
-import dev.jaaj.fx.terminal.controls.wsl.Distribution;
+import dev.jaaj.fx.terminal.models.shell.wsl.Distribution;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;

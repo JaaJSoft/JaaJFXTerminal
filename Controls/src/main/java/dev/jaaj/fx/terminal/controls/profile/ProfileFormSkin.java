@@ -17,7 +17,7 @@
 package dev.jaaj.fx.terminal.controls.profile;
 
 import dev.jaaj.fx.core.skin.SkinFXML;
-import dev.jaaj.fx.terminal.config.terminal.TerminalThemeConfig;
+import dev.jaaj.fx.terminal.models.theme.TerminalThemeConfig;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 

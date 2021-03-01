@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.config.terminal;
+package dev.jaaj.fx.terminal.models.theme;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;

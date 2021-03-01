@@ -19,8 +19,8 @@ package dev.jaaj.fx.terminal.controls;
 import com.kodedu.terminalfx.config.TerminalConfig;
 import com.kodedu.terminalfx.helper.IOHelper;
 import com.kodedu.terminalfx.helper.ThreadHelper;
-import dev.jaaj.fx.terminal.config.shell.AbstractShellConfig;
-import dev.jaaj.fx.terminal.config.terminal.TerminalThemeConfig;
+import dev.jaaj.fx.terminal.models.shell.AbstractShellConfig;
+import dev.jaaj.fx.terminal.models.theme.TerminalThemeConfig;
 import javafx.scene.control.SkinBase;
 
 import java.util.Objects;

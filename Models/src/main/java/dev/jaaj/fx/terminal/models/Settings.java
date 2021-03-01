@@ -14,20 +14,7 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.config.factory.theme;
+package dev.jaaj.fx.terminal.models;
 
-import dev.jaaj.fx.terminal.config.terminal.TerminalThemeConfig;
-import javafx.scene.paint.Color;
-
-public class DefaultJMetroDarkTerminalThemeFactory implements IFactoryTerminalThemeConfig {
-    @Override
-    public TerminalThemeConfig build() {
-        TerminalThemeConfig config = new TerminalThemeConfig();
-        config.setThemeName("Dark JMetro");
-        config.setForegroundColor(Color.WHITE);
-        config.setBackgroundColor(Color.web("#1E1E1E"));
-        config.setCursorColor(Color.WHITE);
-        return config;
-    }
-
+public class Settings {
 }

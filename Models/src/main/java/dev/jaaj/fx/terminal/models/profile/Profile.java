@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.config.profile;
+package dev.jaaj.fx.terminal.models.profile;
 
-import dev.jaaj.fx.terminal.config.factory.theme.DefaultJMetroLightTerminalThemeFactory;
-import dev.jaaj.fx.terminal.config.shell.AbstractShellConfig;
-import dev.jaaj.fx.terminal.config.shell.DefaultShellConfig;
-import dev.jaaj.fx.terminal.config.shell.LocalShellConfig;
-import dev.jaaj.fx.terminal.config.terminal.TerminalThemeConfig;
+
+import dev.jaaj.fx.terminal.models.shell.AbstractShellConfig;
+import dev.jaaj.fx.terminal.models.shell.DefaultShellConfig;
+import dev.jaaj.fx.terminal.models.theme.DefaultJMetroLightTerminalThemeFactory;
+import dev.jaaj.fx.terminal.models.theme.TerminalThemeConfig;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;

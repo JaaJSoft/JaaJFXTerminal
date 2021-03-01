@@ -17,7 +17,7 @@
 package dev.jaaj.fx.terminal.controls.local;
 
 import dev.jaaj.fx.core.skin.SkinFXML;
-import dev.jaaj.fx.terminal.controls.wsl.Distribution;
+import dev.jaaj.fx.terminal.models.shell.wsl.Distribution;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

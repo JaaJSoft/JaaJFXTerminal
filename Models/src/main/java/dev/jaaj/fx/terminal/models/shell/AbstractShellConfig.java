@@ -14,16 +14,14 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.config.shell;
+package dev.jaaj.fx.terminal.models.shell;
 
-public class DefaultShellConfig extends AbstractShellConfig {
-    @Override
-    public String getCommandLine() {
-        return "";
-    }
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
-    @Override
-    public String getTitle() {
-        return "Default";
-    }
+public abstract class AbstractShellConfig {
+
+    public abstract String getCommandLine();
+
+    public abstract String getTitle();
 }

@@ -16,7 +16,7 @@
 
 package dev.jaaj.fx.terminal.controls;
 
-import dev.jaaj.fx.terminal.config.profile.Profile;
+import dev.jaaj.fx.terminal.models.profile.Profile;
 import dev.jaaj.fx.terminal.controls.profile.ProfileDialog;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;

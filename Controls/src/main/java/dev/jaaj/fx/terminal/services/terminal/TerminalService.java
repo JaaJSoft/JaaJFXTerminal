@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.config.terminal;
+package dev.jaaj.fx.terminal.services.terminal;
 
 import dev.jaaj.fx.terminal.controls.Terminal;
 import dev.jaaj.fx.terminal.controls.TerminalTab;

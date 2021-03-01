@@ -17,4 +17,5 @@
 rootProject.name = 'JaaJFXTerminal'
 include 'Controls'
 include 'App'
+include 'Models'
 

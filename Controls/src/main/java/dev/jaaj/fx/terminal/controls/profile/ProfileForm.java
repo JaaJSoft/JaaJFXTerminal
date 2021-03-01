@@ -17,10 +17,10 @@
 package dev.jaaj.fx.terminal.controls.profile;
 
 import dev.jaaj.fx.core.form.AbstractForm;
-import dev.jaaj.fx.terminal.config.factory.theme.DefaultJMetroDarkTerminalThemeFactory;
-import dev.jaaj.fx.terminal.config.factory.theme.DefaultJMetroLightTerminalThemeFactory;
-import dev.jaaj.fx.terminal.config.profile.Profile;
-import dev.jaaj.fx.terminal.config.terminal.TerminalThemeConfig;
+import dev.jaaj.fx.terminal.models.theme.DefaultJMetroDarkTerminalThemeFactory;
+import dev.jaaj.fx.terminal.models.theme.DefaultJMetroLightTerminalThemeFactory;
+import dev.jaaj.fx.terminal.models.profile.Profile;
+import dev.jaaj.fx.terminal.models.theme.TerminalThemeConfig;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
