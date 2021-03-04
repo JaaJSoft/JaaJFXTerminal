@@ -19,9 +19,7 @@ package dev.jaaj.fx.terminal.controls.about;
 import dev.jaaj.fx.terminal.controls.about.data.AppInfo;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
-import javafx.scene.image.Image;
 
-import java.io.FileInputStream;
 import java.util.ResourceBundle;
 
 public class AboutDialog extends Dialog<Void> {

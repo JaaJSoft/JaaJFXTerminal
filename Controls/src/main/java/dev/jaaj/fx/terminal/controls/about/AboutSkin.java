@@ -18,9 +18,6 @@ package dev.jaaj.fx.terminal.controls.about;
 
 import dev.jaaj.fx.core.skin.SkinFXML;
 import dev.jaaj.fx.terminal.controls.about.data.AppInfo;
-import dev.jaaj.fx.terminal.controls.about.data.Library;
-import dev.jaaj.fx.terminal.controls.about.data.Person;
-import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -28,7 +25,6 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.ImageView;
 
-import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class AboutSkin extends SkinFXML<About> {

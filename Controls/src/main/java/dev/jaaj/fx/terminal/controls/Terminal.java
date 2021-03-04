@@ -16,9 +16,9 @@
 
 package dev.jaaj.fx.terminal.controls;
 
-import dev.jaaj.fx.terminal.models.theme.DefaultJMetroLightTerminalThemeFactory;
 import dev.jaaj.fx.terminal.models.profile.Profile;
 import dev.jaaj.fx.terminal.models.shell.AbstractShellConfig;
+import dev.jaaj.fx.terminal.models.theme.DefaultJMetroLightTerminalThemeFactory;
 import dev.jaaj.fx.terminal.models.theme.TerminalThemeConfig;
 import javafx.beans.property.*;
 import javafx.scene.control.Control;

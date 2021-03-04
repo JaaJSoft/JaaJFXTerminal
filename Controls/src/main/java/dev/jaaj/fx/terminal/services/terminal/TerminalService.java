@@ -18,7 +18,10 @@ package dev.jaaj.fx.terminal.services.terminal;
 
 import dev.jaaj.fx.terminal.controls.Terminal;
 import dev.jaaj.fx.terminal.controls.TerminalTab;
-import javafx.collections.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableSet;
+import javafx.collections.SetChangeListener;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 

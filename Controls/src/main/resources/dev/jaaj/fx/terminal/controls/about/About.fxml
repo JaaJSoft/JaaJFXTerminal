@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-
 <!--
   ~ Copyright 2021 JaaJSoft
   ~
@@ -21,7 +16,12 @@
   ~ limitations under the License.
   -->
 
-<VBox  prefHeight="500" prefWidth="550" spacing="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<VBox prefHeight="500" prefWidth="550" spacing="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <HBox spacing="10">
         <ImageView fx:id="icon" fitHeight="50" preserveRatio="true" />
         <VBox alignment="CENTER_LEFT">

@@ -16,10 +16,10 @@
 
 package dev.jaaj.fx.terminal.services.profile;
 
-import dev.jaaj.fx.terminal.models.theme.DefaultJMetroLightTerminalThemeFactory;
+import dev.jaaj.fx.terminal.models.profile.Profile;
 import dev.jaaj.fx.terminal.models.shell.AbstractShellConfig;
 import dev.jaaj.fx.terminal.models.shell.DefaultShellConfig;
-import dev.jaaj.fx.terminal.models.profile.Profile;
+import dev.jaaj.fx.terminal.models.theme.DefaultJMetroLightTerminalThemeFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 

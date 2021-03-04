@@ -16,8 +16,6 @@
 
 package dev.jaaj.fx.terminal.models.theme;
 
-import dev.jaaj.fx.terminal.models.theme.TerminalThemeConfig;
-
 public interface IFactoryTerminalThemeConfig {
     TerminalThemeConfig build();
 }

@@ -17,16 +17,12 @@
 package dev.jaaj.fx.terminal.controls.about;
 
 import dev.jaaj.fx.core.skin.SkinFXML;
-import dev.jaaj.fx.terminal.controls.about.data.AppInfo;
-import dev.jaaj.fx.terminal.controls.about.data.AppInfoBuilder;
 import dev.jaaj.fx.terminal.controls.about.data.Person;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Tooltip;
 
-import java.net.URL;
 import java.util.ResourceBundle;
 
 public class PersonViewerSkin extends SkinFXML<PersonViewer> {

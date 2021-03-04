@@ -16,14 +16,13 @@
 
 package dev.jaaj.fx.terminal.controls;
 
-import dev.jaaj.fx.terminal.models.profile.Profile;
 import dev.jaaj.fx.terminal.controls.profile.ProfileDialog;
+import dev.jaaj.fx.terminal.models.profile.Profile;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tab;
-import javafx.scene.control.Tooltip;
 
 import java.util.Objects;
 import java.util.Optional;

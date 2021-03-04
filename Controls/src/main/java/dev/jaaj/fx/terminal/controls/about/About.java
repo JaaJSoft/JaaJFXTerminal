@@ -17,15 +17,8 @@
 package dev.jaaj.fx.terminal.controls.about;
 
 import dev.jaaj.fx.terminal.controls.about.data.AppInfo;
-import dev.jaaj.fx.terminal.controls.about.data.Library;
-import dev.jaaj.fx.terminal.controls.about.data.Person;
-import javafx.beans.property.*;
-import javafx.collections.ObservableList;
 import javafx.scene.control.Control;
 import javafx.scene.control.Skin;
-import javafx.scene.image.Image;
-
-import java.util.List;
 
 public class About extends Control {
     private final AppInfo appInfo;

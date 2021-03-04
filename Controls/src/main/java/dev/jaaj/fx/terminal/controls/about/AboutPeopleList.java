@@ -21,7 +21,6 @@ import javafx.scene.control.Separator;
 import javafx.scene.layout.VBox;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class AboutPeopleList extends VBox {
     public AboutPeopleList(List<Person> people) {

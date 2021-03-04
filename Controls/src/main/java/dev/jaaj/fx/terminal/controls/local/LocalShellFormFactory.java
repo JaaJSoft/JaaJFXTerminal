@@ -17,9 +17,9 @@
 package dev.jaaj.fx.terminal.controls.local;
 
 import dev.jaaj.fx.core.form.AbstractForm;
+import dev.jaaj.fx.terminal.controls.util.AbstractFormFactory;
 import dev.jaaj.fx.terminal.models.shell.LocalShellConfig;
 import dev.jaaj.fx.terminal.models.shell.WSLConfig;
-import dev.jaaj.fx.terminal.controls.util.AbstractFormFactory;
 
 public class LocalShellFormFactory implements AbstractFormFactory<LocalShellConfig> {
     @Override

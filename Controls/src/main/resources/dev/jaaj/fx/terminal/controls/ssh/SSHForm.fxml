@@ -19,8 +19,7 @@
 
 <?import dev.jaaj.fx.terminal.controls.util.IntegerField?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.VBox?>
-
+<?import javafx.scene.layout.*?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       spacing="10" prefWidth="250">

@@ -17,8 +17,8 @@
 package dev.jaaj.fx.terminal.controls.wsl;
 
 import dev.jaaj.fx.core.form.AbstractForm;
-import dev.jaaj.fx.terminal.models.shell.WSLConfig;
 import dev.jaaj.fx.terminal.controls.util.AbstractFormFactory;
+import dev.jaaj.fx.terminal.models.shell.WSLConfig;
 
 public class WSLFormFactory implements AbstractFormFactory<WSLConfig> {
     @Override

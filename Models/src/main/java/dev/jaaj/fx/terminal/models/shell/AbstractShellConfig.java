@@ -16,9 +16,6 @@
 
 package dev.jaaj.fx.terminal.models.shell;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-
 public abstract class AbstractShellConfig {
 
     public abstract String getCommandLine();
