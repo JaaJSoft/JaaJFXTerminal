@@ -16,7 +16,6 @@
 
 package dev.jaaj.fx.terminal.controls.about;
 
-import com.sun.javafx.application.HostServicesDelegate;
 import dev.jaaj.fx.terminal.controls.about.data.Person;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
