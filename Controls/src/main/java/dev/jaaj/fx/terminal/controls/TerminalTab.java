@@ -37,10 +37,8 @@ public class TerminalTab extends Tab {
         super(terminal.getTitle(), terminal);
         this.terminal.set(terminal);
         this.contentProperty().addListener((observable, oldValue, newValue) -> {
-            if (!Objects.equals(oldValue, newValue)) {
-                if (newValue instanceof Terminal) {
-                    this.setTerminal((Terminal) newValue);
-                }
+            if (!Objects.equals(oldValue, newValue) && newValue instanceof Terminal) {
+                this.setTerminal((Terminal) newValue);
             }
         });
         this.terminalProperty().addListener((observable, oldValue, newValue) -> {

@@ -27,8 +27,8 @@
     <padding>
         <Insets top="15" bottom="15" left="15" right="15"/>
     </padding>
-    <Label fx:id="name"/>
-    <Label fx:id="title"/>
+    <Label fx:id="nameLabel"/>
+    <Label fx:id="titleLabel"/>
     <HBox fx:id="button">
         <Button fx:id="mailBtn" visible="false" onAction="#sendEmail">
             <tooltip>

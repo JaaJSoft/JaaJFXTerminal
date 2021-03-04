@@ -28,9 +28,9 @@ import java.util.ResourceBundle;
 public class PersonViewerSkin extends SkinFXML<PersonViewer> {
     public static final ResourceBundle BUNDLE = ResourceBundle.getBundle(AboutSkin.class.getPackageName() + ".About");
     @FXML
-    Label name;
+    Label nameLabel;
     @FXML
-    Label title;
+    Label titleLabel;
     @FXML
     Button mailBtn;
     @FXML
@@ -50,11 +50,11 @@ public class PersonViewerSkin extends SkinFXML<PersonViewer> {
         if (newValue != null) {
             String name = newValue.getName();
             if (name != null && !name.isBlank()) {
-                this.name.setText(name);
+                this.nameLabel.setText(name);
             }
             String title = newValue.getTitle();
             if (title != null && !title.isBlank()) {
-                this.title.setText(title);
+                this.titleLabel.setText(title);
             }
             String email = newValue.getEmail();
             this.mailBtn.setVisible(email != null && !email.isBlank());
