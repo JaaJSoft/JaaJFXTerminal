@@ -111,15 +111,6 @@ public class SSHConfig extends AbstractShellConfig implements Cloneable {
     }
 
     @Override
-    public Object clone() {
-        SSHConfig sshConfigCopy = new SSHConfig();
-        sshConfigCopy.setInetAddress(this.getInetAddress());
-        sshConfigCopy.setUser(this.getUser());
-        sshConfigCopy.setPort(this.getPort());
-        return sshConfigCopy;
-    }
-
-    @Override
     public String toString() {
         return "SSHConfig{" +
                 "address=" + inetAddress.getValue().getHostName() +

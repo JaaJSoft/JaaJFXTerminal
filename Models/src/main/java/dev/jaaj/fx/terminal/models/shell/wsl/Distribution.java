@@ -83,6 +83,7 @@ public class Distribution {
             }
 
         } catch (IOException | InterruptedException e) {
+            Thread.currentThread().interrupt();
             return Collections.emptyList();
         }
 

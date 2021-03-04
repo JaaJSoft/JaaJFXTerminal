@@ -58,16 +58,14 @@ public class PersonViewer extends Control {
     public void sendEmail() {
         try {
             Desktop.getDesktop().browse(new URL("mailto:" + getPerson().getEmail()).toURI());
-        } catch (IOException | URISyntaxException e) {
-            e.printStackTrace();
+        } catch (IOException | URISyntaxException ignored) {
         }
     }
 
     public void openWebsite() {
         try {
             Desktop.getDesktop().browse(new URL(person.get().getWebsite()).toURI());
-        } catch (IOException | URISyntaxException e) {
-            e.printStackTrace();
+        } catch (IOException | URISyntaxException ignored) {
         }
     }
 }
