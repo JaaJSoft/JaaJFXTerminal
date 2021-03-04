@@ -17,24 +17,21 @@
 package dev.jaaj.fx.terminal.controls.about.data;
 
 import javafx.beans.property.*;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 
 import java.util.List;
 
 public class AppInfo {
-    private final ObservableList<Library> libsList = new SimpleListProperty<>();
-    private final ObservableList<Person> developers = new SimpleListProperty<>();
-    private final ObservableList<Person> translators = new SimpleListProperty<>();
-    private final ObservableList<Person> thanks = new SimpleListProperty<>();
+    private final ObservableList<Library> libsList = FXCollections.observableArrayList();
+    private final ObservableList<Person> developers = FXCollections.observableArrayList();
+    private final ObservableList<Person> translators = FXCollections.observableArrayList();
+    private final ObservableList<Person> thanks = FXCollections.observableArrayList();
     private final ObjectProperty<Image> icon = new SimpleObjectProperty<>();
     private final StringProperty version = new SimpleStringProperty();
     private final StringProperty aboutText = new SimpleStringProperty();
     private final StringProperty appName = new SimpleStringProperty();
-
-    public AppInfo() {
-
-    }
 
     public AppInfo(String appName, String aboutText, String version, Image icon, List<Library> libraries, List<Person> developers, List<Person> translators, List<Person> thanks) {
         this.appName.set(appName);

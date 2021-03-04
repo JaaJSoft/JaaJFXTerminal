@@ -25,6 +25,7 @@ import java.io.FileInputStream;
 import java.util.ResourceBundle;
 
 public class AboutDialog extends Dialog<Void> {
+
     private static final ResourceBundle ABOUT_BUNDLE = ResourceBundle.getBundle(AboutDialog.class.getPackageName() + ".About");
 
     public AboutDialog(AppInfo appInfo) {

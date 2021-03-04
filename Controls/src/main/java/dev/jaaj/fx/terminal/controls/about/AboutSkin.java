@@ -19,9 +19,11 @@ package dev.jaaj.fx.terminal.controls.about;
 import dev.jaaj.fx.core.skin.SkinFXML;
 import dev.jaaj.fx.terminal.controls.about.data.AppInfo;
 import dev.jaaj.fx.terminal.controls.about.data.Library;
+import dev.jaaj.fx.terminal.controls.about.data.Person;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.ImageView;
@@ -54,18 +56,18 @@ public class AboutSkin extends SkinFXML<About> {
     @FXML
     Tab translatorsTab;
 
+    private final AppInfo appInfo;
+
     protected AboutSkin(About control) {
         super(control, AboutSkin.class.getResource("About.fxml"), BUNDLE);
 
-        AppInfo appInfo = control.getAppInfo();
+        appInfo = control.getAppInfo();
         icon.imageProperty().bind(appInfo.iconProperty());
         appName.textProperty().bind(appInfo.appNameProperty());
         version.textProperty().bind(appInfo.versionProperty());
         aboutText.textProperty().bind(appInfo.aboutTextProperty());
-        appInfo.getLibsList().addListener((ListChangeListener<? super Library>) c -> {
-            tabPane.getTabs().add(getLibsTab());
-        });
-
+        //tabPane.getTabs().add(getLibsTab());
+        tabPane.getTabs().add(getDevelopersTab());
     }
 
     private Tab getAboutTab() {
@@ -82,7 +84,13 @@ public class AboutSkin extends SkinFXML<About> {
     }
 
     private Tab getDevelopersTab() {
-        return developersTab;
+        Tab tab = new Tab(BUNDLE.getString("developersTab"));
+        AboutPeopleList peopleList = new AboutPeopleList(appInfo.getDevelopers());
+        ScrollPane scrollPane = new ScrollPane(peopleList);
+        scrollPane.setFitToHeight(true);
+        scrollPane.setFitToWidth(true);
+        tab.setContent(scrollPane);
+        return tab;
     }
 
     private Tab getThanksTab() {

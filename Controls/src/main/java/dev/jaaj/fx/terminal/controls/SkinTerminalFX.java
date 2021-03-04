@@ -60,6 +60,7 @@ public class SkinTerminalFX extends SkinBase<Terminal> {
             config.setFontFamily(themeConfig.getFont().getFamily());
             config.setFontSize((int) themeConfig.getFont().getSize());
         }
+        config.setScrollWhellMoveMultiplier(0.5);
     }
 
     private void destroy() {

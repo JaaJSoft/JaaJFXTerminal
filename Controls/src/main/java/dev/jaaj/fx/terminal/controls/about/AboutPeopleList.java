@@ -16,5 +16,23 @@
 
 package dev.jaaj.fx.terminal.controls.about;
 
-public class AboutPeopleList {
+import dev.jaaj.fx.terminal.controls.about.data.Person;
+import javafx.scene.control.Separator;
+import javafx.scene.layout.VBox;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class AboutPeopleList extends VBox {
+    public AboutPeopleList(List<Person> people) {
+        this(people, 0);
+    }
+
+    public AboutPeopleList(List<Person> people, double spacing) {
+        super(spacing);
+        people.stream().map(PersonViewer::new).forEach(personViewer -> {
+            this.getChildren().add(personViewer);
+            this.getChildren().add(new Separator());
+        });
+    }
 }

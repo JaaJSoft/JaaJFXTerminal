@@ -17,6 +17,8 @@
 package dev.jaaj.fx.terminal.app;
 
 
+import dev.jaaj.fx.terminal.controls.about.data.Person;
+import dev.jaaj.fx.terminal.controls.about.data.PersonBuilder;
 import dev.jaaj.fx.terminal.models.profile.Profile;
 import dev.jaaj.fx.terminal.services.profile.ProfilesService;
 import dev.jaaj.fx.terminal.models.shell.SSHConfig;
@@ -42,6 +44,7 @@ import org.controlsfx.control.StatusBar;
 
 import java.io.InputStream;
 import java.net.URL;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -129,6 +132,19 @@ public class MainController implements Initializable {
                 .setIcon(image)
                 .setVersion("0.1")// todo get app version from gradle
                 .setAboutText(bundle.getString("ABOUT_TEXT_JAAJFXTERM"))
+                .setDevelopers(List.of(
+                        new PersonBuilder().setName("Pierre Chopinet").setEmail("pierre.chopinet@jaaj.dev").setWebsite("https://jaaj.dev").createPerson(),
+                        new PersonBuilder().setName("Pierre Chopinet").setEmail("pierre.chopinet@jaaj.dev").setWebsite("https://jaaj.dev").createPerson(),
+                        new PersonBuilder().setName("Pierre Chopinet").setEmail("pierre.chopinet@jaaj.dev").setWebsite("https://jaaj.dev").createPerson(),
+                        new PersonBuilder().setName("Pierre Chopinet").setEmail("pierre.chopinet@jaaj.dev").setWebsite("https://jaaj.dev").createPerson(),
+                        new PersonBuilder().setName("Pierre Chopinet").setEmail("pierre.chopinet@jaaj.dev").setWebsite("https://jaaj.dev").createPerson(),
+                        new PersonBuilder().setName("Pierre Chopinet").setEmail("pierre.chopinet@jaaj.dev").setWebsite("https://jaaj.dev").createPerson(),
+                        new PersonBuilder().setName("Pierre Chopinet").setEmail("pierre.chopinet@jaaj.dev").setWebsite("https://jaaj.dev").createPerson(),
+                        new PersonBuilder().setName("Pierre Chopinet").setEmail("pierre.chopinet@jaaj.dev").setWebsite("https://jaaj.dev").createPerson(),
+                        new PersonBuilder().setName("Pierre Chopinet").setEmail("pierre.chopinet@jaaj.dev").setWebsite("https://jaaj.dev").createPerson()
+
+                        )
+                )
                 .createAppInfo();
         AboutDialog aboutDialog = new AboutDialog(JaaJFXTerminalApp);
         aboutDialog.initOwner(root.getCenter().getScene().getWindow());

@@ -29,7 +29,7 @@ public class TerminalThemeConfig {
     private final ObjectProperty<Color> foregroundColor = new SimpleObjectProperty<>(Color.WHITE);
     private final ObjectProperty<Color> cursorColor = new SimpleObjectProperty<>(Color.WHITE);
     private final ObjectProperty<Font> font = new SimpleObjectProperty<>(null);
-
+    //todo add scroll thing
     public TerminalThemeConfig() {
     }
 
