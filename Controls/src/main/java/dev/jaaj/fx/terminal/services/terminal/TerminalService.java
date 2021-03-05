@@ -66,7 +66,11 @@ public class TerminalService {
     }
 
     public boolean removeTerminal(Terminal terminal) {
-        return false;
+        Optional<TerminalTab> optionalTerminalTab = getTab(terminal);
+        if (optionalTerminalTab.isEmpty()) {
+            return false;
+        }
+        return terminalTabs.remove(optionalTerminalTab.get());
     }
 
     public boolean removeTerminal(TerminalTab tab) {
