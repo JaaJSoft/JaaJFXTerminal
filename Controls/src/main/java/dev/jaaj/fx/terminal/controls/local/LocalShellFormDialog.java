@@ -22,10 +22,10 @@ import dev.jaaj.fx.terminal.models.shell.LocalShellConfig;
 import java.util.ResourceBundle;
 
 public class LocalShellFormDialog extends DialogForm<LocalShellConfig> {
-    private static final ResourceBundle SSH_BUNDLE = ResourceBundle.getBundle(LocalShellFormDialog.class.getPackageName() + ".LocalShellForm");
+    private static final ResourceBundle BUNDLE = ResourceBundle.getBundle(LocalShellFormDialog.class.getPackageName() + ".LocalShellForm");
 
     public LocalShellFormDialog(LocalShellConfig shellConfig) {
-        super(new LocalShellForm(shellConfig), SSH_BUNDLE.getString("title_dialog"), SSH_BUNDLE.getString("header_dialog"));
+        super(new LocalShellForm(shellConfig), BUNDLE.getString("title_dialog"), String.format(BUNDLE.getString("header_dialog"), shellConfig.getTitle()));
     }
 
 }

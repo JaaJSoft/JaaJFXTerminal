@@ -33,7 +33,6 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        System.out.println(System.getProperty("file.encoding"));
         Parent root = FXMLLoader.load(getClass().getResource("main.fxml"), ResourceBundle.getBundle("dev/jaaj/fx/terminal/app/Terminal"));
         primaryStage.setTitle("JaaJFX - Terminal");
         Scene scene = new Scene(root, 800, 600);

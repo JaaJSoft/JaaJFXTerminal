@@ -19,12 +19,11 @@ package dev.jaaj.fx.terminal.controls.local;
 import dev.jaaj.fx.core.form.AbstractForm;
 import dev.jaaj.fx.terminal.controls.util.AbstractFormFactory;
 import dev.jaaj.fx.terminal.models.shell.LocalShellConfig;
-import dev.jaaj.fx.terminal.models.shell.WSLConfig;
 
 public class LocalShellFormFactory implements AbstractFormFactory<LocalShellConfig> {
     @Override
     public boolean canBuild(Object objectToInitWithForm) {
-        return objectToInitWithForm instanceof WSLConfig;
+        return objectToInitWithForm instanceof LocalShellConfig;
     }
 
     @Override

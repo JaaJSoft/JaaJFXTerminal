@@ -23,14 +23,6 @@
 <?import javafx.scene.layout.*?>
 <VBox prefWidth="250" spacing="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <VBox spacing="5">
-        <Label text="%distribution"/>
-        <ComboBox fx:id="distributionComboBox" prefWidth="250"/>
-    </VBox>
-    <VBox spacing="5">
-        <Label text="%user"/>
-        <TextField fx:id="userField"/>
-    </VBox>
-    <VBox spacing="5">
         <Label text="%working_directory"/>
         <HBox alignment="CENTER_LEFT" spacing="5">
             <TextField fx:id="workingDirectoryField" HBox.hgrow="ALWAYS"/>
@@ -45,10 +37,13 @@
                 </graphic>
             </Button>
         </HBox>
-
     </VBox>
-    <VBox spacing="5">
-        <Label text="%command"/>
-        <TextField fx:id="commandField"/>
-    </VBox>
+    <TitledPane animated="false" fx:id="advancedPane" expanded="false" text="%advanced" VBox.vgrow="always">
+        <VBox spacing="10">
+            <VBox spacing="5">
+                <Label text="%command"/>
+                <TextField fx:id="commandField"/>
+            </VBox>
+        </VBox>
+    </TitledPane>
 </VBox>

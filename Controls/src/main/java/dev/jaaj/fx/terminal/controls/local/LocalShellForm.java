@@ -27,20 +27,18 @@ import javafx.scene.control.Skin;
 public class LocalShellForm extends AbstractForm<LocalShellConfig> {
     private final ObjectProperty<LocalShellConfig> localShellConfig = new SimpleObjectProperty<>();
     private final StringProperty workingDirectory = new SimpleStringProperty();
-    private final StringProperty executable = new SimpleStringProperty();
+    private final StringProperty command = new SimpleStringProperty();
 
     public LocalShellForm(LocalShellConfig config) {
         this.localShellConfig.addListener((observable, oldValue, newValue) -> {
-            workingDirectory.set(newValue.getCommandLine());
+            workingDirectory.set(newValue.getWorkingDirectory());
+            command.set(newValue.getCommandToExecute());
         });
         this.localShellConfig.set(config);
     }
 
     @Override
     public boolean validate() {// TODO find a way to show error
-        if (executable.isNull().get() || workingDirectory.getValue().isBlank()) {
-            return false;
-        }
         return true;
     }
 
@@ -48,10 +46,8 @@ public class LocalShellForm extends AbstractForm<LocalShellConfig> {
     public LocalShellConfig apply() {
         LocalShellConfig config = localShellConfig.getValue();
         if (config != null) {
-            /*config.setDistribution(distribution.getValue());
-            config.setUser(user.get());
             config.setWorkingDirectory(workingDirectory.getValue());
-            config.setCommand(command.getValue());*/
+            config.setCommandToExecute(command.getValue());
         }
         return config;
     }
@@ -86,14 +82,18 @@ public class LocalShellForm extends AbstractForm<LocalShellConfig> {
     }
 
     public String getExecutable() {
-        return executable.get();
+        return localShellConfig.get().getExecutable();
     }
 
-    public StringProperty executableProperty() {
-        return executable;
+    public String getCommand() {
+        return command.get();
     }
 
-    public void setExecutable(String executable) {
-        this.executable.set(executable);
+    public StringProperty commandProperty() {
+        return command;
+    }
+
+    public void setCommand(String command) {
+        this.command.set(command);
     }
 }

@@ -21,8 +21,8 @@ import javafx.beans.property.StringProperty;
 
 public abstract class LocalShellConfig extends AbstractShellConfig {
     private final StringProperty executable = new SimpleStringProperty();
-    private final StringProperty workingDirectory = new SimpleStringProperty();
-    private final StringProperty commandToExecute = new SimpleStringProperty();
+    private final StringProperty workingDirectory = new SimpleStringProperty("");
+    private final StringProperty commandToExecute = new SimpleStringProperty("");
 
     public LocalShellConfig(String executable) {
         this.executable.set(executable);
@@ -30,14 +30,6 @@ public abstract class LocalShellConfig extends AbstractShellConfig {
 
     public String getExecutable() {
         return executable.get();
-    }
-
-    public StringProperty executableProperty() {
-        return executable;
-    }
-
-    public void setExecutable(String executable) {
-        this.executable.set(executable);
     }
 
     public String getWorkingDirectory() {

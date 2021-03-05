@@ -23,10 +23,13 @@ import dev.jaaj.fx.terminal.controls.about.data.AppInfo;
 import dev.jaaj.fx.terminal.controls.about.data.AppInfoBuilder;
 import dev.jaaj.fx.terminal.controls.about.data.Person;
 import dev.jaaj.fx.terminal.controls.about.data.PersonBuilder;
+import dev.jaaj.fx.terminal.controls.local.LocalShellFormDialog;
 import dev.jaaj.fx.terminal.controls.options.OptionsDialog;
 import dev.jaaj.fx.terminal.controls.ssh.SSHFormDialog;
 import dev.jaaj.fx.terminal.controls.wsl.WSLFormDialog;
 import dev.jaaj.fx.terminal.models.profile.Profile;
+import dev.jaaj.fx.terminal.models.shell.CmdShellConfig;
+import dev.jaaj.fx.terminal.models.shell.LocalShellConfig;
 import dev.jaaj.fx.terminal.models.shell.SSHConfig;
 import dev.jaaj.fx.terminal.models.shell.WSLConfig;
 import dev.jaaj.fx.terminal.services.profile.ProfilesService;
@@ -57,6 +60,7 @@ public class MainController implements Initializable {
     public static final Person JAAJSOFT = new PersonBuilder().setName("JaaJSoft").setEmail("contact@jaaj.dev").setWebsite("https://jaaj.dev").createPerson();
     public static final Person REMI_LECOUILLARD = new PersonBuilder().setName("Rémi Lecouillard").setTitle("A good friend").setEmail("remi.lecouillard@jaaj.dev").setWebsite("https://jaaj.dev").createPerson();
     public static final Person JULIEN_CHEVRON = new PersonBuilder().setName("Julien Chevron").setTitle("Noobard").setEmail("julien.chevron@jaaj.dev").setWebsite("https://jaaj.dev").createPerson();
+
     @FXML
     Menu profileMenu;
     @FXML
@@ -73,6 +77,9 @@ public class MainController implements Initializable {
     MenuItem newSSHTerminal;
     @FXML
     MenuItem newWSLTerminal;
+    @FXML
+    MenuItem newLocalShellTerminal;
+
     private ResourceBundle bundle;
 
     private final ProfilesService profilesService = new ProfilesService();
@@ -132,6 +139,17 @@ public class MainController implements Initializable {
         });
     }
 
+    public void openTerminalLocalShell(ActionEvent actionEvent) {
+        CmdShellConfig shellConfig = new CmdShellConfig();
+        LocalShellFormDialog shellFormDialog = new LocalShellFormDialog(shellConfig);
+        shellFormDialog.initOwner(root.getCenter().getScene().getWindow());
+        Optional<LocalShellConfig> optionalLocalShellConfig = shellFormDialog.showAndWait();
+        optionalLocalShellConfig.ifPresent(localShellConfig -> {
+            Terminal terminal = new Terminal(shellFormDialog.getResult());
+            terminalService.addTerminal(terminal);
+        });
+    }
+
     public void openAbout(ActionEvent actionEvent) {
         InputStream inputStream = getClass().getResourceAsStream("img/icon.png");
         Image image = new Image(inputStream);
@@ -185,4 +203,6 @@ public class MainController implements Initializable {
     public void manageProfile(ActionEvent actionEvent) {
 
     }
+
+
 }

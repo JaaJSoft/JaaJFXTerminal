@@ -26,7 +26,8 @@
         <MenuBar fx:id="menuBar">
             <Menu text="%FILE">
                 <Menu text="%NEW">
-                    <MenuItem fx:id="newTerminal" text="%NEW_LOCAL" onAction="#openTerminal"/>
+                    <MenuItem fx:id="newTerminal" text="%NEW_DEFAULT" onAction="#openTerminal"/>
+                    <MenuItem fx:id="newLocalShellTerminal" text="%NEW_LOCAL" onAction="#openTerminalLocalShell"/>
                     <MenuItem fx:id="newWSLTerminal" text="%NEW_WSL" onAction="#openTerminalWSL"/>
                     <MenuItem fx:id="newSSHTerminal" text="%NEW_SSH" onAction="#openTerminalSSH"/>
                 </Menu>
