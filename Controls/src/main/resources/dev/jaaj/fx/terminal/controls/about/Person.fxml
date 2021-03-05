@@ -23,13 +23,16 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml" spacing="10">
+      xmlns:fx="http://javafx.com/fxml">
     <padding>
         <Insets top="15" bottom="15" left="15" right="15"/>
     </padding>
     <Label fx:id="nameLabel"/>
-    <Label fx:id="titleLabel"/>
+    <Label fx:id="titleLabel" style="-fx-font-size: 12; -fx-font-style: italic"/>
     <HBox fx:id="button">
+        <padding>
+            <Insets top="10"/>
+        </padding>
         <Button fx:id="mailBtn" visible="false" onAction="#sendEmail">
             <tooltip>
                 <Tooltip text="%send_email"/>

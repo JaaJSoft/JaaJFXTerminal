@@ -59,7 +59,7 @@ public class SSHForm extends AbstractForm<SSHConfig> {
         }
         try {
             InetAddress ignored = InetAddress.getByName(inetAddressStr.getValue());
-        } catch (UnknownHostException e) {
+        } catch (UnknownHostException e) { //todo print error
             return false;
         }
         return true;
@@ -71,8 +71,7 @@ public class SSHForm extends AbstractForm<SSHConfig> {
         if (config != null) {
             try {
                 config.setInetAddress(InetAddress.getByName(inetAddressStr.get()));
-            } catch (UnknownHostException e) {
-                e.printStackTrace();//TODO error message
+            } catch (UnknownHostException ignored) {
             }
             config.setUser(user.get());
             config.setPort(port.getValue());

@@ -9,17 +9,16 @@ version '0.1'
 
 javafx {
     version = '15'
-    modules = ['javafx.base','javafx.graphics']
+    modules = ['javafx.base', 'javafx.graphics']
 }
 
 sourceCompatibility = 15
 
+compileJava.options.encoding = 'UTF-8'
+
 repositories {
     maven {
-        url 'https://nexus.jaaj.dev/repository/maven-releases'
-    }
-    maven {
-        url 'https://github.com/javaterminal/terminalfx/raw/master/releases'
+        url 'https://nexus.jaaj.dev/repository/maven-public'
     }
     mavenCentral()
     jcenter()

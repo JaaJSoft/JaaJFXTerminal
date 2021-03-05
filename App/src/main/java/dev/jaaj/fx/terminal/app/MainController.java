@@ -21,6 +21,7 @@ import dev.jaaj.fx.terminal.controls.Terminal;
 import dev.jaaj.fx.terminal.controls.about.AboutDialog;
 import dev.jaaj.fx.terminal.controls.about.data.AppInfo;
 import dev.jaaj.fx.terminal.controls.about.data.AppInfoBuilder;
+import dev.jaaj.fx.terminal.controls.about.data.Person;
 import dev.jaaj.fx.terminal.controls.about.data.PersonBuilder;
 import dev.jaaj.fx.terminal.controls.options.OptionsDialog;
 import dev.jaaj.fx.terminal.controls.ssh.SSHFormDialog;
@@ -51,6 +52,11 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
+    //TODO dynamic
+    public static final Person PIERRE_CHOPINET = new PersonBuilder().setName("Pierre Chopinet").setTitle("Main Developer").setEmail("pierre.chopinet@jaaj.dev").setWebsite("https://jaaj.dev").createPerson();
+    public static final Person JAAJSOFT = new PersonBuilder().setName("JaaJSoft").setEmail("contact@jaaj.dev").setWebsite("https://jaaj.dev").createPerson();
+    public static final Person REMI_LECOUILLARD = new PersonBuilder().setName("Rémi Lecouillard").setTitle("A good friend").setEmail("remi.lecouillard@jaaj.dev").setWebsite("https://jaaj.dev").createPerson();
+    public static final Person JULIEN_CHEVRON = new PersonBuilder().setName("Julien Chevron").setTitle("Noobard").setEmail("julien.chevron@jaaj.dev").setWebsite("https://jaaj.dev").createPerson();
     @FXML
     Menu profileMenu;
     @FXML
@@ -135,18 +141,12 @@ public class MainController implements Initializable {
                 .setVersion("0.1")// todo get app version from gradle
                 .setAboutText(bundle.getString("ABOUT_TEXT_JAAJFXTERM"))
                 .setDevelopers(List.of(
-                        new PersonBuilder().setName("Pierre Chopinet").setEmail("pierre.chopinet@jaaj.dev").setWebsite("https://jaaj.dev").createPerson(),
-                        new PersonBuilder().setName("Pierre Chopinet").setEmail("pierre.chopinet@jaaj.dev").setWebsite("https://jaaj.dev").createPerson(),
-                        new PersonBuilder().setName("Pierre Chopinet").setEmail("pierre.chopinet@jaaj.dev").setWebsite("https://jaaj.dev").createPerson(),
-                        new PersonBuilder().setName("Pierre Chopinet").setEmail("pierre.chopinet@jaaj.dev").setWebsite("https://jaaj.dev").createPerson(),
-                        new PersonBuilder().setName("Pierre Chopinet").setEmail("pierre.chopinet@jaaj.dev").setWebsite("https://jaaj.dev").createPerson(),
-                        new PersonBuilder().setName("Pierre Chopinet").setEmail("pierre.chopinet@jaaj.dev").setWebsite("https://jaaj.dev").createPerson(),
-                        new PersonBuilder().setName("Pierre Chopinet").setEmail("pierre.chopinet@jaaj.dev").setWebsite("https://jaaj.dev").createPerson(),
-                        new PersonBuilder().setName("Pierre Chopinet").setEmail("pierre.chopinet@jaaj.dev").setWebsite("https://jaaj.dev").createPerson(),
-                        new PersonBuilder().setName("Pierre Chopinet").setEmail("pierre.chopinet@jaaj.dev").setWebsite("https://jaaj.dev").createPerson()
-
-                        )
-                )
+                        PIERRE_CHOPINET
+                )).setTranslators(List.of(
+                        new PersonBuilder().setName("Pierre Chopinet").setTitle("French Translator").setEmail("pierre.chopinet@jaaj.dev").setWebsite("https://jaaj.dev").createPerson()
+                )).setThanks(List.of(
+                        JAAJSOFT, REMI_LECOUILLARD
+                ))
                 .createAppInfo();
         AboutDialog aboutDialog = new AboutDialog(JaaJFXTerminalApp);
         aboutDialog.initOwner(root.getCenter().getScene().getWindow());
@@ -158,6 +158,11 @@ public class MainController implements Initializable {
                 .setAppName("JaaJFX")
                 .setVersion("0.2.1")// todo get app version from gradle
                 .setAboutText(bundle.getString("ABOUT_TEXT_JAAJFX"))
+                .setDevelopers(List.of(
+                        PIERRE_CHOPINET, JULIEN_CHEVRON
+                )).setThanks(List.of(
+                        JAAJSOFT, REMI_LECOUILLARD
+                ))
                 .createAppInfo();
         AboutDialog aboutDialog = new AboutDialog(JaaJFX);
         aboutDialog.initOwner(root.getCenter().getScene().getWindow());

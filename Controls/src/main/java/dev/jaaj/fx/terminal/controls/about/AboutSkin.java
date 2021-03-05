@@ -18,6 +18,7 @@ package dev.jaaj.fx.terminal.controls.about;
 
 import dev.jaaj.fx.core.skin.SkinFXML;
 import dev.jaaj.fx.terminal.controls.about.data.AppInfo;
+import dev.jaaj.fx.terminal.controls.about.data.Person;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -25,6 +26,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.ImageView;
 
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class AboutSkin extends SkinFXML<About> {
@@ -43,57 +45,38 @@ public class AboutSkin extends SkinFXML<About> {
     Tab aboutTab;
     @FXML
     Label aboutText;
-    @FXML
-    Tab libsTab;
-    @FXML
-    Tab developersTab;
-    @FXML
-    Tab thanksTab;
-    @FXML
-    Tab translatorsTab;
-
-    private final AppInfo appInfo;
 
     protected AboutSkin(About control) {
         super(control, AboutSkin.class.getResource("About.fxml"), BUNDLE);
 
-        appInfo = control.getAppInfo();
+        AppInfo appInfo = control.getAppInfo();
         icon.imageProperty().bind(appInfo.iconProperty());
         appName.textProperty().bind(appInfo.appNameProperty());
         version.textProperty().bind(appInfo.versionProperty());
         aboutText.textProperty().bind(appInfo.aboutTextProperty());
         //tabPane.getTabs().add(getLibsTab());
-        tabPane.getTabs().add(getDevelopersTab());
-    }
-
-    private Tab getAboutTab() {
-        Tab tab = new Tab();
-        return tab;
+        if (!appInfo.getDevelopers().isEmpty()) {
+            tabPane.getTabs().add(getPersonTab(appInfo.getDevelopers(), BUNDLE.getString("developersTab")));
+        }
+        if (!appInfo.getThanks().isEmpty()) {
+            tabPane.getTabs().add(getPersonTab(appInfo.getThanks(), BUNDLE.getString("thanksTab")));
+        }
+        if (!appInfo.getTranslators().isEmpty()) {
+            tabPane.getTabs().add(getPersonTab(appInfo.getTranslators(), BUNDLE.getString("translatorsTab")));
+        }
     }
 
     private TabPane getTabPane() {
         return tabPane;
     }
 
-    private Tab getLibsTab() {
-        return libsTab;
-    }
-
-    private Tab getDevelopersTab() {
-        Tab tab = new Tab(BUNDLE.getString("developersTab"));
-        AboutPeopleList peopleList = new AboutPeopleList(appInfo.getDevelopers());
-        ScrollPane scrollPane = new ScrollPane(peopleList);
+    private Tab getPersonTab(List<Person> personList, String title) {
+        Tab tab = new Tab(title);
+        AboutPeopleList peopleListControl = new AboutPeopleList(personList);
+        ScrollPane scrollPane = new ScrollPane(peopleListControl);
         scrollPane.setFitToHeight(true);
         scrollPane.setFitToWidth(true);
         tab.setContent(scrollPane);
         return tab;
-    }
-
-    private Tab getThanksTab() {
-        return thanksTab;
-    }
-
-    private Tab getTranslatorsTab() {
-        return translatorsTab;
     }
 }
