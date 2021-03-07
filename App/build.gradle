@@ -52,6 +52,7 @@ runtime {
             installerOptions += ['--win-dir-chooser', '--win-menu', '--win-shortcut']
         } else if (currentOs.linux) {
             installerOptions += ['--linux-package-name', rootProject.name, '--linux-shortcut']
+            installerType = 'deb'
         } else if (currentOs.macOsX) {
             installerOptions += ['--mac-package-name', rootProject.name]
         }
