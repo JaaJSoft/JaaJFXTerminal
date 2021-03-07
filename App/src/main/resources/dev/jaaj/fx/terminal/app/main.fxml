@@ -27,7 +27,11 @@
             <Menu text="%FILE">
                 <Menu text="%NEW">
                     <MenuItem fx:id="newTerminal" text="%NEW_DEFAULT" onAction="#openTerminal"/>
-                    <MenuItem fx:id="newLocalShellTerminal" text="%NEW_LOCAL" onAction="#openTerminalLocalShell"/>
+                    <Menu text="%NEW_LOCAL">
+                        <MenuItem fx:id="newCMDShellTerminal" text="%NEW_CMD"/>
+                        <MenuItem fx:id="newPowerShellTerminal" text="%NEW_POWERSHELL"/>
+                        <MenuItem fx:id="newPWSHTerminal" text="%NEW_PWSH"/>
+                    </Menu>
                     <MenuItem fx:id="newWSLTerminal" text="%NEW_WSL" onAction="#openTerminalWSL"/>
                     <MenuItem fx:id="newSSHTerminal" text="%NEW_SSH" onAction="#openTerminalSSH"/>
                 </Menu>

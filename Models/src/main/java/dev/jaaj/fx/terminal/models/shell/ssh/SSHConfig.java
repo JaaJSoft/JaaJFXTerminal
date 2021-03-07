@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.models.shell;
+package dev.jaaj.fx.terminal.models.shell.ssh;
 
+import dev.jaaj.fx.terminal.models.shell.AbstractShellConfig;
 import javafx.beans.property.*;
 
 import java.net.InetAddress;

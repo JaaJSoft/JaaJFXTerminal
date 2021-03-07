@@ -26,8 +26,9 @@ import javafx.scene.control.Skin;
 
 public class LocalShellForm extends AbstractForm<LocalShellConfig> {
     private final ObjectProperty<LocalShellConfig> localShellConfig = new SimpleObjectProperty<>();
-    private final StringProperty workingDirectory = new SimpleStringProperty();
-    private final StringProperty command = new SimpleStringProperty();
+    private final StringProperty workingDirectory = new SimpleStringProperty("");
+    private final StringProperty command = new SimpleStringProperty("");
+    private final StringProperty extraArgs = new SimpleStringProperty("");
 
     public LocalShellForm(LocalShellConfig config) {
         this.localShellConfig.addListener((observable, oldValue, newValue) -> {
@@ -48,6 +49,7 @@ public class LocalShellForm extends AbstractForm<LocalShellConfig> {
         if (config != null) {
             config.setWorkingDirectory(workingDirectory.getValue());
             config.setCommandToExecute(command.getValue());
+            config.setExtraArgs(extraArgs.getValue());
         }
         return config;
     }
@@ -95,5 +97,17 @@ public class LocalShellForm extends AbstractForm<LocalShellConfig> {
 
     public void setCommand(String command) {
         this.command.set(command);
+    }
+
+    public String getExtraArgs() {
+        return extraArgs.get();
+    }
+
+    public StringProperty extraArgsProperty() {
+        return extraArgs;
+    }
+
+    public void setExtraArgs(String extraArgs) {
+        this.extraArgs.set(extraArgs);
     }
 }

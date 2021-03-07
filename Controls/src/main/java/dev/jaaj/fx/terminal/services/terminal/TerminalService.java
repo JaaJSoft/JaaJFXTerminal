@@ -60,6 +60,7 @@ public class TerminalService {
     }
 
     public void addTerminal(Terminal terminal) {
+        System.out.println(terminal.getTerminalConfig().getCommandLine());
         TerminalTab newTab = new TerminalTab(terminal);
         terminalTabs.add(newTab);
         tabPane.getSelectionModel().select(newTab);

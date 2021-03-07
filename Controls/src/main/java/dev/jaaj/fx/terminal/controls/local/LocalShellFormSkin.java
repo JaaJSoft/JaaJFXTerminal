@@ -36,6 +36,8 @@ public class LocalShellFormSkin extends SkinFXML<LocalShellForm> {
     @FXML
     TextField commandField;
     @FXML
+    TextField extraArgsField;
+    @FXML
     TitledPane advancedPane;
 
     public LocalShellFormSkin(LocalShellForm control) {
@@ -77,10 +79,12 @@ public class LocalShellFormSkin extends SkinFXML<LocalShellForm> {
     public void unbind() {
         workingDirectoryField.textProperty().unbind();
         commandField.textProperty().unbind();
+        extraArgsField.textProperty().unbind();
     }
 
     public void bind(LocalShellForm localShellForm) {
         workingDirectoryField.textProperty().bindBidirectional(localShellForm.workingDirectoryProperty());
         commandField.textProperty().bindBidirectional(localShellForm.commandProperty());
+        extraArgsField.textProperty().bindBidirectional(localShellForm.extraArgsProperty());
     }
 }

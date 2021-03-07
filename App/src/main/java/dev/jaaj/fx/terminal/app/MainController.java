@@ -28,10 +28,12 @@ import dev.jaaj.fx.terminal.controls.options.OptionsDialog;
 import dev.jaaj.fx.terminal.controls.ssh.SSHFormDialog;
 import dev.jaaj.fx.terminal.controls.wsl.WSLFormDialog;
 import dev.jaaj.fx.terminal.models.profile.Profile;
-import dev.jaaj.fx.terminal.models.shell.CmdShellConfig;
 import dev.jaaj.fx.terminal.models.shell.LocalShellConfig;
-import dev.jaaj.fx.terminal.models.shell.SSHConfig;
-import dev.jaaj.fx.terminal.models.shell.WSLConfig;
+import dev.jaaj.fx.terminal.models.shell.cmd.CmdShellConfig;
+import dev.jaaj.fx.terminal.models.shell.powershell.PowerShellConfig;
+import dev.jaaj.fx.terminal.models.shell.powershell.PwshConfig;
+import dev.jaaj.fx.terminal.models.shell.ssh.SSHConfig;
+import dev.jaaj.fx.terminal.models.shell.wsl.WSLConfig;
 import dev.jaaj.fx.terminal.services.profile.ProfilesService;
 import dev.jaaj.fx.terminal.services.terminal.TerminalService;
 import javafx.application.Platform;
@@ -61,6 +63,7 @@ public class MainController implements Initializable {
     public static final Person REMI_LECOUILLARD = new PersonBuilder().setName("Rémi Lecouillard").setTitle("A good friend").setEmail("remi.lecouillard@jaaj.dev").setWebsite("https://jaaj.dev").createPerson();
     public static final Person JULIEN_CHEVRON = new PersonBuilder().setName("Julien Chevron").setTitle("Noobard").setEmail("julien.chevron@jaaj.dev").setWebsite("https://jaaj.dev").createPerson();
 
+
     @FXML
     Menu profileMenu;
     @FXML
@@ -78,7 +81,11 @@ public class MainController implements Initializable {
     @FXML
     MenuItem newWSLTerminal;
     @FXML
-    MenuItem newLocalShellTerminal;
+    MenuItem newCMDShellTerminal;
+    @FXML
+    MenuItem newPowerShellTerminal;
+    @FXML
+    MenuItem newPWSHTerminal;
 
     private ResourceBundle bundle;
 
@@ -104,6 +111,9 @@ public class MainController implements Initializable {
                 optionalMenuItem.ifPresent(profileMenuItems::remove);
             }
         });
+        newCMDShellTerminal.setOnAction(event -> openTerminalLocalShell(new CmdShellConfig()));
+        newPowerShellTerminal.setOnAction(event -> openTerminalLocalShell(new PowerShellConfig()));
+        newPWSHTerminal.setOnAction(event -> openTerminalLocalShell(new PwshConfig()));
         newTerminal.fire();
     }
 
@@ -139,8 +149,7 @@ public class MainController implements Initializable {
         });
     }
 
-    public void openTerminalLocalShell(ActionEvent actionEvent) {
-        CmdShellConfig shellConfig = new CmdShellConfig();
+    public void openTerminalLocalShell(LocalShellConfig shellConfig) {
         LocalShellFormDialog shellFormDialog = new LocalShellFormDialog(shellConfig);
         shellFormDialog.initOwner(root.getCenter().getScene().getWindow());
         Optional<LocalShellConfig> optionalLocalShellConfig = shellFormDialog.showAndWait();

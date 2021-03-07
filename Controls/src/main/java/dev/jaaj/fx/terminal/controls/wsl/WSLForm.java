@@ -17,8 +17,8 @@
 package dev.jaaj.fx.terminal.controls.wsl;
 
 import dev.jaaj.fx.core.form.AbstractForm;
-import dev.jaaj.fx.terminal.models.shell.WSLConfig;
 import dev.jaaj.fx.terminal.models.shell.wsl.Distribution;
+import dev.jaaj.fx.terminal.models.shell.wsl.WSLConfig;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;

@@ -23,6 +23,7 @@ public abstract class LocalShellConfig extends AbstractShellConfig {
     private final StringProperty executable = new SimpleStringProperty();
     private final StringProperty workingDirectory = new SimpleStringProperty("");
     private final StringProperty commandToExecute = new SimpleStringProperty("");
+    private final StringProperty extraArgs = new SimpleStringProperty("");
 
     public LocalShellConfig(String executable) {
         this.executable.set(executable);
@@ -54,5 +55,17 @@ public abstract class LocalShellConfig extends AbstractShellConfig {
 
     public void setCommandToExecute(String commandToExecute) {
         this.commandToExecute.set(commandToExecute);
+    }
+
+    public String getExtraArgs() {
+        return extraArgs.get();
+    }
+
+    public StringProperty extraArgsProperty() {
+        return extraArgs;
+    }
+
+    public void setExtraArgs(String extraArgs) {
+        this.extraArgs.set(extraArgs);
     }
 }

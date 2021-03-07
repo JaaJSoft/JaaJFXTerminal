@@ -44,6 +44,10 @@
                 <Label text="%command"/>
                 <TextField fx:id="commandField"/>
             </VBox>
+            <VBox spacing="5">
+                <Label text="%extra"/>
+                <TextField fx:id="extraArgsField"/>
+            </VBox>
         </VBox>
     </TitledPane>
 </VBox>

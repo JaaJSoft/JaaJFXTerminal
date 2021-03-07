@@ -14,20 +14,23 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.controls.wsl;
+package dev.jaaj.fx.terminal.models.shell.powershell;
 
-import dev.jaaj.fx.core.form.AbstractForm;
-import dev.jaaj.fx.terminal.controls.util.AbstractFormFactory;
-import dev.jaaj.fx.terminal.models.shell.wsl.WSLConfig;
+import dev.jaaj.fx.terminal.models.shell.LocalShellConfig;
 
-public class WSLFormFactory implements AbstractFormFactory<WSLConfig> {
-    @Override
-    public boolean canBuild(Object objectToInitWithForm) {
-        return objectToInitWithForm instanceof WSLConfig;
+public class PowerShellConfig extends LocalShellConfig {
+
+    public PowerShellConfig() {
+        super("powershell");
     }
 
     @Override
-    public AbstractForm<WSLConfig> build(Object objectToInitWithForm) {
-        return new WSLForm((WSLConfig) objectToInitWithForm);
+    public String getCommandLine() {
+        return PowerShellUtil.getCommandLine(this);
+    }
+
+    @Override
+    public String getTitle() {
+        return "Powershell";
     }
 }

@@ -14,19 +14,21 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.models.shell;
+package dev.jaaj.fx.terminal.models.shell.cmd;
+
+import dev.jaaj.fx.terminal.models.shell.LocalShellConfig;
 
 public class CmdShellConfig extends LocalShellConfig {
 
     public CmdShellConfig() {
-        super("cmd.exe");
+        super("cmd");
     }
 
     @Override
     public String getCommandLine() {
         String commandLine = this.getExecutable();
         if (getWorkingDirectory() != null && !getWorkingDirectory().isBlank()) {
-            commandLine += " /k cd /d" + getWorkingDirectory();
+            commandLine += " /k cd /d " + getWorkingDirectory();
             if (getCommandToExecute() != null && !getCommandToExecute().isBlank()) {
                 commandLine += " & " + getCommandToExecute();
             }
@@ -35,8 +37,7 @@ public class CmdShellConfig extends LocalShellConfig {
                 commandLine += " /k " + getCommandToExecute();
             }
         }
-
-        return commandLine;
+        return commandLine + " " + getExtraArgs();
     }
 
     @Override
