@@ -101,7 +101,6 @@ public class SSHConfig extends AbstractShellConfig implements Cloneable {
         if (!command.getValue().isBlank()) {
             startCommand += " -t " + command.getValue();
         }
-        System.out.println(startCommand);
         return startCommand;
     }
 
