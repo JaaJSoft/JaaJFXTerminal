@@ -41,6 +41,11 @@ public class TerminalService {
 
     private void onTabsChanged(ListChangeListener.Change<? extends Tab> c) {
         c.next();
+        if (c.getList().size() == 1) {
+
+        } else {
+            
+        }
         List<? extends Tab> removed = c.getRemoved();
         removed.stream().filter(TerminalTab.class::isInstance).map(TerminalTab.class::cast).forEach(terminalTabs::remove);
         List<? extends Tab> added = c.getAddedSubList();

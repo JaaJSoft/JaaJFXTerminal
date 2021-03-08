@@ -42,10 +42,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TabPane;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import org.controlsfx.control.StatusBar;
@@ -111,10 +108,21 @@ public class MainController implements Initializable {
                 optionalMenuItem.ifPresent(profileMenuItems::remove);
             }
         });
+        tabPane.getTabs().addListener(this::onTabsChanged);
+
         newCMDShellTerminal.setOnAction(event -> openTerminalLocalShell(new CmdShellConfig()));
         newPowerShellTerminal.setOnAction(event -> openTerminalLocalShell(new PowerShellConfig()));
         newPWSHTerminal.setOnAction(event -> openTerminalLocalShell(new PwshConfig()));
         newTerminal.fire();
+    }
+
+    private void onTabsChanged(ListChangeListener.Change<? extends Tab> c) {
+        c.next();
+        if (c.getList().size() == 1) {
+            terminalService.getFocusedTerminal().ifPresent(terminal -> root.setCenter(terminal));
+        } else {
+            root.setCenter(tabPane);
+        }
     }
 
 
@@ -212,6 +220,4 @@ public class MainController implements Initializable {
     public void manageProfile(ActionEvent actionEvent) {
 
     }
-
-
 }
