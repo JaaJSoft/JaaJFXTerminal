@@ -18,6 +18,7 @@ package dev.jaaj.fx.terminal.controls.util;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 
@@ -43,40 +44,9 @@ public class IntegerField extends TextField {
 
         value.set(integer);
 
-        value.addListener((observable, oldValue, newValue) -> {
-            if (!oldValue.equals(newValue)) {
-                setText(newValue.toString());
-            }
-        });
-        textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!oldValue.equals(newValue) && !newValue.isBlank() && !newValue.equals("-")) {
-                setValue(Integer.parseInt(newValue));
-            }
-        });
-
-        setTextFormatter(new TextFormatter<String>(change -> {
-            String allText = this.getText();
-            String text = change.getText();
-
-            if ((allText + text).equals("-")) {
-                return change;
-            }
-            if (text.matches("[0-9]*")) {
-                try {
-                    int v = Integer.parseInt(allText + text);
-                    if (v >= this.minValue.getValue() && v <= this.maxValue.getValue()) {
-                        return change;
-                    }
-                    return null;
-                } catch (NumberFormatException e) {
-                    return null;
-                }
-            }
-            if (allText.isEmpty() && !text.isBlank()) {
-                return change;
-            }
-            return null;
-        }));
+        value.addListener(this::integerValue2Text);
+        textProperty().addListener(this::text2IntegerValueListener);
+        setTextFormatter(new TextFormatter<String>(this::integerTextFormatter));
     }
 
     public int getValue() {
@@ -113,5 +83,41 @@ public class IntegerField extends TextField {
 
     public void setMaxValue(int maxValue) {
         this.maxValue.set(maxValue);
+    }
+
+    private TextFormatter.Change integerTextFormatter(TextFormatter.Change change) {
+        String allText = this.getText();
+        String text = change.getText();
+
+        if ((allText + text).equals("-")) {
+            return change;
+        }
+        if (text.matches("[0-9]*")) {
+            try {
+                int v = Integer.parseInt(allText + text);
+                if (v >= this.minValue.getValue() && v <= this.maxValue.getValue()) {
+                    return change;
+                }
+                return null;
+            } catch (NumberFormatException e) {
+                return null;
+            }
+        }
+        if (allText.isEmpty() && !text.isBlank()) {
+            return change;
+        }
+        return null;
+    }
+
+    private void text2IntegerValueListener(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+        if (!oldValue.equals(newValue) && !newValue.isBlank() && !newValue.equals("-")) {
+            setValue(Integer.parseInt(newValue));
+        }
+    }
+
+    private void integerValue2Text(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+        if (!oldValue.equals(newValue)) {
+            setText(newValue.toString());
+        }
     }
 }
