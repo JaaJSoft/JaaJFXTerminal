@@ -20,6 +20,7 @@ import dev.jaaj.fx.core.form.AbstractForm;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class FormFactoryVisitor {
     private final List<AbstractFormFactory<?>> formFactories = new ArrayList<>();
@@ -33,12 +34,13 @@ public class FormFactoryVisitor {
         return formFactories.remove(formFactory);
     }
 
-    public AbstractForm<?> visit(Object o) {
+    public Optional<AbstractForm<?>> visit(Object o) {
         for (AbstractFormFactory<?> formFactory : formFactories) {
+            System.out.println(formFactory.getClass().toGenericString());
             if (formFactory.canBuild(o)) {
-                return formFactory.build(o);
+                return Optional.ofNullable(formFactory.build(o));
             }
         }
-        return null;
+        return Optional.empty();
     }
 }

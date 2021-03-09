@@ -18,6 +18,7 @@ package dev.jaaj.fx.terminal.controls.profile;
 
 import dev.jaaj.fx.core.form.AbstractForm;
 import dev.jaaj.fx.terminal.models.profile.Profile;
+import dev.jaaj.fx.terminal.models.shell.AbstractShellConfig;
 import dev.jaaj.fx.terminal.models.theme.DefaultJMetroDarkTerminalThemeFactory;
 import dev.jaaj.fx.terminal.models.theme.DefaultJMetroLightTerminalThemeFactory;
 import dev.jaaj.fx.terminal.models.theme.TerminalThemeConfig;
@@ -33,6 +34,8 @@ public class ProfileForm extends AbstractForm<Profile> {
     private final ObjectProperty<Profile> profile = new SimpleObjectProperty<>();
     private final ObservableList<TerminalThemeConfig> terminalThemeConfigs = FXCollections.observableArrayList();
     private final ObjectProperty<SingleSelectionModel<TerminalThemeConfig>> terminalThemeSelectionModel = new SimpleObjectProperty<>();
+    private final ObjectProperty<AbstractShellConfig> shellConfig = new SimpleObjectProperty<>();
+    //private final BooleanProperty nativeTheme = new SimpleBooleanProperty(true);
 
     public ProfileForm(Profile profile) {
         this.profile.set(profile);
@@ -83,5 +86,17 @@ public class ProfileForm extends AbstractForm<Profile> {
 
     public ObjectProperty<SingleSelectionModel<TerminalThemeConfig>> terminalThemeSelectionModelProperty() {
         return terminalThemeSelectionModel;
+    }
+
+    public AbstractShellConfig getShellConfig() {
+        return shellConfig.get();
+    }
+
+    public ObjectProperty<AbstractShellConfig> shellConfigProperty() {
+        return shellConfig;
+    }
+
+    public void setShellConfig(AbstractShellConfig shellConfig) {
+        this.shellConfig.set(shellConfig);
     }
 }

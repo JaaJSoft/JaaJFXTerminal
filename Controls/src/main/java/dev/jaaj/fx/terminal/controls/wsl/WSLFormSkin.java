@@ -49,6 +49,8 @@ public class WSLFormSkin extends SkinFXML<WSLForm> {
                 ResourceBundle.getBundle(WSLFormSkin.class.getPackageName() + ".WSLForm")
         );
         distributionComboBox.setItems(control.getPossibleDistributions());
+        distributionComboBox.prefWidthProperty().bind(control.widthProperty());
+
         bind(control);
         selectDefaultDistribution(control);
         control.formStateProperty().addListener((observable, oldValue, newValue) -> {

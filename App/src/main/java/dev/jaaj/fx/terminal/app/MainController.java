@@ -180,7 +180,8 @@ public class MainController implements Initializable {
                 )).setTranslators(List.of(
                         new PersonBuilder().setName("Pierre Chopinet").setTitle("French Translator").setEmail("pierre.chopinet@jaaj.dev").setWebsite("https://jaaj.dev").createPerson()
                 )).setThanks(List.of(
-                        JAAJSOFT, REMI_LECOUILLARD
+                        JAAJSOFT, REMI_LECOUILLARD,
+                        new PersonBuilder().setName("Icons8").setTitle("Free Icons").setWebsite("https://icons8.com/").createPerson()
                 ))
                 .createAppInfo();
         AboutDialog aboutDialog = new AboutDialog(JaaJFXTerminalApp);

@@ -22,6 +22,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
+import javafx.scene.layout.HBox;
 
 import java.util.ResourceBundle;
 
@@ -35,6 +37,8 @@ public class PersonViewerSkin extends SkinFXML<PersonViewer> {
     Button mailBtn;
     @FXML
     Button websiteBtn;
+    @FXML
+    HBox buttonBox;
 
     public PersonViewerSkin(PersonViewer control) {
         super(control, PersonViewer.class.getResource("Person.fxml"), BUNDLE);
@@ -57,15 +61,22 @@ public class PersonViewerSkin extends SkinFXML<PersonViewer> {
                 this.titleLabel.setText(title);
             }
             String email = newValue.getEmail();
-            this.mailBtn.setVisible(email != null && !email.isBlank());
+            if (email == null || email.isBlank()) {
+                buttonBox.getChildren().remove(mailBtn);
+            }
+            this.mailBtn.setTooltip(new Tooltip(email));
             String website = newValue.getWebsite();
-            this.websiteBtn.setVisible(website != null && !website.isBlank());
+            if (website == null || website.isBlank()) {
+                buttonBox.getChildren().remove(websiteBtn);
+            }
+            this.websiteBtn.setTooltip(new Tooltip(website));
         }
     }
 
     public void sendEmail(ActionEvent actionEvent) {
         this.getSkinnable().sendEmail();
     }
+
     public void openWebsite(ActionEvent actionEvent) {
         this.getSkinnable().openWebsite();
     }

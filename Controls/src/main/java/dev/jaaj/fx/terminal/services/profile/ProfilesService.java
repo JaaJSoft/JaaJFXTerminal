@@ -18,7 +18,7 @@ package dev.jaaj.fx.terminal.services.profile;
 
 import dev.jaaj.fx.terminal.models.profile.Profile;
 import dev.jaaj.fx.terminal.models.shell.AbstractShellConfig;
-import dev.jaaj.fx.terminal.models.shell.DefaultShellConfig;
+import dev.jaaj.fx.terminal.models.shell.wsl.WSLConfig;
 import dev.jaaj.fx.terminal.models.theme.DefaultJMetroLightTerminalThemeFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -46,7 +46,7 @@ public class ProfilesService {
 
     public Profile getDefaultProfile() {
         if (profiles.isEmpty()) {
-            AbstractShellConfig shellConfig = new DefaultShellConfig();
+            AbstractShellConfig shellConfig = new WSLConfig();
             profiles.add(new Profile("Default", shellConfig, new DefaultJMetroLightTerminalThemeFactory().build()));
         }
         return profiles.get(0);
