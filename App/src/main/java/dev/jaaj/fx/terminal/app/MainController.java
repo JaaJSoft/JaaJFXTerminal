@@ -168,7 +168,7 @@ public class MainController implements Initializable {
     }
 
     public void openAbout(ActionEvent actionEvent) {
-        InputStream inputStream = getClass().getResourceAsStream("img/wsl.png");
+        InputStream inputStream = getClass().getResourceAsStream("img/icon.png");
         Image image = new Image(inputStream);
         AppInfo JaaJFXTerminalApp = new AppInfoBuilder()
                 .setAppName("JaaJFXTerminal")
