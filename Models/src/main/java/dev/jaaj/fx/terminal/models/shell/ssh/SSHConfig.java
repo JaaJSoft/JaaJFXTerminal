@@ -21,7 +21,7 @@ import javafx.beans.property.*;
 
 import java.net.InetAddress;
 
-public class SSHConfig extends AbstractShellConfig implements Cloneable {
+public class SSHConfig extends AbstractShellConfig {
 
     private final ObjectProperty<InetAddress> inetAddress = new SimpleObjectProperty<>();
     private final StringProperty inetAddressStr = new SimpleStringProperty();
