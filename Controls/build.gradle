@@ -65,7 +65,7 @@ publishing {
             version project.version
             from components.java
             pom {
-                name = project.name
+                name = 'controls'
                 description = 'A JavaFX terminal app'
                 url = 'https://github.com/JaaJSoft/JaaJFX-core'
                 /*properties = [
@@ -79,7 +79,7 @@ publishing {
                     }
                 }
                 scm {
-                    url = 'https://github.com/JaaJSoft/JaaJFX-core'
+                    url = 'https://github.com/JaaJSoft/JaaJFXTerminal'
                 }
             }
         }

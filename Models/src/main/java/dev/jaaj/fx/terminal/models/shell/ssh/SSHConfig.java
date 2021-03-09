@@ -33,6 +33,7 @@ public class SSHConfig extends AbstractShellConfig implements Cloneable {
         inetAddress.addListener((observable, oldValue, newValue) -> {
             inetAddressStr.set(newValue.getHostName());
         });
+        setShellIcon(getClass().getResource("ssh.png").toExternalForm());
     }
 
     public InetAddress getInetAddress() {

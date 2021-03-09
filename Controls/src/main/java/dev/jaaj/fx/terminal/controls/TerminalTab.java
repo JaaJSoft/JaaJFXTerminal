@@ -20,9 +20,11 @@ import dev.jaaj.fx.terminal.controls.profile.ProfileDialog;
 import dev.jaaj.fx.terminal.models.profile.Profile;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tab;
+import javafx.scene.image.ImageView;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -30,7 +32,6 @@ import java.util.ResourceBundle;
 
 public class TerminalTab extends Tab {
     public static final ResourceBundle BUNDLE = ResourceBundle.getBundle(TerminalTab.class.getPackageName() + ".Terminal");
-
     private final ObjectProperty<Terminal> terminal = new SimpleObjectProperty<>();
 
     public TerminalTab(Terminal terminal) {
@@ -48,6 +49,20 @@ public class TerminalTab extends Tab {
         });
         this.onClosedProperty().addListener((observable, oldValue, newValue) -> terminal.close());
         this.setContextMenu(createContextMenu());
+        this.setGraphic(createImage(terminal));
+    }
+
+    private Node createImage(Terminal terminal) {
+        ImageView imageView = null;
+        String shellIcon = terminal.getTerminalConfig().getShellIcon();
+        //System.out.println(shellIcon);
+        if (shellIcon != null) {
+            imageView = new ImageView(shellIcon);
+            imageView.setPreserveRatio(true);
+            imageView.setFitWidth(20);
+        }
+
+        return imageView;
     }
 
     private ContextMenu createContextMenu() {

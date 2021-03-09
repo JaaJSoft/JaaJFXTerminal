@@ -22,6 +22,7 @@ public class PwshConfig extends LocalShellConfig {
 
     public PwshConfig() {
         super("pwsh");
+        setShellIcon(getClass().getResource("powershell_96px.png").toExternalForm());
     }
 
     @Override

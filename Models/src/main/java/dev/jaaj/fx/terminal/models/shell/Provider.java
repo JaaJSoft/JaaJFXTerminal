@@ -16,25 +16,5 @@
 
 package dev.jaaj.fx.terminal.models.shell;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-
-public abstract class AbstractShellConfig {
-    private final StringProperty shellIcon = new SimpleStringProperty();
-
-    public String getShellIcon() {
-        return shellIcon.get();
-    }
-
-    public StringProperty shellIconProperty() {
-        return shellIcon;
-    }
-
-    public void setShellIcon(String shellIcon) {
-        this.shellIcon.set(shellIcon);
-    }
-
-    public abstract String getCommandLine();
-
-    public abstract String getTitle();
+public interface Provider {
 }

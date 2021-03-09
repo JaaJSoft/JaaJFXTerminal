@@ -22,6 +22,7 @@ public class CmdShellConfig extends LocalShellConfig {
 
     public CmdShellConfig() {
         super("cmd");
+        setShellIcon(getClass().getResource("cmd.png").toExternalForm());
     }
 
     @Override

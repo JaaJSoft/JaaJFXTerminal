@@ -28,6 +28,10 @@ public class WSLConfig extends AbstractShellConfig {
     private final StringProperty workingDirectory = new SimpleStringProperty("");
     private final StringProperty command = new SimpleStringProperty("");
 
+    public WSLConfig() {
+        setShellIcon(getClass().getResource("wsl.png").toExternalForm());
+    }
+
     public Distribution getDistribution() {
         return distribution.get();
     }
