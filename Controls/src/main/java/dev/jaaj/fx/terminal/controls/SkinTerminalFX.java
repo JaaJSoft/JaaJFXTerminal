@@ -45,11 +45,8 @@ public class SkinTerminalFX extends SkinBase<Terminal> {
         control.lastCommandProperty().addListener((observable, oldValue, newValue) -> terminal.command(newValue));
 
         control.closedProperty().addListener((observable, oldValue, newValue) -> destroy());
-
         this.getChildren().clear();
         this.getChildren().add(terminal);
-
-
     }
 
     private void syncTheme(TerminalConfig config, TerminalThemeConfig themeConfig) {

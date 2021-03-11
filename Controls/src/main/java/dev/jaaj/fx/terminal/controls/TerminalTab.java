@@ -47,7 +47,12 @@ public class TerminalTab extends Tab {
                 this.setContent(newValue);
             }
         });
-        this.onClosedProperty().addListener((observable, oldValue, newValue) -> terminal.close());
+        this.onCloseRequestProperty().addListener((observable, oldValue, newValue) -> {
+            terminal.close();
+        });
+        this.onClosedProperty().addListener((observable, oldValue, newValue) -> {
+            terminal.close();
+        });
         this.setContextMenu(createContextMenu());
         this.setGraphic(createImage(terminal));
     }

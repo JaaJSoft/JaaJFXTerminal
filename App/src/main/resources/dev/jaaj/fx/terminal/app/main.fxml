@@ -39,7 +39,7 @@
                 <MenuItem text="%CLOSE" onAction="#exit"/>
             </Menu>
             <Menu text="%PROFILE" fx:id="profileMenu">
-                <MenuItem text="%MANAGE_PROFILES" onAction="#manageProfile"/>
+                <MenuItem text="%MANAGE_PROFILES" onAction="#manageProfiles"/>
                 <MenuItem text="%SAVE_PROFILE" onAction="#saveProfile"/>
             </Menu>
             <Menu text="%SETTINGS">

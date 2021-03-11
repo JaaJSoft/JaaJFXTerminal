@@ -49,13 +49,16 @@ public class TerminalService {
 
     private void onTerminalTabsChanged(SetChangeListener.Change<? extends TerminalTab> c) {
         if (c.wasAdded()) {
-            if (!tabPane.getTabs().contains(c.getElementAdded())) {
-                tabPane.getTabs().add(c.getElementAdded());
+            TerminalTab terminalTabAdded = c.getElementAdded();
+            if (!tabPane.getTabs().contains(terminalTabAdded)) {
+                tabPane.getTabs().add(terminalTabAdded);
             }
         } else if (c.wasRemoved()) {
-            if (tabPane.getTabs().contains(c.getElementRemoved())) {
-                tabPane.getTabs().remove(c.getElementRemoved());
+            TerminalTab terminalTabRemoved = c.getElementRemoved();
+            if (tabPane.getTabs().contains(terminalTabRemoved)) {
+                tabPane.getTabs().remove(terminalTabRemoved);
             }
+            terminalTabRemoved.getTerminal().close();
         }
     }
 

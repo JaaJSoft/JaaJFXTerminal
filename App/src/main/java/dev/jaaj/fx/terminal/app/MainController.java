@@ -25,6 +25,7 @@ import dev.jaaj.fx.terminal.controls.about.data.Person;
 import dev.jaaj.fx.terminal.controls.about.data.PersonBuilder;
 import dev.jaaj.fx.terminal.controls.local.LocalShellFormDialog;
 import dev.jaaj.fx.terminal.controls.options.OptionsDialog;
+import dev.jaaj.fx.terminal.controls.profile.ProfilesDialog;
 import dev.jaaj.fx.terminal.controls.ssh.SSHFormDialog;
 import dev.jaaj.fx.terminal.controls.wsl.WSLFormDialog;
 import dev.jaaj.fx.terminal.models.profile.Profile;
@@ -218,7 +219,12 @@ public class MainController implements Initializable {
 
     }
 
-    public void manageProfile(ActionEvent actionEvent) {
+    public void manageProfiles(ActionEvent actionEvent) {
+        ProfilesDialog profilesDialog = new ProfilesDialog();
+        profilesDialog.initOwner(root.getCenter().getScene().getWindow());
+        Optional<List<Profile>> optionalProfiles = profilesDialog.showAndWait();
+        optionalProfiles.ifPresent(profiles -> {
 
+        });
     }
 }

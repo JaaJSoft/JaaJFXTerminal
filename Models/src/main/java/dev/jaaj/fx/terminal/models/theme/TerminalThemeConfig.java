@@ -16,10 +16,7 @@
 
 package dev.jaaj.fx.terminal.models.theme;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
@@ -29,6 +26,8 @@ public class TerminalThemeConfig {
     private final ObjectProperty<Color> foregroundColor = new SimpleObjectProperty<>(Color.WHITE);
     private final ObjectProperty<Color> cursorColor = new SimpleObjectProperty<>(Color.WHITE);
     private final ObjectProperty<Font> font = new SimpleObjectProperty<>(null);
+    private final BooleanProperty cursorBlink = new SimpleBooleanProperty(false);
+
     //todo add scroll thing
     public TerminalThemeConfig() {
     }

@@ -18,10 +18,12 @@ package dev.jaaj.fx.terminal.services.profile;
 
 import dev.jaaj.fx.terminal.models.profile.Profile;
 import dev.jaaj.fx.terminal.models.shell.AbstractShellConfig;
-import dev.jaaj.fx.terminal.models.shell.wsl.WSLConfig;
+import dev.jaaj.fx.terminal.models.shell.cmd.CmdShellConfig;
 import dev.jaaj.fx.terminal.models.theme.DefaultJMetroLightTerminalThemeFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
+import java.util.List;
 
 public class ProfilesService {
     private final ObservableList<Profile> profiles = FXCollections.observableArrayList();
@@ -30,13 +32,16 @@ public class ProfilesService {
 
     }
 
+    public ProfilesService(List<Profile> profiles) {
+        this.profiles.addAll(profiles);
+    }
+
     public void saveProfile(Profile profile) {
         profiles.add(profile);
     }
 
 
     public boolean deleteProfile(Profile profile) {
-
         return profiles.remove(profile);
     }
 
@@ -46,8 +51,8 @@ public class ProfilesService {
 
     public Profile getDefaultProfile() {
         if (profiles.isEmpty()) {
-            AbstractShellConfig shellConfig = new WSLConfig();
-            profiles.add(new Profile("Default", shellConfig, new DefaultJMetroLightTerminalThemeFactory().build()));
+            AbstractShellConfig shellConfig = new CmdShellConfig();
+            profiles.add(new Profile(shellConfig, new DefaultJMetroLightTerminalThemeFactory().build()));
         }
         return profiles.get(0);
     }
