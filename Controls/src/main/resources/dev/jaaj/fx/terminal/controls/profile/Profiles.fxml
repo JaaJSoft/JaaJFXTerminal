@@ -15,11 +15,32 @@
   -->
 
 
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.layout.BorderPane?>
-<BorderPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml">
-    <left>
-        <ListView/>
-    </left>
-</BorderPane>
+<?import dev.jaaj.fx.terminal.controls.profile.ProfileForm?>
+<?import dev.jaaj.fx.terminal.controls.profile.ProfileListView?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<SplitPane fx:id="root" xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml" dividerPositions="0.1">
+    <BorderPane>
+        <top>
+            <HBox alignment="CENTER_LEFT">
+                <TextField HBox.hgrow="ALWAYS"/>
+                <Button text="add" HBox.hgrow="NEVER"/>
+            </HBox>
+        </top>
+        <center>
+            <ScrollPane fitToHeight="true" fitToWidth="true">
+                <ProfileListView fx:id="listProfiles"/>
+            </ScrollPane>
+        </center>
+        <bottom>
+            <HBox fx:id="buttons" style="-fx-border-color: red">
+                <Button fx:id="btn1" text="AAA A"/>
+                <Button fx:id="btn2" text="FUIUF A"/>
+            </HBox>
+        </bottom>
+    </BorderPane>
+    <VBox fx:id="right">
+        <ProfileForm fx:id="profileForm"/>
+    </VBox>
+</SplitPane>

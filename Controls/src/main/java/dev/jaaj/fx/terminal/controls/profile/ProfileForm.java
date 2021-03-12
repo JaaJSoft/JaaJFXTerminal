@@ -38,12 +38,23 @@ public class ProfileForm extends AbstractForm<Profile> {
     //private final BooleanProperty nativeTheme = new SimpleBooleanProperty(true);
 
     public ProfileForm(Profile profile) {
+        this();
         this.profile.set(profile);
+    }
+
+    public ProfileForm() {
         terminalThemeConfigs.add(new DefaultJMetroLightTerminalThemeFactory().build());
         terminalThemeConfigs.add(new DefaultJMetroDarkTerminalThemeFactory().build());
-        terminalThemeSelectionModel.addListener((observable, oldValue, newValue) -> {
-            if (oldValue == null && newValue != null) {
-                getTerminalThemeSelectionModel().select(profile.getTerminalThemeConfig());
+        profileProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                if (terminalThemeSelectionModel.isNotNull().get()) {
+                    getTerminalThemeSelectionModel().select(newValue.getTerminalThemeConfig());
+                }
+            }
+        });
+        terminalThemeSelectionModel.addListener((observable2, oldValue2, newValue2) -> {
+            if (profile.isNotNull().get()) {
+                getTerminalThemeSelectionModel().select(getProfile().getTerminalThemeConfig());
             }
         });
     }

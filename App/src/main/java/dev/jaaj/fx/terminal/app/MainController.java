@@ -99,7 +99,8 @@ public class MainController implements Initializable {
             ObservableList<MenuItem> profileMenuItems = profileMenu.getItems();
             if (c.wasAdded()) {
                 Profile profile = c.getAddedSubList().get(0);
-                MenuItem e = new MenuItem(profile.getProfileName());
+                MenuItem e = new MenuItem();
+                e.textProperty().bind(profile.profileNameProperty());
                 e.setOnAction(event -> {
                     terminalService.addTerminal(new Terminal(profile));
                 });
@@ -220,11 +221,8 @@ public class MainController implements Initializable {
     }
 
     public void manageProfiles(ActionEvent actionEvent) {
-        ProfilesDialog profilesDialog = new ProfilesDialog();
+        ProfilesDialog profilesDialog = new ProfilesDialog(profilesService.getProfiles());
         profilesDialog.initOwner(root.getCenter().getScene().getWindow());
-        Optional<List<Profile>> optionalProfiles = profilesDialog.showAndWait();
-        optionalProfiles.ifPresent(profiles -> {
-
-        });
+        profilesDialog.showAndWait();
     }
 }

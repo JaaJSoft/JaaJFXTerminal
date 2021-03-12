@@ -17,13 +17,41 @@
 package dev.jaaj.fx.terminal.controls.profile;
 
 import dev.jaaj.fx.core.skin.SkinFXML;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.SplitPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 import java.util.ResourceBundle;
 
 public class ProfilesSkin extends SkinFXML<Profiles> {
     public static final ResourceBundle BUNDLE = ResourceBundle.getBundle(ProfileForm.class.getPackageName() + ".Profile");
 
+    @FXML
+    SplitPane root;
+    @FXML
+    VBox right;
+    @FXML
+    ProfileListView listProfiles;
+    @FXML
+    ProfileForm profileForm;
+    @FXML
+    HBox buttons;
+    @FXML
+    Button btn1;
+    @FXML
+    Button btn2;
+
     public ProfilesSkin(Profiles control) {
         super(control, ProfileFormSkin.class.getResource("Profiles.fxml"), BUNDLE);
+        listProfiles.setItems(control.getProfiles());
+        listProfiles.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            profileForm.setVisible(newValue != null);
+            profileForm.setProfile(newValue);
+        });
+        control.profileSelectionModelProperty().bind(listProfiles.selectionModelProperty());
+        btn1.prefWidthProperty().bind(buttons.widthProperty().divide(buttons.getChildren().size()));
+        btn2.prefWidthProperty().bind(buttons.widthProperty().divide(buttons.getChildren().size()));
     }
 }

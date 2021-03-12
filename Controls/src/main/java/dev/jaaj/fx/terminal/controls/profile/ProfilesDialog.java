@@ -17,14 +17,19 @@
 package dev.jaaj.fx.terminal.controls.profile;
 
 import dev.jaaj.fx.terminal.models.profile.Profile;
+import javafx.collections.ObservableList;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 
-import java.util.List;
+import java.util.ResourceBundle;
 
-public class ProfilesDialog extends Dialog<List<Profile>> {
-    public ProfilesDialog() {
+public class ProfilesDialog extends Dialog<Void> {
+    public static final ResourceBundle BUNDLE = ResourceBundle.getBundle(ProfileForm.class.getPackageName() + ".Profile");
+
+    public ProfilesDialog(ObservableList<Profile> profiles) {
+        this.setTitle(BUNDLE.getString("profiles"));
+        this.setHeaderText(BUNDLE.getString("manage_profiles"));
         this.getDialogPane().getButtonTypes().addAll(ButtonType.CLOSE);
-        this.getDialogPane().setContent(new Profiles());
+        this.getDialogPane().setContent(new Profiles(profiles));
     }
 }

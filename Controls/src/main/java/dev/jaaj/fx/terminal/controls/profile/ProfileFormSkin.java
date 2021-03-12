@@ -22,6 +22,7 @@ import dev.jaaj.fx.terminal.controls.local.LocalShellFormFactory;
 import dev.jaaj.fx.terminal.controls.ssh.SSHFormFactory;
 import dev.jaaj.fx.terminal.controls.util.FormFactoryVisitor;
 import dev.jaaj.fx.terminal.controls.wsl.WSLFormFactory;
+import dev.jaaj.fx.terminal.models.profile.Profile;
 import dev.jaaj.fx.terminal.models.shell.AbstractShellConfig;
 import dev.jaaj.fx.terminal.models.theme.TerminalThemeConfig;
 import javafx.fxml.FXML;
@@ -41,22 +42,37 @@ public class ProfileFormSkin extends SkinFXML<ProfileForm> {
     ScrollPane shellFormBox;
     @FXML
     TabPane tabPane;
+    //@FXML
+    //Label profileName;
+
+    private final FormFactoryVisitor formFactoryVisitor;
 
     public ProfileFormSkin(ProfileForm control) {
         super(control, ProfileFormSkin.class.getResource("Profile.fxml"), BUNDLE);
         builtInThemes.itemsProperty().set(control.getTerminalThemeConfigs());
         builtInThemes.prefWidthProperty().bind(control.widthProperty());
         control.terminalThemeSelectionModelProperty().bind(builtInThemes.selectionModelProperty());
-        FormFactoryVisitor formFactoryVisitor = new FormFactoryVisitor()//
+        formFactoryVisitor = new FormFactoryVisitor()//
                 .register(new LocalShellFormFactory())
                 .register(new SSHFormFactory())
                 .register(new WSLFormFactory());
-        AbstractShellConfig shellConfig = control.getProfile().getShellConfig();
-        Optional<AbstractForm<?>> visit = formFactoryVisitor.visit(shellConfig);
-        visit.ifPresent(abstractForm -> {
-            shellFormBox.setContent(abstractForm);
+        control.profileProperty().addListener((observable, oldValue, newValue) -> {
+            setProfile(newValue);
         });
+        if (control.getProfile() != null) {
+            setProfile(control.getProfile());
+        }
     }
 
+    private void setProfile(Profile profile) {
+        if (profile != null) {
+            //profileName.textProperty().bind(profile.profileNameProperty());
+            AbstractShellConfig shellConfig = profile.getShellConfig();
+            Optional<AbstractForm<?>> visit = formFactoryVisitor.visit(shellConfig);
+            visit.ifPresent(abstractForm -> {
+                shellFormBox.setContent(abstractForm);
+            });
+        }
+    }
 
 }
