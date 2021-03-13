@@ -35,12 +35,13 @@
                     <MenuItem fx:id="newWSLTerminal" text="%NEW_WSL" onAction="#openTerminalWSL"/>
                     <MenuItem fx:id="newSSHTerminal" text="%NEW_SSH" onAction="#openTerminalSSH"/>
                 </Menu>
-
+                <SeparatorMenuItem/>
                 <MenuItem text="%CLOSE" onAction="#exit"/>
             </Menu>
             <Menu text="%PROFILE" fx:id="profileMenu">
                 <MenuItem text="%MANAGE_PROFILES" onAction="#manageProfiles"/>
                 <MenuItem text="%SAVE_PROFILE" onAction="#saveProfile"/>
+                <SeparatorMenuItem/>
             </Menu>
             <Menu text="%SETTINGS">
                 <MenuItem text="%OPEN_SETTINGS" onAction="#openSettings"/>

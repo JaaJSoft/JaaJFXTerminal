@@ -34,8 +34,8 @@
             </ScrollPane>
         </center>
         <bottom>
-            <HBox fx:id="buttons" style="-fx-border-color: red">
-                <Button fx:id="btn1" text="AAA A"/>
+            <HBox fx:id="buttons">
+                <Button fx:id="btn1" text="%import"/>
                 <Button fx:id="btn2" text="FUIUF A"/>
             </HBox>
         </bottom>

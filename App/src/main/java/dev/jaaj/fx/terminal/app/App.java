@@ -37,8 +37,8 @@ public class App extends Application {
         primaryStage.setTitle("JaaJFX - Terminal");
         Scene scene = new Scene(root, 800, 500);
 
-        JMetro jMetro = new JMetro(Style.LIGHT);
-        jMetro.setScene(scene);
+        JMetro jMetro = new JMetro(scene, Style.DARK);
+        //jMetro.setScene(scene);
 
         scene.getStylesheets().add(Main.class.getResource("styles/Styles.css").toExternalForm());
 

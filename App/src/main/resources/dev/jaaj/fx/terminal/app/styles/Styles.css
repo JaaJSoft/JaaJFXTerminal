@@ -22,3 +22,7 @@
 .check-box {
     -fx-font-size: 14;
 }
+
+.dialog-pane .text-input > Pane {
+    -fx-background-color: transparent;
+}
