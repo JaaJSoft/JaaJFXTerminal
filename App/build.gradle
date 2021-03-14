@@ -72,7 +72,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'dev.jaaj.fx:core:0.2.1'
+    implementation 'dev.jaaj.fx:core:0.2.4'
     implementation 'org.jfxtras:jmetro:11.6.11'
     implementation 'org.controlsfx:controlsfx:11.0.2'
     implementation project(":Controls")

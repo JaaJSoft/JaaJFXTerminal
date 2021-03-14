@@ -16,9 +16,9 @@
 
 package dev.jaaj.fx.terminal.controls;
 
+import dev.jaaj.fx.terminal.models.Settings;
 import dev.jaaj.fx.terminal.models.profile.Profile;
 import dev.jaaj.fx.terminal.models.shell.AbstractShellConfig;
-import dev.jaaj.fx.terminal.models.theme.DefaultJMetroLightTerminalThemeFactory;
 import dev.jaaj.fx.terminal.models.theme.TerminalThemeConfig;
 import javafx.beans.property.*;
 import javafx.scene.control.Control;
@@ -30,8 +30,9 @@ public class Terminal extends Control {
     private final BooleanProperty closed = new SimpleBooleanProperty(false);
 
     public Terminal(AbstractShellConfig terminalConfig) {
-        this(terminalConfig, new DefaultJMetroLightTerminalThemeFactory().build());// todo auto-theme
+        this(terminalConfig, Settings.getInstance().getTerminalThemeFromCurrentTheme());
     }
+
 
     public Terminal(AbstractShellConfig terminalConfig, TerminalThemeConfig themeConfig) {
         profile = new Profile(terminalConfig.getTitle(), terminalConfig, themeConfig);
@@ -98,4 +99,6 @@ public class Terminal extends Control {
     public String getTitle() {
         return profile.getProfileName();
     }
+
+
 }

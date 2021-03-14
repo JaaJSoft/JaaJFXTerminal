@@ -16,18 +16,19 @@
 
 package dev.jaaj.fx.terminal.models.theme;
 
-import javafx.scene.paint.Color;
+import dev.jaaj.fx.core.theme.Theme;
 
-public class DefaultJMetroDarkTerminalThemeFactory implements IFactoryTerminalThemeConfig {
+import java.util.HashMap;
+import java.util.Map;
 
-    @Override
-    public TerminalThemeConfig build() {
-        TerminalThemeConfig config = new TerminalThemeConfig();
-        config.setThemeName("Dark JMetro");
-        config.setForegroundColor(Color.WHITE);
-        config.setBackgroundColor(Color.web("#1E1E1E"));
-        config.setCursorColor(Color.WHITE);
-        return config;
+public class TerminalThemeProvider { //TODO loading from config
+    private final Map<Class<? extends Theme>, TerminalThemeConfig> terminalThemeConfigMap = new HashMap<>();
+
+    public TerminalThemeConfig getTerminalTheme(Theme theme) {
+        return terminalThemeConfigMap.get(theme.getClass());
     }
 
+    public void registerTheme(Theme theme, TerminalThemeConfig terminalThemeConfig) {
+        terminalThemeConfigMap.put(theme.getClass(), terminalThemeConfig);
+    }
 }

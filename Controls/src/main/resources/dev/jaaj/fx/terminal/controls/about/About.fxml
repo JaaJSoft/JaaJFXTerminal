@@ -32,9 +32,7 @@
     </HBox>
     <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE">
         <Tab fx:id="aboutTab" text="%aboutTab">
-            <Label fx:id="aboutText" prefWidth="550.0"
-                   text="AAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                   wrapText="true">
+            <Label fx:id="aboutText" prefWidth="550.0" wrapText="true">
                 <padding>
                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                 </padding>

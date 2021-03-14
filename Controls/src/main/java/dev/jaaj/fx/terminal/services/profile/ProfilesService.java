@@ -16,10 +16,10 @@
 
 package dev.jaaj.fx.terminal.services.profile;
 
+import dev.jaaj.fx.terminal.models.Settings;
 import dev.jaaj.fx.terminal.models.profile.Profile;
 import dev.jaaj.fx.terminal.models.shell.AbstractShellConfig;
 import dev.jaaj.fx.terminal.models.shell.cmd.CmdShellConfig;
-import dev.jaaj.fx.terminal.models.theme.DefaultJMetroLightTerminalThemeFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -52,7 +52,7 @@ public class ProfilesService {
     public Profile getDefaultProfile() {
         if (profiles.isEmpty()) {
             AbstractShellConfig shellConfig = new CmdShellConfig();
-            profiles.add(new Profile(shellConfig, new DefaultJMetroLightTerminalThemeFactory().build()));
+            profiles.add(new Profile(shellConfig, Settings.getInstance().getTerminalThemeFromCurrentTheme()));
         }
         return profiles.get(0);
     }

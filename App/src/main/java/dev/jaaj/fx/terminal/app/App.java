@@ -16,6 +16,10 @@
 
 package dev.jaaj.fx.terminal.app;
 
+import dev.jaaj.fx.core.theme.Theme;
+import dev.jaaj.fx.core.theme.ThemeVistor;
+import dev.jaaj.fx.core.theme.windows.Windows10DarkTheme;
+import dev.jaaj.fx.terminal.models.Settings;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -23,8 +27,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import jfxtras.styles.jmetro.JMetro;
-import jfxtras.styles.jmetro.Style;
 
 import java.io.InputStream;
 import java.util.ResourceBundle;
@@ -33,13 +35,18 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("main.fxml"), ResourceBundle.getBundle("dev/jaaj/fx/terminal/app/Terminal"));
         primaryStage.setTitle("JaaJFX - Terminal");
+        ThemeVistor themeVistor = new ThemeVistor()
+                .addTheme(new Windows10DarkTheme())
+                .addTheme(new Windows10DarkTheme());
+        Theme theme = themeVistor.visit(null);
+        //theme = new Windows10LightTheme();
+        Settings settings = Settings.getInstance();
+        settings.setTheme(theme);
+
+        Parent root = FXMLLoader.load(getClass().getResource("main.fxml"), ResourceBundle.getBundle("dev/jaaj/fx/terminal/app/Terminal"));
         Scene scene = new Scene(root, 800, 500);
-
-        JMetro jMetro = new JMetro(scene, Style.DARK);
-        //jMetro.setScene(scene);
-
+        theme.applyTheme(scene);
         scene.getStylesheets().add(Main.class.getResource("styles/Styles.css").toExternalForm());
 
         primaryStage.setScene(scene);
