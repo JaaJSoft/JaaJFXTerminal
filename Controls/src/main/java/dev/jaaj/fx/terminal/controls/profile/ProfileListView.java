@@ -28,7 +28,6 @@ public class ProfileListView extends ListView<Profile> {
     public ProfileListView() {
         this.setCellFactory(param -> {
             ListCell<Profile> profileCell = new ListCell<>();
-            profileCell.setEditable(true);
             profileCell.itemProperty().addListener((observable, oldValue, newValue) -> {
                 if (newValue != null) {
                     profileCell.textProperty().bind(newValue.profileNameProperty());

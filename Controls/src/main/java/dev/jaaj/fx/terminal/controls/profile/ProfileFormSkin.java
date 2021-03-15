@@ -19,7 +19,7 @@ package dev.jaaj.fx.terminal.controls.profile;
 import dev.jaaj.fx.core.skin.SkinFXML;
 import dev.jaaj.fx.terminal.models.theme.TerminalThemeConfig;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TabPane;
 
@@ -29,7 +29,7 @@ public class ProfileFormSkin extends SkinFXML<ProfileForm> {
     public static final ResourceBundle BUNDLE = ResourceBundle.getBundle(ProfileForm.class.getPackageName() + ".Profile");
 
     @FXML
-    ChoiceBox<TerminalThemeConfig> builtInThemes;
+    ComboBox<TerminalThemeConfig> builtInThemes;
     @FXML
     ScrollPane shellFormBox;
     @FXML
