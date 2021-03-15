@@ -38,6 +38,7 @@ public class Settings {
         terminalThemeProvider = new TerminalThemeProvider();
         terminalThemeProvider.registerTheme(new Windows10LightTheme(), new DefaultJMetroLightTerminalThemeFactory().build());
         terminalThemeProvider.registerTheme(new Windows10DarkTheme(), new DefaultJMetroDarkTerminalThemeFactory().build());
+        terminalThemeProvider.registerTheme(new DefaultTheme(), new DefaultJMetroLightTerminalThemeFactory().build());
     }
 
     public static Settings getInstance() {

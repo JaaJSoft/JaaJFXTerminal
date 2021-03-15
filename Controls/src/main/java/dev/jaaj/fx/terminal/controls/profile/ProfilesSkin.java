@@ -53,6 +53,6 @@ public class ProfilesSkin extends SkinFXML<Profiles> {
         control.profileSelectionModelProperty().bind(listProfiles.selectionModelProperty());
         btn1.prefWidthProperty().bind(buttons.widthProperty().divide(buttons.getChildren().size()));
         btn2.prefWidthProperty().bind(buttons.widthProperty().divide(buttons.getChildren().size()));
-        profileForm.prefWidthProperty().bind(right.widthProperty());
+
     }
 }

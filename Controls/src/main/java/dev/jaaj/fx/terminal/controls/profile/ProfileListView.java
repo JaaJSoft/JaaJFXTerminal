@@ -59,6 +59,8 @@ public class ProfileListView extends ListView<Profile> {
 
                     contextMenu.getItems().addAll(delete, rename);
                     profileCell.setContextMenu(contextMenu);
+                } else {
+                    profileCell.setGraphic(null);
                 }
             });
             return profileCell;
