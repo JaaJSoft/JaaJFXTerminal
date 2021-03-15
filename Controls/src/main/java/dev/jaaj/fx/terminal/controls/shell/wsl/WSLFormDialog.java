@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.controls.wsl;
+package dev.jaaj.fx.terminal.controls.shell.wsl;
 
 import dev.jaaj.fx.core.form.DialogForm;
 import dev.jaaj.fx.terminal.models.shell.wsl.WSLConfig;

@@ -17,6 +17,12 @@
 package dev.jaaj.fx.terminal.controls.profile;
 
 import dev.jaaj.fx.core.form.AbstractForm;
+import dev.jaaj.fx.terminal.controls.shell.ShellForm;
+import dev.jaaj.fx.terminal.controls.shell.ShellFormFactory;
+import dev.jaaj.fx.terminal.controls.shell.local.LocalShellFormFactory;
+import dev.jaaj.fx.terminal.controls.shell.ssh.SSHFormFactory;
+import dev.jaaj.fx.terminal.controls.shell.wsl.WSLFormFactory;
+import dev.jaaj.fx.terminal.controls.util.FormFactoryVisitor;
 import dev.jaaj.fx.terminal.models.profile.Profile;
 import dev.jaaj.fx.terminal.models.shell.AbstractShellConfig;
 import dev.jaaj.fx.terminal.models.theme.DefaultJMetroDarkTerminalThemeFactory;
@@ -29,12 +35,14 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Skin;
 
+import java.util.Optional;
+
 public class ProfileForm extends AbstractForm<Profile> {
 
     private final ObjectProperty<Profile> profile = new SimpleObjectProperty<>();
     private final ObservableList<TerminalThemeConfig> terminalThemeConfigs = FXCollections.observableArrayList();
     private final ObjectProperty<SingleSelectionModel<TerminalThemeConfig>> terminalThemeSelectionModel = new SimpleObjectProperty<>();
-    private final ObjectProperty<AbstractShellConfig> shellConfig = new SimpleObjectProperty<>();
+    private final ObjectProperty<ShellForm<? extends AbstractShellConfig>> shellForm = new SimpleObjectProperty<>();
     //private final BooleanProperty nativeTheme = new SimpleBooleanProperty(true);
 
     public ProfileForm(Profile profile) {
@@ -43,6 +51,10 @@ public class ProfileForm extends AbstractForm<Profile> {
     }
 
     public ProfileForm() {
+        FormFactoryVisitor<ShellFormFactory<?>> formFactoryVisitor = new FormFactoryVisitor<ShellFormFactory<?>>()
+                .register(new LocalShellFormFactory())
+                .register(new SSHFormFactory())
+                .register(new WSLFormFactory());
         terminalThemeConfigs.add(new DefaultJMetroLightTerminalThemeFactory().build());
         terminalThemeConfigs.add(new DefaultJMetroDarkTerminalThemeFactory().build());
         profileProperty().addListener((observable, oldValue, newValue) -> {
@@ -50,6 +62,8 @@ public class ProfileForm extends AbstractForm<Profile> {
                 if (terminalThemeSelectionModel.isNotNull().get()) {
                     getTerminalThemeSelectionModel().select(newValue.getTerminalThemeConfig());
                 }
+                Optional<ShellFormFactory<?>> visit = formFactoryVisitor.visit(newValue.getShellConfig());
+                visit.ifPresent(shellFormFactory -> shellForm.set(shellFormFactory.build(newValue.getShellConfig())));
             }
         });
         terminalThemeSelectionModel.addListener((observable2, oldValue2, newValue2) -> {
@@ -61,12 +75,18 @@ public class ProfileForm extends AbstractForm<Profile> {
 
     @Override
     public boolean validate() {
-        return false;
+        if (shellForm.isNull().get()) {
+            return false;
+        }
+        return shellForm.get().validate();
     }
 
     @Override
     public Profile apply() {
-        return null;
+        Profile profile = this.profile.get();
+        profile.setShellConfig(shellForm.get().apply());
+        profile.setTerminalThemeConfig(getTerminalThemeSelectionModel().getSelectedItem());
+        return profile;
     }
 
     @Override
@@ -99,15 +119,15 @@ public class ProfileForm extends AbstractForm<Profile> {
         return terminalThemeSelectionModel;
     }
 
-    public AbstractShellConfig getShellConfig() {
-        return shellConfig.get();
+    public ShellForm<? extends AbstractShellConfig> getShellForm() {
+        return shellForm.get();
     }
 
-    public ObjectProperty<AbstractShellConfig> shellConfigProperty() {
-        return shellConfig;
+    public ObjectProperty<ShellForm<? extends AbstractShellConfig>> shellFormProperty() {
+        return shellForm;
     }
 
-    public void setShellConfig(AbstractShellConfig shellConfig) {
-        this.shellConfig.set(shellConfig);
+    public void setShellForm(ShellForm<? extends AbstractShellConfig> shellForm) {
+        this.shellForm.set(shellForm);
     }
 }

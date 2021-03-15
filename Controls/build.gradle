@@ -45,7 +45,7 @@ repositories {
 
 dependencies {
     implementation group: 'org.jetbrains.pty4j', name: 'pty4j', version: '0.11.4'
-    implementation 'dev.jaaj.fx:core:0.2.4'
+    implementation 'dev.jaaj.fx:core:0.2.5'
     implementation 'com.kodedu.terminalfx:terminalfx:1.1.0'
     implementation project(":Models")
     implementation 'org.controlsfx:controlsfx:11.0.2'

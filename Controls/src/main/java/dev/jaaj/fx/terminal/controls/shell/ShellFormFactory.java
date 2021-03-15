@@ -14,13 +14,9 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.controls.util;
+package dev.jaaj.fx.terminal.controls.shell;
 
-import dev.jaaj.fx.core.form.AbstractForm;
+import dev.jaaj.fx.terminal.controls.util.AbstractFormFactory;
 
-public abstract class AbstractFormFactory<T extends AbstractForm<?>> {
-
-    public abstract boolean canBuild(Object objectToInitWithForm);
-
-    public abstract T build(Object objectToInitWithForm);
+public abstract class ShellFormFactory<T extends ShellForm<?>> extends AbstractFormFactory<T> {
 }

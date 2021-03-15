@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.controls.local;
+package dev.jaaj.fx.terminal.controls.shell.wsl;
 
 import dev.jaaj.fx.core.skin.SkinFXML;
+import dev.jaaj.fx.terminal.models.shell.wsl.Distribution;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.stage.DirectoryChooser;
@@ -27,38 +29,51 @@ import javafx.stage.DirectoryChooser;
 import java.io.File;
 import java.util.ResourceBundle;
 
-public class LocalShellFormSkin extends SkinFXML<LocalShellForm> {
-
+public class WSLFormSkin extends SkinFXML<WSLForm> {
+    @FXML
+    ComboBox<Distribution> distributionComboBox;
+    @FXML
+    TextField userField;
     @FXML
     TextField workingDirectoryField;
     @FXML
-    Button chooseDirBtn;
-    @FXML
     TextField commandField;
     @FXML
-    TextField extraArgsField;
+    Button chooseDirBtn;
     @FXML
     TitledPane advancedPane;
 
-    public LocalShellFormSkin(LocalShellForm control) {
+    public WSLFormSkin(WSLForm control) {
         super(control,
-                LocalShellFormSkin.class.getResource("LocalShellForm.fxml"),
-                ResourceBundle.getBundle(LocalShellFormSkin.class.getPackageName() + ".LocalShellForm")
+                WSLFormSkin.class.getResource("WSLForm.fxml"),
+                ResourceBundle.getBundle(WSLFormSkin.class.getPackageName() + ".WSLForm")
         );
+        distributionComboBox.setItems(control.getPossibleDistributions());
+        distributionComboBox.prefWidthProperty().bind(control.widthProperty());
+
         bind(control);
+        selectDefaultDistribution(control);
+        control.formStateProperty().addListener((observable, oldValue, newValue) -> {
+
+        });
         control.formStateProperty().addListener((observable, oldValue, newValue) -> {
             switch (newValue) {
-                case READONLY -> {
+                case READONLY:
+                    distributionComboBox.setEditable(false);
+                    userField.setEditable(false);
                     workingDirectoryField.setEditable(false);
                     commandField.setEditable(false);
                     chooseDirBtn.setDisable(true);
-                }
-                case EDITABLE -> {
+                    break;
+                case EDITABLE:
+                    distributionComboBox.setEditable(true);
+                    userField.setEditable(true);
                     workingDirectoryField.setEditable(true);
                     commandField.setEditable(true);
                     chooseDirBtn.setDisable(false);
-                }
-                default -> throw new IllegalStateException("Unexpected value: " + newValue);
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + newValue);
             }
 
         });
@@ -76,15 +91,25 @@ public class LocalShellFormSkin extends SkinFXML<LocalShellForm> {
         }
     }
 
-    public void unbind() {
-        workingDirectoryField.textProperty().unbind();
-        commandField.textProperty().unbind();
-        extraArgsField.textProperty().unbind();
+    private void selectDefaultDistribution(WSLForm control) {
+        control.getPossibleDistributions()
+                .stream()
+                .filter(Distribution::isDefault)
+                .findAny()
+                .ifPresent(value -> distributionComboBox.getSelectionModel().select(value));
     }
 
-    public void bind(LocalShellForm localShellForm) {
-        workingDirectoryField.textProperty().bindBidirectional(localShellForm.workingDirectoryProperty());
-        commandField.textProperty().bindBidirectional(localShellForm.commandProperty());
-        extraArgsField.textProperty().bindBidirectional(localShellForm.extraArgsProperty());
+    public void unbind() {
+        distributionComboBox.valueProperty().unbind();
+        userField.textProperty().unbind();
+        workingDirectoryField.textProperty().unbind();
+        commandField.textProperty().unbind();
+    }
+
+    public void bind(WSLForm wslForm) {
+        distributionComboBox.valueProperty().bindBidirectional(wslForm.distributionProperty());
+        userField.textProperty().bindBidirectional(wslForm.userProperty());
+        workingDirectoryField.textProperty().bindBidirectional(wslForm.workingDirectoryProperty());
+        commandField.textProperty().bindBidirectional(wslForm.commandProperty());
     }
 }

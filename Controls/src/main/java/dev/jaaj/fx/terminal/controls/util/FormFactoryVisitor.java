@@ -16,29 +16,27 @@
 
 package dev.jaaj.fx.terminal.controls.util;
 
-import dev.jaaj.fx.core.form.AbstractForm;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class FormFactoryVisitor {
-    private final List<AbstractFormFactory<?>> formFactories = new ArrayList<>();
+public class FormFactoryVisitor<T extends AbstractFormFactory<?>> {
+    private final List<T> formFactories = new ArrayList<>();
 
-    public FormFactoryVisitor register(AbstractFormFactory<?> formFactory) {
+    public FormFactoryVisitor<T> register(T formFactory) {
         formFactories.add(formFactory);
         return this;
     }
 
-    public boolean unregister(AbstractFormFactory<?> formFactory) {
+    public boolean unregister(T formFactory) {
         return formFactories.remove(formFactory);
     }
 
-    public Optional<AbstractForm<?>> visit(Object o) {
-        for (AbstractFormFactory<?> formFactory : formFactories) {
+    public Optional<T> visit(Object o) {
+        for (T formFactory : formFactories) {
             System.out.println(formFactory.getClass().toGenericString());
             if (formFactory.canBuild(o)) {
-                return Optional.ofNullable(formFactory.build(o));
+                return Optional.of(formFactory);
             }
         }
         return Optional.empty();

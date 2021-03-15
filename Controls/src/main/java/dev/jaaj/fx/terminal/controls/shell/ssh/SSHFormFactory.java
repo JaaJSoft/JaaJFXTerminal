@@ -14,13 +14,12 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.controls.ssh;
+package dev.jaaj.fx.terminal.controls.shell.ssh;
 
-import dev.jaaj.fx.core.form.AbstractForm;
-import dev.jaaj.fx.terminal.controls.util.AbstractFormFactory;
+import dev.jaaj.fx.terminal.controls.shell.ShellFormFactory;
 import dev.jaaj.fx.terminal.models.shell.ssh.SSHConfig;
 
-public class SSHFormFactory implements AbstractFormFactory<SSHConfig> {
+public class SSHFormFactory extends ShellFormFactory<SSHForm> {
 
     @Override
     public boolean canBuild(Object objectToInitWithForm) {
@@ -28,7 +27,7 @@ public class SSHFormFactory implements AbstractFormFactory<SSHConfig> {
     }
 
     @Override
-    public AbstractForm<SSHConfig> build(Object objectToInitWithForm) {
+    public SSHForm build(Object objectToInitWithForm) {
         return new SSHForm((SSHConfig) objectToInitWithForm);
     }
 }

@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.controls.ssh;
+package dev.jaaj.fx.terminal.controls.shell.ssh;
 
-import dev.jaaj.fx.core.form.AbstractForm;
+import dev.jaaj.fx.terminal.controls.shell.ShellForm;
 import dev.jaaj.fx.terminal.models.shell.ssh.SSHConfig;
 import javafx.beans.property.*;
 import javafx.scene.control.Skin;
@@ -24,7 +24,7 @@ import javafx.scene.control.Skin;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-public class SSHForm extends AbstractForm<SSHConfig> {
+public class SSHForm extends ShellForm<SSHConfig> {
     private final ObjectProperty<SSHConfig> sshConfig = new SimpleObjectProperty<>();
 
     private final StringProperty inetAddressStr = new SimpleStringProperty();

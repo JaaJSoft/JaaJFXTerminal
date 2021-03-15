@@ -14,20 +14,10 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.controls.wsl;
+package dev.jaaj.fx.terminal.controls.shell;
 
 import dev.jaaj.fx.core.form.AbstractForm;
-import dev.jaaj.fx.terminal.controls.util.AbstractFormFactory;
-import dev.jaaj.fx.terminal.models.shell.wsl.WSLConfig;
+import dev.jaaj.fx.terminal.models.shell.AbstractShellConfig;
 
-public class WSLFormFactory implements AbstractFormFactory<WSLConfig> {
-    @Override
-    public boolean canBuild(Object objectToInitWithForm) {
-        return objectToInitWithForm instanceof WSLConfig;
-    }
-
-    @Override
-    public AbstractForm<WSLConfig> build(Object objectToInitWithForm) {
-        return new WSLForm((WSLConfig) objectToInitWithForm);
-    }
+public abstract class ShellForm<T extends AbstractShellConfig> extends AbstractForm<T> {
 }

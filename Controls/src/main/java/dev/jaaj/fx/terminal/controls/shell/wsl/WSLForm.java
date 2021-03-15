@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.controls.wsl;
+package dev.jaaj.fx.terminal.controls.shell.wsl;
 
-import dev.jaaj.fx.core.form.AbstractForm;
+import dev.jaaj.fx.terminal.controls.shell.ShellForm;
 import dev.jaaj.fx.terminal.models.shell.wsl.Distribution;
 import dev.jaaj.fx.terminal.models.shell.wsl.WSLConfig;
 import javafx.beans.property.ObjectProperty;
@@ -27,7 +27,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Skin;
 
-public class WSLForm extends AbstractForm<WSLConfig> {
+public class WSLForm extends ShellForm<WSLConfig> {
     private final ObjectProperty<WSLConfig> wslConfig = new SimpleObjectProperty<>();
 
     private final ObjectProperty<Distribution> distribution = new SimpleObjectProperty<>();

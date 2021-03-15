@@ -39,7 +39,7 @@ public class App extends Application {
         ThemeVistor themeVistor = new ThemeVistor()
                 .addTheme(new Windows10DarkTheme())
                 .addTheme(new Windows10DarkTheme());
-        Theme theme = themeVistor.visit(null);
+        Theme theme = themeVistor.visit();
         //theme = new Windows10LightTheme();
         Settings settings = Settings.getInstance();
         settings.setTheme(theme);

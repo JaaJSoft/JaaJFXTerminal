@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.controls.local;
+package dev.jaaj.fx.terminal.controls.shell.local;
 
-import dev.jaaj.fx.core.form.AbstractForm;
+import dev.jaaj.fx.terminal.controls.shell.ShellForm;
 import dev.jaaj.fx.terminal.models.shell.LocalShellConfig;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -24,7 +24,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.Skin;
 
-public class LocalShellForm extends AbstractForm<LocalShellConfig> {
+public class LocalShellForm extends ShellForm<LocalShellConfig> {
     private final ObjectProperty<LocalShellConfig> localShellConfig = new SimpleObjectProperty<>();
     private final StringProperty workingDirectory = new SimpleStringProperty("");
     private final StringProperty command = new SimpleStringProperty("");

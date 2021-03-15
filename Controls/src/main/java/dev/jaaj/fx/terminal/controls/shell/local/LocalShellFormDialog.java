@@ -14,20 +14,18 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.controls.local;
+package dev.jaaj.fx.terminal.controls.shell.local;
 
-import dev.jaaj.fx.core.form.AbstractForm;
-import dev.jaaj.fx.terminal.controls.util.AbstractFormFactory;
+import dev.jaaj.fx.core.form.DialogForm;
 import dev.jaaj.fx.terminal.models.shell.LocalShellConfig;
 
-public class LocalShellFormFactory implements AbstractFormFactory<LocalShellConfig> {
-    @Override
-    public boolean canBuild(Object objectToInitWithForm) {
-        return objectToInitWithForm instanceof LocalShellConfig;
+import java.util.ResourceBundle;
+
+public class LocalShellFormDialog extends DialogForm<LocalShellConfig> {
+    private static final ResourceBundle BUNDLE = ResourceBundle.getBundle(LocalShellFormDialog.class.getPackageName() + ".LocalShellForm");
+
+    public LocalShellFormDialog(LocalShellConfig shellConfig) {
+        super(new LocalShellForm(shellConfig), BUNDLE.getString("title_dialog"), String.format(BUNDLE.getString("header_dialog"), shellConfig.getTitle()));
     }
 
-    @Override
-    public AbstractForm<LocalShellConfig> build(Object objectToInitWithForm) {
-        return new LocalShellForm((LocalShellConfig) objectToInitWithForm);
-    }
 }

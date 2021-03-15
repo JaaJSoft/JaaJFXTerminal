@@ -19,12 +19,12 @@
 <?import dev.jaaj.fx.terminal.controls.profile.ProfileListView?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<SplitPane fx:id="root" xmlns="http://javafx.com/javafx"
+<SplitPane prefWidth="700" fx:id="root" xmlns="http://javafx.com/javafx"
            xmlns:fx="http://javafx.com/fxml" dividerPositions="0.1">
-    <BorderPane>
+    <BorderPane maxWidth="200" minWidth="200"><!--fix this-->
         <top>
-            <HBox alignment="CENTER_LEFT">
-                <TextField HBox.hgrow="ALWAYS"/>
+            <HBox alignment="CENTER_LEFT" SplitPane.resizableWithParent="false">
+                <TextField HBox.hgrow="SOMETIMES"/>
                 <Button text="add" HBox.hgrow="NEVER"/>
             </HBox>
         </top>

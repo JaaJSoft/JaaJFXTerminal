@@ -14,18 +14,21 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.controls.local;
+package dev.jaaj.fx.terminal.controls.shell.ssh;
 
 import dev.jaaj.fx.core.form.DialogForm;
-import dev.jaaj.fx.terminal.models.shell.LocalShellConfig;
+import dev.jaaj.fx.terminal.models.shell.ssh.SSHConfig;
 
 import java.util.ResourceBundle;
 
-public class LocalShellFormDialog extends DialogForm<LocalShellConfig> {
-    private static final ResourceBundle BUNDLE = ResourceBundle.getBundle(LocalShellFormDialog.class.getPackageName() + ".LocalShellForm");
+public class SSHFormDialog extends DialogForm<SSHConfig> {
+    private static final ResourceBundle SSH_BUNDLE = ResourceBundle.getBundle(SSHFormDialog.class.getPackageName() + ".SSHForm");
 
-    public LocalShellFormDialog(LocalShellConfig shellConfig) {
-        super(new LocalShellForm(shellConfig), BUNDLE.getString("title_dialog"), String.format(BUNDLE.getString("header_dialog"), shellConfig.getTitle()));
+    public SSHFormDialog(SSHConfig sshConfig) {
+        super(new SSHForm(sshConfig), SSH_BUNDLE.getString("title_dialog"), SSH_BUNDLE.getString("header_dialog"));
     }
 
+    public SSHFormDialog() {
+        this(new SSHConfig());
+    }
 }
