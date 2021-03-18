@@ -28,7 +28,7 @@ import static org.junit.Assert.assertEquals;
 public class PowerShellAdapterTest {
     private static PowerShellConfig CONFIG;
     private static Gson gson;
-    private static final String json = "{\"type\":\"dev.jaaj.fx.terminal.models.shell.powershell.PowerShellConfig\",\"properties\":{\"workingDirectory\":\".\",\"commandToExecute\":\"ls\",\"extraArgs\":\"\",\"shellIcon\":\"file:/D:/programmation/JaaJ/JaaJFXTerminal/Models/build/resources/main/dev/jaaj/fx/terminal/models/shell/powershell/powershell_96px.png\"}}";
+    private static final String json = "{\"type\":\"dev.jaaj.fx.terminal.models.shell.powershell.PowerShellConfig\",\"properties\":{\"workingDirectory\":\".\",\"commandToExecute\":\"ls\",\"extraArgs\":\"\",\"shellIcon\":\"" + PowerShellConfig.class.getResource("powershell_96px.png").toExternalForm() + "\"}}";
 
     @BeforeClass
     public static void beforeClass() throws Exception {

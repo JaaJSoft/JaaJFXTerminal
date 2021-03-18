@@ -30,7 +30,7 @@ import static org.junit.Assert.assertEquals;
 public class SSHConfigAdapterTest {
     private static SSHConfig CONFIG;
     private static Gson gson;
-    private static final String json = "{\"type\":\"dev.jaaj.fx.terminal.models.shell.ssh.SSHConfig\",\"properties\":{\"inetAddress\":\"1.1.1.1\",\"user\":\"pierre\",\"port\":48953,\"command\":\"fish\",\"shellIcon\":\"file:/D:/programmation/JaaJ/JaaJFXTerminal/Models/build/resources/main/dev/jaaj/fx/terminal/models/shell/ssh/ssh.png\"}}";
+    private static final String json = "{\"type\":\"dev.jaaj.fx.terminal.models.shell.ssh.SSHConfig\",\"properties\":{\"inetAddress\":\"1.1.1.1\",\"user\":\"pierre\",\"port\":48953,\"command\":\"fish\",\"shellIcon\":\"" + SSHConfig.class.getResource("ssh.png").toExternalForm() + "\"}}";
 
     @BeforeClass
     public static void beforeClass() throws Exception {
