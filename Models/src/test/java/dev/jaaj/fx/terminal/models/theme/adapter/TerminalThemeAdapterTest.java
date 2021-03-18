@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dev.jaaj.fx.terminal.models.theme.DefaultJMetroLightTerminalThemeFactory;
 import dev.jaaj.fx.terminal.models.theme.TerminalThemeConfig;
+import javafx.scene.text.Font;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -28,10 +29,11 @@ import static org.junit.Assert.assertEquals;
 public class TerminalThemeAdapterTest {
     private static final TerminalThemeConfig TERMINAL_THEME_CONFIG = new DefaultJMetroLightTerminalThemeFactory().build();
     private static Gson gson;
-    private static final String json = "{\"themeName\":\"Light JMetro\",\"backgroundColor\":\"#F8F8F8FF\",\"foregroundColor\":\"#000000FF\",\"cursorColor\":\"#000000FF\",\"font\":\"Consolas\",\"fontSize\":14.0}";
+    private static final String json = "{\"themeName\":\"Light JMetro\",\"backgroundColor\":\"#F8F8F8FF\",\"foregroundColor\":\"#000000FF\",\"cursorColor\":\"#000000FF\",\"font\":\"Arial\",\"fontSize\":14.0}";
 
     @BeforeClass
     public static void beforeClass() throws Exception {
+        TERMINAL_THEME_CONFIG.setFont(new Font("Arial", 14));
         gson = new GsonBuilder()
                 .registerTypeAdapter(TerminalThemeConfig.class, new TerminalThemeAdapter())
                 .create();
