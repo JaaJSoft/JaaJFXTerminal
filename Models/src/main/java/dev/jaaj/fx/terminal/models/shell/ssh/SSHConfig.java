@@ -20,6 +20,7 @@ import dev.jaaj.fx.terminal.models.shell.AbstractShellConfig;
 import javafx.beans.property.*;
 
 import java.net.InetAddress;
+import java.util.Objects;
 
 public class SSHConfig extends AbstractShellConfig {
 
@@ -30,9 +31,7 @@ public class SSHConfig extends AbstractShellConfig {
     private final StringProperty command = new SimpleStringProperty("");
 
     public SSHConfig() {
-        inetAddress.addListener((observable, oldValue, newValue) -> {
-            inetAddressStr.set(newValue.getHostName());
-        });
+        inetAddress.addListener((observable, oldValue, newValue) -> inetAddressStr.set(newValue.getHostName()));
         setShellIcon(getClass().getResource("ssh.png").toExternalForm());
     }
 
@@ -119,5 +118,18 @@ public class SSHConfig extends AbstractShellConfig {
                 ", port=" + port.getValue() +
                 ", command=" + command.getValue() +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SSHConfig sshConfig = (SSHConfig) o;
+        return Objects.equals(getInetAddress(), sshConfig.getInetAddress()) && Objects.equals(getUser(), sshConfig.getUser()) && Objects.equals(getPort(), sshConfig.getPort()) && Objects.equals(getCommand(), sshConfig.getCommand());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getInetAddress(), getUser(), getPort(), getCommand());
     }
 }

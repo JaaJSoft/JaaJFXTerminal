@@ -16,9 +16,14 @@
 
 package dev.jaaj.fx.terminal.models.theme;
 
-import javafx.beans.property.*;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+
+import java.util.Objects;
 
 public class TerminalThemeConfig {
     private final StringProperty themeName = new SimpleStringProperty();
@@ -26,7 +31,7 @@ public class TerminalThemeConfig {
     private final ObjectProperty<Color> foregroundColor = new SimpleObjectProperty<>(Color.WHITE);
     private final ObjectProperty<Color> cursorColor = new SimpleObjectProperty<>(Color.WHITE);
     private final ObjectProperty<Font> font = new SimpleObjectProperty<>(null);
-    private final BooleanProperty cursorBlink = new SimpleBooleanProperty(false);
+    //private final BooleanProperty cursorBlink = new SimpleBooleanProperty(false);
 
     //todo add scroll thing
     public TerminalThemeConfig() {
@@ -95,5 +100,18 @@ public class TerminalThemeConfig {
     @Override
     public String toString() {
         return themeName.getValue();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TerminalThemeConfig that = (TerminalThemeConfig) o;
+        return Objects.equals(getThemeName(), that.getThemeName()) && Objects.equals(getBackgroundColor(), that.getBackgroundColor()) && Objects.equals(getForegroundColor(), that.getForegroundColor()) && Objects.equals(getCursorColor(), that.getCursorColor()) && Objects.equals(getFont(), that.getFont());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getThemeName(), getBackgroundColor(), getForegroundColor(), getCursorColor(), getFont());
     }
 }

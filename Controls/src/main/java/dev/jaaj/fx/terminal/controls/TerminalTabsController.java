@@ -14,10 +14,8 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.services.terminal;
+package dev.jaaj.fx.terminal.controls;
 
-import dev.jaaj.fx.terminal.controls.Terminal;
-import dev.jaaj.fx.terminal.controls.TerminalTab;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableSet;
@@ -29,11 +27,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-public class TerminalService {
+public class TerminalTabsController {
     private final TabPane tabPane;
     private final ObservableSet<TerminalTab> terminalTabs = FXCollections.observableSet();
 
-    public TerminalService(TabPane tabPane) {
+    public TerminalTabsController(TabPane tabPane) {
         this.tabPane = tabPane;
         tabPane.getTabs().addListener(this::onTabsChanged);
         terminalTabs.addListener(this::onTerminalTabsChanged);

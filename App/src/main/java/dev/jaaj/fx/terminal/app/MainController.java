@@ -18,6 +18,7 @@ package dev.jaaj.fx.terminal.app;
 
 
 import dev.jaaj.fx.terminal.controls.Terminal;
+import dev.jaaj.fx.terminal.controls.TerminalTabsController;
 import dev.jaaj.fx.terminal.controls.about.AboutDialog;
 import dev.jaaj.fx.terminal.controls.about.data.AppInfo;
 import dev.jaaj.fx.terminal.controls.about.data.AppInfoBuilder;
@@ -29,14 +30,13 @@ import dev.jaaj.fx.terminal.controls.shell.local.LocalShellFormDialog;
 import dev.jaaj.fx.terminal.controls.shell.ssh.SSHFormDialog;
 import dev.jaaj.fx.terminal.controls.shell.wsl.WSLFormDialog;
 import dev.jaaj.fx.terminal.models.profile.Profile;
+import dev.jaaj.fx.terminal.models.profile.ProfilesController;
 import dev.jaaj.fx.terminal.models.shell.LocalShellConfig;
 import dev.jaaj.fx.terminal.models.shell.cmd.CmdShellConfig;
 import dev.jaaj.fx.terminal.models.shell.powershell.PowerShellConfig;
 import dev.jaaj.fx.terminal.models.shell.powershell.PwshConfig;
 import dev.jaaj.fx.terminal.models.shell.ssh.SSHConfig;
 import dev.jaaj.fx.terminal.models.shell.wsl.WSLConfig;
-import dev.jaaj.fx.terminal.services.profile.ProfilesService;
-import dev.jaaj.fx.terminal.services.terminal.TerminalService;
 import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -87,14 +87,14 @@ public class MainController implements Initializable {
 
     private ResourceBundle bundle;
 
-    private final ProfilesService profilesService = new ProfilesService();
-    private TerminalService terminalService;
+    private final ProfilesController profilesController = new ProfilesController();
+    private TerminalTabsController terminalTabsController;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         bundle = resources;
-        terminalService = new TerminalService(tabPane);
-        profilesService.getProfiles().addListener((ListChangeListener<? super Profile>) c -> {
+        terminalTabsController = new TerminalTabsController(tabPane);
+        profilesController.getProfiles().addListener((ListChangeListener<? super Profile>) c -> {
             c.next();
             ObservableList<MenuItem> profileMenuItems = profileMenu.getItems();
             if (c.wasAdded()) {
@@ -102,7 +102,7 @@ public class MainController implements Initializable {
                 MenuItem e = new MenuItem();
                 e.textProperty().bind(profile.profileNameProperty());
                 e.setOnAction(event -> {
-                    terminalService.addTerminal(new Terminal(profile));
+                    terminalTabsController.addTerminal(new Terminal(profile));
                 });
                 profileMenuItems.add(e);
             } else if (c.wasRemoved()) {
@@ -121,7 +121,7 @@ public class MainController implements Initializable {
     private void onTabsChanged(ListChangeListener.Change<? extends Tab> c) {
         c.next();
         if (c.getList().size() == 1) {
-            terminalService.getFocusedTerminal().ifPresent(terminal -> root.setCenter(terminal));
+            terminalTabsController.getFocusedTerminal().ifPresent(terminal -> root.setCenter(terminal));
         } else {
             root.setCenter(tabPane);
         }
@@ -135,8 +135,8 @@ public class MainController implements Initializable {
     }
 
     public void openTerminal(ActionEvent actionEvent) {
-        Terminal terminal = new Terminal(profilesService.getDefaultProfile());
-        terminalService.addTerminal(terminal);
+        Terminal terminal = new Terminal(profilesController.getDefaultProfile());
+        terminalTabsController.addTerminal(terminal);
     }
 
     public void openTerminalSSH(ActionEvent actionEvent) {
@@ -145,7 +145,7 @@ public class MainController implements Initializable {
         Optional<SSHConfig> optional = sshTerminalDialog.showAndWait();
         optional.ifPresent(sshConfig -> {
             Terminal terminal = new Terminal(sshTerminalDialog.getResult());
-            terminalService.addTerminal(terminal);
+            terminalTabsController.addTerminal(terminal);
         });
     }
 
@@ -155,7 +155,7 @@ public class MainController implements Initializable {
         Optional<WSLConfig> optional = WSLFormDialog.showAndWait();
         optional.ifPresent(sshConfig -> {
             Terminal terminal = new Terminal(WSLFormDialog.getResult());
-            terminalService.addTerminal(terminal);
+            terminalTabsController.addTerminal(terminal);
         });
     }
 
@@ -165,7 +165,7 @@ public class MainController implements Initializable {
         Optional<LocalShellConfig> optionalLocalShellConfig = shellFormDialog.showAndWait();
         optionalLocalShellConfig.ifPresent(localShellConfig -> {
             Terminal terminal = new Terminal(shellFormDialog.getResult());
-            terminalService.addTerminal(terminal);
+            terminalTabsController.addTerminal(terminal);
         });
     }
 
@@ -214,14 +214,14 @@ public class MainController implements Initializable {
     }
 
     public void saveProfile(ActionEvent event) {
-        terminalService.getFocusedTerminal().ifPresent(terminal -> {
-            profilesService.saveProfile(terminal.getProfile());
+        terminalTabsController.getFocusedTerminal().ifPresent(terminal -> {
+            profilesController.saveProfile(terminal.getProfile());
         });
 
     }
 
     public void manageProfiles(ActionEvent actionEvent) {
-        ProfilesDialog profilesDialog = new ProfilesDialog(profilesService.getProfiles());
+        ProfilesDialog profilesDialog = new ProfilesDialog(profilesController.getProfiles());
         profilesDialog.initOwner(root.getCenter().getScene().getWindow());
         profilesDialog.showAndWait();
     }

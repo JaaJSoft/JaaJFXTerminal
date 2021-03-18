@@ -19,6 +19,8 @@ package dev.jaaj.fx.terminal.models.shell;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import java.util.Objects;
+
 public abstract class LocalShellConfig extends AbstractShellConfig {
     private final StringProperty executable = new SimpleStringProperty();
     private final StringProperty workingDirectory = new SimpleStringProperty("");
@@ -67,5 +69,18 @@ public abstract class LocalShellConfig extends AbstractShellConfig {
 
     public void setExtraArgs(String extraArgs) {
         this.extraArgs.set(extraArgs);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LocalShellConfig that = (LocalShellConfig) o;
+        return Objects.equals(getExecutable(), that.getExecutable()) && Objects.equals(getWorkingDirectory(), that.getWorkingDirectory()) && Objects.equals(getCommandToExecute(), that.getCommandToExecute()) && Objects.equals(getExtraArgs(), that.getExtraArgs());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getExecutable(), getWorkingDirectory(), getCommandToExecute(), getExtraArgs());
     }
 }

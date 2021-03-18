@@ -14,30 +14,49 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.services.profile;
+package dev.jaaj.fx.terminal.models.profile;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import dev.jaaj.fx.terminal.models.Settings;
-import dev.jaaj.fx.terminal.models.profile.Profile;
 import dev.jaaj.fx.terminal.models.shell.AbstractShellConfig;
 import dev.jaaj.fx.terminal.models.shell.cmd.CmdShellConfig;
+import dev.jaaj.fx.terminal.models.theme.TerminalThemeConfig;
+import dev.jaaj.fx.terminal.models.theme.adapter.TerminalThemeAdapter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 
-public class ProfilesService {
+public class ProfilesController {
     private final ObservableList<Profile> profiles = FXCollections.observableArrayList();
 
-    public ProfilesService() {
+    public ProfilesController() {
 
     }
 
-    public ProfilesService(List<Profile> profiles) {
+    public ProfilesController(List<Profile> profiles) {
         this.profiles.addAll(profiles);
     }
 
     public void saveProfile(Profile profile) {
         profiles.add(profile);
+
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(TerminalThemeConfig.class, new TerminalThemeAdapter())
+                .create();
+        String toJson = gson.toJson(profile.getTerminalThemeConfig());
+
+        try (BufferedWriter bufferedWriter = Files.newBufferedWriter(Path.of("test.json"))) {
+            bufferedWriter.write(toJson);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        TerminalThemeConfig terminalThemeConfig = gson.fromJson(toJson, TerminalThemeConfig.class);
     }
 
 

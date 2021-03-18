@@ -17,6 +17,7 @@
 package dev.jaaj.fx.terminal.models.theme;
 
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 public class DefaultJMetroDarkTerminalThemeFactory implements IFactoryTerminalThemeConfig {
 
@@ -27,6 +28,7 @@ public class DefaultJMetroDarkTerminalThemeFactory implements IFactoryTerminalTh
         config.setForegroundColor(Color.WHITE);
         config.setBackgroundColor(Color.web("#1E1E1E"));
         config.setCursorColor(Color.WHITE);
+        config.setFont(new Font("Consolas", 14));
         return config;
     }
 
