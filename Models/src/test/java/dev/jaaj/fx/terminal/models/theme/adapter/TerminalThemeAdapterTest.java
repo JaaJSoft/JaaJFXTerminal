@@ -42,6 +42,7 @@ public class TerminalThemeAdapterTest {
     @Test
     public void serialize() {
         String s = gson.toJson(TERMINAL_THEME_CONFIG);
+        System.out.println(s);
         assertEquals(json, s);
     }
 
