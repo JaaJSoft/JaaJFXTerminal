@@ -28,7 +28,7 @@ import static org.junit.Assert.assertEquals;
 public class CmdShellAdapterTest {
     private static CmdShellConfig CONFIG;
     private static Gson gson;
-    private static final String json = "{\"type\":\"dev.jaaj.fx.terminal.models.shell.cmd.CmdShellConfig\",\"properties\":{\"workingDirectory\":\".\",\"commandToExecute\":\"ls\",\"extraArgs\":\"\",\"shellIcon\":\"file:/D:/programmation/JaaJ/JaaJFXTerminal/Models/build/resources/main/dev/jaaj/fx/terminal/models/shell/cmd/cmd.png\"}}";
+    private static final String json = "{\"type\":\"dev.jaaj.fx.terminal.models.shell.cmd.CmdShellConfig\",\"properties\":{\"workingDirectory\":\".\",\"commandToExecute\":\"ls\",\"extraArgs\":\"\",\"shellIcon\":\"" + CmdShellConfig.class.getResource("cmd.png").toExternalForm() + "\"}}";
 
     @BeforeClass
     public static void beforeClass() throws Exception {
