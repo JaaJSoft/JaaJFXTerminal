@@ -42,7 +42,7 @@ public class TerminalThemeAdapterTest {
 
     @Test
     public void serialize() {
-        if (isWindows()) { // TODO why its fail on linux ??
+        if (isWindows()) { // TODO why it fails on linux ??
             String s = gson.toJson(TERMINAL_THEME_CONFIG);
             assertEquals(json, s);
         }
