@@ -228,7 +228,7 @@ public class MainController implements Initializable {
 
     public void saveProfile(ActionEvent event) {
         terminalTabsController.getFocusedTerminal().ifPresent(terminal -> {
-            profilesController.saveProfile(terminal.getProfile());
+            boolean saveProfile = profilesController.saveProfile(terminal.getProfile());
         });
 
     }

@@ -49,11 +49,9 @@ import java.util.List;
 
 public class ProfilesController {
     private final ObservableList<Profile> profiles = FXCollections.observableArrayList();
-    private final Gson gson;
+    private final static Gson gson = getBuilder().create();
 
     public ProfilesController(Path location) {
-        GsonBuilder gsonBuilder = getBuilder();
-        gson = gsonBuilder.create();
         Type listOfType = new TypeToken<ArrayList<Profile>>() {
         }.getType();
         try (BufferedReader bufferedReader = Files.newBufferedReader(location)) {
@@ -91,8 +89,12 @@ public class ProfilesController {
         this.profiles.addAll(profiles);
     }
 
-    public void saveProfile(Profile profile) {
+    public boolean saveProfile(Profile profile) {
+        if (profiles.contains(profile)) {
+            return false;
+        }
         profiles.add(profile);
+        return true;
     }
 
     public boolean deleteProfile(Profile profile) {
@@ -111,7 +113,7 @@ public class ProfilesController {
         return profiles.get(0);
     }
 
-    private GsonBuilder getBuilder() {
+    public static GsonBuilder getBuilder() {
         return new GsonBuilder()
                 .registerTypeAdapter(Profile.class, new ProfileAdapter())
                 .registerTypeAdapter(AbstractShellConfig.class, new AbstractShellAdapter())
@@ -122,6 +124,12 @@ public class ProfilesController {
                 .registerTypeAdapter(PwshConfig.class, new PwshAdapter())
                 .registerTypeAdapter(TerminalThemeConfig.class, new TerminalThemeAdapter())
                 .setPrettyPrinting();
+    }
+
+    public static Profile copy(Profile profile) {
+        //Yes, it is disgusting.
+        String s = gson.toJson(profile);
+        return gson.fromJson(s, Profile.class);
     }
 }
 

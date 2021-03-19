@@ -17,6 +17,7 @@
 package dev.jaaj.fx.terminal.controls.profile;
 
 import dev.jaaj.fx.terminal.models.profile.Profile;
+import dev.jaaj.fx.terminal.models.profile.ProfilesController;
 import javafx.scene.control.*;
 
 import java.util.Optional;
@@ -56,8 +57,13 @@ public class ProfileListCell extends ListCell<Profile> {
                 Optional<String> optional = dialogRename.showAndWait();
                 optional.ifPresent(item::setProfileName);
             });
+            MenuItem duplicate = new MenuItem(BUNDLE.getString("duplicate"));
+            duplicate.setOnAction(event -> {
+                Profile copy = ProfilesController.copy(item);
+                getListView().getItems().add(copy);
+            });
 
-            contextMenu.getItems().addAll(delete, rename);
+            contextMenu.getItems().addAll(rename, duplicate, delete);
             this.setContextMenu(contextMenu);
         } else {
             this.setDisable(true);
