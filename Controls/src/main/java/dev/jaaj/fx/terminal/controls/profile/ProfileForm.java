@@ -52,9 +52,9 @@ public class ProfileForm extends AbstractForm<Profile> {
 
     public ProfileForm() {
         FormFactoryVisitor<ShellFormFactory<?>> formFactoryVisitor = new FormFactoryVisitor<ShellFormFactory<?>>()
-                .register(new LocalShellFormFactory())
                 .register(new SSHFormFactory())
-                .register(new WSLFormFactory());
+                .register(new WSLFormFactory())
+                .register(new LocalShellFormFactory());
         terminalThemeConfigs.add(new DefaultJMetroLightTerminalThemeFactory().build());
         terminalThemeConfigs.add(new DefaultJMetroDarkTerminalThemeFactory().build());
         profileProperty().addListener((observable, oldValue, newValue) -> {

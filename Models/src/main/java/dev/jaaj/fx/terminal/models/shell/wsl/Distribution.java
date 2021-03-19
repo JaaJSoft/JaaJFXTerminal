@@ -22,6 +22,7 @@ import java.io.InputStreamReader;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Distribution {
@@ -88,6 +89,8 @@ public class Distribution {
             Thread.currentThread().interrupt();
             return Collections.emptyList();
         }
-
+    }
+    public static Optional<Distribution> getDefaultDistribution() {
+        return Distribution.getAll().stream().filter(Distribution::isDefault).findAny();
     }
 }

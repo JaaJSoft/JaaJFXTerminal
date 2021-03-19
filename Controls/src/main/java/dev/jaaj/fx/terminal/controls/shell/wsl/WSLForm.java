@@ -45,7 +45,7 @@ public class WSLForm extends ShellForm<WSLConfig> {
             distribution.set(newValue.getDistribution());
             user.set(newValue.getUser());
             workingDirectory.set(newValue.getWorkingDirectory());
-            command.set(newValue.getCommand());
+            command.set(newValue.getCommandToExecute());
         });
         this.wslConfig.set(config);
     }
@@ -65,7 +65,7 @@ public class WSLForm extends ShellForm<WSLConfig> {
             config.setDistribution(distribution.getValue());
             config.setUser(user.get());
             config.setWorkingDirectory(workingDirectory.getValue());
-            config.setCommand(command.getValue());
+            config.setCommandToExecute(command.getValue());
         }
         return config;
     }

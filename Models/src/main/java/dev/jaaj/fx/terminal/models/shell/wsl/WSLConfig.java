@@ -16,19 +16,22 @@
 
 package dev.jaaj.fx.terminal.models.shell.wsl;
 
-import dev.jaaj.fx.terminal.models.shell.AbstractShellConfig;
+import dev.jaaj.fx.terminal.models.shell.LocalShellConfig;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class WSLConfig extends AbstractShellConfig {
+import java.util.Objects;
+import java.util.Optional;
+
+public class WSLConfig extends LocalShellConfig {
     private final ObjectProperty<Distribution> distribution = new SimpleObjectProperty<>();
     private final StringProperty user = new SimpleStringProperty("");
-    private final StringProperty workingDirectory = new SimpleStringProperty("");
-    private final StringProperty command = new SimpleStringProperty("");
 
     public WSLConfig() {
+        super("wsl");
+        Distribution.getDefaultDistribution().ifPresent(distribution::set);
         setShellIcon(getClass().getResource("wsl.png").toExternalForm());
     }
 
@@ -56,30 +59,6 @@ public class WSLConfig extends AbstractShellConfig {
         this.user.set(user);
     }
 
-    public String getWorkingDirectory() {
-        return workingDirectory.get();
-    }
-
-    public StringProperty workingDirectoryProperty() {
-        return workingDirectory;
-    }
-
-    public void setWorkingDirectory(String workingDirectory) {
-        this.workingDirectory.set(workingDirectory);
-    }
-
-    public String getCommand() {
-        return command.get();
-    }
-
-    public StringProperty commandProperty() {
-        return command;
-    }
-
-    public void setCommand(String command) {
-        this.command.set(command);
-    }
-
     @Override
     public String getCommandLine() {
         String startCommand = "wsl";
@@ -89,13 +68,14 @@ public class WSLConfig extends AbstractShellConfig {
         if (!getUser().isBlank()) {
             startCommand += " -u " + getUser();
         }
-
         if (!getWorkingDirectory().isBlank()) {
             startCommand += " --cd " + getWorkingDirectory();
         }
-
-        if (!getCommand().isBlank()) {
-            startCommand += " -e " + getCommand();
+        if (!getCommandToExecute().isBlank()) {
+            startCommand += " -e " + getCommandToExecute();
+        }
+        if (!getExtraArgs().isBlank()) {
+            startCommand += " " + getExtraArgs();
         }
         return startCommand;
     }
@@ -108,8 +88,25 @@ public class WSLConfig extends AbstractShellConfig {
             user += "@";
         }
         if (distrib.isBlank()) {
-            distrib = "Default"; //TODO: resource bundle
+            Optional<Distribution> optionalDistribution = Distribution.getDefaultDistribution();
+            if (optionalDistribution.isPresent()) {
+                distrib = optionalDistribution.get().getName();
+            }
         }
         return user + distrib;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        WSLConfig wslConfig = (WSLConfig) o;
+        return Objects.equals(getDistribution(), wslConfig.getDistribution()) && Objects.equals(getUser(), wslConfig.getUser());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getDistribution(), getUser());
     }
 }
