@@ -29,6 +29,7 @@ import dev.jaaj.fx.terminal.controls.profile.ProfilesDialog;
 import dev.jaaj.fx.terminal.controls.shell.local.LocalShellFormDialog;
 import dev.jaaj.fx.terminal.controls.shell.ssh.SSHFormDialog;
 import dev.jaaj.fx.terminal.controls.shell.wsl.WSLFormDialog;
+import dev.jaaj.fx.terminal.models.Settings;
 import dev.jaaj.fx.terminal.models.profile.Profile;
 import dev.jaaj.fx.terminal.models.profile.ProfilesController;
 import dev.jaaj.fx.terminal.models.shell.LocalShellConfig;
@@ -50,6 +51,7 @@ import org.controlsfx.control.StatusBar;
 
 import java.io.InputStream;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -87,8 +89,13 @@ public class MainController implements Initializable {
 
     private ResourceBundle bundle;
 
-    private final ProfilesController profilesController = new ProfilesController();
+    private final ProfilesController profilesController;
     private TerminalTabsController terminalTabsController;
+    private final HashMap<Profile, MenuItem> profileMenuItemHashMap = new HashMap<>();
+
+    public MainController() {
+        profilesController = Settings.getInstance().getProfilesController();
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -99,23 +106,29 @@ public class MainController implements Initializable {
             ObservableList<MenuItem> profileMenuItems = profileMenu.getItems();
             if (c.wasAdded()) {
                 Profile profile = c.getAddedSubList().get(0);
-                MenuItem e = new MenuItem();
-                e.textProperty().bind(profile.profileNameProperty());
-                e.setOnAction(event -> {
-                    terminalTabsController.addTerminal(new Terminal(profile));
-                });
-                profileMenuItems.add(e);
+                MenuItem profileMenuItem = createProfileMenuItem(profile);
+                profileMenuItems.add(profileMenuItem);
+                profileMenuItemHashMap.put(profile, profileMenuItem);
             } else if (c.wasRemoved()) {
-                Optional<MenuItem> optionalMenuItem = profileMenuItems.stream().filter(menuItem -> menuItem.getText().equals(c.getRemoved().get(0).getProfileName())).findAny();
-                optionalMenuItem.ifPresent(profileMenuItems::remove);
+                Profile profile = c.getRemoved().get(0);
+                MenuItem menuItem = profileMenuItemHashMap.remove(profile);
+                profileMenuItems.remove(menuItem);
             }
         });
+        profilesController.getProfiles().forEach(profile -> profileMenu.getItems().add(createProfileMenuItem(profile)));
         tabPane.getTabs().addListener(this::onTabsChanged);
 
         newCMDShellTerminal.setOnAction(event -> openTerminalLocalShell(new CmdShellConfig()));
         newPowerShellTerminal.setOnAction(event -> openTerminalLocalShell(new PowerShellConfig()));
         newPWSHTerminal.setOnAction(event -> openTerminalLocalShell(new PwshConfig()));
         newTerminal.fire();
+    }
+
+    private MenuItem createProfileMenuItem(Profile profile) {
+        MenuItem e = new MenuItem();
+        e.textProperty().bind(profile.profileNameProperty());
+        e.setOnAction(event -> terminalTabsController.addTerminal(new Terminal(profile)));
+        return e;
     }
 
     private void onTabsChanged(ListChangeListener.Change<? extends Tab> c) {

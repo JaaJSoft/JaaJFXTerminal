@@ -31,7 +31,7 @@ public class SSHConfig extends AbstractShellConfig {
     private final StringProperty command = new SimpleStringProperty("");
 
     public SSHConfig() {
-        inetAddress.addListener((observable, oldValue, newValue) -> inetAddressStr.set(newValue.getHostName()));
+        inetAddress.addListener((observable, oldValue, newValue) -> inetAddressStr.set(newValue.getHostAddress()));
         setShellIcon(getClass().getResource("ssh.png").toExternalForm());
     }
 
@@ -107,7 +107,7 @@ public class SSHConfig extends AbstractShellConfig {
 
     @Override
     public String getTitle() {
-        return getUser() + "@" + getInetAddress().getHostName();
+        return getUser() + "@" + getInetAddressStr();
     }
 
     @Override

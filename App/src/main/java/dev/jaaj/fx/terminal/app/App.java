@@ -16,6 +16,7 @@
 
 package dev.jaaj.fx.terminal.app;
 
+import dev.dirs.ProjectDirectories;
 import dev.jaaj.fx.core.theme.Theme;
 import dev.jaaj.fx.core.theme.ThemeVistor;
 import dev.jaaj.fx.core.theme.windows.Windows10DarkTheme;
@@ -29,6 +30,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.InputStream;
+import java.nio.file.Path;
 import java.util.ResourceBundle;
 
 public class App extends Application {
@@ -43,6 +45,8 @@ public class App extends Application {
         //theme = new DefaultTheme();
         Settings settings = Settings.getInstance();
         settings.setTheme(theme);
+        ProjectDirectories myProjDirs = ProjectDirectories.from("dev", "JaaJSoft", "JaaJFXTerminal");
+        settings.setConfigLocation(Path.of(myProjDirs.configDir));
 
         Parent root = FXMLLoader.load(getClass().getResource("main.fxml"), ResourceBundle.getBundle("dev/jaaj/fx/terminal/app/Terminal"));
         Scene scene = new Scene(root, 800, 500);

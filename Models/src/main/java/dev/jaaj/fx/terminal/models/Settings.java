@@ -20,12 +20,16 @@ import dev.jaaj.fx.core.theme.DefaultTheme;
 import dev.jaaj.fx.core.theme.Theme;
 import dev.jaaj.fx.core.theme.windows.Windows10DarkTheme;
 import dev.jaaj.fx.core.theme.windows.Windows10LightTheme;
+import dev.jaaj.fx.terminal.models.profile.ProfilesController;
 import dev.jaaj.fx.terminal.models.theme.DefaultJMetroDarkTerminalThemeFactory;
 import dev.jaaj.fx.terminal.models.theme.DefaultJMetroLightTerminalThemeFactory;
 import dev.jaaj.fx.terminal.models.theme.TerminalThemeConfig;
 import dev.jaaj.fx.terminal.models.theme.TerminalThemeProvider;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+
+import java.nio.file.Path;
 
 public class Settings {
 
@@ -33,12 +37,16 @@ public class Settings {
 
     private final ObjectProperty<Theme> theme = new SimpleObjectProperty<>(new DefaultTheme());
     private final TerminalThemeProvider terminalThemeProvider;
+    private final ObjectProperty<Path> configLocation = new SimpleObjectProperty<>();
+    private final ObjectProperty<ProfilesController> profilesController = new SimpleObjectProperty<>();
 
     private Settings() {
+
         terminalThemeProvider = new TerminalThemeProvider();
         terminalThemeProvider.registerTheme(new Windows10LightTheme(), new DefaultJMetroLightTerminalThemeFactory().build());
         terminalThemeProvider.registerTheme(new Windows10DarkTheme(), new DefaultJMetroDarkTerminalThemeFactory().build());
         terminalThemeProvider.registerTheme(new DefaultTheme(), new DefaultJMetroLightTerminalThemeFactory().build());
+        configLocation.addListener((observable, oldValue, newValue) -> profilesController.set(new ProfilesController(getConfigLocation().resolve("profiles.json"))));
     }
 
     public static Settings getInstance() {
@@ -65,8 +73,27 @@ public class Settings {
     }
 
     public TerminalThemeConfig getTerminalThemeFromCurrentTheme() {
-        TerminalThemeConfig terminalTheme = getTerminalThemeProvider().getTerminalTheme(getTheme());
-        return terminalTheme;
+        return getTerminalThemeProvider().getTerminalTheme(getTheme());
+    }
+
+    public Path getConfigLocation() {
+        return configLocation.get();
+    }
+
+    public void setConfigLocation(Path configLocation) {
+        this.configLocation.set(configLocation);
+    }
+
+    public ProfilesController getProfilesController() {
+        return profilesController.get();
+    }
+
+    public ObjectProperty<Path> configLocationProperty() {
+        return configLocation;
+    }
+
+    public ReadOnlyObjectProperty<ProfilesController> profilesControllerProperty() {
+        return profilesController;
     }
 }
 
