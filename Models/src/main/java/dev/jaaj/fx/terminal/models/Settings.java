@@ -39,7 +39,7 @@ public class Settings {
     private final TerminalThemeProvider terminalThemeProvider;
     private final ObjectProperty<Path> configLocation = new SimpleObjectProperty<>();
     private final ObjectProperty<ProfilesController> profilesController = new SimpleObjectProperty<>();
-
+    
     private Settings() {
 
         terminalThemeProvider = new TerminalThemeProvider();

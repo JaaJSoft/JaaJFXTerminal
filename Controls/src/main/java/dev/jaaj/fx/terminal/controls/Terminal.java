@@ -30,7 +30,7 @@ public class Terminal extends Control {
     private final BooleanProperty closed = new SimpleBooleanProperty(false);
 
     public Terminal(AbstractShellConfig terminalConfig) {
-        this(terminalConfig, Settings.getInstance().getTerminalThemeFromCurrentTheme());
+        this(terminalConfig, null);
     }
 
 
@@ -55,6 +55,9 @@ public class Terminal extends Control {
     }
 
     public TerminalThemeConfig getTerminalThemeConfig() {
+        if (profile.getTerminalThemeConfig() == null) {
+            return Settings.getInstance().getTerminalThemeFromCurrentTheme();
+        }
         return profile.getTerminalThemeConfig();
     }
 

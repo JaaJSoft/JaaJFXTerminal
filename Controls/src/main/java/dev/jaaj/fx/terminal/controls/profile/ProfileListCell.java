@@ -49,11 +49,8 @@ public class ProfileListCell extends ListCell<Profile> {
             });
             MenuItem rename = new MenuItem(BUNDLE.getString("rename"));
             rename.setOnAction(event -> {
-                TextInputDialog dialogRename = new TextInputDialog(item.getProfileName());
+                TextInputDialog dialogRename = new ProfileNameDialog(item);
                 dialogRename.initOwner(this.getScene().getWindow());
-                dialogRename.setTitle(BUNDLE.getString("rename"));
-                dialogRename.setHeaderText(BUNDLE.getString("rename"));
-                dialogRename.setContentText(BUNDLE.getString("profile_name"));
                 Optional<String> optional = dialogRename.showAndWait();
                 optional.ifPresent(item::setProfileName);
             });

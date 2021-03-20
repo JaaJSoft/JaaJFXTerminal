@@ -19,7 +19,6 @@ package dev.jaaj.fx.terminal.models.profile;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import dev.jaaj.fx.terminal.models.Settings;
 import dev.jaaj.fx.terminal.models.shell.AbstractShellConfig;
 import dev.jaaj.fx.terminal.models.shell.adapter.AbstractShellAdapter;
 import dev.jaaj.fx.terminal.models.shell.cmd.CmdShellAdapter;
@@ -108,7 +107,7 @@ public class ProfilesController {
     public Profile getDefaultProfile() {
         if (profiles.isEmpty()) {
             AbstractShellConfig shellConfig = new CmdShellConfig();
-            profiles.add(new Profile(shellConfig, Settings.getInstance().getTerminalThemeFromCurrentTheme()));
+            profiles.add(new Profile(shellConfig, null));
         }
         return profiles.get(0);
     }

@@ -37,7 +37,13 @@ public class ProfileAdapter implements JsonSerializer<Profile>, JsonDeserializer
         JsonObject jsonObject = json.getAsJsonObject();
         String profileName = jsonObject.get("profileName").getAsString();
         AbstractShellConfig shellConfig = context.deserialize(jsonObject.get("shellConfig").getAsJsonObject(), AbstractShellConfig.class);
-        TerminalThemeConfig terminalThemeConfig = context.deserialize(jsonObject.get("terminalThemeConfig").getAsJsonObject(), TerminalThemeConfig.class);
+        JsonElement terminalThemeConfigJsonObject = jsonObject.get("terminalThemeConfig");
+        TerminalThemeConfig terminalThemeConfig;
+        if (terminalThemeConfigJsonObject != null && !terminalThemeConfigJsonObject.isJsonNull()) {
+            terminalThemeConfig = context.deserialize(terminalThemeConfigJsonObject.getAsJsonObject(), TerminalThemeConfig.class);
+        } else {
+            terminalThemeConfig = null;
+        }
         return new Profile(profileName, shellConfig, terminalThemeConfig);
     }
 }

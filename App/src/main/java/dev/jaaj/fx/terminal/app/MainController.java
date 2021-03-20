@@ -25,6 +25,7 @@ import dev.jaaj.fx.terminal.controls.about.data.AppInfoBuilder;
 import dev.jaaj.fx.terminal.controls.about.data.Person;
 import dev.jaaj.fx.terminal.controls.about.data.PersonBuilder;
 import dev.jaaj.fx.terminal.controls.options.OptionsDialog;
+import dev.jaaj.fx.terminal.controls.profile.ProfileNameDialog;
 import dev.jaaj.fx.terminal.controls.profile.ProfilesDialog;
 import dev.jaaj.fx.terminal.controls.shell.local.LocalShellFormDialog;
 import dev.jaaj.fx.terminal.controls.shell.ssh.SSHFormDialog;
@@ -228,7 +229,14 @@ public class MainController implements Initializable {
 
     public void saveProfile(ActionEvent event) {
         terminalTabsController.getFocusedTerminal().ifPresent(terminal -> {
-            boolean saveProfile = profilesController.saveProfile(terminal.getProfile());
+            Profile profile = terminal.getProfile();
+            TextInputDialog renameDialog = new ProfileNameDialog(profile);
+            renameDialog.initOwner(root.getCenter().getScene().getWindow());
+            Optional<String> s = renameDialog.showAndWait();
+            if (s.isPresent()) {
+                profile.setProfileName(s.get());
+                boolean saveProfile = profilesController.saveProfile(profile);
+            }
         });
 
     }
