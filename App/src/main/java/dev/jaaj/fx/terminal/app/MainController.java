@@ -64,7 +64,6 @@ public class MainController implements Initializable {
     public static final Person REMI_LECOUILLARD = new PersonBuilder().setName("Rémi Lecouillard").setTitle("A good friend").setEmail("remi.lecouillard@jaaj.dev").setWebsite("https://jaaj.dev").createPerson();
     public static final Person JULIEN_CHEVRON = new PersonBuilder().setName("Julien Chevron").setTitle("Noobard").setEmail("julien.chevron@jaaj.dev").setWebsite("https://jaaj.dev").createPerson();
 
-
     @FXML
     Menu profileMenu;
     @FXML
@@ -140,7 +139,6 @@ public class MainController implements Initializable {
             root.setCenter(tabPane);
         }
     }
-
 
     @FXML
     private void exit(ActionEvent event) {
@@ -245,5 +243,6 @@ public class MainController implements Initializable {
         ProfilesDialog profilesDialog = new ProfilesDialog(profilesController.getProfiles());
         profilesDialog.initOwner(root.getCenter().getScene().getWindow());
         profilesDialog.showAndWait();
+        profilesController.savesProfiles();
     }
 }

@@ -16,9 +16,9 @@
 
 package dev.jaaj.fx.terminal.controls;
 
-import dev.jaaj.fx.terminal.models.Settings;
 import dev.jaaj.fx.terminal.models.profile.Profile;
 import dev.jaaj.fx.terminal.models.shell.AbstractShellConfig;
+import dev.jaaj.fx.terminal.models.theme.DefaultJMetroDarkTerminalThemeFactory;
 import dev.jaaj.fx.terminal.models.theme.TerminalThemeConfig;
 import javafx.beans.property.*;
 import javafx.scene.control.Control;
@@ -28,11 +28,11 @@ public class Terminal extends Control {
     private final StringProperty lastCommand = new SimpleStringProperty("");
     private final Profile profile;
     private final BooleanProperty closed = new SimpleBooleanProperty(false);
+    private final ObjectProperty<TerminalThemeConfig> defaultTerminalTheme = new SimpleObjectProperty<>(new DefaultJMetroDarkTerminalThemeFactory().build());
 
     public Terminal(AbstractShellConfig terminalConfig) {
         this(terminalConfig, null);
     }
-
 
     public Terminal(AbstractShellConfig terminalConfig, TerminalThemeConfig themeConfig) {
         profile = new Profile(terminalConfig.getTitle(), terminalConfig, themeConfig);
@@ -56,7 +56,7 @@ public class Terminal extends Control {
 
     public TerminalThemeConfig getTerminalThemeConfig() {
         if (profile.getTerminalThemeConfig() == null) {
-            return Settings.getInstance().getTerminalThemeFromCurrentTheme();
+            return getDefaultTerminalTheme();
         }
         return profile.getTerminalThemeConfig();
     }
@@ -103,5 +103,15 @@ public class Terminal extends Control {
         return profile.getProfileName();
     }
 
+    public TerminalThemeConfig getDefaultTerminalTheme() {
+        return defaultTerminalTheme.get();
+    }
 
+    public ObjectProperty<TerminalThemeConfig> defaultTerminalThemeProperty() {
+        return defaultTerminalTheme;
+    }
+
+    public void setDefaultTerminalTheme(TerminalThemeConfig defaultTerminalTheme) {
+        this.defaultTerminalTheme.set(defaultTerminalTheme);
+    }
 }

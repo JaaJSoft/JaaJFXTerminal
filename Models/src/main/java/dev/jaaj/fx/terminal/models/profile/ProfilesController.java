@@ -47,11 +47,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProfilesController {
-    private final ObservableList<Profile> profiles = FXCollections.observableArrayList();
     private final static Gson gson = getBuilder().create();
 
+    private final ObservableList<Profile> profiles = FXCollections.observableArrayList();
+    private final Path location;
+    private final Type listOfType;
+
     public ProfilesController(Path location) {
-        Type listOfType = new TypeToken<ArrayList<Profile>>() {
+        this.location = location;
+        listOfType = new TypeToken<ArrayList<Profile>>() {
         }.getType();
         try (BufferedReader bufferedReader = Files.newBufferedReader(location)) {
             List<Profile> fromJson = gson.fromJson(bufferedReader, listOfType);
@@ -61,7 +65,7 @@ public class ProfilesController {
             //no profile found
         }
         profiles.addListener((ListChangeListener<? super Profile>) c -> {
-            saveProfiles(location, listOfType);
+            saveProfiles(this.location, listOfType);
         });
     }
 
@@ -80,6 +84,10 @@ public class ProfilesController {
         } catch (IOException e) {
             e.printStackTrace(); //todo error
         }
+    }
+
+    public void savesProfiles() {
+        saveProfiles(location, listOfType);
     }
 
 

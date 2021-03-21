@@ -16,6 +16,7 @@
 
 package dev.jaaj.fx.terminal.controls;
 
+import dev.jaaj.fx.terminal.models.Settings;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableSet;
@@ -61,6 +62,7 @@ public class TerminalTabsController {
     }
 
     public void addTerminal(Terminal terminal) {
+        terminal.setDefaultTerminalTheme(Settings.getInstance().getTerminalThemeFromCurrentTheme());
         System.out.println(terminal.getTerminalConfig().getCommandLine());
         TerminalTab newTab = new TerminalTab(terminal);
         terminalTabs.add(newTab);
