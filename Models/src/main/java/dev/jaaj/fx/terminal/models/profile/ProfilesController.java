@@ -47,7 +47,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProfilesController {
-    private final static Gson gson = getBuilder().create();
+    private static final Gson gson = getBuilder().create();
 
     private final ObservableList<Profile> profiles = FXCollections.observableArrayList();
     private final Path location;
