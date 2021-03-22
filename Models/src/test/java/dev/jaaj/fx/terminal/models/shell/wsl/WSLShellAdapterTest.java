@@ -28,11 +28,12 @@ import static org.junit.Assert.assertEquals;
 public class WSLShellAdapterTest {
     private static WSLConfig CONFIG;
     private static Gson gson;
-    private static final String json = "{\"type\":\"dev.jaaj.fx.terminal.models.shell.wsl.WSLConfig\",\"properties\":{\"distribution\":{\"name\":\"WLinux\",\"isDefault\":true},\"user\":\"pierre\",\"workingDirectory\":\".\",\"commandToExecute\":\"ls\",\"extraArgs\":\"\",\"shellIcon\":\"" + WSLConfig.class.getResource("wsl.png").toExternalForm() + "\"}}";
+    private static final String json = "{\"type\":\"dev.jaaj.fx.terminal.models.shell.wsl.WSLConfig\",\"properties\":{\"distribution\":{\"name\":\"ubuntu\",\"isDefault\":true},\"user\":\"pierre\",\"workingDirectory\":\".\",\"commandToExecute\":\"ls\",\"extraArgs\":\"\",\"shellIcon\":\"" + WSLConfig.class.getResource("wsl.png").toExternalForm() + "\"}}";
 
     @BeforeClass
     public static void beforeClass() throws Exception {
         CONFIG = new WSLConfig();
+        CONFIG.setDistribution(new Distribution("ubuntu", true));
         CONFIG.setUser("pierre");
         CONFIG.setWorkingDirectory(".");
         CONFIG.setCommandToExecute("ls");
