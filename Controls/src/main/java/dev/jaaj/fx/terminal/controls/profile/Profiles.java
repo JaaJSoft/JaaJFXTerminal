@@ -21,28 +21,44 @@ import dev.jaaj.fx.terminal.models.profile.Profile;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 import javafx.scene.control.Control;
 import javafx.scene.control.SelectionModel;
 import javafx.scene.control.Skin;
 
+import java.util.function.Function;
+
 public class Profiles extends Control {
     private final ObservableList<Profile> profilesList;
     private final ObjectProperty<SelectionModel<Profile>> profileSelectionModel = new SimpleObjectProperty<>();
     private final ObjectProperty<AbstractForm<Profile>> profileForm = new SimpleObjectProperty<>();
     private final ObservableMap<Profile, AbstractForm<Profile>> mapProfileForm = FXCollections.observableHashMap();
+    private Function<Profile, AbstractForm<Profile>> newForm = ProfileForm::new;
 
     public Profiles(ObservableList<Profile> profiles) {
         this.profilesList = profiles;
         profileSelectionModel.addListener((observable, oldValue, newValue) -> {
             newValue.selectedItemProperty().addListener((observableItem, oldItem, newItem) -> {
-                AbstractForm<Profile> form = mapProfileForm.computeIfAbsent(newItem, ProfileForm::new);
+                AbstractForm<Profile> form = mapProfileForm.computeIfAbsent(newItem, newForm);
                 profileForm.set(form);
                 form.setVisible(newItem != null);
             });
             newValue.select(0);
         });
+        profilesList.addListener((ListChangeListener<? super Profile>) c -> {
+            c.next();
+            c.getRemoved().forEach(mapProfileForm::remove);
+        });
+    }
+
+    public void apply() {
+        mapProfileForm.values().forEach(AbstractForm::apply);
+    }
+
+    public boolean validate() {
+        return mapProfileForm.values().stream().allMatch(AbstractForm::validate);
     }
 
     @Override
@@ -80,5 +96,13 @@ public class Profiles extends Control {
 
     public void setProfileForm(AbstractForm<Profile> profileForm) {
         this.profileForm.set(profileForm);
+    }
+
+    public Function<Profile, AbstractForm<Profile>> getNewForm() {
+        return newForm;
+    }
+
+    public void setNewForm(Function<Profile, AbstractForm<Profile>> newForm) {
+        this.newForm = newForm;
     }
 }
