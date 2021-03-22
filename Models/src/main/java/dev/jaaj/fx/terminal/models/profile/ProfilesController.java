@@ -61,12 +61,9 @@ public class ProfilesController {
             List<Profile> fromJson = gson.fromJson(bufferedReader, listOfType);
             profiles.addAll(fromJson);
         } catch (IOException e) {
-            e.printStackTrace();
             //no profile found
         }
-        profiles.addListener((ListChangeListener<? super Profile>) c -> {
-            saveProfiles(this.location, listOfType);
-        });
+        profiles.addListener((ListChangeListener<? super Profile>) c -> saveProfiles(this.location, listOfType));
     }
 
     public void saveProfiles(Path location, Type listOfType) {

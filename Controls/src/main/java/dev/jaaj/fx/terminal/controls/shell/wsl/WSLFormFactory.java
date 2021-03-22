@@ -19,7 +19,7 @@ package dev.jaaj.fx.terminal.controls.shell.wsl;
 import dev.jaaj.fx.terminal.controls.shell.ShellFormFactory;
 import dev.jaaj.fx.terminal.models.shell.wsl.WSLConfig;
 
-public class WSLFormFactory extends ShellFormFactory<WSLForm> {
+public class WSLFormFactory implements ShellFormFactory<WSLForm> {
     @Override
     public boolean canBuild(Object objectToInitWithForm) {
         return objectToInitWithForm instanceof WSLConfig;

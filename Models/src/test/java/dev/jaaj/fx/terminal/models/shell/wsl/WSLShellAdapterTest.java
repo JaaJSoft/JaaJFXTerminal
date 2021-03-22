@@ -28,7 +28,7 @@ import static org.junit.Assert.assertEquals;
 public class WSLShellAdapterTest {
     private static WSLConfig CONFIG;
     private static Gson gson;
-    private static final String json = "{\"type\":\"dev.jaaj.fx.terminal.models.shell.wsl.WSLConfig\",\"properties\":{\"distribution\":{\"name\":\"ubuntu\",\"isDefault\":true},\"user\":\"pierre\",\"workingDirectory\":\".\",\"commandToExecute\":\"ls\",\"extraArgs\":\"\",\"shellIcon\":\"" + WSLConfig.class.getResource("wsl.png").toExternalForm() + "\"}}";
+    private static final String JSON = "{\"type\":\"dev.jaaj.fx.terminal.models.shell.wsl.WSLConfig\",\"properties\":{\"distribution\":{\"name\":\"ubuntu\",\"isDefault\":true},\"user\":\"pierre\",\"workingDirectory\":\".\",\"commandToExecute\":\"ls\",\"extraArgs\":\"\",\"shellIcon\":\"" + WSLConfig.class.getResource("wsl.png").toExternalForm() + "\"}}";
 
     @BeforeClass
     public static void beforeClass() throws Exception {
@@ -47,12 +47,12 @@ public class WSLShellAdapterTest {
     @Test
     public void serialize() {
         String s = gson.toJson(CONFIG, AbstractShellConfig.class);
-        assertEquals(json, s);
+        assertEquals(JSON, s);
     }
 
     @Test
     public void deserialize() {
-        AbstractShellConfig configFromJson = gson.fromJson(json, AbstractShellConfig.class);
+        AbstractShellConfig configFromJson = gson.fromJson(JSON, AbstractShellConfig.class);
         assertEquals(CONFIG, configFromJson);
     }
 }

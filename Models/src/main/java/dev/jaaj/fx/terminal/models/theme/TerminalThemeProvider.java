@@ -19,7 +19,9 @@ package dev.jaaj.fx.terminal.models.theme;
 import dev.jaaj.fx.core.theme.Theme;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class TerminalThemeProvider { //TODO loading from config
     private final Map<Class<? extends Theme>, TerminalThemeConfig> terminalThemeConfigMap = new HashMap<>();
@@ -30,5 +32,9 @@ public class TerminalThemeProvider { //TODO loading from config
 
     public void registerTheme(Theme theme, TerminalThemeConfig terminalThemeConfig) {
         terminalThemeConfigMap.put(theme.getClass(), terminalThemeConfig);
+    }
+
+    public Set<TerminalThemeConfig> getTerminalThemes() {
+        return new HashSet<>(terminalThemeConfigMap.values());
     }
 }

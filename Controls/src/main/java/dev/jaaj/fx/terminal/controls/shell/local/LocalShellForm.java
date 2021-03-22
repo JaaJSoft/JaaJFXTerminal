@@ -19,23 +19,21 @@ package dev.jaaj.fx.terminal.controls.shell.local;
 import dev.jaaj.fx.terminal.controls.shell.ShellForm;
 import dev.jaaj.fx.terminal.models.shell.LocalShellConfig;
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.Skin;
 
 public class LocalShellForm extends ShellForm<LocalShellConfig> {
-    private final ObjectProperty<LocalShellConfig> localShellConfig = new SimpleObjectProperty<>();
     private final StringProperty workingDirectory = new SimpleStringProperty("");
     private final StringProperty command = new SimpleStringProperty("");
     private final StringProperty extraArgs = new SimpleStringProperty("");
 
     public LocalShellForm(LocalShellConfig config) {
-        this.localShellConfig.addListener((observable, oldValue, newValue) -> {
+        this.itemProperty().addListener((observable, oldValue, newValue) -> {
             workingDirectory.set(newValue.getWorkingDirectory());
             command.set(newValue.getCommandToExecute());
         });
-        this.localShellConfig.set(config);
+        this.itemProperty().set(config);
     }
 
     @Override
@@ -45,7 +43,7 @@ public class LocalShellForm extends ShellForm<LocalShellConfig> {
 
     @Override
     public LocalShellConfig apply() {
-        LocalShellConfig config = localShellConfig.getValue();
+        LocalShellConfig config = itemProperty().getValue();
         if (config != null) {
             config.setWorkingDirectory(workingDirectory.getValue());
             config.setCommandToExecute(command.getValue());
@@ -60,15 +58,15 @@ public class LocalShellForm extends ShellForm<LocalShellConfig> {
     }
 
     public LocalShellConfig getLocalShellConfig() {
-        return localShellConfig.get();
+        return itemProperty().get();
     }
 
     public ObjectProperty<LocalShellConfig> localShellConfigProperty() {
-        return localShellConfig;
+        return itemProperty();
     }
 
     public void setLocalShellConfig(LocalShellConfig localShellConfig) {
-        this.localShellConfig.set(localShellConfig);
+        this.itemProperty().set(localShellConfig);
     }
 
     public String getWorkingDirectory() {
@@ -84,7 +82,7 @@ public class LocalShellForm extends ShellForm<LocalShellConfig> {
     }
 
     public String getExecutable() {
-        return localShellConfig.get().getExecutable();
+        return itemProperty().get().getExecutable();
     }
 
     public String getCommand() {

@@ -19,7 +19,7 @@ package dev.jaaj.fx.terminal.controls.shell.local;
 import dev.jaaj.fx.terminal.controls.shell.ShellFormFactory;
 import dev.jaaj.fx.terminal.models.shell.LocalShellConfig;
 
-public class LocalShellFormFactory extends ShellFormFactory<LocalShellForm> {
+public class LocalShellFormFactory implements ShellFormFactory<LocalShellForm> {
     @Override
     public boolean canBuild(Object objectToInitWithForm) {
         return objectToInitWithForm instanceof LocalShellConfig;

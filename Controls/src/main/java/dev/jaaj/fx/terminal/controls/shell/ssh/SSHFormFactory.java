@@ -19,7 +19,7 @@ package dev.jaaj.fx.terminal.controls.shell.ssh;
 import dev.jaaj.fx.terminal.controls.shell.ShellFormFactory;
 import dev.jaaj.fx.terminal.models.shell.ssh.SSHConfig;
 
-public class SSHFormFactory extends ShellFormFactory<SSHForm> {
+public class SSHFormFactory implements ShellFormFactory<SSHForm> {
 
     @Override
     public boolean canBuild(Object objectToInitWithForm) {

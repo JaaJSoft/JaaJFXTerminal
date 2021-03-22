@@ -30,7 +30,7 @@ import static org.junit.Assert.assertEquals;
 public class TerminalThemeAdapterTest {
     private static final TerminalThemeConfig TERMINAL_THEME_CONFIG = new DefaultJMetroLightTerminalThemeFactory().build();
     private static Gson gson;
-    private static final String json = "{\"themeName\":\"Light JMetro\",\"backgroundColor\":\"#F8F8F8FF\",\"foregroundColor\":\"#000000FF\",\"cursorColor\":\"#000000FF\",\"font\":\"Arial\",\"fontSize\":14.0}";
+    private static final String JSON = "{\"themeName\":\"Light JMetro\",\"backgroundColor\":\"#F8F8F8FF\",\"foregroundColor\":\"#000000FF\",\"cursorColor\":\"#000000FF\",\"font\":\"Arial\",\"fontSize\":14.0}";
 
     @BeforeClass
     public static void beforeClass() throws Exception {
@@ -44,13 +44,13 @@ public class TerminalThemeAdapterTest {
     public void serialize() {
         if (isWindows()) { // TODO why it fails on linux ??
             String s = gson.toJson(TERMINAL_THEME_CONFIG);
-            assertEquals(json, s);
+            assertEquals(JSON, s);
         }
     }
 
     @Test
     public void deserialize() {
-        TerminalThemeConfig terminalThemeConfig = gson.fromJson(json, TerminalThemeConfig.class);
+        TerminalThemeConfig terminalThemeConfig = gson.fromJson(JSON, TerminalThemeConfig.class);
         assertEquals(TERMINAL_THEME_CONFIG, terminalThemeConfig);
     }
 }

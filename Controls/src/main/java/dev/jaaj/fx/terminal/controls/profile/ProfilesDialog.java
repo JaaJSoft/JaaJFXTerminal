@@ -29,7 +29,7 @@ public class ProfilesDialog extends Dialog<Void> {
     public ProfilesDialog(ObservableList<Profile> profiles) {
         this.setTitle(BUNDLE.getString("profiles"));
         this.setHeaderText(BUNDLE.getString("manage_profiles"));
-        this.getDialogPane().getButtonTypes().addAll(ButtonType.CLOSE);
+        this.getDialogPane().getButtonTypes().addAll(ButtonType.CANCEL, ButtonType.OK, ButtonType.APPLY);
         this.getDialogPane().setContent(new Profiles(profiles));
     }
 }

@@ -28,7 +28,7 @@ import static org.junit.Assert.assertEquals;
 public class PowerShellAdapterTest {
     private static PowerShellConfig CONFIG;
     private static Gson gson;
-    private static final String json = "{\"type\":\"dev.jaaj.fx.terminal.models.shell.powershell.PowerShellConfig\",\"properties\":{\"workingDirectory\":\".\",\"commandToExecute\":\"ls\",\"extraArgs\":\"\",\"shellIcon\":\"" + PowerShellConfig.class.getResource("powershell_96px.png").toExternalForm() + "\"}}";
+    private static final String JSON = "{\"type\":\"dev.jaaj.fx.terminal.models.shell.powershell.PowerShellConfig\",\"properties\":{\"workingDirectory\":\".\",\"commandToExecute\":\"ls\",\"extraArgs\":\"\",\"shellIcon\":\"" + PowerShellConfig.class.getResource("powershell_96px.png").toExternalForm() + "\"}}";
 
     @BeforeClass
     public static void beforeClass() throws Exception {
@@ -44,12 +44,12 @@ public class PowerShellAdapterTest {
     @Test
     public void serialize() {
         String s = gson.toJson(CONFIG, AbstractShellConfig.class);
-        assertEquals(json, s);
+        assertEquals(JSON, s);
     }
 
     @Test
     public void deserialize() {
-        AbstractShellConfig configFromJson = gson.fromJson(json, AbstractShellConfig.class);
+        AbstractShellConfig configFromJson = gson.fromJson(JSON, AbstractShellConfig.class);
         assertEquals(CONFIG, configFromJson);
     }
 }

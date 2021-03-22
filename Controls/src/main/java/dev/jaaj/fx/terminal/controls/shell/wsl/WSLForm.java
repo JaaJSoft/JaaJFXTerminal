@@ -28,7 +28,6 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Skin;
 
 public class WSLForm extends ShellForm<WSLConfig> {
-    private final ObjectProperty<WSLConfig> wslConfig = new SimpleObjectProperty<>();
 
     private final ObjectProperty<Distribution> distribution = new SimpleObjectProperty<>();
     private final StringProperty user = new SimpleStringProperty();
@@ -41,13 +40,13 @@ public class WSLForm extends ShellForm<WSLConfig> {
     }
 
     public WSLForm(WSLConfig config) {
-        this.wslConfig.addListener((observable, oldValue, newValue) -> {
+        this.itemProperty().addListener((observable, oldValue, newValue) -> {
             distribution.set(newValue.getDistribution());
             user.set(newValue.getUser());
             workingDirectory.set(newValue.getWorkingDirectory());
             command.set(newValue.getCommandToExecute());
         });
-        this.wslConfig.set(config);
+        this.itemProperty().set(config);
     }
 
     @Override
@@ -60,7 +59,7 @@ public class WSLForm extends ShellForm<WSLConfig> {
 
     @Override
     public WSLConfig apply() {
-        WSLConfig config = wslConfig.getValue();
+        WSLConfig config = itemProperty().getValue();
         if (config != null) {
             config.setDistribution(distribution.getValue());
             config.setUser(user.get());
@@ -71,15 +70,15 @@ public class WSLForm extends ShellForm<WSLConfig> {
     }
 
     public WSLConfig getWslConfig() {
-        return wslConfig.get();
+        return itemProperty().get();
     }
 
     public ObjectProperty<WSLConfig> wslConfigProperty() {
-        return wslConfig;
+        return itemProperty();
     }
 
     public void setWslConfig(WSLConfig wslConfig) {
-        this.wslConfig.set(wslConfig);
+        this.itemProperty().set(wslConfig);
     }
 
     @Override

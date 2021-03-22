@@ -25,7 +25,6 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 public class SSHForm extends ShellForm<SSHConfig> {
-    private final ObjectProperty<SSHConfig> sshConfig = new SimpleObjectProperty<>();
 
     private final StringProperty inetAddressStr = new SimpleStringProperty();
     private final StringProperty user = new SimpleStringProperty("root");
@@ -37,13 +36,13 @@ public class SSHForm extends ShellForm<SSHConfig> {
     }
 
     public SSHForm(SSHConfig config) {
-        this.sshConfig.addListener((observable, oldValue, newValue) -> {
+        this.itemProperty().addListener((observable, oldValue, newValue) -> {
             inetAddressStr.set(newValue.getInetAddressStr());
             user.set(newValue.getUser());
             port.set(newValue.getPort());
             command.set(newValue.getCommand());
         });
-        this.sshConfig.set(config);
+        this.itemProperty().set(config);
     }
 
     @Override
@@ -67,7 +66,7 @@ public class SSHForm extends ShellForm<SSHConfig> {
 
     @Override
     public SSHConfig apply() {
-        SSHConfig config = sshConfig.getValue();
+        SSHConfig config = itemProperty().getValue();
         if (config != null) {
             try {
                 config.setInetAddress(InetAddress.getByName(inetAddressStr.get()));
@@ -86,15 +85,15 @@ public class SSHForm extends ShellForm<SSHConfig> {
     }
 
     public SSHConfig getSshConfig() {
-        return sshConfig.get();
+        return itemProperty().get();
     }
 
     public ObjectProperty<SSHConfig> sshConfigProperty() {
-        return sshConfig;
+        return itemProperty();
     }
 
     public void setSshConfig(SSHConfig sshConfig) {
-        this.sshConfig.set(sshConfig);
+        this.itemProperty().set(sshConfig);
     }
 
     public StringProperty inetAddressStrProperty() {
@@ -111,5 +110,33 @@ public class SSHForm extends ShellForm<SSHConfig> {
 
     public StringProperty commandProperty() {
         return command;
+    }
+
+    public String getInetAddressStr() {
+        return inetAddressStr.get();
+    }
+
+    public String getUser() {
+        return user.get();
+    }
+
+    public int getPort() {
+        return port.get();
+    }
+
+    public String getCommand() {
+        return command.get();
+    }
+
+    public void setUser(String user) {
+        this.user.set(user);
+    }
+
+    public void setPort(int port) {
+        this.port.set(port);
+    }
+
+    public void setCommand(String command) {
+        this.command.set(command);
     }
 }

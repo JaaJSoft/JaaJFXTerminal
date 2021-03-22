@@ -16,21 +16,31 @@
 
 package dev.jaaj.fx.terminal.controls.profile;
 
+import dev.jaaj.fx.core.form.AbstractForm;
 import dev.jaaj.fx.terminal.models.profile.Profile;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import javafx.scene.control.Control;
 import javafx.scene.control.SelectionModel;
 import javafx.scene.control.Skin;
 
 public class Profiles extends Control {
-    private final ObservableList<Profile> profiles;
+    private final ObservableList<Profile> profilesList;
     private final ObjectProperty<SelectionModel<Profile>> profileSelectionModel = new SimpleObjectProperty<>();
+    private final ObjectProperty<AbstractForm<Profile>> profileForm = new SimpleObjectProperty<>();
+    private final ObservableMap<Profile, AbstractForm<Profile>> mapProfileForm = FXCollections.observableHashMap();
 
     public Profiles(ObservableList<Profile> profiles) {
-        this.profiles = profiles;
+        this.profilesList = profiles;
         profileSelectionModel.addListener((observable, oldValue, newValue) -> {
+            newValue.selectedItemProperty().addListener((observableItem, oldItem, newItem) -> {
+                AbstractForm<Profile> form = mapProfileForm.computeIfAbsent(newItem, ProfileForm::new);
+                profileForm.set(form);
+                form.setVisible(newItem != null);
+            });
             newValue.select(0);
         });
     }
@@ -41,7 +51,7 @@ public class Profiles extends Control {
     }
 
     public ObservableList<Profile> getProfiles() {
-        return profiles;
+        return profilesList;
     }
 
     public SelectionModel<Profile> getProfileSelectionModel() {
@@ -54,5 +64,21 @@ public class Profiles extends Control {
 
     public void setProfileSelectionModel(SelectionModel<Profile> profileSelectionModel) {
         this.profileSelectionModel.set(profileSelectionModel);
+    }
+
+    public void setProfileForm(ProfileForm profileForm) {
+        this.profileForm.set(profileForm);
+    }
+
+    public AbstractForm<Profile> getProfileForm() {
+        return profileForm.get();
+    }
+
+    public ObjectProperty<AbstractForm<Profile>> profileFormProperty() {
+        return profileForm;
+    }
+
+    public void setProfileForm(AbstractForm<Profile> profileForm) {
+        this.profileForm.set(profileForm);
     }
 }

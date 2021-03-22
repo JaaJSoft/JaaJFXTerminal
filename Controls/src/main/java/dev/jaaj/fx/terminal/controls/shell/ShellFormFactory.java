@@ -16,7 +16,7 @@
 
 package dev.jaaj.fx.terminal.controls.shell;
 
-import dev.jaaj.fx.terminal.controls.util.AbstractFormFactory;
+import dev.jaaj.fx.core.form.AbstractFormFactory;
 
-public abstract class ShellFormFactory<T extends ShellForm<?>> extends AbstractFormFactory<T> {
+public interface ShellFormFactory<T extends ShellForm<?>> extends AbstractFormFactory<T> {
 }
