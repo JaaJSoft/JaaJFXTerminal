@@ -53,42 +53,40 @@ public class ProfilesController {
     private final Path location;
     private final Type listOfType;
 
-    public ProfilesController(Path location) {
+    public ProfilesController(Path location) throws IOException {
         this.location = location;
         listOfType = new TypeToken<ArrayList<Profile>>() {
         }.getType();
         try (BufferedReader bufferedReader = Files.newBufferedReader(location)) {
             List<Profile> fromJson = gson.fromJson(bufferedReader, listOfType);
             profiles.addAll(fromJson);
-        } catch (IOException e) {
-            //no profile found
         }
-        profiles.addListener((ListChangeListener<? super Profile>) c -> saveProfiles(this.location, listOfType));
+        profiles.addListener((ListChangeListener<? super Profile>) c -> {
+            try {
+                saveProfiles(this.location, listOfType);
+            } catch (IOException ignored) {
+                // nothing to do
+            }
+        });
     }
 
-    public void saveProfiles(Path location, Type listOfType) {
+    public void saveProfiles(Path location, Type listOfType) throws IOException {
         String toJson = gson.toJson(new ArrayList<>(profiles), listOfType);
         if (!Files.exists(location)) {
-            try {
-                Files.createDirectories(location.getParent());
-                Files.createFile(location);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            Files.createDirectories(location.getParent());
+            Files.createFile(location);
         }
         try (BufferedWriter bufferedWriter = Files.newBufferedWriter(location)) {
             bufferedWriter.write(toJson);
-        } catch (IOException e) {
-            e.printStackTrace(); //todo error
         }
     }
 
-    public void savesProfiles() {
+    public void savesProfiles() throws IOException {
         saveProfiles(location, listOfType);
     }
 
 
-    public ProfilesController(Path location, List<Profile> profiles) {
+    public ProfilesController(Path location, List<Profile> profiles) throws IOException {
         this(location);
         this.profiles.addAll(profiles);
     }

@@ -30,6 +30,7 @@ import dev.jaaj.fx.terminal.controls.profile.ProfilesDialog;
 import dev.jaaj.fx.terminal.controls.shell.local.LocalShellFormDialog;
 import dev.jaaj.fx.terminal.controls.shell.ssh.SSHFormDialog;
 import dev.jaaj.fx.terminal.controls.shell.wsl.WSLFormDialog;
+import dev.jaaj.fx.terminal.controls.util.ExceptionAlert;
 import dev.jaaj.fx.terminal.models.Settings;
 import dev.jaaj.fx.terminal.models.profile.Profile;
 import dev.jaaj.fx.terminal.models.profile.ProfilesController;
@@ -48,8 +49,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
-import org.controlsfx.control.StatusBar;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.HashMap;
@@ -72,8 +73,6 @@ public class MainController implements Initializable {
     MenuBar menuBar;
     @FXML
     TabPane tabPane;
-    @FXML
-    StatusBar statusBar;
     @FXML
     MenuItem newTerminal;
     @FXML
@@ -243,6 +242,11 @@ public class MainController implements Initializable {
         ProfilesDialog profilesDialog = new ProfilesDialog(profilesController.getProfiles());
         profilesDialog.initOwner(root.getCenter().getScene().getWindow());
         profilesDialog.showAndWait();
-        profilesController.savesProfiles();
+        try {
+            profilesController.savesProfiles();
+        } catch (IOException e) {
+            Alert alert = new ExceptionAlert("Error", "Error while saving profiles", "", e);
+            alert.showAndWait();
+        }
     }
 }

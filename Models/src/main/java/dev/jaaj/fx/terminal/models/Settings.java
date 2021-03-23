@@ -29,6 +29,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
+import java.io.IOException;
 import java.nio.file.Path;
 
 public class Settings {
@@ -39,14 +40,19 @@ public class Settings {
     private final TerminalThemeProvider terminalThemeProvider;
     private final ObjectProperty<Path> configLocation = new SimpleObjectProperty<>();
     private final ObjectProperty<ProfilesController> profilesController = new SimpleObjectProperty<>();
-    
-    private Settings() {
 
+    private Settings() {
         terminalThemeProvider = new TerminalThemeProvider();
         terminalThemeProvider.registerTheme(new Windows10LightTheme(), new DefaultJMetroLightTerminalThemeFactory().build());
         terminalThemeProvider.registerTheme(new Windows10DarkTheme(), new DefaultJMetroDarkTerminalThemeFactory().build());
         terminalThemeProvider.registerTheme(new DefaultTheme(), new DefaultJMetroLightTerminalThemeFactory().build());
-        configLocation.addListener((observable, oldValue, newValue) -> profilesController.set(new ProfilesController(getConfigLocation().resolve("profiles.json"))));
+        configLocation.addListener((observable, oldValue, newValue) -> {
+            try {
+                profilesController.set(new ProfilesController(getConfigLocation().resolve("profiles.json")));
+            } catch (IOException ignored) {
+                //it should not happen here
+            }
+        });
     }
 
     public static Settings getInstance() {
