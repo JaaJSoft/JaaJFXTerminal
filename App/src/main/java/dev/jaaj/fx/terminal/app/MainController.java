@@ -161,11 +161,11 @@ public class MainController implements Initializable {
     }
 
     public void openTerminalWSL(ActionEvent actionEvent) {
-        WSLFormDialog WSLFormDialog = new WSLFormDialog();
-        WSLFormDialog.initOwner(root.getCenter().getScene().getWindow());
-        Optional<WSLConfig> optional = WSLFormDialog.showAndWait();
+        WSLFormDialog wslFormDialog = new WSLFormDialog();
+        wslFormDialog.initOwner(root.getCenter().getScene().getWindow());
+        Optional<WSLConfig> optional = wslFormDialog.showAndWait();
         optional.ifPresent(sshConfig -> {
-            Terminal terminal = new Terminal(WSLFormDialog.getResult());
+            Terminal terminal = new Terminal(wslFormDialog.getResult());
             terminalTabsController.addTerminal(terminal);
         });
     }
@@ -183,7 +183,7 @@ public class MainController implements Initializable {
     public void openAbout(ActionEvent actionEvent) {
         InputStream inputStream = getClass().getResourceAsStream("img/icon.png");
         Image image = new Image(inputStream);
-        AppInfo JaaJFXTerminalApp = new AppInfoBuilder()
+        AppInfo jaajfxterminalapp = new AppInfoBuilder()
                 .setAppName("JaaJFXTerminal")
                 .setIcon(image)
                 .setVersion("0.1")// todo get app version from gradle
@@ -197,15 +197,15 @@ public class MainController implements Initializable {
                         new PersonBuilder().setName("Icons8").setTitle("Free Icons").setWebsite("https://icons8.com/").createPerson()
                 ))
                 .createAppInfo();
-        AboutDialog aboutDialog = new AboutDialog(JaaJFXTerminalApp);
+        AboutDialog aboutDialog = new AboutDialog(jaajfxterminalapp);
         aboutDialog.initOwner(root.getCenter().getScene().getWindow());
         aboutDialog.show();
     }
 
     public void openAboutJaaJFX(ActionEvent actionEvent) {
-        AppInfo JaaJFX = new AppInfoBuilder()
+        AppInfo jaajfx = new AppInfoBuilder()
                 .setAppName("JaaJFX")
-                .setVersion("0.2.1")// todo get app version from gradle
+                .setVersion("0.3.0")// todo get app version from gradle
                 .setAboutText(bundle.getString("ABOUT_TEXT_JAAJFX"))
                 .setDevelopers(List.of(
                         PIERRE_CHOPINET, JULIEN_CHEVRON
@@ -213,7 +213,7 @@ public class MainController implements Initializable {
                         JAAJSOFT, REMI_LECOUILLARD
                 ))
                 .createAppInfo();
-        AboutDialog aboutDialog = new AboutDialog(JaaJFX);
+        AboutDialog aboutDialog = new AboutDialog(jaajfx);
         aboutDialog.initOwner(root.getCenter().getScene().getWindow());
         aboutDialog.show();
     }
