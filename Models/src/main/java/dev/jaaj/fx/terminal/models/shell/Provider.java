@@ -16,10 +16,10 @@
 
 package dev.jaaj.fx.terminal.models.shell;
 
-public interface Provider<Shell> {
+public interface Provider<S> {
     boolean isDefault();
 
     boolean isAvailable();
 
-    Shell get();
+    S get();
 }

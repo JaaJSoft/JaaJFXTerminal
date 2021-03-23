@@ -60,9 +60,7 @@ public class SSHFormSkin extends SkinFXML<SSHForm> {
                     throw new IllegalStateException("Unexpected value: " + newValue);
             }
         });
-        advancedPane.setOnMouseClicked(event -> {
-            advancedPane.getScene().getWindow().sizeToScene();
-        });
+        advancedPane.setOnMouseClicked(event -> advancedPane.getScene().getWindow().sizeToScene());
     }
 
     public void unbind() {

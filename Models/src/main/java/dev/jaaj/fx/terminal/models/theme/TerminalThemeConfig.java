@@ -31,11 +31,8 @@ public class TerminalThemeConfig {
     private final ObjectProperty<Color> foregroundColor = new SimpleObjectProperty<>(Color.WHITE);
     private final ObjectProperty<Color> cursorColor = new SimpleObjectProperty<>(Color.WHITE);
     private final ObjectProperty<Font> font = new SimpleObjectProperty<>(null);
-    //private final BooleanProperty cursorBlink = new SimpleBooleanProperty(false);
-
-    //todo add scroll thing
-    public TerminalThemeConfig() {
-    }
+    //cursorBlinking
+    //scrollSpeed
 
     public Color getBackgroundColor() {
         return backgroundColor.get();

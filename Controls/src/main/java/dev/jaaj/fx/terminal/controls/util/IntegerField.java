@@ -46,7 +46,7 @@ public class IntegerField extends TextField {
 
         value.addListener(this::integerValue2Text);
         textProperty().addListener(this::text2IntegerValueListener);
-        setTextFormatter(new TextFormatter<String>(this::integerTextFormatter));
+        setTextFormatter(new TextFormatter<>(this::integerTextFormatter));
     }
 
     public int getValue() {

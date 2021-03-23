@@ -24,6 +24,8 @@ import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
 public class SerializableUtil {
+    private SerializableUtil() {
+    }
 
     public static Serializable fromString(String s) throws IOException, ClassNotFoundException {
         try {

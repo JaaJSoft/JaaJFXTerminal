@@ -22,6 +22,10 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 public class Util {
+
+    private Util() {
+    }
+
     public static void openWebsite(String url) throws IOException, URISyntaxException {
         Desktop.getDesktop().browse(new URL(url).toURI());
     }

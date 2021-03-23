@@ -34,8 +34,6 @@ public class ProfileFormSkin extends SkinFXML<ProfileForm> {
     ScrollPane shellFormBox;
     @FXML
     TabPane tabPane;
-    //@FXML
-    //Label profileName;
 
     public ProfileFormSkin(ProfileForm control) {
         super(control, ProfileFormSkin.class.getResource("Profile.fxml"), BUNDLE);
@@ -43,9 +41,7 @@ public class ProfileFormSkin extends SkinFXML<ProfileForm> {
         builtInThemes.prefWidthProperty().bind(control.widthProperty());
         control.terminalThemeSelectionModelProperty().bind(builtInThemes.selectionModelProperty());
 
-        control.shellFormProperty().addListener((observable, oldValue, newValue) -> {
-            shellFormBox.setContent(newValue);
-        });
+        control.shellFormProperty().addListener((observable, oldValue, newValue) -> shellFormBox.setContent(newValue));
         if (control.shellFormProperty().isNotNull().get()) {
             shellFormBox.setContent(control.getShellForm());
         }

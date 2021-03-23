@@ -42,7 +42,6 @@ public class App extends Application {
                 .addTheme(new Windows10DarkTheme())
                 .addTheme(new Windows10DarkTheme());
         Theme theme = themeVistor.visit();
-        //theme = new DefaultTheme();
         Settings settings = Settings.getInstance();
         settings.setTheme(theme);
         ProjectDirectories myProjDirs = ProjectDirectories.from("dev", "JaaJSoft", "JaaJFXTerminal");

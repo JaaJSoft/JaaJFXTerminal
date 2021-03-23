@@ -83,9 +83,9 @@ public class WSLConfig extends LocalShellConfig {
     @Override
     public String getTitle() {
         String distrib = getDistribution().getName();
-        String user = getUser();
-        if (!user.isBlank()) {
-            user += "@";
+        String u = getUser();
+        if (!u.isBlank()) {
+            u += "@";
         }
         if (distrib.isBlank()) {
             Optional<Distribution> optionalDistribution = Distribution.getDefaultDistribution();
@@ -93,7 +93,7 @@ public class WSLConfig extends LocalShellConfig {
                 distrib = optionalDistribution.get().getName();
             }
         }
-        return user + distrib;
+        return u + distrib;
     }
 
     @Override

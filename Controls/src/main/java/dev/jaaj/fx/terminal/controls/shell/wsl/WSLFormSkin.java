@@ -78,9 +78,7 @@ public class WSLFormSkin extends SkinFXML<WSLForm> {
 
         });
         chooseDirBtn.setOnAction(this::openFolderPicker);
-        advancedPane.setOnMouseClicked(event -> {
-            advancedPane.getScene().getWindow().sizeToScene();
-        });
+        advancedPane.setOnMouseClicked(event -> advancedPane.getScene().getWindow().sizeToScene());
     }
 
     public void openFolderPicker(ActionEvent actionEvent) {

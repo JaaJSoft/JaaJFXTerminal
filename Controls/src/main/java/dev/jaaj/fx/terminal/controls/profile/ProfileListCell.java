@@ -33,12 +33,13 @@ public class ProfileListCell extends ListCell<Profile> {
             this.setDisable(false);
             this.textProperty().bind(item.profileNameProperty());
             ContextMenu contextMenu = new ContextMenu();
-            MenuItem delete = new MenuItem(BUNDLE.getString("delete"));
-            delete.setOnAction(event -> {
+            String delete = BUNDLE.getString("delete");
+            MenuItem deleteMenuItem = new MenuItem(delete);
+            deleteMenuItem.setOnAction(event -> {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.initOwner(this.getScene().getWindow());
-                alert.setTitle(BUNDLE.getString("delete"));
-                alert.setHeaderText(BUNDLE.getString("delete"));
+                alert.setTitle(delete);
+                alert.setHeaderText(delete);
                 alert.setContentText(BUNDLE.getString("delete_prompt"));
                 Optional<ButtonType> buttonType = alert.showAndWait();
                 buttonType.ifPresent(buttonType1 -> {
@@ -60,7 +61,7 @@ public class ProfileListCell extends ListCell<Profile> {
                 getListView().getItems().add(copy);
             });
 
-            contextMenu.getItems().addAll(rename, duplicate, delete);
+            contextMenu.getItems().addAll(rename, duplicate, deleteMenuItem);
             this.setContextMenu(contextMenu);
         } else {
             this.setDisable(true);

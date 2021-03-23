@@ -43,9 +43,7 @@ public class ProfilesSkin extends SkinFXML<Profiles> {
 
     public ProfilesSkin(Profiles control) {
         super(control, ProfileFormSkin.class.getResource("Profiles.fxml"), BUNDLE);
-        control.profileFormProperty().addListener((observable, oldValue, newValue) -> {
-            right.getChildren().setAll(newValue);
-        });
+        control.profileFormProperty().addListener((observable, oldValue, newValue) -> right.getChildren().setAll(newValue));
         listProfiles.setItems(control.getProfiles());
         control.profileSelectionModelProperty().bind(listProfiles.selectionModelProperty());
         btn1.prefWidthProperty().bind(buttons.widthProperty().divide(buttons.getChildren().size()));

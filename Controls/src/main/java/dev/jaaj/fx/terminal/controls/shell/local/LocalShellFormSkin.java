@@ -48,24 +48,20 @@ public class LocalShellFormSkin extends SkinFXML<LocalShellForm> {
         bind(control);
         control.formStateProperty().addListener((observable, oldValue, newValue) -> {
             switch (newValue) {
-                case READONLY -> {
-                    workingDirectoryField.setEditable(false);
-                    commandField.setEditable(false);
-                    chooseDirBtn.setDisable(true);
-                }
-                case EDITABLE -> {
-                    workingDirectoryField.setEditable(true);
-                    commandField.setEditable(true);
-                    chooseDirBtn.setDisable(false);
-                }
+                case READONLY -> setEditableHandle(false);
+                case EDITABLE -> setEditableHandle(true);
                 default -> throw new IllegalStateException("Unexpected value: " + newValue);
             }
 
         });
         chooseDirBtn.setOnAction(this::openFolderPicker);
-        advancedPane.setOnMouseClicked(event -> {
-            advancedPane.getScene().getWindow().sizeToScene();
-        });
+        advancedPane.setOnMouseClicked(event -> advancedPane.getScene().getWindow().sizeToScene());
+    }
+
+    private void setEditableHandle(boolean editable) {
+        workingDirectoryField.setEditable(editable);
+        commandField.setEditable(editable);
+        chooseDirBtn.setDisable(!editable);
     }
 
     public void openFolderPicker(ActionEvent actionEvent) {

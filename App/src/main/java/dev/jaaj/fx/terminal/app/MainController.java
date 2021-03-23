@@ -97,6 +97,7 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        LOGGER.info("initialize");
         bundle = resources;
         terminalTabsController = new TerminalTabsController(tabPane);
         profilesController.getProfiles().addListener((ListChangeListener<? super Profile>) c -> {
@@ -140,6 +141,7 @@ public class MainController implements Initializable {
 
     @FXML
     private void exit(ActionEvent event) {
+        LOGGER.info("Exit");
         Platform.exit();
         System.exit(0);
     }
@@ -204,7 +206,7 @@ public class MainController implements Initializable {
     public void openAboutJaaJFX(ActionEvent actionEvent) {
         AppInfo jaajfx = new AppInfoBuilder()
                 .setAppName("JaaJFX")
-                .setVersion("0.3.0")// todo get app version from gradle
+                .setVersion("0.3.0")
                 .setAboutText(bundle.getString("ABOUT_TEXT_JAAJFX"))
                 .setDevelopers(List.of(
                         PIERRE_CHOPINET, JULIEN_CHEVRON

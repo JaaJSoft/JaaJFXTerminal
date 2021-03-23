@@ -48,12 +48,8 @@ public class TerminalTab extends Tab {
                 this.setContent(newValue);
             }
         });
-        this.onCloseRequestProperty().addListener((observable, oldValue, newValue) -> {
-            terminal.close();
-        });
-        this.onClosedProperty().addListener((observable, oldValue, newValue) -> {
-            terminal.close();
-        });
+        this.onCloseRequestProperty().addListener((observable, oldValue, newValue) -> terminal.close());
+        this.onClosedProperty().addListener((observable, oldValue, newValue) -> terminal.close());
         this.setContextMenu(createContextMenu());
         this.setGraphic(createImage(terminal));
     }
@@ -61,7 +57,6 @@ public class TerminalTab extends Tab {
     private Node createImage(Terminal terminal) {
         ImageView imageView = null;
         String shellIcon = terminal.getTerminalConfig().getShellIcon();
-        //System.out.println(shellIcon);
         if (shellIcon != null) {
             imageView = new ImageView(shellIcon);
             imageView.setPreserveRatio(true);

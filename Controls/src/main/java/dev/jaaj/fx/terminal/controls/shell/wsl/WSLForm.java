@@ -52,6 +52,7 @@ public class WSLForm extends ShellForm<WSLConfig> {
     @Override
     public boolean validate() {// TODO find a way to show error
         if (distribution.isNull().get() || distribution.getValue().getName().isBlank()) {
+            // stuff
             return false;
         }
         return true;

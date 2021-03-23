@@ -20,6 +20,9 @@ import com.google.gson.JsonObject;
 import dev.jaaj.fx.terminal.models.shell.LocalShellConfig;
 
 public class LocalShellAdapterHelper {
+    
+    private LocalShellAdapterHelper() {
+    }
 
     public static void serializeProperties(JsonObject result, LocalShellConfig localShellConfig) {
         result.addProperty("workingDirectory", localShellConfig.getWorkingDirectory());

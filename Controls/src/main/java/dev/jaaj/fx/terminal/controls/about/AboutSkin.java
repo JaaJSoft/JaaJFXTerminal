@@ -39,7 +39,7 @@ public class AboutSkin extends SkinFXML<About> {
     public static final ResourceBundle BUNDLE = ResourceBundle.getBundle(AboutSkin.class.getPackageName() + ".About");
 
     @FXML
-    ImageView icon;
+    ImageView iconImageView;
     @FXML
     Label appName;
     @FXML
@@ -56,9 +56,13 @@ public class AboutSkin extends SkinFXML<About> {
 
         AppInfo appInfo = control.getAppInfo();
         appInfo.iconProperty().addListener((observable, oldValue, newValue) -> {
-            icon.setImage(new Image(newValue));
+            LOGGER.debug("new Icon");
+            iconImageView.setImage(new Image(newValue));
         });
-        icon.setImage(new Image(appInfo.getIcon()));
+        String icon = appInfo.getIcon();
+        if (icon != null) {
+            this.iconImageView.setImage(new Image(icon));
+        }
         appName.textProperty().bind(appInfo.appNameProperty());
         version.textProperty().bind(appInfo.versionProperty());
         aboutText.textProperty().bind(appInfo.aboutTextProperty());
@@ -75,10 +79,6 @@ public class AboutSkin extends SkinFXML<About> {
         if (!appInfo.getTranslators().isEmpty()) {
             tabPane.getTabs().add(getPersonTab(appInfo.getTranslators(), BUNDLE.getString("translatorsTab")));
         }
-    }
-
-    private TabPane getTabPane() {
-        return tabPane;
     }
 
     private Tab getPersonTab(List<Person> personList, String title) {

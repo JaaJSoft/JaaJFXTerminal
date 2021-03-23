@@ -20,6 +20,9 @@ import dev.jaaj.fx.terminal.models.shell.LocalShellConfig;
 
 public class PowerShellUtil {
 
+    private PowerShellUtil() {
+    }
+
     public static String getCommandLine(LocalShellConfig powerShellConfig) {
         String commandLine = powerShellConfig.getExecutable() + " " + powerShellConfig.getExtraArgs();
         if (powerShellConfig.getWorkingDirectory() != null && !powerShellConfig.getWorkingDirectory().isBlank()) {
