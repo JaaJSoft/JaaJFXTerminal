@@ -72,6 +72,7 @@ repositories {
 }
 
 dependencies {
+    implementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.28'
     implementation 'dev.jaaj.fx:core:0.3.0'
     implementation 'org.jfxtras:jmetro:11.6.11'
     implementation 'org.controlsfx:controlsfx:11.0.2'

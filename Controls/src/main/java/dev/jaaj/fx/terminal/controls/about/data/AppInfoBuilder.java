@@ -16,8 +16,6 @@
 
 package dev.jaaj.fx.terminal.controls.about.data;
 
-import javafx.scene.image.Image;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +23,7 @@ public class AppInfoBuilder {
     private String appName;
     private String aboutText;
     private String version;
-    private Image icon;
+    private String icon;
     private List<Library> libraries = new ArrayList<>();
     private List<Person> developers = new ArrayList<>();
     private List<Person> translators = new ArrayList<>();
@@ -46,7 +44,7 @@ public class AppInfoBuilder {
         return this;
     }
 
-    public AppInfoBuilder setIcon(Image icon) {
+    public AppInfoBuilder setIcon(String icon) {
         this.icon = icon;
         return this;
     }

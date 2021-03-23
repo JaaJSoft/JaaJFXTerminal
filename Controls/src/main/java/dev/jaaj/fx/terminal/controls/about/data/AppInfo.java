@@ -16,13 +16,10 @@
 
 package dev.jaaj.fx.terminal.controls.about.data;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.image.Image;
 
 import java.util.List;
 
@@ -31,12 +28,12 @@ public class AppInfo {
     private final ObservableList<Person> developers = FXCollections.observableArrayList();
     private final ObservableList<Person> translators = FXCollections.observableArrayList();
     private final ObservableList<Person> thanks = FXCollections.observableArrayList();
-    private final ObjectProperty<Image> icon = new SimpleObjectProperty<>();
+    private final StringProperty icon = new SimpleStringProperty();
     private final StringProperty version = new SimpleStringProperty();
     private final StringProperty aboutText = new SimpleStringProperty();
     private final StringProperty appName = new SimpleStringProperty();
 
-    public AppInfo(String appName, String aboutText, String version, Image icon, List<Library> libraries, List<Person> developers, List<Person> translators, List<Person> thanks) {
+    public AppInfo(String appName, String aboutText, String version, String icon, List<Library> libraries, List<Person> developers, List<Person> translators, List<Person> thanks) {
         this.appName.set(appName);
         this.aboutText.set(aboutText);
         this.version.set(version);
@@ -63,17 +60,6 @@ public class AppInfo {
         return thanks;
     }
 
-    public Image getIcon() {
-        return icon.get();
-    }
-
-    public ObjectProperty<Image> iconProperty() {
-        return icon;
-    }
-
-    public void setIcon(Image icon) {
-        this.icon.set(icon);
-    }
 
     public String getVersion() {
         return version.get();
@@ -109,5 +95,17 @@ public class AppInfo {
 
     public void setAppName(String appName) {
         this.appName.set(appName);
+    }
+
+    public String getIcon() {
+        return icon.get();
+    }
+
+    public StringProperty iconProperty() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon.set(icon);
     }
 }

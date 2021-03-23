@@ -16,32 +16,33 @@
 
 package dev.jaaj.fx.terminal.controls.about.data;
 
-public class Library {
-    private final String name;
-    private final String version;
-    private final String licence;
-    private final String website;
+public class LibraryBuilder {
+    private String name;
+    private String version;
+    private String licence;
+    private String website;
 
-    public Library(String name, String version, String licence, String website) {
+    public LibraryBuilder setName(String name) {
         this.name = name;
+        return this;
+    }
+
+    public LibraryBuilder setVersion(String version) {
         this.version = version;
+        return this;
+    }
+
+    public LibraryBuilder setLicence(String licence) {
         this.licence = licence;
+        return this;
+    }
+
+    public LibraryBuilder setWebsite(String website) {
         this.website = website;
+        return this;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getVersion() {
-        return version;
-    }
-
-    public String getLicence() {
-        return licence;
-    }
-
-    public String getWebsite() {
-        return website;
+    public Library createLibrary() {
+        return new Library(name, version, licence, website);
     }
 }

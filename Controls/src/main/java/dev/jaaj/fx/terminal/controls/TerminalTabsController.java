@@ -23,12 +23,16 @@ import javafx.collections.ObservableSet;
 import javafx.collections.SetChangeListener;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
 public class TerminalTabsController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(TerminalTabsController.class);
+
     private final TabPane tabPane;
     private final ObservableSet<TerminalTab> terminalTabs = FXCollections.observableSet();
 
@@ -63,7 +67,7 @@ public class TerminalTabsController {
 
     public void addTerminal(Terminal terminal) {
         terminal.setDefaultTerminalTheme(Settings.getInstance().getTerminalThemeFromCurrentTheme());
-        System.out.println(terminal.getTerminalConfig().getCommandLine());
+        LOGGER.info(terminal.getTerminalConfig().getCommandLine());
         TerminalTab newTab = new TerminalTab(terminal);
         terminalTabs.add(newTab);
         tabPane.getSelectionModel().select(newTab);

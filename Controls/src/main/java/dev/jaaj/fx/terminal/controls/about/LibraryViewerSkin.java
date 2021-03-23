@@ -17,7 +17,7 @@
 package dev.jaaj.fx.terminal.controls.about;
 
 import dev.jaaj.fx.core.skin.SkinFXML;
-import dev.jaaj.fx.terminal.controls.about.data.Person;
+import dev.jaaj.fx.terminal.controls.about.data.Library;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -29,52 +29,41 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ResourceBundle;
 
-public class PersonViewerSkin extends SkinFXML<PersonViewer> {
+public class LibraryViewerSkin extends SkinFXML<LibraryViewer> {
     public static final ResourceBundle BUNDLE = ResourceBundle.getBundle(AboutSkin.class.getPackageName() + ".About");
     @FXML
     Label nameLabel;
     @FXML
-    Label titleLabel;
-    @FXML
-    Button mailBtn;
+    Label licenceLabel;
     @FXML
     Button websiteBtn;
     @FXML
     HBox buttonBox;
 
-    public PersonViewerSkin(PersonViewer control) {
-        super(control, PersonViewer.class.getResource("Person.fxml"), BUNDLE);
-        control.personProperty().addListener((observable, oldValue, newValue) -> set(newValue));
-        if (control.getPerson() != null) {
-            set(control.getPerson());
+    public LibraryViewerSkin(LibraryViewer control) {
+        super(control, PersonViewer.class.getResource("Library.fxml"), BUNDLE);
+        control.libraryProperty().addListener((observable, oldValue, newValue) -> set(newValue));
+        if (control.getLibrary() != null) {
+            set(control.getLibrary());
         }
     }
 
-    private void set(Person newValue) {
+    private void set(Library newValue) {
         if (newValue != null) {
-            String name = newValue.getName();
-            if (name != null && !name.isBlank()) {
+            String name = newValue.getName() + " " + newValue.getVersion();
+            if (!name.isBlank()) {
                 this.nameLabel.setText(name);
             }
-            String title = newValue.getTitle();
-            if (title != null && !title.isBlank()) {
-                this.titleLabel.setText(title);
+            String licence = newValue.getLicence();
+            if (licence != null && !licence.isBlank()) {
+                this.licenceLabel.setText(licence);
             }
-            String email = newValue.getEmail();
-            if (email == null || email.isBlank()) {
-                buttonBox.getChildren().remove(mailBtn);
-            }
-            this.mailBtn.setTooltip(new Tooltip(email));
             String website = newValue.getWebsite();
             if (website == null || website.isBlank()) {
                 buttonBox.getChildren().remove(websiteBtn);
             }
             this.websiteBtn.setTooltip(new Tooltip(website));
         }
-    }
-
-    public void sendEmail(ActionEvent actionEvent) throws IOException, URISyntaxException {
-        this.getSkinnable().sendEmail();
     }
 
     public void openWebsite(ActionEvent actionEvent) throws IOException, URISyntaxException {

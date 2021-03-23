@@ -36,6 +36,8 @@ import dev.jaaj.fx.terminal.models.theme.adapter.TerminalThemeAdapter;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -47,7 +49,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProfilesController {
-    private static final Gson gson = getBuilder().create();
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ProfilesController.class);
+
+    private static final Gson GSON = getBuilder().create();
 
     private final ObservableList<Profile> profiles = FXCollections.observableArrayList();
     private final Path location;
@@ -58,20 +63,20 @@ public class ProfilesController {
         listOfType = new TypeToken<ArrayList<Profile>>() {
         }.getType();
         try (BufferedReader bufferedReader = Files.newBufferedReader(location)) {
-            List<Profile> fromJson = gson.fromJson(bufferedReader, listOfType);
+            List<Profile> fromJson = GSON.fromJson(bufferedReader, listOfType);
             profiles.addAll(fromJson);
         }
         profiles.addListener((ListChangeListener<? super Profile>) c -> {
             try {
                 saveProfiles(this.location, listOfType);
-            } catch (IOException ignored) {
-                // nothing to do
+            } catch (IOException e) {
+                LOGGER.error(e.getMessage());
             }
         });
     }
 
     public void saveProfiles(Path location, Type listOfType) throws IOException {
-        String toJson = gson.toJson(new ArrayList<>(profiles), listOfType);
+        String toJson = GSON.toJson(new ArrayList<>(profiles), listOfType);
         if (!Files.exists(location)) {
             Files.createDirectories(location.getParent());
             Files.createFile(location);
@@ -130,8 +135,8 @@ public class ProfilesController {
 
     public static Profile copy(Profile profile) {
         //Yes, it is disgusting.
-        String s = gson.toJson(profile);
-        return gson.fromJson(s, Profile.class);
+        String s = GSON.toJson(profile);
+        return GSON.fromJson(s, Profile.class);
     }
 }
 

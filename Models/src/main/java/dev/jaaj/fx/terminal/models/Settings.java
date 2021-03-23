@@ -28,11 +28,14 @@ import dev.jaaj.fx.terminal.models.theme.TerminalThemeProvider;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.nio.file.Path;
 
 public class Settings {
+    private static final Logger LOGGER = LoggerFactory.getLogger(Settings.class);
 
     private static Settings instance;
 
@@ -49,8 +52,8 @@ public class Settings {
         configLocation.addListener((observable, oldValue, newValue) -> {
             try {
                 profilesController.set(new ProfilesController(getConfigLocation().resolve("profiles.json")));
-            } catch (IOException ignored) {
-                //it should not happen here
+            } catch (IOException e) {
+                LOGGER.error(e.getMessage());
             }
         });
     }

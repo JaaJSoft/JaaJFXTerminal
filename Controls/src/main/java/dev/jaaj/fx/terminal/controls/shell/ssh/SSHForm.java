@@ -20,11 +20,15 @@ import dev.jaaj.fx.terminal.controls.shell.ShellForm;
 import dev.jaaj.fx.terminal.models.shell.ssh.SSHConfig;
 import javafx.beans.property.*;
 import javafx.scene.control.Skin;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 public class SSHForm extends ShellForm<SSHConfig> {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(SSHForm.class);
 
     private final StringProperty inetAddressStr = new SimpleStringProperty();
     private final StringProperty user = new SimpleStringProperty("root");
@@ -57,8 +61,9 @@ public class SSHForm extends ShellForm<SSHConfig> {
             return false;
         }
         try {
-            InetAddress ignored = InetAddress.getByName(inetAddressStr.getValue());
-        } catch (UnknownHostException e) { //todo print error
+            InetAddress.getByName(inetAddressStr.getValue());
+        } catch (UnknownHostException e) {
+            LOGGER.info(e.getMessage());
             return false;
         }
         return true;
@@ -70,7 +75,8 @@ public class SSHForm extends ShellForm<SSHConfig> {
         if (config != null) {
             try {
                 config.setInetAddress(InetAddress.getByName(inetAddressStr.get()));
-            } catch (UnknownHostException ignored) {
+            } catch (UnknownHostException e) {
+                LOGGER.error(e.getMessage());
             }
             config.setUser(user.get());
             config.setPort(port.getValue());

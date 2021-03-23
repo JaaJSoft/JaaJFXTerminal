@@ -20,10 +20,7 @@ package dev.jaaj.fx.terminal.app;
 import dev.jaaj.fx.terminal.controls.Terminal;
 import dev.jaaj.fx.terminal.controls.TerminalTabsController;
 import dev.jaaj.fx.terminal.controls.about.AboutDialog;
-import dev.jaaj.fx.terminal.controls.about.data.AppInfo;
-import dev.jaaj.fx.terminal.controls.about.data.AppInfoBuilder;
-import dev.jaaj.fx.terminal.controls.about.data.Person;
-import dev.jaaj.fx.terminal.controls.about.data.PersonBuilder;
+import dev.jaaj.fx.terminal.controls.about.data.*;
 import dev.jaaj.fx.terminal.controls.options.OptionsDialog;
 import dev.jaaj.fx.terminal.controls.profile.ProfileNameDialog;
 import dev.jaaj.fx.terminal.controls.profile.ProfilesDialog;
@@ -47,11 +44,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
@@ -59,7 +56,9 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
-    //TODO dynamic
+    private static final Logger LOGGER = LoggerFactory.getLogger(MainController.class);
+
+    // TODO dynamic
     public static final Person PIERRE_CHOPINET = new PersonBuilder().setName("Pierre Chopinet").setTitle("Main Developer").setEmail("pierre.chopinet@jaaj.dev").setWebsite("https://jaaj.dev").createPerson();
     public static final Person JAAJSOFT = new PersonBuilder().setName("JaaJSoft").setEmail("contact@jaaj.dev").setWebsite("https://jaaj.dev").createPerson();
     public static final Person REMI_LECOUILLARD = new PersonBuilder().setName("Rémi Lecouillard").setTitle("A good friend").setEmail("remi.lecouillard@jaaj.dev").setWebsite("https://jaaj.dev").createPerson();
@@ -181,13 +180,13 @@ public class MainController implements Initializable {
     }
 
     public void openAbout(ActionEvent actionEvent) {
-        InputStream inputStream = getClass().getResourceAsStream("img/icon.png");
-        Image image = new Image(inputStream);
+        String icon = getClass().getResource("img/icon.png").toExternalForm();
         AppInfo jaajfxterminalapp = new AppInfoBuilder()
                 .setAppName("JaaJFXTerminal")
-                .setIcon(image)
-                .setVersion("0.1")// todo get app version from gradle
+                .setIcon(icon)
+                .setVersion("0.1")
                 .setAboutText(bundle.getString("ABOUT_TEXT_JAAJFXTERM"))
+                .setLibraries(List.of(new LibraryBuilder().setName("JaaJFX").setLicence("Apache 2.0").setVersion("0.3.1").setWebsite("https://github.com/JaaJSoft/JaaJFX-core").createLibrary()))
                 .setDevelopers(List.of(
                         PIERRE_CHOPINET
                 )).setTranslators(List.of(

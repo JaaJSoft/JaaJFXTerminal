@@ -16,7 +16,7 @@
 
 package dev.jaaj.fx.terminal.controls.about;
 
-import dev.jaaj.fx.terminal.controls.about.data.Person;
+import dev.jaaj.fx.terminal.controls.about.data.Library;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.control.Control;
@@ -25,39 +25,34 @@ import javafx.scene.control.Skin;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class PersonViewer extends Control {
-    private final ObjectProperty<Person> person = new SimpleObjectProperty<>();
+public class LibraryViewer extends Control {
+    private final ObjectProperty<Library> library = new SimpleObjectProperty<>();
 
-    public PersonViewer(Person person) {
-        this.person.set(person);
+    public LibraryViewer(Library library) {
+        this.setLibrary(library);
     }
 
-    public PersonViewer() {
+    public LibraryViewer() {
     }
 
-    public Person getPerson() {
-        return person.get();
+    public Library getLibrary() {
+        return library.get();
     }
 
-    public ObjectProperty<Person> personProperty() {
-        return person;
+    public ObjectProperty<Library> libraryProperty() {
+        return library;
     }
 
-    public void setPerson(Person person) {
-        this.person.set(person);
+    public void setLibrary(Library library) {
+        this.library.set(library);
     }
 
     @Override
     protected Skin<?> createDefaultSkin() {
-        return new PersonViewerSkin(this);
-    }
-
-    public void sendEmail() throws IOException, URISyntaxException {
-        Util.openWebsite("mailto:" + getPerson().getEmail());
+        return new LibraryViewerSkin(this);
     }
 
     public void openWebsite() throws IOException, URISyntaxException {
-        Util.openWebsite(getPerson().getWebsite());
+        Util.openWebsite(getLibrary().getWebsite());
     }
 }
-
