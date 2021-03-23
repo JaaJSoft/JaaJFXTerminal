@@ -246,6 +246,7 @@ public class MainController implements Initializable {
             profilesController.savesProfiles();
         } catch (IOException e) {
             Alert alert = new ExceptionAlert("Error", "Error while saving profiles", "", e);
+            alert.initOwner(root.getCenter().getScene().getWindow());
             alert.showAndWait();
         }
     }
