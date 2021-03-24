@@ -35,7 +35,7 @@ public class BashConfig extends LocalShellConfig {
             init += " " + getCommandToExecute() + " ; ";
         }
         if (!init.isBlank()) {
-            commandLine += " -c " + init + "exec ${SHELL}";
+            commandLine += " -c \"" + init + "exec ${SHELL}\"";
         }
         return commandLine + " " + getExtraArgs();
     }
