@@ -20,7 +20,11 @@ package dev.jaaj.fx.terminal.app;
 import dev.jaaj.fx.terminal.controls.Terminal;
 import dev.jaaj.fx.terminal.controls.TerminalTabsController;
 import dev.jaaj.fx.terminal.controls.about.AboutDialog;
-import dev.jaaj.fx.terminal.controls.about.data.*;
+import dev.jaaj.fx.terminal.controls.about.data.AppInfo;
+import dev.jaaj.fx.terminal.controls.about.data.Person;
+import dev.jaaj.fx.terminal.controls.about.data.builder.AppInfoBuilder;
+import dev.jaaj.fx.terminal.controls.about.data.builder.LibraryBuilder;
+import dev.jaaj.fx.terminal.controls.about.data.builder.PersonBuilder;
 import dev.jaaj.fx.terminal.controls.options.OptionsDialog;
 import dev.jaaj.fx.terminal.controls.profile.ProfileNameDialog;
 import dev.jaaj.fx.terminal.controls.profile.ProfilesDialog;
@@ -188,7 +192,7 @@ public class MainController implements Initializable {
                 .setIcon(icon)
                 .setVersion("0.1")
                 .setAboutText(bundle.getString("ABOUT_TEXT_JAAJFXTERM"))
-                .setLibraries(List.of(new LibraryBuilder().setName("JaaJFX").setLicence("Apache 2.0").setVersion("0.3.1").setWebsite("https://github.com/JaaJSoft/JaaJFX-core").createLibrary()))
+                .setLibraries(List.of(new LibraryBuilder().setName("JaaJFX").setLicence("Apache 2.0").setVersion("0.3.0").setWebsite("https://github.com/JaaJSoft/JaaJFX-core").createLibrary()))
                 .setDevelopers(List.of(
                         PIERRE_CHOPINET
                 )).setTranslators(List.of(

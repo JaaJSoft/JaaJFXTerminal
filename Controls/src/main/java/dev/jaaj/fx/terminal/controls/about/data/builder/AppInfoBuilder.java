@@ -14,7 +14,11 @@
  * limitations under the License.
  */
 
-package dev.jaaj.fx.terminal.controls.about.data;
+package dev.jaaj.fx.terminal.controls.about.data.builder;
+
+import dev.jaaj.fx.terminal.controls.about.data.AppInfo;
+import dev.jaaj.fx.terminal.controls.about.data.Library;
+import dev.jaaj.fx.terminal.controls.about.data.Person;
 
 import java.util.ArrayList;
 import java.util.List;

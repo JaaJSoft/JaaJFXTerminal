@@ -108,4 +108,18 @@ public class AppInfo {
     public void setIcon(String icon) {
         this.icon.set(icon);
     }
+
+    @Override
+    public String toString() {
+        return "AppInfo{" +
+                "libsList=" + libsList +
+                ", developers=" + developers +
+                ", translators=" + translators +
+                ", thanks=" + thanks +
+                ", icon=" + icon +
+                ", version=" + version +
+                ", aboutText=" + aboutText +
+                ", appName=" + appName +
+                '}';
+    }
 }

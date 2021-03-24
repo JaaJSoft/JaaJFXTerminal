@@ -24,7 +24,7 @@
 <VBox prefHeight="500" prefWidth="550" spacing="10" xmlns="http://javafx.com/javafx/11.0.1"
       xmlns:fx="http://javafx.com/fxml/1">
     <HBox spacing="10">
-        <ImageView fx:id="icon" fitHeight="50" preserveRatio="true"/>
+        <ImageView fx:id="iconImageView" fitHeight="50" preserveRatio="true"/>
         <VBox alignment="CENTER_LEFT">
             <Label fx:id="appName" style="-fx-font-size: 20"/>
             <Label fx:id="version" style="-fx-font-size: 14"/>
