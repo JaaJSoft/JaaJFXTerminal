@@ -29,19 +29,19 @@ public class BashConfig extends LocalShellConfig {
         String commandLine = getExecutable();
         String init = "";
         if (getWorkingDirectory() != null && !getWorkingDirectory().isBlank()) {
-            init += " cd " + getWorkingDirectory() + ";";
+            init += " cd " + getWorkingDirectory() + " ; ";
         }
         if (getCommandToExecute() != null && !getCommandToExecute().isBlank()) {
-            init += " " + getCommandToExecute();
+            init += " " + getCommandToExecute() + " ; ";
         }
         if (!init.isBlank()) {
-            commandLine += " --init-file <(" + init + ")";
+            commandLine += " -c \"" + init + "exec ${SHELL}\"";
         }
-        return commandLine + getExtraArgs();
+        return commandLine + " " + getExtraArgs();
     }
 
     @Override
     public String getTitle() {
-        return null;
+        return "Bash";
     }
 }
