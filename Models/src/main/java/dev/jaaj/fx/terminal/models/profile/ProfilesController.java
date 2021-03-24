@@ -65,6 +65,8 @@ public class ProfilesController {
         try (BufferedReader bufferedReader = Files.newBufferedReader(location)) {
             List<Profile> fromJson = GSON.fromJson(bufferedReader, listOfType);
             profiles.addAll(fromJson);
+        } catch (IOException e) {
+            LOGGER.info("No profiles found");
         }
         profiles.addListener((ListChangeListener<? super Profile>) c -> {
             try {
@@ -74,6 +76,12 @@ public class ProfilesController {
             }
         });
     }
+
+    public ProfilesController(Path location, List<Profile> profiles) throws IOException {
+        this(location);
+        this.profiles.addAll(profiles);
+    }
+
 
     public void saveProfiles(Path location, Type listOfType) throws IOException {
         String toJson = GSON.toJson(new ArrayList<>(profiles), listOfType);
@@ -90,11 +98,6 @@ public class ProfilesController {
         saveProfiles(location, listOfType);
     }
 
-
-    public ProfilesController(Path location, List<Profile> profiles) throws IOException {
-        this(location);
-        this.profiles.addAll(profiles);
-    }
 
     public boolean saveProfile(Profile profile) {
         if (profiles.contains(profile)) {
