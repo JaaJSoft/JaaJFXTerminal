@@ -36,6 +36,7 @@ import dev.jaaj.fx.terminal.models.Settings;
 import dev.jaaj.fx.terminal.models.profile.Profile;
 import dev.jaaj.fx.terminal.models.profile.ProfilesController;
 import dev.jaaj.fx.terminal.models.shell.LocalShellConfig;
+import dev.jaaj.fx.terminal.models.shell.bash.BashConfig;
 import dev.jaaj.fx.terminal.models.shell.cmd.CmdShellConfig;
 import dev.jaaj.fx.terminal.models.shell.powershell.PowerShellConfig;
 import dev.jaaj.fx.terminal.models.shell.powershell.PwshConfig;
@@ -88,6 +89,8 @@ public class MainController implements Initializable {
     MenuItem newPowerShellTerminal;
     @FXML
     MenuItem newPWSHTerminal;
+    @FXML
+    MenuItem newBashTerminal;
 
     private ResourceBundle bundle;
 
@@ -124,6 +127,7 @@ public class MainController implements Initializable {
         newCMDShellTerminal.setOnAction(event -> openTerminalLocalShell(new CmdShellConfig()));
         newPowerShellTerminal.setOnAction(event -> openTerminalLocalShell(new PowerShellConfig()));
         newPWSHTerminal.setOnAction(event -> openTerminalLocalShell(new PwshConfig()));
+        newBashTerminal.setOnAction(event -> openTerminalLocalShell(new BashConfig()));
         newTerminal.fire();
     }
 

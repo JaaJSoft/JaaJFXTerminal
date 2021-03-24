@@ -30,6 +30,7 @@
                         <MenuItem fx:id="newCMDShellTerminal" text="%NEW_CMD"/>
                         <MenuItem fx:id="newPowerShellTerminal" text="%NEW_POWERSHELL"/>
                         <MenuItem fx:id="newPWSHTerminal" text="%NEW_PWSH"/>
+                        <MenuItem fx:id="newBashTerminal" text="%NEW_BASH"/>
                     </Menu>
                     <MenuItem fx:id="newWSLTerminal" text="%NEW_WSL" onAction="#openTerminalWSL"/>
                     <MenuItem fx:id="newSSHTerminal" text="%NEW_SSH" onAction="#openTerminalSSH"/>

@@ -82,7 +82,6 @@ public class ProfilesController {
         this.profiles.addAll(profiles);
     }
 
-
     public void saveProfiles(Path location, Type listOfType) throws IOException {
         LOGGER.info("Saving profiles in: {}", location);
         String toJson = GSON.toJson(new ArrayList<>(profiles), listOfType);
