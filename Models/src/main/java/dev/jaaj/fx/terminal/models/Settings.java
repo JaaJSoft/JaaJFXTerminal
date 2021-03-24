@@ -51,7 +51,9 @@ public class Settings {
         terminalThemeProvider.registerTheme(new DefaultTheme(), new DefaultJMetroLightTerminalThemeFactory().build());
         configLocation.addListener((observable, oldValue, newValue) -> {
             try {
-                profilesController.set(new ProfilesController(getConfigLocation().resolve("profiles.json")));
+                Path profiles = getConfigLocation().resolve("profiles.json");
+                LOGGER.info("Loading profiles from: {}", profiles);
+                profilesController.set(new ProfilesController(profiles));
             } catch (IOException e) {
                 LOGGER.error(e.getMessage());
             }
