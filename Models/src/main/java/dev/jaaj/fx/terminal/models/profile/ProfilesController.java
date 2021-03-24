@@ -84,6 +84,7 @@ public class ProfilesController {
 
 
     public void saveProfiles(Path location, Type listOfType) throws IOException {
+        LOGGER.info("Saving profiles in: {}", location);
         String toJson = GSON.toJson(new ArrayList<>(profiles), listOfType);
         if (!Files.exists(location)) {
             Files.createDirectories(location.getParent());
