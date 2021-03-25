@@ -23,12 +23,15 @@ import dev.jaaj.fx.terminal.controls.shell.ShellFormFactory;
 import dev.jaaj.fx.terminal.controls.shell.local.LocalShellFormFactory;
 import dev.jaaj.fx.terminal.controls.shell.ssh.SSHFormFactory;
 import dev.jaaj.fx.terminal.controls.shell.wsl.WSLFormFactory;
+import dev.jaaj.fx.terminal.controls.theme.TerminalThemeForm;
 import dev.jaaj.fx.terminal.models.Settings;
 import dev.jaaj.fx.terminal.models.profile.Profile;
 import dev.jaaj.fx.terminal.models.shell.AbstractShellConfig;
 import dev.jaaj.fx.terminal.models.theme.TerminalThemeConfig;
 import dev.jaaj.fx.terminal.models.theme.TerminalThemeProvider;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -39,9 +42,12 @@ import java.util.Optional;
 
 public class ProfileForm extends AbstractForm<Profile> {
 
-    private final ObservableList<TerminalThemeConfig> terminalThemeConfigs = FXCollections.observableArrayList();
     private final ObjectProperty<SingleSelectionModel<TerminalThemeConfig>> terminalThemeSelectionModel = new SimpleObjectProperty<>();
     private final ObjectProperty<ShellForm<? extends AbstractShellConfig>> shellForm = new SimpleObjectProperty<>();
+    private final ObjectProperty<AbstractForm<? extends TerminalThemeConfig>> terminalThemeForm = new SimpleObjectProperty<>(new TerminalThemeForm());
+    private final BooleanProperty nativeTheme = new SimpleBooleanProperty(false);
+
+    private final ObservableList<TerminalThemeConfig> terminalThemeConfigs = FXCollections.observableArrayList();
     private final ObjectProperty<TerminalThemeProvider> terminalThemeProvider = new SimpleObjectProperty<>();
     private final ObjectProperty<FormFactoryVisitor<ShellFormFactory<?>>> formFactoryVisitor = new SimpleObjectProperty<>();
 
@@ -59,8 +65,10 @@ public class ProfileForm extends AbstractForm<Profile> {
                 if (terminalThemeSelectionModel.isNotNull().get()) {
                     getTerminalThemeSelectionModel().select(newValue.getTerminalThemeConfig());
                 }
+                nativeTheme.set(newValue.getTerminalThemeConfig() == null);
                 Optional<ShellFormFactory<?>> visit = formFactoryVisitor.get().visit(newValue.getShellConfig());
                 visit.ifPresent(shellFormFactory -> shellForm.set(shellFormFactory.build(newValue.getShellConfig())));
+
             }
         });
         terminalThemeSelectionModel.addListener((observable2, oldValue2, newValue2) -> {
@@ -68,6 +76,7 @@ public class ProfileForm extends AbstractForm<Profile> {
                 getTerminalThemeSelectionModel().select(getProfile().getTerminalThemeConfig());
             }
         });
+
     }
 
     private FormFactoryVisitor<ShellFormFactory<?>> getDefaultShellFormFactory() {
@@ -161,5 +170,29 @@ public class ProfileForm extends AbstractForm<Profile> {
 
     public void setFormFactoryVisitor(FormFactoryVisitor<ShellFormFactory<?>> formFactoryVisitor) {
         this.formFactoryVisitor.set(formFactoryVisitor);
+    }
+
+    public boolean isNativeTheme() {
+        return nativeTheme.get();
+    }
+
+    public BooleanProperty nativeThemeProperty() {
+        return nativeTheme;
+    }
+
+    public void setNativeTheme(boolean nativeTheme) {
+        this.nativeTheme.set(nativeTheme);
+    }
+
+    public AbstractForm<? extends TerminalThemeConfig> getTerminalThemeForm() {
+        return terminalThemeForm.get();
+    }
+
+    public ObjectProperty<AbstractForm<? extends TerminalThemeConfig>> terminalThemeFormProperty() {
+        return terminalThemeForm;
+    }
+
+    public void setTerminalThemeForm(AbstractForm<? extends TerminalThemeConfig> terminalThemeForm) {
+        this.terminalThemeForm.set(terminalThemeForm);
     }
 }

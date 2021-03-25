@@ -16,16 +16,27 @@
 
 package dev.jaaj.fx.terminal.controls.theme;
 
-import javafx.scene.control.Control;
+import dev.jaaj.fx.core.form.AbstractForm;
+import dev.jaaj.fx.terminal.models.theme.TerminalThemeConfig;
 import javafx.scene.control.Skin;
 
 import java.util.ResourceBundle;
 
-public class TerminalThemeForm extends Control {
+public class TerminalThemeForm extends AbstractForm<TerminalThemeConfig> {
     public static final ResourceBundle BUNDLE = ResourceBundle.getBundle(TerminalThemeForm.class.getPackageName() + ".TerminalTheme");
 
     @Override
     protected Skin<?> createDefaultSkin() {
         return new TerminalThemeFormSkin(this);
+    }
+
+    @Override
+    public boolean validate() {
+        return false;
+    }
+
+    @Override
+    public TerminalThemeConfig apply() {
+        return null;
     }
 }

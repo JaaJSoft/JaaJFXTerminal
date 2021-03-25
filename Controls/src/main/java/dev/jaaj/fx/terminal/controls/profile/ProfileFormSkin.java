@@ -16,12 +16,15 @@
 
 package dev.jaaj.fx.terminal.controls.profile;
 
+import dev.jaaj.fx.core.form.FormState;
 import dev.jaaj.fx.core.skin.SkinFXML;
 import dev.jaaj.fx.terminal.models.theme.TerminalThemeConfig;
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TabPane;
+import javafx.scene.layout.VBox;
 
 import java.util.ResourceBundle;
 
@@ -34,16 +37,34 @@ public class ProfileFormSkin extends SkinFXML<ProfileForm> {
     ScrollPane shellFormBox;
     @FXML
     TabPane tabPane;
+    @FXML
+    CheckBox checkBoxSystemTheme;
+    @FXML
+    VBox themeBox;
 
     public ProfileFormSkin(ProfileForm control) {
         super(control, ProfileFormSkin.class.getResource("Profile.fxml"), BUNDLE);
         builtInThemes.itemsProperty().set(control.getTerminalThemeConfigs());
         builtInThemes.prefWidthProperty().bind(control.widthProperty());
         control.terminalThemeSelectionModelProperty().bind(builtInThemes.selectionModelProperty());
-
+        checkBoxSystemTheme.selectedProperty().bindBidirectional(control.nativeThemeProperty());
+        builtInThemes.disableProperty().bind(checkBoxSystemTheme.selectedProperty());
+        checkBoxSystemTheme.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            builtInThemes.setDisable(newValue);
+            if (control.getTerminalThemeForm() != null) {
+                control.getTerminalThemeForm().setFormState(FormState.READONLY);
+            }
+        });
         control.shellFormProperty().addListener((observable, oldValue, newValue) -> shellFormBox.setContent(newValue));
         if (control.shellFormProperty().isNotNull().get()) {
             shellFormBox.setContent(control.getShellForm());
+        }
+        control.terminalThemeFormProperty().addListener((observable, oldValue, newValue) -> {
+            themeBox.getChildren().remove(oldValue);
+            themeBox.getChildren().add(newValue);
+        });
+        if (control.getTerminalThemeForm() != null) {
+            themeBox.getChildren().add(control.getTerminalThemeForm());
         }
     }
 }

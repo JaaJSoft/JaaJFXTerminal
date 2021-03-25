@@ -29,13 +29,13 @@ public class BashConfig extends LocalShellConfig {
         String commandLine = getExecutable();
         String init = "";
         if (getWorkingDirectory() != null && !getWorkingDirectory().isBlank()) {
-            init += " cd " + getWorkingDirectory() + " ; ";
+            init += "cd " + getWorkingDirectory() + " && ";
         }
         if (getCommandToExecute() != null && !getCommandToExecute().isBlank()) {
-            init += " " + getCommandToExecute() + " ; ";
+            init += " " + getCommandToExecute() + " && ";
         }
         if (!init.isBlank()) {
-            commandLine += " -c \"" + init + "exec ${SHELL}\"";
+            commandLine += " -c \"" + init + "exec ${BASH}\"";
         }
         return commandLine + " " + getExtraArgs();
     }

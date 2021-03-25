@@ -16,7 +16,6 @@
   ~ limitations under the License.
   -->
 
-<?import dev.jaaj.fx.terminal.controls.theme.TerminalThemeForm?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -35,7 +34,7 @@
             </ScrollPane>
         </Tab>
         <Tab text="%theme">
-            <VBox spacing="10">
+            <VBox fx:id="themeBox" spacing="10">
                 <padding>
                     <Insets top="10" left="5" right="5"/>
                 </padding>
@@ -47,9 +46,6 @@
                     <ComboBox fx:id="builtInThemes"/>
                 </VBox>
                 <Separator/>
-                <TerminalThemeForm VBox.vgrow="ALWAYS">
-
-                </TerminalThemeForm>
             </VBox>
 
         </Tab>
