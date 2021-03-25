@@ -25,6 +25,12 @@ import java.util.ResourceBundle;
 public class TerminalThemeForm extends AbstractForm<TerminalThemeConfig> {
     public static final ResourceBundle BUNDLE = ResourceBundle.getBundle(TerminalThemeForm.class.getPackageName() + ".TerminalTheme");
 
+    public TerminalThemeForm() {
+        itemProperty().addListener((observable, oldValue, newValue) -> {
+
+        });
+    }
+
     @Override
     protected Skin<?> createDefaultSkin() {
         return new TerminalThemeFormSkin(this);
@@ -32,7 +38,7 @@ public class TerminalThemeForm extends AbstractForm<TerminalThemeConfig> {
 
     @Override
     public boolean validate() {
-        return false;
+        return true;
     }
 
     @Override

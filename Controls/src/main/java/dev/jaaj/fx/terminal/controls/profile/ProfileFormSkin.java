@@ -50,7 +50,6 @@ public class ProfileFormSkin extends SkinFXML<ProfileForm> {
         checkBoxSystemTheme.selectedProperty().bindBidirectional(control.nativeThemeProperty());
         builtInThemes.disableProperty().bind(checkBoxSystemTheme.selectedProperty());
         checkBoxSystemTheme.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            builtInThemes.setDisable(newValue);
             if (control.getTerminalThemeForm() != null) {
                 control.getTerminalThemeForm().setFormState(FormState.READONLY);
             }

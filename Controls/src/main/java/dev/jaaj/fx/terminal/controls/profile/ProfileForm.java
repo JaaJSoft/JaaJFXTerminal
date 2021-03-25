@@ -91,14 +91,17 @@ public class ProfileForm extends AbstractForm<Profile> {
         if (shellForm.isNull().get()) {
             return false;
         }
-        return shellForm.get().validate();
+        if (terminalThemeForm.isNull().get()) {
+            return false;
+        }
+        return shellForm.get().validate() && terminalThemeForm.get().validate();
     }
 
     @Override
     public Profile apply() {
         Profile profile = getProfile();
         profile.setShellConfig(shellForm.get().apply());
-        profile.setTerminalThemeConfig(getTerminalThemeSelectionModel().getSelectedItem());
+        profile.setTerminalThemeConfig(terminalThemeForm.get().apply());
         return profile;
     }
 
