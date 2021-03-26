@@ -16,18 +16,30 @@
   ~ limitations under the License.
   -->
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       spacing="10" prefWidth="250">
+<!--    <Label text="%text_and_background" style="-fx-font-size: 16"/>-->
+    <HBox spacing="10">
+        <VBox spacing="5" HBox.hgrow="ALWAYS" fx:id="textColorPickerBox">
+            <Label text="%text_color"/>
+            <ColorPicker fx:id="textColorPicker"/>
+        </VBox>
+        <VBox spacing="5" HBox.hgrow="ALWAYS" fx:id="backgroundColorPickerBox">
+            <Label text="%background_color"/>
+            <ColorPicker fx:id="backgroundColorPicker"/>
+        </VBox>
+    </HBox>
+    <HBox spacing="10">
+        <VBox spacing="5" HBox.hgrow="ALWAYS" fx:id="cursorColorPickerBox">
+            <Label text="%cursor_color"/>
+            <ColorPicker fx:id="cursorColorPicker"/>
+        </VBox>
+    </HBox>
+    <Button fx:id="fontPickerBtn" text="Font"/>
+    <Separator/>
+    <Label text="%palette" style="-fx-font-size: 16"/>
 
-    <VBox spacing="5">
-        <Label text="AAAAA"/>
-    </VBox>
-    <VBox spacing="5">
-        <Label text="AAAAA"/>
-        <TextField fx:id="commandField"/>
-    </VBox>
 </VBox>

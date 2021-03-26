@@ -68,13 +68,15 @@ runtime {
         def currentOs = org.gradle.internal.os.OperatingSystem.current()
         def imgType = currentOs.windows ? 'ico' : currentOs.macOsX ? 'icns' : 'png'
         imageOptions += ['--icon', "src/main/resources/dev/jaaj/fx/terminal/app/img/icon.$imgType"]
+        imageOptions += ['--vendor', 'JaaJSoft']
         installerOptions += ['--resource-dir', "src/main/resources"]
         installerOptions += ['--vendor', 'JaaJSoft']
-        jvmArgs += "-Dfile.encoding=UTF-8"
+        jvmArgs += " -Dfile.encoding=UTF-8"
         if (currentOs.windows) {
             installerOptions += ['--win-dir-chooser', '--win-menu', '--win-shortcut']
         } else if (currentOs.linux) {
-            installerOptions += ['--linux-package-name', rootProject.name, '--linux-shortcut']
+            installerOptions += ['--linux-package-name', rootProject.name.toLowerCase(), '--linux-shortcut']
+            installerOptions += ['--linux-menu-group', "Utility;TerminalEmulator"]
         } else if (currentOs.macOsX) {
             installerOptions += ['--mac-package-name', rootProject.name]
         }

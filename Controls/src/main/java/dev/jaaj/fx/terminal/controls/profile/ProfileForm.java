@@ -44,7 +44,7 @@ public class ProfileForm extends AbstractForm<Profile> {
 
     private final ObjectProperty<SingleSelectionModel<TerminalThemeConfig>> terminalThemeSelectionModel = new SimpleObjectProperty<>();
     private final ObjectProperty<ShellForm<? extends AbstractShellConfig>> shellForm = new SimpleObjectProperty<>();
-    private final ObjectProperty<AbstractForm<? extends TerminalThemeConfig>> terminalThemeForm = new SimpleObjectProperty<>(new TerminalThemeForm());
+    private final ObjectProperty<AbstractForm<TerminalThemeConfig>> terminalThemeForm = new SimpleObjectProperty<>(new TerminalThemeForm());
     private final BooleanProperty nativeTheme = new SimpleBooleanProperty(false);
 
     private final ObservableList<TerminalThemeConfig> terminalThemeConfigs = FXCollections.observableArrayList();
@@ -68,7 +68,7 @@ public class ProfileForm extends AbstractForm<Profile> {
                 nativeTheme.set(newValue.getTerminalThemeConfig() == null);
                 Optional<ShellFormFactory<?>> visit = formFactoryVisitor.get().visit(newValue.getShellConfig());
                 visit.ifPresent(shellFormFactory -> shellForm.set(shellFormFactory.build(newValue.getShellConfig())));
-
+                terminalThemeForm.get().setItem(newValue.getTerminalThemeConfig());
             }
         });
         terminalThemeSelectionModel.addListener((observable2, oldValue2, newValue2) -> {
@@ -187,15 +187,15 @@ public class ProfileForm extends AbstractForm<Profile> {
         this.nativeTheme.set(nativeTheme);
     }
 
-    public AbstractForm<? extends TerminalThemeConfig> getTerminalThemeForm() {
+    public AbstractForm<TerminalThemeConfig> getTerminalThemeForm() {
         return terminalThemeForm.get();
     }
 
-    public ObjectProperty<AbstractForm<? extends TerminalThemeConfig>> terminalThemeFormProperty() {
+    public ObjectProperty<AbstractForm<TerminalThemeConfig>> terminalThemeFormProperty() {
         return terminalThemeForm;
     }
 
-    public void setTerminalThemeForm(AbstractForm<? extends TerminalThemeConfig> terminalThemeForm) {
+    public void setTerminalThemeForm(AbstractForm<TerminalThemeConfig> terminalThemeForm) {
         this.terminalThemeForm.set(terminalThemeForm);
     }
 }
