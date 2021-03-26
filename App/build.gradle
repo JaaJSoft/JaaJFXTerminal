@@ -71,7 +71,7 @@ runtime {
         imageOptions += ['--vendor', 'JaaJSoft']
         installerOptions += ['--resource-dir', "src/main/resources"]
         installerOptions += ['--vendor', 'JaaJSoft']
-        jvmArgs += " -Dfile.encoding=UTF-8"
+        jvmArgs += "-Dfile.encoding=UTF-8"
         if (currentOs.windows) {
             installerOptions += ['--win-dir-chooser', '--win-menu', '--win-shortcut']
         } else if (currentOs.linux) {
