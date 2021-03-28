@@ -52,6 +52,7 @@ public class ProfileFormSkin extends SkinFXML<ProfileForm> {
         checkBoxSystemTheme.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if (control.getTerminalThemeForm() != null) {
                 control.getTerminalThemeForm().setFormState(FormState.READONLY);
+                control.getTerminalThemeForm().setDisable(newValue);
             }
         });
         control.shellFormProperty().addListener((observable, oldValue, newValue) -> shellFormBox.setContent(newValue));
@@ -61,9 +62,11 @@ public class ProfileFormSkin extends SkinFXML<ProfileForm> {
         control.terminalThemeFormProperty().addListener((observable, oldValue, newValue) -> {
             themeBox.getChildren().remove(oldValue);
             themeBox.getChildren().add(newValue);
+            newValue.setDisable(control.isNativeTheme());
         });
         if (control.getTerminalThemeForm() != null) {
             themeBox.getChildren().add(control.getTerminalThemeForm());
+            control.getTerminalThemeForm().setDisable(control.isNativeTheme());
         }
     }
 }
