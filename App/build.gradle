@@ -75,7 +75,7 @@ runtime {
         if (currentOs.windows) {
             installerOptions += ['--win-dir-chooser', '--win-menu', '--win-shortcut']
         } else if (currentOs.linux) {
-            installerOptions += ['--linux-package-name', rootProject.name.toLowerCase(), '--linux-shortcut']
+            installerOptions += ['--linux-package-name', rootProject.name.toLowerCase(), '--linux-shortcut', '--verbose']
             installerOptions += ['--linux-menu-group', "Utility;TerminalEmulator"]
         } else if (currentOs.macOsX) {
             installerOptions += ['--mac-package-name', rootProject.name]

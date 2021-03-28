@@ -17,7 +17,6 @@
 package dev.jaaj.fx.terminal.controls.theme;
 
 import dev.jaaj.fx.core.skin.SkinFXML;
-import dev.jaaj.fx.terminal.models.theme.DefaultJMetroDarkTerminalThemeFactory;
 import dev.jaaj.fx.terminal.models.theme.TerminalThemeConfig;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -51,11 +50,17 @@ public class TerminalThemeFormSkin extends SkinFXML<TerminalThemeForm> {
         backgroundColorPicker.prefWidthProperty().bind(backgroundColorPickerBox.widthProperty());
         cursorColorPicker.prefWidthProperty().bind(cursorColorPickerBox.widthProperty());
         fontPickerBtn.setOnAction(this::fontPickerAction);
+        bind(control);
+    }
+
+    private void bind(TerminalThemeForm terminalThemeForm) {
+        textColorPicker.valueProperty().bindBidirectional(terminalThemeForm.textColorProperty());
+        backgroundColorPicker.valueProperty().bindBidirectional(terminalThemeForm.backgroundColorProperty());
+        cursorColorPicker.valueProperty().bindBidirectional(terminalThemeForm.cursorColorProperty());
     }
 
     private void fontPickerAction(ActionEvent event) {
-        //TerminalThemeConfig terminalThemeConfig = getSkinnable().getItem();
-        TerminalThemeConfig terminalThemeConfig = new DefaultJMetroDarkTerminalThemeFactory().build();
+        TerminalThemeConfig terminalThemeConfig = getSkinnable().getItem();
         FontSelectorDialog fontSelectorDialog = new FontSelectorDialog(terminalThemeConfig.getFont());
         fontSelectorDialog.initOwner(getNode().getScene().getWindow());
         fontSelectorDialog.showAndWait();

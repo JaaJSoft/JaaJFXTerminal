@@ -44,7 +44,7 @@ public class ProfileForm extends AbstractForm<Profile> {
 
     private final ObjectProperty<SingleSelectionModel<TerminalThemeConfig>> terminalThemeSelectionModel = new SimpleObjectProperty<>();
     private final ObjectProperty<ShellForm<? extends AbstractShellConfig>> shellForm = new SimpleObjectProperty<>();
-    private final ObjectProperty<AbstractForm<TerminalThemeConfig>> terminalThemeForm = new SimpleObjectProperty<>(new TerminalThemeForm());
+    private final ObjectProperty<TerminalThemeForm> terminalThemeForm = new SimpleObjectProperty<>(new TerminalThemeForm());
     private final BooleanProperty nativeTheme = new SimpleBooleanProperty(false);
 
     private final ObservableList<TerminalThemeConfig> terminalThemeConfigs = FXCollections.observableArrayList();
@@ -71,10 +71,15 @@ public class ProfileForm extends AbstractForm<Profile> {
                 terminalThemeForm.get().setItem(newValue.getTerminalThemeConfig());
             }
         });
-        terminalThemeSelectionModel.addListener((observable2, oldValue2, newValue2) -> {
+        terminalThemeSelectionModel.addListener((o, old, terminalThemeSelectModel) -> {
             if (itemProperty().isNotNull().get()) {
-                getTerminalThemeSelectionModel().select(getProfile().getTerminalThemeConfig());
+                terminalThemeSelectModel.select(getProfile().getTerminalThemeConfig());
             }
+            terminalThemeSelectModel.selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+                if (terminalThemeForm.get() != null) {
+                    terminalThemeForm.get().setItem(newValue);
+                }
+            });
         });
 
     }
@@ -101,7 +106,11 @@ public class ProfileForm extends AbstractForm<Profile> {
     public Profile apply() {
         Profile profile = getProfile();
         profile.setShellConfig(shellForm.get().apply());
-        profile.setTerminalThemeConfig(terminalThemeForm.get().apply());
+        if (isNativeTheme()) {
+            profile.setTerminalThemeConfig(null);
+        } else {
+            profile.setTerminalThemeConfig(terminalThemeForm.get().apply());
+        }
         return profile;
     }
 
@@ -187,15 +196,15 @@ public class ProfileForm extends AbstractForm<Profile> {
         this.nativeTheme.set(nativeTheme);
     }
 
-    public AbstractForm<TerminalThemeConfig> getTerminalThemeForm() {
+    public TerminalThemeForm getTerminalThemeForm() {
         return terminalThemeForm.get();
     }
 
-    public ObjectProperty<AbstractForm<TerminalThemeConfig>> terminalThemeFormProperty() {
+    public ObjectProperty<TerminalThemeForm> terminalThemeFormProperty() {
         return terminalThemeForm;
     }
 
-    public void setTerminalThemeForm(AbstractForm<TerminalThemeConfig> terminalThemeForm) {
+    public void setTerminalThemeForm(TerminalThemeForm terminalThemeForm) {
         this.terminalThemeForm.set(terminalThemeForm);
     }
 }
