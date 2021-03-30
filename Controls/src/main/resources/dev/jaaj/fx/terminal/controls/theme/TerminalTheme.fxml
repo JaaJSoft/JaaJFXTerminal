@@ -16,12 +16,13 @@
   ~ limitations under the License.
   -->
 
+<?import dev.jaaj.fx.terminal.controls.util.FontPicker?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       spacing="10" prefWidth="250">
-<!--    <Label text="%text_and_background" style="-fx-font-size: 16"/>-->
+    <!--    <Label text="%text_and_background" style="-fx-font-size: 16"/>-->
     <HBox spacing="10">
         <VBox spacing="5" HBox.hgrow="ALWAYS" fx:id="textColorPickerBox">
             <Label text="%text_color"/>
@@ -38,7 +39,10 @@
             <ColorPicker fx:id="cursorColorPicker"/>
         </VBox>
     </HBox>
-    <Button fx:id="fontPickerBtn" text="Font"/>
+    <VBox spacing="5" HBox.hgrow="ALWAYS" >
+        <Label text="%background_color"/>
+        <FontPicker fx:id="fontPicker"/>
+    </VBox>
     <Separator/>
     <Label text="%palette" style="-fx-font-size: 16"/>
 

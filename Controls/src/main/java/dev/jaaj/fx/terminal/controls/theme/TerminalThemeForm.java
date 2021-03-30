@@ -29,10 +29,10 @@ import java.util.ResourceBundle;
 public class TerminalThemeForm extends AbstractForm<TerminalThemeConfig> {
     public static final ResourceBundle BUNDLE = ResourceBundle.getBundle(TerminalThemeForm.class.getPackageName() + ".TerminalTheme");
 
-    private final ObjectProperty<Color> backgroundColor = new SimpleObjectProperty<>();
-    private final ObjectProperty<Color> textColor = new SimpleObjectProperty<>();
-    private final ObjectProperty<Color> cursorColor = new SimpleObjectProperty<>();
-    private final ObjectProperty<Font> font = new SimpleObjectProperty<>();
+    private final ObjectProperty<Color> backgroundColor = new SimpleObjectProperty<>(Color.WHITE);
+    private final ObjectProperty<Color> textColor = new SimpleObjectProperty<>(Color.BLACK);
+    private final ObjectProperty<Color> cursorColor = new SimpleObjectProperty<>(Color.BLACK);
+    private final ObjectProperty<Font> font = new SimpleObjectProperty<>(Font.getDefault());// todo get a better font
 
     public TerminalThemeForm() {
         itemProperty().addListener((observable, oldValue, newValue) -> {

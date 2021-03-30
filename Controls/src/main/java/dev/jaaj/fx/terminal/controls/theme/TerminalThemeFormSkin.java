@@ -17,10 +17,10 @@
 package dev.jaaj.fx.terminal.controls.theme;
 
 import dev.jaaj.fx.core.skin.SkinFXML;
+import dev.jaaj.fx.terminal.controls.util.FontPicker;
 import dev.jaaj.fx.terminal.models.theme.TerminalThemeConfig;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.layout.VBox;
 import org.controlsfx.dialog.FontSelectorDialog;
@@ -42,14 +42,13 @@ public class TerminalThemeFormSkin extends SkinFXML<TerminalThemeForm> {
     @FXML
     VBox cursorColorPickerBox;
     @FXML
-    Button fontPickerBtn;
+    FontPicker fontPicker;
 
     public TerminalThemeFormSkin(TerminalThemeForm control) {
         super(control, TerminalThemeFormSkin.class.getResource("TerminalTheme.fxml"), BUNDLE);
         textColorPicker.prefWidthProperty().bind(textColorPickerBox.widthProperty());
         backgroundColorPicker.prefWidthProperty().bind(backgroundColorPickerBox.widthProperty());
         cursorColorPicker.prefWidthProperty().bind(cursorColorPickerBox.widthProperty());
-        fontPickerBtn.setOnAction(this::fontPickerAction);
         bind(control);
     }
 
@@ -57,6 +56,7 @@ public class TerminalThemeFormSkin extends SkinFXML<TerminalThemeForm> {
         textColorPicker.valueProperty().bindBidirectional(terminalThemeForm.textColorProperty());
         backgroundColorPicker.valueProperty().bindBidirectional(terminalThemeForm.backgroundColorProperty());
         cursorColorPicker.valueProperty().bindBidirectional(terminalThemeForm.cursorColorProperty());
+        fontPicker.fontProperty().bindBidirectional(terminalThemeForm.fontProperty());
     }
 
     private void fontPickerAction(ActionEvent event) {

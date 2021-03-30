@@ -49,7 +49,7 @@ public class App extends Application {
 
         Parent root = FXMLLoader.load(getClass().getResource("main.fxml"), ResourceBundle.getBundle("dev/jaaj/fx/terminal/app/Terminal"));
         Scene scene = new Scene(root, 800, 500);
-        theme.applyTheme(scene);
+        settings.getTheme().applyTheme(scene);
         scene.getStylesheets().add(Main.class.getResource("styles/Styles.css").toExternalForm());
 
         primaryStage.setScene(scene);
