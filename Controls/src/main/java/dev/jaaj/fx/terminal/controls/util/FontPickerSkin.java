@@ -40,6 +40,11 @@ public class FontPickerSkin extends SkinBase<FontPicker> {
         button.minWidthProperty().bind(control.minWidthProperty());
         button.maxHeightProperty().bind(control.maxHeightProperty());
         button.maxWidthProperty().bind(control.maxWidthProperty());
+        control.fontProperty().addListener((observable, oldValue, newValue) -> button.setFont(newValue));
+        Font font = control.getFont();
+        if (font != null) {
+            button.setFont(font);
+        }
     }
 
     private void openDialog(ActionEvent event) {
