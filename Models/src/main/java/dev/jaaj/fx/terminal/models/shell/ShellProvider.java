@@ -16,7 +16,7 @@
 
 package dev.jaaj.fx.terminal.models.shell;
 
-public interface Provider<S> {
+public interface ShellProvider<S> {
     boolean isDefault();
 
     boolean isAvailable();
